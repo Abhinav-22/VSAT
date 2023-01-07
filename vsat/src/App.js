@@ -1,11 +1,11 @@
 import React from "react";
-import Individual from "./Individual";
+//import Individual from "./Individual";
+import Mainpage from "./Mainpage.js";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header"></header>
-      <Individual />
-    </div>
+    <>
+      <Mainpage />
+    </>
   );
 }
 

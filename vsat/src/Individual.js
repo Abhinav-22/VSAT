@@ -4,7 +4,7 @@ function Induvidual() {
   return (
     <>
       <div className="App">
-        <h1 className="Heading">Induvidual Users</h1>
+        <h1 className="bg -black text -white">Induvidual Users</h1>
 
         <div className="wrapper">
           <input
