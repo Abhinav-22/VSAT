@@ -4,7 +4,9 @@ import Mainpage from "./Mainpage.js";
 import Login from "./Login.js";
 import Register from "./Register.js";
 import Individual from "./Individual.js";
+import Network from "./Network.js";
 import Web from "./Web.js";
+import Data from "./Data.js";
 import { Route, Routes } from "react-router-dom";
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <Route path="register" element={<Register />}></Route>
         <Route path="individual" element={<Individual />}></Route>
         <Route path="web" element={<Web />}></Route>
+        <Route path="network" element={<Network />}></Route>
+        <Route path="data" element={<Data />}></Route>
       </Routes>{" "}
     </>
   );
