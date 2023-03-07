@@ -2,9 +2,10 @@ import React from "react";
 import logo from "./img/transparent.svg";
 import { Link } from "react-router-dom";
 
-const Web = () => {
+function Dashboard() {
   return (
     <>
+      {" "}
       <div className="grid grid-cols-6 gap-0 h-full">
         <div className="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
@@ -12,16 +13,17 @@ const Web = () => {
               <Link to="/" className="flex items-center pl-2.5 mb-5">
                 <img
                   src={logo}
-                  style={{ height: "90px", alt: "abc", loading: "lazy" }}
-                  alt=""
-                  loading="lazy"
+                  classNameName="h-14 mr-3 sm:h-14"
+                  alt="VSAT Logo"
                 />
               </Link>
               <ul className="space-y-2">
                 <li>
                   <Link
                     to="/dashboard"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +41,9 @@ const Web = () => {
                 <li>
                   <Link
                     to="/web"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +63,9 @@ const Web = () => {
                 <li>
                   <Link
                     to="/network"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +86,9 @@ const Web = () => {
                 <li>
                   <Link
                     to="/data"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -100,7 +108,9 @@ const Web = () => {
                 <li>
                   <Link
                     to="/domain"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -119,9 +129,11 @@ const Web = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to=""
-                    href="#"
-                    className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
+                  <Link
+                    to=""
+                    className="flex items-center p-2 text-base font-normal
+                    text-gray-900 rounded-lg dark:text-white hover:bg-gray-100
+                    dark:hover:bg-gray-900"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -202,75 +214,189 @@ const Web = () => {
             </div>
           </aside>
         </div>
+        {/* ================================== */}
 
-        <div class="pane bg-gray-900 col-span-5">
-          <h2 class="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
-            Web security
+        <div className="pane bg-gray-900 col-span-5">
+          <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
+            Security Dashboard
           </h2>
-          <p class="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
-          <div class="grid ml-7 grid-cols-4 justify-center">
-            <div class="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
+          <p className="mt-3 ml-7 py-2 text-xl text-white font-light mb-4">
+            Welcome,
+            <span className="user font-semibold">Mark</span>
+          </p>
+          <div className="grid ml-7 grid-cols-4 justify-center">
+            <div className="web h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="60"
                 height="60"
                 fill="currentColor"
-                class="clock float-right mt-7 mr-2 bi bi-clock text-white"
+                className="guard float-right mt-7 mr-2 text-blue-500 bi bi-shield-shaded"
                 viewBox="0 0 16 16"
               >
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
+                <path
+                  fill-rule="evenodd"
+                  d="M8 14.933a.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067v13.866zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z"
+                />
               </svg>
 
-              <span class="user font-medium text-lg ml-2 text-white">
-                Website load time
+              <span className="user font-medium text-lg ml-2 text-white">
+                Web Security
               </span>
               <br />
-              <span class="user font-semibold text-3xl ml-2 text-white ">
-                1.036ms
+              <span className="user font-bold text-2xl ml-2 text-white">
+                Active
+              </span>
+            </div>
+            <div className="net h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                fill="currentColor"
+                className="text-blue-500 bi bi-hdd-network float-right mt-7 mr-2"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8.5v3a1.5 1.5 0 0 1 1.5 1.5h5.5a.5.5 0 0 1 0 1H10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5H.5a.5.5 0 0 1 0-1H6A1.5 1.5 0 0 1 7.5 10V7H2a2 2 0 0 1-2-2V4zm1 0v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm6 7.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5z" />
+              </svg>
+
+              <span className="user font-medium text-lg ml-2 text-white">
+                Network Security
+              </span>
+              <br />
+              <span className="user font-bold text-2xl ml-2 text-white">
+                Active
+              </span>
+            </div>
+            <div className="data h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                fill="currentColor"
+                className="text-blue-500 bi bi-database float-right mt-7 mr-2"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313ZM13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 5.698ZM14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13V4Zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 8.698Zm0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525Z" />
+              </svg>
+
+              <span className="user font-medium text-lg ml-2 text-white">
+                Data Security
+              </span>
+              <br />
+              <span className="user font-bold text-2xl ml-2 text-white">
+                Active
+              </span>
+            </div>
+            <div className="asset h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                fill="currentColor"
+                className="text-blue-500 bi bi-gear float-right mt-7 mr-2"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+              </svg>
+
+              <span className="user font-medium text-lg ml-2 text-white">
+                Social Security
+              </span>
+              <br />
+              <span className="user font-bold text-2xl ml-2 text-white">
+                Not active
               </span>
             </div>
           </div>
-          <div class="scan grid grid-cols-3 gap-2">
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                HTTP Security Header
+          <div className="scan grid grid-cols-3 gap-2">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5">
+              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
+                Security at a glance
               </p>
-              <br />
-
-              <span class="user font-normal text-sm text-gray-400">
-                View the status of HTTP security header of your website
-              </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
-            <br />
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                URL redirections
+            <div className="col-span-1 news bg-gray-800 h-80 mt-5 rounded shadow shadow-slate-700 w-96 ml-3">
+              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
+                News
               </p>
-              <br />
-
-              <span class="user font-normal text-sm text-gray-400">
-                View the URLs redirected from your website
+              <span className="user font-medium text-base text-gray-400 ml-3 text-left flex justify-start">
+                "Indigo hit with 'cybersecurity incident'"
               </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
-            </div>
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                Phishing statsus
-              </p>
-              <br />
-
-              <span class="user font-normal text-sm text-gray-400">
-                Check whether your domain has flagged as Phishing website
+              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <span className="user font-medium text-base text-gray-400 ml-3 text-left flex justify-start">
+                "A prominent UK cybersecurity stock is under attack from short
+                sellers. Here's what you need to know"
               </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <span className="user font-medium text-base text-gray-400 ml-3 flex justify-start">
+                "Indigo hit with 'cybersecurity incident'"
+              </span>
+              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <span className="user font-medium text-base text-gray-400 ml-3 flex justify-start">
+                "Indigo hit with 'cybersecurity incident'"
+              </span>
+              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
           </div>
+          <div className="flex tutorial mt-4 ml-7 w-auto rounded justify-between">
+            <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded h-10">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-journal-code my-auto"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"
+                />
+                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+              </svg>
+              <span className="my-auto ttspan ml-3 flex justify-center">
+                Click to learn best cyber security practises for your industry.
+              </span>
+            </button>
+
+            <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-search my-auto"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+              </svg>
+              <span className="my-auto ttspan ml-3 flex justify-center">
+                Quick scan
+              </span>
+            </button>
+          </div>
+
+          <button className="flex items-center justify-center mt-7 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded h-10">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-download"
+              viewBox="0 0 16 16"
+            >
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+            Generate report
+          </button>
         </div>
       </div>
     </>
   );
-};
+}
 
-export default Web;
+export default Dashboard;

@@ -4,6 +4,7 @@ import ind from "./img/User.svg";
 import org from "./img/Organization.svg";
 import security from "./img/security.svg";
 import register from "./img/register.svg";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -13,13 +14,13 @@ const Register = () => {
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
-                <a href="/src/index.html">
+                <Link to="/">
                   {" "}
                   <img
                     src={logo}
                     style={{ height: "90px", alt: "abc", loading: "lazy" }}
                   />
-                </a>
+                </Link>
               </div>
             </div>
           </nav>

@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "./img/transparent.svg";
+import { Link } from "react-router-dom";
+
 
 function Induvidual() {
   return (

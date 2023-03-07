@@ -2,11 +2,11 @@ import React from "react";
 import logo from "./img/transparent.svg";
 import { Link } from "react-router-dom";
 
-const Web = () => {
+const Domain = () => {
   return (
     <>
-      <div className="grid grid-cols-6 gap-0 h-full">
-        <div className="sidebar">
+      <div class="grid grid-cols-6 gap-0 h-full">
+        <div class="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
             <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
@@ -19,8 +19,8 @@ const Web = () => {
               </Link>
               <ul className="space-y-2">
                 <li>
-                  <Link
-                    to="/dashboard"
+                  <a
+                    href="/src/dashboard.html"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -34,11 +34,11 @@ const Web = () => {
                       <path d="M7.5 1.018a7 7 0 0 0-4.79 11.566L7.5 7.793V1.018zm1 0V7.5h6.482A7.001 7.001 0 0 0 8.5 1.018zM14.982 8.5H8.207l-4.79 4.79A7 7 0 0 0 14.982 8.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z" />
                     </svg>
                     <span className="ml-3">Dashboard</span>
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="/web"
+                  <a
+                    href="/src/web.html"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -54,11 +54,11 @@ const Web = () => {
                     <span className="flex-1 ml-3 whitespace-nowrap">
                       Web security
                     </span>
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="/network"
+                  <a
+                    href="/src/network.html"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -75,11 +75,11 @@ const Web = () => {
                     <span className="flex-1 ml-3 whitespace-nowrap">
                       Network security
                     </span>
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="/data"
+                  <a
+                    href="/src/data.html"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -95,11 +95,11 @@ const Web = () => {
                     <span className="flex-1 ml-3 whitespace-nowrap">
                       Data security
                     </span>
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="/domain"
+                  <a
+                    href="/src/domain.html"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -116,10 +116,10 @@ const Web = () => {
                     <span className="flex-1 ml-3 whitespace-nowrap">
                       Domain checkup
                     </span>
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link to=""
+                  <a
                     href="#"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
@@ -137,7 +137,7 @@ const Web = () => {
                       />
                     </svg>
                     <span className="flex-1 ml-3 whitespace-nowrap">APIs</span>
-                  </Link>
+                  </a>
                 </li>
               </ul>
               <div
@@ -202,70 +202,67 @@ const Web = () => {
             </div>
           </aside>
         </div>
-
-        <div class="pane bg-gray-900 col-span-5">
-          <h2 class="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
-            Web security
-          </h2>
-          <p class="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
-          <div class="grid ml-7 grid-cols-4 justify-center">
-            <div class="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
-                fill="currentColor"
-                class="clock float-right mt-7 mr-2 bi bi-clock text-white"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
-              </svg>
-
-              <span class="user font-medium text-lg ml-2 text-white">
-                Website load time
-              </span>
-              <br />
-              <span class="user font-semibold text-3xl ml-2 text-white ">
-                1.036ms
-              </span>
-            </div>
+        <div class="grid ml-7 grid-cols-4 justify-center">
+          <div class="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="60"
+              height="60"
+              fill="currentColor"
+              class="ssl float-right mt-7 mr-2 text-white bi bi-patch-check"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+              />
+              <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+            </svg>
+            <span class="user font-medium text-lg ml-2 text-white">
+              SSL expiry in
+            </span>
+            <br />
+            <span class="user font-semibold text-3xl ml-2 text-white ">
+              5 days
+            </span>
           </div>
           <div class="scan grid grid-cols-3 gap-2">
             <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                HTTP Security Header
+                SSL certificate info.
               </p>
               <br />
 
               <span class="user font-normal text-sm text-gray-400">
-                View the status of HTTP security header of your website
+                View the status of ssl certificate of your website
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
             <br />
             <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                URL redirections
+                DNS info.
               </p>
               <br />
 
               <span class="user font-normal text-sm text-gray-400">
-                View the URLs redirected from your website
+                View the information about DNS records
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
+            <br />
             <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
-                Phishing statsus
+                WHOIS lookup
               </p>
               <br />
 
               <span class="user font-normal text-sm text-gray-400">
-                Check whether your domain has flagged as Phishing website
+                View information about your domain from WHOIS
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
+            <br />
           </div>
         </div>
       </div>
@@ -273,4 +270,4 @@ const Web = () => {
   );
 };
 
-export default Web;
+export default Domain;

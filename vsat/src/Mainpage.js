@@ -3,6 +3,8 @@ import logo from "./img/transparent.svg";
 import ind from "./img/User.svg";
 import org from "./img/Organization.svg";
 import security from "./img/security.svg";
+import { Link } from "react-router-dom";
+
 
 function Mainpage() {
   return (
@@ -42,20 +44,18 @@ function Mainpage() {
                 id="main"
                 className="grid grid-cols-2 gap-1 justify-between w-80"
               >
-                <button
-                  onclick="ind()"
-                  className="ml-7 bg-blue-500 hover:bg-blue-700 text-white text-left font-semibold py-1 px-2 rounded"
-                >
-                  <img className="h-10 w-10" src={ind} alt="hi" />
-                  <span>Individuals</span>
-                </button>
-                <button
-                  onclick="ent()"
-                  className="ml-7 bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded"
-                >
-                  <img className="h-10 w-10" src={org} alt="hi" />{" "}
-                  <span>Enterprises</span>
-                </button>
+                <Link to="/individual">
+                  <button className="ml-7 bg-blue-500 hover:bg-blue-700 text-white text-left font-semibold py-1 px-2 rounded">
+                    <img className="h-10 w-10" src={ind} alt="hi" />
+                    <span>Individuals</span>
+                  </button>
+                </Link>
+                <Link to="/login">
+                  <button className="ml-7 bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded">
+                    <img className="h-10 w-10" src={org} alt="hi" />{" "}
+                    <span>Enterprises</span>
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="mb-6 lg:mb-0 ">
