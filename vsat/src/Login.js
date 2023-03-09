@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
 import { Link } from "react-router-dom";
+import supabase from "./config/supabaseClient";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,8 +11,17 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
     console.log(email, password);
+    if (error) {
+      alert(error.message);
+    } else {
+      alert("Logged in successfully");
+    }
+    console.log(data);
   };
 
   return (
@@ -93,7 +103,7 @@ function Login() {
               <Link to="">
                 <button
                   type="submit"
-                  // onClick={handleSubmit}
+                  onClick={handleSubmit}
                   className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Login to your account

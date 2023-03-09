@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import logo from "./img/transparent.svg";
-import ind from "./img/User.svg";
-import org from "./img/Organization.svg";
-import security from "./img/security.svg";
 import register from "./img/register.svg";
 import { Link } from "react-router-dom";
+import supabase from "./config/supabaseClient";
 
 const Register = () => {
+  console.log(supabase);
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [company, setCompany] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState("");
-  const [visitors, setVisitors] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,17 +19,70 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(
-      email,
-      password,
-      confirmPassword,
-      firstName,
-      lastName,
-      company,
-      phone,
-      visitors,
-      website
-    );
+    if (
+      !firstName ||
+      !lastName ||
+      !company ||
+      !phone ||
+      !website ||
+      !email ||
+      !password ||
+      !confirmPassword
+    ) {
+      alert("enter all fields");
+      return;
+    }
+
+    let { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    } else {
+      alert("Check mail");
+    }
+    console.log(data);
+    addTable();
+    // console.log(
+    //   email,
+    //   password,
+    //   confirmPassword,
+    //   firstName,
+    //   lastName,
+    //   company,
+    //   phone,
+    //   visitors,
+    //   website
+    // );
+  };
+
+  const addTable = async (e) => {
+    var currentTime = new Date().toLocaleString();
+    const { data, error } = await supabase
+      .from("users")
+      .insert([
+        {
+          email,
+          firstName,
+          lastName,
+          company,
+          phone,
+          website,
+          password,
+          currentTime,
+        },
+      ]);
+
+    if (error) {
+      alert(error.message);
+      return;
+    } else {
+      alert("Check mail");
+    }
+    console.log(data);
   };
   return (
     <>
@@ -142,23 +194,6 @@ const Register = () => {
                     required
                   />
                 </div>
-                <div>
-                  <label
-                    for="visitors"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Unique visitors (per month)
-                  </label>
-                  <input
-                    type="number"
-                    id="visitors"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder=""
-                    value={visitors}
-                    onChange={(e) => setVisitors(e.target.value)}
-                    required
-                  />
-                </div>
               </div>
               <div className="mb-6">
                 <label
@@ -237,7 +272,7 @@ const Register = () => {
               </div>
               <button
                 type="submit"
-                onChange={handleSubmit}
+                // onChange={handleSubmit}
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Submit
