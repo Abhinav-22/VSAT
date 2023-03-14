@@ -9,6 +9,7 @@ import Web from "./Web.js";
 import Data from "./Data.js";
 import Dashboard from "./Dashboard.js";
 import Domain from "./Domain.js";
+import Api from "./Api.js";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="data" element={<Data />}></Route>
         <Route path="dashboard" element={<Dashboard />}></Route>
         <Route path="domain" element={<Domain />}></Route>
+        <Route path="api" element={<Api />}></Route>
       </Routes>{" "}
     </>
   );

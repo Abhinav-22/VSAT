@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
 import { Link } from "react-router-dom";
@@ -16,8 +16,32 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // for validation
+  const [domain, setDomain] = useState(null);
+
+  useEffect(() => {
+    const fetchDomain = async () => {
+      const { data, error } = await supabase.from("users").select();
+
+      if (error) {
+        setDomain(null);
+        console.log(error);
+      }
+      if (data) {
+        setDomain(data);
+        console.log(data);
+      }
+
+    };
+
+    fetchDomain();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    domain.map(user =>(
+      console.log(user.website)
+    ))
 
     if (
       !firstName ||
@@ -61,20 +85,18 @@ const Register = () => {
 
   const addTable = async (e) => {
     var currentTime = new Date().toLocaleString();
-    const { data, error } = await supabase
-      .from("users")
-      .insert([
-        {
-          email,
-          firstName,
-          lastName,
-          company,
-          phone,
-          website,
-          password,
-          currentTime,
-        },
-      ]);
+    const { data, error } = await supabase.from("users").insert([
+      {
+        email,
+        firstName,
+        lastName,
+        company,
+        phone,
+        website,
+        password,
+        currentTime,
+      },
+    ]);
 
     if (error) {
       alert(error.message);
@@ -82,7 +104,7 @@ const Register = () => {
     } else {
       alert("Check mail");
     }
-    console.log(data);
+    //console.log(data);
   };
   return (
     <>
