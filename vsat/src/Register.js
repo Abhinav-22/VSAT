@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
 import { Link } from "react-router-dom";
@@ -19,29 +21,23 @@ const Register = () => {
   // for validation
   const [domain, setDomain] = useState(null);
 
-  useEffect(() => {
-    const fetchDomain = async () => {
-      const { data, error } = await supabase.from("users").select();
-
-      if (error) {
-        setDomain(null);
-        console.log(error);
-      }
-      if (data) {
-        setDomain(data);
-        console.log(data);
-      }
-
-    };
-
-    fetchDomain();
-  }, []);
+  var flag = 0;
+  const fetchDomain = async () => {
+    const { data, error } = await supabase.from("users").select();
+    console.log("use effect working");
+    if (error) {
+      setDomain(null);
+      console.log(error);
+    }
+    if (data) {
+      setDomain(data);
+      console.log(data);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    domain.map(user =>(
-      console.log(user.website)
-    ))
+    flag = 0;
 
     if (
       !firstName ||
@@ -67,9 +63,23 @@ const Register = () => {
       return;
     } else {
       alert("Check mail");
+      console.log(data);
+      fetchDomain();
+      domain.map((user) => {
+        if (user.website == website) {
+          flag = 1;
+          // alert("website already exist");
+          // console.log(flag);
+        }
+      });
+      if (flag == 0) {
+        // console.log("");
+        addTable();
+      } else if (flag == 1) {
+        alert("website already exist");
+      }
     }
-    console.log(data);
-    addTable();
+
     // console.log(
     //   email,
     //   password,
@@ -102,7 +112,7 @@ const Register = () => {
       alert(error.message);
       return;
     } else {
-      alert("Check mail");
+      alert("inserted successfully");
     }
     //console.log(data);
   };
@@ -207,11 +217,12 @@ const Register = () => {
                     Website URL
                   </label>
                   <input
-                    type="url"
+                    pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
                     id="website"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="flowbite.com"
                     value={website}
+                    oninvalid="setCustomValidity('Please Enter URL.')"
                     onChange={(e) => setWebsite(e.target.value)}
                     required
                   />

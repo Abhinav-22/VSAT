@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ function Login() {
     if (error) {
       alert(error.message);
     } else {
-      alert("Logged in successfully");
+      navigate("/dashboard");
     }
     console.log(data);
   };
