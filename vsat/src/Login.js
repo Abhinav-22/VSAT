@@ -7,7 +7,19 @@ import supabase from "./config/supabaseClient";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [users, setUsers] = useState(null);
+
   const navigate = useNavigate();
+  useEffect(() => {
+    const logout = async () => {
+      const { error } = await supabase.auth.signOut();
+      if(error)
+      {
+        console.log(error);
+      }
+    };
+    logout();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,13 +27,55 @@ function Login() {
       email: email,
       password: password,
     });
-    console.log(email, password);
+    // console.log(email, password);
     if (error) {
       alert(error.message);
     } else {
-      navigate("/dashboard");
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user.aud == "authenticated") {
+        updateUser();
+        navigate("/dashboard");
+      } else {
+        alert("not authenticated");
+      }
+
+      // getSession();
+      // userDetails();
     }
-    console.log(data);
+    // console.log(data);
+  };
+
+  const getSession = async (e) => {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      alert(error.message);
+    } else {
+      console.log(data);
+    }
+  };
+
+  const userDetails = async (e) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log(user.id);
+    console.log(user.email);
+    console.log(user.aud);
+  };
+
+  const updateUser = async (e) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const { error } = await supabase
+      .from("users")
+      .update({ uuid: user.id })
+      .eq("email", user.email);
+    if (error) {
+      alert(error.message);
+    }
   };
 
   return (

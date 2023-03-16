@@ -1,8 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import logo from "./img/transparent.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import supabase from "./config/supabaseClient";
 
 function Dashboard() {
+  const [authName, setAuthName] = useState("");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authCompany, setAuthCompany] = useState("");
+
+  const navigate = useNavigate();
+
+  // for validation
+  // const [domain, setDomain] = useState(null);
+
+  useEffect(() => {
+    console.log("workingggg");
+
+    const fetchDetails = async () => {
+      // await delay(1000);
+
+      const { data, error } = await supabase.from("users").select();
+      if (error) {
+        // setDomain(null);
+        console.log(error);
+      }
+      if (data) {
+        try {
+        // setDomain(data);
+        // console.log(domain);
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        console.log(user.aud);
+
+        
+          if (user.aud != "authenticated") {
+            navigate("/confirmresubmission");
+          } else {
+            data.map((us) => {
+              // console.log(us.firstName);
+              if (us.email === user.email) {
+                setAuthName(us.firstName);
+                setAuthCompany(us.company);
+                setAuthEmail(us.email);
+                // console.log(us.firstName);
+              }
+            });
+          }
+        } catch (e){
+          if(e.name == 'TypeError')
+          navigate("/confirmresubmission");
+        }
+      }
+    };
+    fetchDetails();
+  }, []);
+
   return (
     <>
       {" "}
@@ -182,11 +236,11 @@ function Dashboard() {
                     </svg>
                   </div>
                   <span className=" ml-3 mt-3 flex justify-center font-bold text-white">
-                    Adidas Inc.
+                    {authCompany}
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  security@adidas.com
+                  {authEmail}{" "}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10">
@@ -222,7 +276,7 @@ function Dashboard() {
           </h2>
           <p className="mt-3 ml-7 py-2 text-xl text-white font-light mb-4">
             Welcome,
-            <span className="user font-semibold">Mark</span>
+            <span className="user font-semibold">{authName}</span>
           </p>
           <div className="grid ml-7 grid-cols-4 justify-center">
             <div className="web h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">

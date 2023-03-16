@@ -22,17 +22,41 @@ const Register = () => {
   const [domain, setDomain] = useState(null);
 
   var flag = 0;
-  const fetchDomain = async () => {
-    const { data, error } = await supabase.from("users").select();
-    console.log("use effect working");
+  // const fetchDomain = async () => {
+  //   const { data, error } = await supabase.from("users").select();
+  //   console.log("use effect working");
+  //   if (error) {
+  //     setDomain(null);
+  //     console.log(error);
+  //   }
+  //   if (data) {
+  //     setDomain(data);
+  //     console.log(data);
+  //   }
+  // };
+  const addTable = async (e) => {
+    var currentTime = new Date().toLocaleString();
+    const { data, error } = await supabase.from("users").insert([
+      {
+        email,
+        firstName,
+        lastName,
+        company,
+        phone,
+        website,
+        password,
+        currentTime,
+      },
+    ]);
+
     if (error) {
-      setDomain(null);
-      console.log(error);
-    }
-    if (data) {
-      setDomain(data);
+      alert(error.message);
+      return;
+    } else {
+      alert("inserted successfully");
       console.log(data);
     }
+    //console.log(data);
   };
 
   const handleSubmit = async (e) => {
@@ -63,8 +87,15 @@ const Register = () => {
       return;
     } else {
       alert("Check mail");
-      console.log(data);
-      fetchDomain();
+      const { data, error } = await supabase.from("users").select();
+      if (error) {
+        setDomain(null);
+        console.log(error);
+      }
+      if (data) {
+        setDomain(data);
+        console.log(data);
+      }
       domain.map((user) => {
         if (user.website == website) {
           flag = 1;
@@ -73,49 +104,13 @@ const Register = () => {
         }
       });
       if (flag == 0) {
-        // console.log("");
         addTable();
       } else if (flag == 1) {
         alert("website already exist");
       }
     }
-
-    // console.log(
-    //   email,
-    //   password,
-    //   confirmPassword,
-    //   firstName,
-    //   lastName,
-    //   company,
-    //   phone,
-    //   visitors,
-    //   website
-    // );
   };
 
-  const addTable = async (e) => {
-    var currentTime = new Date().toLocaleString();
-    const { data, error } = await supabase.from("users").insert([
-      {
-        email,
-        firstName,
-        lastName,
-        company,
-        phone,
-        website,
-        password,
-        currentTime,
-      },
-    ]);
-
-    if (error) {
-      alert(error.message);
-      return;
-    } else {
-      alert("inserted successfully");
-    }
-    //console.log(data);
-  };
   return (
     <>
       <div className="grid grid-cols-2 gap-0 h-full">
