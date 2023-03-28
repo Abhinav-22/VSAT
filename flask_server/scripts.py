@@ -106,20 +106,91 @@ class MyScripts:
                 details.update({'hhtps':hsd})
                 return(hsd)
             gethttps()
-            # print(ssl_info)
-          #  def get_whois_info(domain):
-           #     try:
-           #         w = whois.whois(domain)
-           #         return w
-           #     except Exception as e:
-           #         print(f'Error getting WHOIS info for {domain}: {e}')
-           #         return None
-           # domain = input()
-           # domain="google.com"
-           # whois_info = get_whois_info(domain)
-           # if whois_info:
-           #     print(f'WHOIS info for {domain}:')
-           #     print(whois_info)
+            def get_records(domain):
+
+                ids = [
+                    'NONE',
+                    'A',
+                    'NS',
+                    'MD',
+                    'MF',
+                    'CNAME',
+                    'SOA',
+                    'MB',
+                    'MG',
+                    'MR',
+                    'NULL',
+                    'WKS',
+                    'PTR',
+                    'HINFO',
+                    'MINFO',
+                    'MX',
+                    'TXT',
+                    'RP',
+                    'AFSDB',
+                    'X25',
+                    'ISDN',
+                    'RT',
+                    'NSAP',
+                    'NSAP-PTR',
+                    'SIG',
+                    'KEY',
+                    'PX',
+                    'GPOS',
+                    'AAAA',
+                    'LOC',
+                    'NXT',
+                    'SRV',
+                    'NAPTR',
+                    'KX',
+                    'CERT',
+                    'A6',
+                    'DNAME',
+                    'OPT',
+                    'APL',
+                    'DS',
+                    'SSHFP',
+                    'IPSECKEY',
+                    'RRSIG',
+                    'NSEC',
+                    'DNSKEY',
+                    'DHCID',
+                    'NSEC3',
+                    'NSEC3PARAM',
+                    'TLSA',
+                    'HIP',
+                    'CDS',
+                    'CDNSKEY',
+                    'CSYNC',
+                    'SPF',
+                    'UNSPEC',
+                    'EUI48',
+                    'EUI64',
+                    'TKEY',
+                    'TSIG',
+                    'IXFR',
+                    'AXFR',
+                    'MAILB',
+                    'MAILA',
+                    'ANY',
+                    'URI',
+                    'CAA',
+                    'TA',
+                    'DLV',
+                ]
+
+                for a in ids:
+                    try:
+                        answers = dns.resolver.resolve(domain, a)
+                        for rdata in answers:
+                            print(a, ':', rdata.to_text())
+                            s = a+' : '+rdata.to_text()
+                            list.append(s)
+                    except Exception as e:
+                        pass  # or pass
+            get_records(domain)
+            details.update({'DNS Resolution': list})
+       
             return details
         list = []
         enterprise_detail = {}
@@ -230,13 +301,7 @@ class MyScripts:
                     continue
                 if(link['href'].startswith('http')):
                     links.append(link['href'])
-                # print('-------------------------------------')
-                # print("Crawling the target website.....")
-                # print("Links presesnt on this website-")
-                # i = 0
-               # for link in links:
-                #  print(link)
-            # print(links)
+               
             enterprise_detail.update({'URL Redirection': links})
 
             # loading time
@@ -333,7 +398,7 @@ class MyScripts:
                 enterprise_detail.update({'SSL_details':ssl_info})
                 
                   #  details.update({'Domain details':'none'})
-                return enterprise_detail
+               # return enterprise_detail
             hostname ="www.rajagiritech.ac.in"
             domain="rajagiritech.ac.in"
             ssl_info = get_ssl_whois_info(hostname,domain)
@@ -346,9 +411,77 @@ class MyScripts:
                     enterprise_detail.update({'Error getting WHOIS':wd})
                 #return (wdict) 
             whoissample()
+
+            # https
+            def gethttps():                
+                ur='https://'+wd
+                hsd={}
+                
+                response = requests.get(ur)
+                headers = response.headers
+                cookies = response.cookies
+
+# XXSS block
+                try:
+                    if headers["X-XSS-Protection"]:
+                        hsd.update({'X-XSS-Protection' :  'pass'})
+                except KeyError:
+                    hsd.update({'X-XSS-Protection header not present' :  'fail!'})
+
+# NOSNIFF block
+                try:
+                    if headers["X-Content-Type-Options"].lower() == "nosniff":
+                        hsd.update({'X-Content-Type-Options' :  'pass'})
+                    else:
+                        hsd.update({'X-Content-Type-Options header not set correctly' :  'fail!'})
+                except KeyError:
+                    hsd.update({'X-Content-Type-Options header not present' :  'fail!'})
+
+# XFrame block
+                try:
+                    if "deny" in headers["X-Frame-Options"].lower():
+                         hsd.update({'X-Frame-Options' :  'pass'})
+                    elif "sameorigin" in headers["X-Frame-Options"].lower():
+                        hsd.update({'X-Frame-Options' :  'pass'})
+                    else:
+                        hsd.update({'X-Frame-Options header not set correctly' :  'fail!'})
+                except KeyError:
+                    hsd.update({'X-Frame-Options header not present' :  'fail!'})
+
+# HSTS block
+                try:
+                    if headers["Strict-Transport-Security"]:
+                        hsd.update({'Strict-Transport-Security' :  'pass'})
+                except KeyError:
+                    hsd.update({'Strict-Transport-Security header not present' :  'fail!'})
+
+# Policy block
+                try:
+                    if headers["Content-Security-Policy"]:
+                        hsd.update({'Content-Security-Policy' :  'pass'})
+                except KeyError:
+                    hsd.update({'Content-Security-Policy header not present' :  'fail!'})
+
+# Cookie blocks
+                for cookie in cookies:
+                    hsd.update({'Set-Cookie' :  ''})
+                    if cookie.secure:
+                        hsd.update({'Secure' :  'pass'})
+                    else:
+                        hsd.update({'Secure attribute not set' :  'fail!'})
+                    if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
+                        hsd.update({'HttpOnly' :  'pass'})
+                else:
+                    hsd.update({'HttpOnly attribute not set' :  'fail!'})
+
+                enterprise_detail.update({'hhtps':hsd})
+                return(hsd)
+            gethttps()
+
+            
             return enterprise_detail
 
-            return enterprise_detail
+           # return enterprise_detail
 
         # ... other routes and scripts ...
               
