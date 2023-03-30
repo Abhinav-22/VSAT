@@ -11,6 +11,8 @@ import requests
 import time
 import requests
 import re
+from flask import request
+from flask import jsonify
 wd="rajagiritech.ac.in"
 details = {}
 
@@ -19,7 +21,7 @@ class MyScripts:
     def __init__(self):
         self.app = Flask(__name__)
 
-        @self.app.route('/individual')
+        @self.app.route('/individual',methods=['GET', 'POST'])
         def script1():
             def get_ssl_whois_info(hostname, domain):
                 details.update({'domain_name': domain})
@@ -190,12 +192,12 @@ class MyScripts:
                         pass  # or pass
             get_records(domain)
             details.update({'DNS Resolution': list})
-       
-            return details
+            return jsonify({'Indiviudal Details': details})
+           # return details
         list = []
         enterprise_detail = {}
 
-        @self.app.route('/enterprise')
+        @self.app.route('/enterprise',methods=['GET', 'POST'])
         def script2():
             # code for script2
             # domain=input()
@@ -478,8 +480,8 @@ class MyScripts:
                 return(hsd)
             gethttps()
 
-            
-            return enterprise_detail
+            return jsonify({'Enterprise Details': enterprise_detail})
+            #return enterprise_detail
 
            # return enterprise_detail
 
