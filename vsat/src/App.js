@@ -13,6 +13,7 @@ import Api from "./Api.js";
 
 import { Route, Routes } from "react-router-dom";
 import ConfirmResubmission from "./ConfirmResubmission.js";
+import TxtVerify from "./TxtVerify.js";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />}></Route>
         <Route path="domain" element={<Domain />}></Route>
         <Route path="api" element={<Api />}></Route>
+        <Route path="txt" element={<TxtVerify />}></Route>
         <Route
           path="confirmresubmission"
           element={<ConfirmResubmission />}
