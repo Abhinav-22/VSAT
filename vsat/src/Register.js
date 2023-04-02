@@ -97,16 +97,16 @@ const Register = () => {
         console.log(data);
       }
       domain.map((user) => {
-        if (user.website == website) {
+        if (user.website === website || user.email === email) {
           flag = 1;
           // alert("website already exist");
           // console.log(flag);
         }
       });
-      if (flag == 0) {
+      if (flag === 0) {
         addTable();
-      } else if (flag == 1) {
-        alert("website already exist");
+      } else if (flag === 1) {
+        alert("already exist");
       }
     }
   };
@@ -122,6 +122,7 @@ const Register = () => {
                   {" "}
                   <img
                     src={logo}
+                    alt="logo"
                     style={{ height: "90px", alt: "abc", loading: "lazy" }}
                   />
                 </Link>
@@ -275,26 +276,19 @@ const Register = () => {
                 />
               </div>
               <div className="flex items-start mb-6">
-                <div className="flex items-center h-5">
-                  <input
-                    id="remember"
-                    type="checkbox"
-                    value=""
-                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                    required
-                  />
-                </div>
+                <div className="flex items-center h-5"></div>
                 <label
                   for="remember"
                   className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  I agree with the{" "}
-                  <a
-                    href="#"
+                  {" "}
+                  Already have an account?
+                  <Link
+                    to="/login"
                     className="text-blue-600 hover:underline dark:text-blue-500"
                   >
-                    terms and conditions
-                  </a>
+                    {"    "}Sign in
+                  </Link>
                   .
                 </label>
               </div>

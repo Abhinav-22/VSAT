@@ -1,8 +1,22 @@
 import React from "react";
 import logo from "./img/transparent.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import supabase from "./config/supabaseClient";
 
 const Web = () => {
+  const navigate = useNavigate();
+
+  const logout = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log("logout failed");
+    } else {
+      console.log("logged out successfully");
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <div className="grid grid-cols-6 gap-0 h-full">
@@ -119,7 +133,8 @@ const Web = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/api"
+                  <Link
+                    to="/api"
                     className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900"
                   >
                     <svg
@@ -176,7 +191,7 @@ const Web = () => {
                   security@adidas.com
                 </p>
                 <div className="btn drop-shadow-lg	 ">
-                  <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10">
+                  <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10" onClick={logout}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

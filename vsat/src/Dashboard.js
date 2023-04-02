@@ -27,14 +27,13 @@ function Dashboard() {
       }
       if (data) {
         try {
-        // setDomain(data);
-        // console.log(domain);
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        console.log(user.aud);
+          // setDomain(data);
+          // console.log(domain);
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
+          console.log(user.aud);
 
-        
           if (user.aud != "authenticated") {
             navigate("/confirmresubmission");
           } else {
@@ -48,14 +47,24 @@ function Dashboard() {
               }
             });
           }
-        } catch (e){
-          if(e.name == 'TypeError')
-          navigate("/confirmresubmission");
+        } catch (e) {
+          if (e.name == "TypeError") navigate("/confirmresubmission");
         }
       }
     };
     fetchDetails();
   }, []);
+
+  const logout = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log("logout failed");
+    } else {
+      console.log("logged out successfully");
+      navigate("/login");
+    }
+  };
 
   return (
     <>
@@ -243,7 +252,10 @@ function Dashboard() {
                   {authEmail}{" "}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
-                  <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10">
+                  <button
+                    className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10"
+                    onClick={logout}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
