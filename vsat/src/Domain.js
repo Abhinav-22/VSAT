@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
 const Domain = () => {
   const navigate = useNavigate();
+
+  const [authName, setAuthName] = useState("");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authCompany, setAuthCompany] = useState("");
+
+  useEffect(() => {
+    console.log("workingggg");
+
+    const fetchDetails = async () => {
+      // await delay(1000);
+
+      const { data, error } = await supabase.from("users").select();
+      if (error) {
+        // setDomain(null);
+        console.log(error);
+      }
+      if (data) {
+        try {
+          // setDomain(data);
+          // console.log(domain);
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
+          console.log(user.aud);
+
+          if (user.aud != "authenticated") {
+            navigate("/confirmresubmission");
+          } else {
+            data.map((us) => {
+              // console.log(us.firstName);
+              if (us.email === user.email) {
+                setAuthName(us.firstName);
+                setAuthCompany(us.company);
+                setAuthEmail(us.email);
+                // console.log(us.firstName);
+              }
+            });
+          }
+        } catch (e) {
+          if (e.name == "TypeError") navigate("/confirmresubmission");
+        }
+      }
+    };
+    fetchDetails();
+  }, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -183,11 +228,11 @@ const Domain = () => {
                     </svg>
                   </div>
                   <span className=" ml-3 mt-3 flex justify-center font-bold text-white">
-                    Adidas Inc.
+                    {authCompany}
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  security@adidas.com
+                  {authEmail}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button
@@ -218,7 +263,6 @@ const Domain = () => {
             </div>
           </aside>
         </div>
-
 
         <div class="pane bg-gray-900 col-span-5">
           <h2 class="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">

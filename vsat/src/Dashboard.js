@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
-
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
 function Dashboard() {
+
+  const navigate = useNavigate();
+  
   const [authName, setAuthName] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
 
-  const navigate = useNavigate();
 
-  // for validation
-  // const [domain, setDomain] = useState(null);
 
   useEffect(() => {
     console.log("workingggg");

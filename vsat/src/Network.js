@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./img/transparent.svg";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -6,6 +6,51 @@ import supabase from "./config/supabaseClient";
 
 const Network = () => {
   const navigate = useNavigate();
+
+  const [authName, setAuthName] = useState("");
+  const [authEmail, setAuthEmail] = useState("");
+  const [authCompany, setAuthCompany] = useState("");
+
+  useEffect(() => {
+    console.log("workingggg");
+
+    const fetchDetails = async () => {
+      // await delay(1000);
+
+      const { data, error } = await supabase.from("users").select();
+      if (error) {
+        // setDomain(null);
+        console.log(error);
+      }
+      if (data) {
+        try {
+          // setDomain(data);
+          // console.log(domain);
+          const {
+            data: { user },
+          } = await supabase.auth.getUser();
+          console.log(user.aud);
+
+          if (user.aud != "authenticated") {
+            navigate("/confirmresubmission");
+          } else {
+            data.map((us) => {
+              // console.log(us.firstName);
+              if (us.email === user.email) {
+                setAuthName(us.firstName);
+                setAuthCompany(us.company);
+                setAuthEmail(us.email);
+                // console.log(us.firstName);
+              }
+            });
+          }
+        } catch (e) {
+          if (e.name == "TypeError") navigate("/confirmresubmission");
+        }
+      }
+    };
+    fetchDetails();
+  }, []);
 
   const logout = async (e) => {
     e.preventDefault();
@@ -183,14 +228,17 @@ const Network = () => {
                   </svg>
                 </div>
                 <span className=" ml-3 mt-3 flex justify-center font-bold text-white">
-                  Adidas Inc.
+                  {authCompany}
                 </span>
               </div>
               <p className="flex justify-center mb-3 text-sm font-light text-white">
-                security@adidas.com
+                {authEmail}
               </p>
               <div className="btn drop-shadow-lg	 ">
-                <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10" onClick={logout}>
+                <button
+                  className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10"
+                  onClick={logout}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
