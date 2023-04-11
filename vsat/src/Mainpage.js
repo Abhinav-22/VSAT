@@ -35,7 +35,9 @@ function Mainpage() {
                 Securing you in the digital space against threats
               </p>
               <p className="ml-7  text-gray-500 text-lg">
-              VSAT provides the platform that caters both individuals and organizations,<br>thus ensures security for everyone</br> 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
+                Minima officia consequatur adipisci tenetur repudiandae rerum
+                quos.
               </p>
               <br />
               <div
