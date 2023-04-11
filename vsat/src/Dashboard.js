@@ -384,6 +384,7 @@ function Dashboard() {
             </div>
           </div>
           <div className="flex tutorial mt-4 ml-7 w-auto rounded justify-between">
+            <a href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview" target="_blank">
             <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded h-10">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +405,7 @@ function Dashboard() {
                 Click to learn best cyber security practises for your industry.
               </span>
             </button>
-
+              </a>
             <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -36,7 +36,7 @@ function Mainpage() {
               </p>
               <p className="ml-7  text-gray-500 text-lg">
                 Ensuring security for everyone by securing their digital assets<br /> and thus making 
-                everyone safe in the digital world.
+                everyone safe in the digital world
               </p>
               <br />
               <div
