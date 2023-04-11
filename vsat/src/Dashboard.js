@@ -287,7 +287,7 @@ function Dashboard() {
           </h2>
           <p className="mt-3 ml-7 py-2 text-xl text-white font-light mb-4">
             Welcome,
-            <span className="user font-semibold">{authName}</span>
+            <span className="user font-semibold">&nbsp;{authName}</span>
           </p>
           <div className="grid ml-7 grid-cols-4 justify-center">
             <div className="web h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
@@ -377,32 +377,10 @@ function Dashboard() {
             </div>
           </div>
           <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5">
+            <div className="col-span-3 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 mr-14">
               <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
                 Security at a glance
               </p>
-            </div>
-            <div className="col-span-1 news bg-gray-800 h-80 mt-5 rounded shadow shadow-slate-700 w-96 ml-3">
-              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
-                News
-              </p>
-              <span className="user font-medium text-base text-gray-400 ml-3 text-left flex justify-start">
-                "Indigo hit with 'cybersecurity incident'"
-              </span>
-              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
-              <span className="user font-medium text-base text-gray-400 ml-3 text-left flex justify-start">
-                "A prominent UK cybersecurity stock is under attack from short
-                sellers. Here's what you need to know"
-              </span>
-              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
-              <span className="user font-medium text-base text-gray-400 ml-3 flex justify-start">
-                "Indigo hit with 'cybersecurity incident'"
-              </span>
-              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
-              <span className="user font-medium text-base text-gray-400 ml-3 flex justify-start">
-                "Indigo hit with 'cybersecurity incident'"
-              </span>
-              <hr className="h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
           </div>
           <div className="flex tutorial mt-4 ml-7 w-auto rounded justify-between">
@@ -427,7 +405,7 @@ function Dashboard() {
               </span>
             </button>
 
-            <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10">
+            <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -456,7 +434,7 @@ function Dashboard() {
               <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
               <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
             </svg>
-            Generate report
+            &nbsp;Generate report
           </button>
         </div>
       </div>

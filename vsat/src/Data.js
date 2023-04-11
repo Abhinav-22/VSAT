@@ -298,9 +298,8 @@ const Data = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 Data leak scan info.
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 Check whether any of your organization's data is breached
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />

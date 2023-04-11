@@ -300,9 +300,8 @@ const Domain = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 SSL certificate info.
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the status of ssl certificate of your website
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
@@ -312,9 +311,8 @@ const Domain = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 DNS info.
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the information about DNS records
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
@@ -324,9 +322,8 @@ const Domain = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 WHOIS lookup
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View information about your domain from WHOIS
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />

@@ -299,9 +299,8 @@ const Web = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 HTTP Security Header
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the status of HTTP security header of your website
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
@@ -311,9 +310,8 @@ const Web = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 URL redirections
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the URLs redirected from your website
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
@@ -322,9 +320,8 @@ const Web = () => {
               <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
                 Phishing statsus
               </p>
-              <br />
 
-              <span class="user font-normal text-sm text-gray-400">
+              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
                 Check whether your domain has flagged as Phishing website
               </span>
               <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
