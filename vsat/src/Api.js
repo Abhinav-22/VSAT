@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
+import copy from "copy-to-clipboard";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
 const Api = () => {
   const navigate = useNavigate();
-
-  const [authName, setAuthName] = useState("");
+  const [tokenVal, settokenVal] = useState(
+    "56516e64eae7423be4d52c31c51c1d387874d1c0eb109d3c9931a668e4c8ac0b"
+  );
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
+
+  const handleCopyText = (e) => {
+    e.preventDefault();
+    copy(tokenVal);
+    // alert(`You have copied "${tokenVal}"`);
+  };
 
   useEffect(() => {
     console.log("workingggg");
@@ -36,7 +44,6 @@ const Api = () => {
             data.map((us) => {
               // console.log(us.firstName);
               if (us.email === user.email) {
-                setAuthName(us.firstName);
                 setAuthCompany(us.company);
                 setAuthEmail(us.email);
                 // console.log(us.firstName);
@@ -61,6 +68,7 @@ const Api = () => {
       navigate("/login");
     }
   };
+
   return (
     <>
       <div className="grid grid-cols-6 gap-0 h-full">
@@ -290,13 +298,16 @@ const Api = () => {
                 </label>
                 <div class="relative">
                   <p
-                    id="default-search"
+                    id="token"
                     class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   >
-                    56516e64eae7423be4d52c31c51c1d387874d1c0eb109d3c9931a668e4c8ac0b
+                    {tokenVal}{" "}
                   </p>
-                  <button class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button
+                    class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleCopyText}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
