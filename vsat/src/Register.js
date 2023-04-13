@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createElement } from "react";
 import { useNavigate } from "react-router-dom";
 
 import logo from "./img/transparent.svg";
@@ -62,6 +62,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     flag = 0;
+   
 
     if (
       !firstName ||
