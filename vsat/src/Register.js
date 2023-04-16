@@ -34,6 +34,7 @@ const Register = () => {
   //     console.log(data);
   //   }
   // };
+
   const addTable = async (e) => {
     var currentTime = new Date().toLocaleString();
     const { data, error } = await supabase.from("users").insert([
@@ -59,10 +60,12 @@ const Register = () => {
     //console.log(data);
   };
 
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     flag = 0;
-   
+    
 
     if (
       !firstName ||
@@ -110,6 +113,7 @@ const Register = () => {
         alert("already exist");
       }
     }
+
   };
 
   return (

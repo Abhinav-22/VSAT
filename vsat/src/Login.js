@@ -8,8 +8,12 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState(null);
+  const [txtval, setTxtval] = useState();
+  const [tokenval, setTokenval] = useState();
 
+  const [res, setRes] = useState();
   const navigate = useNavigate();
+
   useEffect(() => {
     const logout = async () => {
       const { error } = await supabase.auth.signOut();
@@ -18,6 +22,38 @@ function Login() {
       }
     };
     logout();
+    function maketxtid(length) {
+      let result = "vsat-";
+      let end = ".verifydomain.vsat";
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      const charactersLength = characters.length;
+      let counter = 0;
+      while (counter < length) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+        counter += 1;
+      }
+      result += end;
+      return result;
+    }
+    setTxtval(maketxtid(16));
+
+    function makeid(length) {
+      let result = "";
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+      const charactersLength = characters.length;
+      let counter = 0;
+      while (counter < length) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+        counter += 1;
+      }
+      return result;
+    }
+
+    setTokenval(makeid(20));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -35,6 +71,8 @@ function Login() {
       } = await supabase.auth.getUser();
       if (user.aud == "authenticated") {
         updateUser();
+        addtoken();
+
         navigate("/dashboard");
       } else {
         alert("not authenticated");
@@ -74,6 +112,47 @@ function Login() {
       .eq("email", user.email);
     if (error) {
       alert(error.message);
+    }
+  };
+
+  const updateRes = (e) => {
+    console.log(e);
+    setRes(e);
+  };
+
+  const addtoken = async (e) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("txt").select();
+    if (error) {
+      alert(error.message);
+      updateRes(null);
+    }
+    if (data) {
+      updateRes(data);
+      console.log(res);
+
+      res.map((us) => {
+        if (user.email == us.domain && us.flag == false) {
+          console.log(us);
+          console.log(us.email);
+          console.log(us.flag);
+        }
+      });
+
+      const { error } = await supabase
+        .from("txt")
+        .update({ txt: txtval })
+        .eq("domain", user.website);
+      if (error) {
+        alert(error.message);
+      }
+
+      console.log(data);
+      console.log(txtval);
+      console.log(tokenval);
     }
   };
 

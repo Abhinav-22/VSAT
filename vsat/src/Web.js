@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
@@ -6,15 +6,20 @@ import supabase from "./config/supabaseClient";
 const Web = () => {
   const navigate = useNavigate();
 
-  
   const [authName, setAuthName] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
-
-
+  const [load, setLoad] = useState([{}]);
 
   useEffect(() => {
-    console.log("workingggg");
+    // console.log("workingggg");
+    fetch("/webpagespeed")
+      .then((res) => res.json())
+      .then((data) => {
+        setLoad(data);
+        // console.log(data);
+        // console.log(typeof load.ltime);
+      });
 
     const fetchDetails = async () => {
       // await delay(1000);
@@ -53,7 +58,6 @@ const Web = () => {
     };
     fetchDetails();
   }, []);
-
 
   const logout = async (e) => {
     e.preventDefault();
@@ -195,7 +199,7 @@ const Web = () => {
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"
                       />
                     </svg>
@@ -237,10 +241,13 @@ const Web = () => {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-          {authEmail}
+                  {authEmail}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
-                  <button className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10" onClick={logout}>
+                  <button
+                    className="flex items-center justify-center mt-7 mx-auto bg-red-400 hover:bg-red-700 text-white font-light text-left py-1 px-2 rounded h-10"
+                    onClick={logout}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -250,11 +257,11 @@ const Web = () => {
                       viewBox="0 0 16 16"
                     >
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
                       />
                       <path
-                        fill-rule="evenodd"
+                        fillRule="evenodd"
                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
                       />
                     </svg>
@@ -266,65 +273,75 @@ const Web = () => {
           </aside>
         </div>
 
-        <div class="pane bg-gray-900 col-span-5">
-          <h2 class="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
+        <div className="pane bg-gray-900 col-span-5">
+          <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
             Web security
           </h2>
-          <p class="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
-          <div class="grid ml-7 grid-cols-4 justify-center">
-            <div class="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
+          <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
+          <div className="grid ml-7 grid-cols-4 justify-center">
+            <div className="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="60"
                 height="60"
                 fill="currentColor"
-                class="clock float-right mt-7 mr-2 bi bi-clock text-white"
+                className="clock float-right mt-7 mr-2 bi bi-clock text-white"
                 viewBox="0 0 16 16"
               >
                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" />
               </svg>
 
-              <span class="user font-medium text-lg ml-2 text-white">
+              <span className="user font-medium text-lg ml-2 text-white">
                 Website load time
               </span>
               <br />
-              <span class="user font-semibold text-3xl ml-2 text-white ">
-                1.036ms
+              <span className="user font-semibold text-3xl ml-2 text-white ">
+                <div>
+                  {typeof load.ltime === "undefined" ? (
+                    <p className="user font-semibold text-2xl ml-2 text-white ">
+                      loading...
+                    </p>
+                  ) : (
+                    <p className="user font-semibold text-2xl ml-2 text-white">
+                      {load.ltime.toFixed(7) * 1000}ms
+                    </p>
+                  )}
+                </div>
               </span>
             </div>
           </div>
-          <div class="scan grid grid-cols-3 gap-2">
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
+          <div className="scan grid grid-cols-3 gap-2">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 HTTP Security Header
               </p>
 
-              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
+              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the status of HTTP security header of your website
               </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
             <br />
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 URL redirections
               </p>
 
-              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
+              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the URLs redirected from your website
               </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 Phishing statsus
               </p>
 
-              <span class="user font-normal text-sm text-gray-400 ml-3  py-2">
+              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 Check whether your domain has flagged as Phishing website
               </span>
-              <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
             </div>
           </div>
         </div>
