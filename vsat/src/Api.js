@@ -76,12 +76,7 @@ const Api = () => {
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
             <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
-                <img
-                  src={logo}
-                  style={{ height: "90px", alt: "abc", loading: "lazy" }}
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
               <ul className="space-y-2">
                 <li>
@@ -272,40 +267,40 @@ const Api = () => {
           </aside>
         </div>
 
-        <div class="pane bg-gray-900 col-span-5">
-          <h2 class="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
+        <div className="pane bg-gray-900 col-span-5">
+          <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
             API Settings
           </h2>
-          <p class="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
-          <div class="scan grid grid-cols-3 gap-2">
-            <div class="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p class="ml-3  py-2 text-xl text-white font-normal mb-4">
+          <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
+          <div className="scan grid grid-cols-3 gap-2">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 VSAT API keys
                 <br />
-                <span class="user font-normal text-sm text-gray-400 mt-3">
+                <span className="user font-normal text-sm text-gray-400 mt-3">
                   Your API is secured behind an API gateway which requires an
                   API Key for every request. You can use the keys below to use
                   VSAT API.
                 </span>
-                <hr class=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+                <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
               </p>
               <form>
                 <label
                   for="default-search"
-                  class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+                  className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
                 >
                   Search
                 </label>
-                <div class="relative">
+                <div className="relative">
                   <p
                     id="token"
-                    class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   >
                     {tokenVal}{" "}
                   </p>
                   <button
-                    class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     onClick={handleCopyText}
                   >
                     <svg
@@ -313,7 +308,7 @@ const Api = () => {
                       width="16"
                       height="16"
                       fill="currentColor"
-                      class="bi bi-clipboard"
+                      className="bi bi-clipboard"
                       viewBox="0 0 16 16"
                     >
                       <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />

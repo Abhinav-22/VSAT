@@ -19,9 +19,9 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // for validation
-  const [domain, setDomain] = useState(null);
+  const [domain, setDomain] = useState([]);
+  const [flag, setFlag] = useState(0);
 
-  var flag = 0;
   // const fetchDomain = async () => {
   //   const { data, error } = await supabase.from("users").select();
   //   console.log("use effect working");
@@ -60,13 +60,18 @@ const Register = () => {
     //console.log(data);
   };
 
-  
-
+  const fetchh = async (e) => {
+    domain.map((user) => {
+      if (user.website == website || user.email == email) {
+        setFlag(1); // alert("website already exist");
+        console.log(flag);
+      }
+    });
+    console.log(flag);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    flag = 0;
-    
-
+    setFlag(0);
     if (
       !firstName ||
       !lastName ||
@@ -93,27 +98,21 @@ const Register = () => {
       alert("Check mail");
       const { data, error } = await supabase.from("users").select();
       if (error) {
-        setDomain(null);
+        setDomain("hi");
         console.log(error);
       }
       if (data) {
-        setDomain(data);
         console.log(data);
+        setDomain(data);
       }
-      domain.map((user) => {
-        if (user.website === website || user.email === email) {
-          flag = 1;
-          // alert("website already exist");
-          // console.log(flag);
-        }
-      });
-      if (flag === 0) {
+      fetchh();
+      console.log(flag);
+      if (flag == 0) {
         addTable();
-      } else if (flag === 1) {
+      } else if (flag == 1) {
         alert("already exist");
       }
     }
-
   };
 
   return (
@@ -134,7 +133,7 @@ const Register = () => {
               </div>
             </div>
           </nav>
-          <div className="flex justify-center mx-auto mt-10 w-full max-w-max p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+          <div className="flex justify-center mx-auto mt-10 w-full max-w-max p-4  border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
             <form onSubmit={handleSubmit}>
               <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <h5 className="text-xl font-medium text-gray-900 dark:text-white">

@@ -77,12 +77,7 @@ const Web = () => {
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
             <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
-                <img
-                  src={logo}
-                  style={{ height: "90px", alt: "abc", loading: "lazy" }}
-                  alt=""
-                  loading="lazy"
-                />
+                <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
               <ul className="space-y-2">
                 <li>
