@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,8 +8,11 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState(null);
-  const [txtval, setTxtval] = useState();
-  const [tokenval, setTokenval] = useState();
+  const [txtval, setTxtval] = useState("");
+  const [tokenval, setTokenval] = useState("");
+  const [forceRender, setForceRender] = useState(false);
+  const [data1, setData] = useState();
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const [res, setRes] = useState([{}]);
   const navigate = useNavigate();
@@ -89,6 +92,30 @@ function Login() {
     }
   };
 
+  const storeApi = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("api").select();
+    console.log(data, "apival");
+    setData(data);
+    console.log(data1);
+    forceUpdate();
+    // const token = data.map((us) => {
+    //   if (user.id == us.id) {
+    //     console.log(us.token);
+    //     setTokenval(us.token);
+    //     setForceRender((prevState) => !prevState);
+    //     return us.token;
+    //   }
+    // })[0];
+  };
+
+  useEffect(() => {
+    console.log(data1);
+  }, [data1]);
+
   const addtoken = async (e) => {
     const {
       data: { user },
@@ -99,12 +126,14 @@ function Login() {
       console.log(error.message);
     } else {
       data.map((us) => {
-        if (user.email == us.email && us.flag == false) {
+        if (user.email === us.email && us.flag === false) {
           maketxtid();
         }
       });
 
       checktoken();
+
+      storeApi();
     }
   };
 
@@ -134,7 +163,7 @@ function Login() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      if (user.aud == "authenticated") {
+      if (user.aud === "authenticated") {
         updateUser();
         addtoken();
 

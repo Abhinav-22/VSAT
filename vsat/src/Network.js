@@ -3,6 +3,7 @@ import logo from "./img/transparent.svg";
 
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import usePortStore from "./stores/portStore";
 
 const Network = () => {
   const navigate = useNavigate();
@@ -10,6 +11,21 @@ const Network = () => {
   const [authName, setAuthName] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
+  const portsCount = usePortStore((state) => state.scanports);
+  const setportsCount = usePortStore((state) => state.updatePorts);
+
+  const getData = async (result) => {
+    const response = await fetch(
+      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
+    );
+    const data = await response.json();
+    if (!data) {
+      console.log("The array is empty");
+    }
+    console.log(data.openPorts);
+    console.log(data.openPorts.length);
+    setportsCount(data.openPorts.length);
+  };
 
   useEffect(() => {
     console.log("workingggg");
@@ -281,7 +297,7 @@ const Network = () => {
             </span>
             <br />
             <span className="user font-semibold text-3xl ml-2 text-white ">
-              5
+              {portsCount}
             </span>
           </div>
         </div>

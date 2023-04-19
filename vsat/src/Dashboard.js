@@ -3,6 +3,7 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import { create } from "zustand";
+import usePortStore from "./stores/portStore";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -16,35 +17,13 @@ function Dashboard() {
   const [tokenval, setTokenval] = useState();
 
   const [gportCount, setgportCount] = useState(null);
-  // const useStore = create((set) => ({
-  //   scanports: 0,
-  //   updatePorts: () => set((state) => ({ scanports: ports.length })),
-  //   resetPorts: () => set({ scanports: 0 }),
-  // }));
 
-  // function PortCounter() {
-  //   const gportCount = useStore((state) => state.scanports);
-  // }
 
-  const getData = async (result) => {
-    const response = await fetch(
-      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
-    );
-    const data = await response.json();
-    if (!data) {
-      console.log("The array is empty");
-    }
-    console.log(data.openPorts);
-    console.log(data.openPorts.length);
-    setPorts(data.openPorts.length);
-    // PortCounter();
-    console.log(ports);
-    console.log(gportCount);
-  };
 
   useEffect(() => {
     console.log("workingggg");
-    getData();
+    // console.log(portsCount);
+
     // console.log("---------------");
     console.log(ports);
     const fetchDetails = async () => {

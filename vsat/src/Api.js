@@ -21,6 +21,20 @@ const Api = () => {
   useEffect(() => {
     console.log("workingggg");
 
+    const fetchToken = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("api")
+        .select("id, token")
+        .eq("id", user.id);
+      console.log(data);
+      settokenVal(data.token);
+      console.log(tokenVal);
+    };
+
     const fetchDetails = async () => {
       // await delay(1000);
 
@@ -46,6 +60,7 @@ const Api = () => {
               if (us.email === user.email) {
                 setAuthCompany(us.company);
                 setAuthEmail(us.email);
+                fetchToken();
                 // console.log(us.firstName);
               }
             });
