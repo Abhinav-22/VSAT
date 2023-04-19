@@ -3,37 +3,24 @@ import logo from "./img/transparent.svg";
 import copy from "copy-to-clipboard";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useTokenStore from "./stores/tokenStore";
 
 const Api = () => {
   const navigate = useNavigate();
-  const [tokenVal, settokenVal] = useState(
-    "56516e64eae7423be4d52c31c51c1d387874d1c0eb109d3c9931a668e4c8ac0b"
-  );
+  const [tokenVal, settokenVal] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
 
+  const tokenStore = useTokenStore((state) => state.tokenVal);
+
   const handleCopyText = (e) => {
     e.preventDefault();
-    copy(tokenVal);
+    copy(tokenStore);
     // alert(`You have copied "${tokenVal}"`);
   };
 
   useEffect(() => {
     console.log("workingggg");
-
-    const fetchToken = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { data, error } = await supabase
-        .from("api")
-        .select("id, token")
-        .eq("id", user.id);
-      console.log(data);
-      settokenVal(data.token);
-      console.log(tokenVal);
-    };
 
     const fetchDetails = async () => {
       // await delay(1000);
@@ -60,7 +47,6 @@ const Api = () => {
               if (us.email === user.email) {
                 setAuthCompany(us.company);
                 setAuthEmail(us.email);
-                fetchToken();
                 // console.log(us.firstName);
               }
             });
@@ -312,7 +298,7 @@ const Api = () => {
                     className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   >
-                    {tokenVal}{" "}
+                    {tokenStore}{" "}
                   </p>
                   <button
                     className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

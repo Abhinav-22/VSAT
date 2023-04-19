@@ -29,7 +29,7 @@ const Network = () => {
 
   useEffect(() => {
     console.log("workingggg");
-
+    getData();
     const fetchDetails = async () => {
       // await delay(1000);
 

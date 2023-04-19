@@ -3,18 +3,19 @@ import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useTokenStore from "./stores/tokenStore";
+import useTxtStore from "./stores/txtStore";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [users, setUsers] = useState(null);
-  const [txtval, setTxtval] = useState("");
-  const [tokenval, setTokenval] = useState("");
-  const [forceRender, setForceRender] = useState(false);
   const [data1, setData] = useState();
-  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  const [res, setRes] = useState([{}]);
+  const settokenStore = useTokenStore((state) => state.updateToken);
+
+  const settxtStore = useTxtStore((state) => state.updateTxt);
+  const txtStoreval = useTxtStore((state) => state.txtVal);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,17 +100,27 @@ function Login() {
 
     const { data, error } = await supabase.from("api").select();
     console.log(data, "apival");
-    setData(data);
-    console.log(data1);
-    forceUpdate();
-    // const token = data.map((us) => {
-    //   if (user.id == us.id) {
-    //     console.log(us.token);
-    //     setTokenval(us.token);
-    //     setForceRender((prevState) => !prevState);
-    //     return us.token;
-    //   }
-    // })[0];
+    data.map((us) => {
+      if (user.email === us.email) {
+        console.log(us.token);
+        settokenStore(us.token);
+      }
+    });
+  };
+
+  const storeTxt = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("txt").select();
+    console.log(data, "txtval");
+    data.map((us) => {
+      if (user.email === us.email) {
+        console.log(us.txtval);
+        settxtStore(us.txtval);
+      }
+    });
   };
 
   useEffect(() => {
@@ -134,6 +145,8 @@ function Login() {
       checktoken();
 
       storeApi();
+      storeTxt();
+      console.log(txtStoreval);
     }
   };
 

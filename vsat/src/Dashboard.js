@@ -54,6 +54,7 @@ function Dashboard() {
                 setAuthEmail(us.email);
                 if (us.txt_status == false) {
                   console.log(us.txt_status);
+                  
                   navigate("/txt");
                 }
                 // console.log(typeof us.txt_status);
