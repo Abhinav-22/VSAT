@@ -10,6 +10,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data1, setData] = useState();
+  const [idd, setId] = useState("");
 
   const settokenStore = useTokenStore((state) => state.updateToken);
 
@@ -162,6 +163,83 @@ function Login() {
       console.log(error.message);
     }
   };
+  const initialApi = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    let userid = "";
+    let useremail = "";
+    userid = user.id;
+    useremail = user.email;
+    console.log(userid);
+    const { data, error } = await supabase.from("api").select();
+    if (error) {
+      console.log(error.message);
+    }
+    let flag = 0;
+    data.map((us) => {
+      if (user.email == us.email) {
+        flag = 1;
+      }
+    });
+    console.log(flag);
+    if (flag === 0) {
+      const { data, error } = await supabase.from("api").insert([
+        {
+          id: userid,
+          token: null,
+          flag: false,
+          email: useremail,
+          domain: "",
+        },
+      ]);
+      if (error) {
+        console.log(error.message);
+        return;
+      } else {
+        console.log("inserted api table successfully");
+      }
+    }
+  };
+
+  const initialTxt = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    let userid = "";
+    let useremail = "";
+    userid = user.id;
+    useremail = user.email;
+    console.log(userid);
+    const { data, error } = await supabase.from("txt").select();
+    if (error) {
+      console.log(error.message);
+    }
+    let flag = 0;
+    data.map((us) => {
+      if (user.email == us.email) {
+        flag = 1;
+      }
+    });
+    console.log(flag);
+    if (flag === 0) {
+      const { data, error } = await supabase.from("txt").insert([
+        {
+          id: userid,
+          txtval: null,
+          flag: false,
+          email: useremail,
+          status: false,
+        },
+      ]);
+      if (error) {
+        console.log(error.message);
+        return;
+      } else {
+        console.log("inserted txt table successfully");
+      }
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -178,6 +256,8 @@ function Login() {
       } = await supabase.auth.getUser();
       if (user.aud === "authenticated") {
         updateUser();
+        initialApi();
+        initialTxt();
         addtoken();
 
         navigate("/dashboard");
