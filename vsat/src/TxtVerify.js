@@ -25,14 +25,14 @@ const TxtVerify = () => {
               </div>
             </div>
           </nav>
-          <div className="mx-auto mt-10 w-full max-w-xl p-4  bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+          <div className="mx-auto mt-10 w-full max-w-xl p-4   rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 :border-gray-700 ">
             <div className="items flex flex-col items-center justify-center mx-auto">
               <ol className="flex items-center justify-center mx-auto w-full mb-4 sm:mb-5 ">
-                <li className="flex w-full items-center text-blue-600 dark:text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b after:border-blue-100 after:border-4 after:inline-block dark:after:border-blue-800">
-                  <div className="flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full lg:h-12 lg:w-12 dark:bg-blue-800 shrink-0">
+                <li className="flex w-full items-center text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-blue-800">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full lg:h-12 lg:w-12 bg-blue-800 shrink-0">
                     <svg
                       aria-hidden="true"
-                      className="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300"
+                      className="w-5 h-5  lg:w-6 lg:h-6 text-blue-300"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -45,12 +45,12 @@ const TxtVerify = () => {
                     </svg>
                   </div>
                 </li>
-                <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-100 after:border-4 after:inline-block dark:after:border-gray-700">
-                  <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-gray-700">
+                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-gray-700 shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      className="bi bi-file-earmark-text-fill w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300"
+                      className="bi bi-file-earmark-text-fill w-5 h-5  lg:w-6 lg:h-6 text-blue-300"
                       width="16"
                       height="16"
                       viewBox="0 0 16 16"
@@ -60,10 +60,10 @@ const TxtVerify = () => {
                   </div>
                 </li>
                 <li className="flex items-center">
-                  <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full lg:h-12 lg:w-12 dark:bg-gray-700 shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-gray-700 shrink-0">
                     <svg
                       aria-hidden="true"
-                      className="w-5 h-5 text-gray-500 lg:w-6 lg:h-6 dark:text-gray-100"
+                      className="w-5 h-5  lg:w-6 lg:h-6 text-gray-100"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                       xmlns="http://www.w3.org/2000/svg"
@@ -80,30 +80,30 @@ const TxtVerify = () => {
               </ol>
             </div>
             <form action="#">
-              <h3 className="mb-4 text-lg font-bold leading-none text-gray-900 dark:text-white text-center">
+              <h3 className="mb-4 text-lg font-bold leading-none text-white text-center">
                 TXT record verification
               </h3>
               <br />
               <div className="grid ">
                 <div>
-                  <h2 className="mb-2 text-lg font-light text-center text-gray-900 dark:text-white">
+                  <h2 className="mb-2 text-lg font-light text-center text-white">
                     Add TXT record
                   </h2>
-                  <ol className="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
+                  <ol className="max-w-md space-y-1  list-decimal list-inside text-gray-400">
                     <li>
-                      <span className="font-normal text-gray-900 dark:text-white">
+                      <span className="font-normaltext-white">
                         Log in to your DNS manager settings and go to DNS
                         records.
                       </span>
                     </li>
                     <li>
-                      <span className="font-normal text-gray-900 dark:text-white">
+                      <span className="font-normal ttext-white">
                         Create a new TXT record. Leave txt name as <i>"@"</i> or
                         blank.
                       </span>
                     </li>
                     <li>
-                      <span className="font-normal text-gray-900 dark:text-white">
+                      <span className="font-normal text-white">
                         Copy the following txt value to the txt value section.
                       </span>
                     </li>
@@ -111,7 +111,7 @@ const TxtVerify = () => {
                   </ol>
                   <p
                     id="default-search"
-                    className="block text-center w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="block text-center w-full p-4 pl-10 text-sm  border rounded-lg  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     required
                   >
                     {txtStoreval}
@@ -121,7 +121,7 @@ const TxtVerify = () => {
                 <div>
                   <br />
 
-                  <span className="font-normal text-gray-900 text-center flex items-center justify-center dark:text-white">
+                  <span className="font-normal  text-center flex items-center justify-center text-white">
                     Click <i>" Next Step: Verify "</i> to verify the addition
                   </span>
                 </div>
@@ -139,7 +139,7 @@ const TxtVerify = () => {
               </div>
               <br />
               <br />
-              <span className="bg-red-100 mx-auto flex  items-center justify-center text-red-800 w-max text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
+              <span className=" mx-auto flex  items-center justify-center  w-max text-xs font-medium  px-2.5 py-0.5 rounded bg-gray-700 text-red-400 border border-red-400">
                 <b>
                   <i>Note: </i>
                 </b>{" "}
