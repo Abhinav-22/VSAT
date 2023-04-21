@@ -300,15 +300,15 @@ function Login() {
               </div>
             </div>
           </nav>
-          <div className="mx-auto mt-10 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+          <div className="mx-auto mt-10 w-full max-w-sm p-4  rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
             <form className="space-y-6" onSubmit={handleSubmit}>
-              <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+              <h5 className="text-xl font-medium text-white">
                 Sign in to our platform
               </h5>
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-white"
                 >
                   Your email
                 </label>
@@ -317,7 +317,7 @@ function Login() {
                   name="email"
                   id="email"
                   value={email}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className=" border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -326,7 +326,7 @@ function Login() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-white"
                 >
                   Your password
                 </label>
@@ -337,14 +337,14 @@ function Login() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   required
                 />
               </div>
               <div className="flex items-start pb-2">
                 <a
                   href="#"
-                  className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500"
+                  className="ml-auto text-sm  hover:underline text-blue-500"
                 >
                   Lost Password?
                 </a>
@@ -358,7 +358,7 @@ function Login() {
                   Login to your account
                 </button>
               </Link>
-              <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
+              <div className="text-sm font-medium text-gray-300">
                 Not registered?{" "}
                 <Link
                   to="/register"
@@ -370,16 +370,28 @@ function Login() {
             </form>
           </div>
         </div>
-        <div className="img-pane bg-gray-700 w-full h-full ">
+        <div className="img-pane bg-gray-800 w-full h-full drop-shadow-lg ">
           <img
-            className="w-10/12 h-10/12 mx-10 mt-10 mb-10 bg-opacity-25"
+            className="w-6/12 h-6/12 mx-auto mt-10 my-auto bg-opacity-25 drop-shadow-md"
             src={payment}
             alt="security"
           />
-          <p className="mb-3 text-lg font-medium text-gray-900 md:text-xl dark:text-white text-center ">
-            {" "}
-            "If it's smart, it's vulnerable"
-          </p>
+  <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+      <figure class="max-w-screen-md mx-auto">
+          <svg class="h-12 mx-auto mb-3 text-gray-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
+          </svg> 
+          <blockquote>
+              <p class="text-xl font-light text-white">"Social engineering bypasses all technologies, including firewalls."</p>
+          </blockquote>
+          <figcaption class="flex items-center justify-center mt-6 space-x-3">
+              <div class="flex items-center divide-x-2 divide-gray-700">
+                  <div class="pr-3 font-medium text-white">Kevin Mitnick</div>
+                  <div class="pl-3 text-sm font-light text-gray-400">CEO at Mitnick Security Consulting, LLC. </div>
+              </div>
+          </figcaption>
+      </figure>
+  </div>
         </div>
       </div>
     </>
