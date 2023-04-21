@@ -291,12 +291,12 @@ function Login() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-0 h-screen w-full ">
+      <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen ">
         <div className="form-pane bg-gray-900">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
-                <img src={logo} style={{ height: "90px", alt: "abc" }} />
+                <img src={logo} style={{ height: "60px", alt: "abc" }} />
               </div>
             </div>
           </nav>
@@ -370,9 +370,9 @@ function Login() {
             </form>
           </div>
         </div>
-        <div className="img-pane bg-gray-800 w-full h-full drop-shadow-lg ">
+        <div className="img-pane bg-gray-800 w-full h-full shadow shadow-slate-500  ">
           <img
-            className="w-6/12 h-6/12 mx-auto mt-10 my-auto bg-opacity-25 drop-shadow-md"
+            className="w-6/12 h-6/12 mx-auto mt-10 my-auto bg-opacity-25 flex flex-col items-center justify-center drop-shadow-md"
             src={payment}
             alt="security"
           />

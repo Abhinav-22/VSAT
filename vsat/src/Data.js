@@ -297,7 +297,7 @@ const Data = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 Check whether any of your organization's data is breached
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
             <br />
           </div>

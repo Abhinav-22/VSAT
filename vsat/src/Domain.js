@@ -299,7 +299,7 @@ const Domain = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the status of ssl certificate of your website
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
             <br />
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
@@ -310,7 +310,7 @@ const Domain = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the information about DNS records
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full border-0 bg-gray-700" />
             </div>
             <br />
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
@@ -321,7 +321,7 @@ const Domain = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View information about your domain from WHOIS
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
             <br />
           </div>

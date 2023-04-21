@@ -310,7 +310,7 @@ const Network = () => {
             <span className="user font-normal text-sm text-gray-400 pl-3">
               View the status of open ports and services of your network
             </span>
-            <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+            <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
           </div>
           <br />
         </div>

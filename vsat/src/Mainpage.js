@@ -8,13 +8,13 @@ import { Link } from "react-router-dom";
 function Mainpage() {
   return (
     <>
-      <div className=" bg-gray-900 w-full h-screen">
+      <div className=" bg-gray-900 w-full h-screen min-h-screen">
         <nav className="relative w-full flex flex-wrap items-center justify-between ">
           <div className="container-fluid w-full flex flex-wrap items-center justify-between">
             <div className="container-fluid">
               <img
                 src={logo}
-                style={{ height: "90px", alt: "abc", loading: "lazy" }}
+                style={{ height: "60px", alt: "abc", loading: "lazy" }}
                 alt=""
                 loading="lazy"
               />

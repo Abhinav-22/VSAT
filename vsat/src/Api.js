@@ -283,7 +283,7 @@ const Api = () => {
                   API Key for every request. You can use the keys below to use
                   VSAT API.
                 </span>
-                <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+                <hr className=" h-px my-1 w-full border-0 bg-gray-700" />
               </p>
               <form>
                 <label

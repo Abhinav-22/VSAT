@@ -315,7 +315,7 @@ const Web = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the status of HTTP security header of your website
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
             <br />
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
@@ -326,7 +326,7 @@ const Web = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 View the URLs redirected from your website
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
@@ -336,7 +336,7 @@ const Web = () => {
               <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
                 Check whether your domain has flagged as Phishing website
               </span>
-              <hr className=" h-px my-1 w-full bg-gray-200 border-0 dark:bg-gray-700" />
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
           </div>
         </div>
