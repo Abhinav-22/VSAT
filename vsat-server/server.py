@@ -13,7 +13,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
-wd = "www.kia.com"
+wd = "www.rajagiritech.edu.in"
+txtval="\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -346,5 +347,25 @@ def get_xssbasic():
             xdict.update({"XSS not detected on": url})
     return jsonify(xdict)
 
-
+@app.route("/txtverification", methods=['POST', 'GET'])
+def get_txt_verification():
+    dnsd = {}
+    ids = ['TXT']
+    verd={}
+    for a in ids:
+        try:
+            answers = dns.resolver.resolve(wd, a)
+            for rdata in answers:
+                #print(a, ':', rdata.to_text())
+                dnsd[a] = rdata.to_text()
+            time.sleep(10)
+        except Exception as e:
+            pass  # or pass
+        print(dnsd.get('TXT'))
+        print(txtval)
+        if dnsd.get('TXT') == txtval:
+            verd.update({"TXT status":True})
+        else:
+            verd.update({"TXT status":False})
+    return jsonify(verd)
 app.run()
