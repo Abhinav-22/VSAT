@@ -25,8 +25,11 @@ def get_hostname_info():
         socket.gethostbyname(wd)
         a = socket.gethostbyname(wd)
         hosd.update({"Valid hostname": a})
+        hosd.update({"HostnameFlag":True})
     except:
         hosd.update({"Invalid hostname": wd})
+        hosd.update({"HostnameFlag":False})
+
     return jsonify(hosd)
 
 
@@ -36,8 +39,10 @@ def get_whois_info():
     try:
         w = whois.whois(wd)
         whoid.update({'Whois info': w})
+        whoid.update({"WhoisFlag":True})
     except Exception as e:
         whoid.update({'Error getting WHOIS': wd})
+        whoid.update({"WhoisFlag":False})
     return jsonify(whoid)
 
 
