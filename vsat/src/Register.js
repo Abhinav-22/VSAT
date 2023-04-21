@@ -133,10 +133,10 @@ const Register = () => {
               </div>
             </div>
           </nav>
-          <div className="flex justify-center mx-auto mt-10 w-full max-w-max p-4  border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+          <div className="flex justify-center mx-auto mt-7 w-full max-w-max p-4  border  rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
             <form onSubmit={handleSubmit}>
               <div className="grid gap-6 mb-6 md:grid-cols-2">
-                <h5 className="text-xl font-medium text-gray-900 dark:text-white">
+                <h5 className="text-xl font-medium text-white">
                   Register to our platform
                 </h5>
                 <br />
@@ -144,14 +144,14 @@ const Register = () => {
                 <div>
                   <label
                     for="first_name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-white"
                   >
                     First name
                   </label>
                   <input
                     type="text"
                     id="first_name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className=" border  text-sm rounded-lg f  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="John"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -161,14 +161,14 @@ const Register = () => {
                 <div>
                   <label
                     for="last_name"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-white"
                   >
                     Last name
                   </label>
                   <input
                     type="text"
                     id="last_name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Doe"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
