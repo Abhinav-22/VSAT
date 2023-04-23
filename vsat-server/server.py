@@ -13,8 +13,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
-wd = "www.rajagiritech.edu.in"
-txtval="\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
+wd = "www.kia.com"
+txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -25,11 +25,11 @@ def get_hostname_info():
     try:
         socket.gethostbyname(wd)
         a = socket.gethostbyname(wd)
-        hosd.update({"Valid hostname": a})
-        hosd.update({"HostnameFlag":True})
+        hosd.update({"ValidHostname": a})
+        hosd.update({"HostnameFlag": True})
     except:
-        hosd.update({"Invalid hostname": wd})
-        hosd.update({"HostnameFlag":False})
+        hosd.update({"InvalidHostname": wd})
+        hosd.update({"HostnameFlag": False})
 
     return jsonify(hosd)
 
@@ -40,10 +40,10 @@ def get_whois_info():
     try:
         w = whois.whois(wd)
         whoid.update({'Whois info': w})
-        whoid.update({"WhoisFlag":True})
+        whoid.update({"WhoisFlag": True})
     except Exception as e:
         whoid.update({'Error getting WHOIS': wd})
-        whoid.update({"WhoisFlag":False})
+        whoid.update({"WhoisFlag": False})
     return jsonify(whoid)
 
 
@@ -347,11 +347,12 @@ def get_xssbasic():
             xdict.update({"XSS not detected on": url})
     return jsonify(xdict)
 
+
 @app.route("/txtverification", methods=['POST', 'GET'])
 def get_txt_verification():
     dnsd = {}
     ids = ['TXT']
-    verd={}
+    verd = {}
     for a in ids:
         try:
             answers = dns.resolver.resolve(wd, a)
@@ -364,8 +365,10 @@ def get_txt_verification():
         print(dnsd.get('TXT'))
         print(txtval)
         if dnsd.get('TXT') == txtval:
-            verd.update({"TXT status":True})
+            verd.update({"TXT status": True})
         else:
-            verd.update({"TXT status":False})
+            verd.update({"TXT status": False})
     return jsonify(verd)
+
+
 app.run()
