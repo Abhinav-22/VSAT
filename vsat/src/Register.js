@@ -81,33 +81,45 @@ const Register = () => {
       return;
     }
 
-    let { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      alert(error.message);
-      return;
-    } else {
-      alert("Check mail");
-      const { data, error } = await supabase.from("users").select();
-      if (error) {
-        setDomain("hi");
-        console.log(error);
-      }
-      if (data) {
+    fetch("/hostname")
+      .then((res) => res.json())
+      .then((data) => {
+        setValidFlag(data);
         console.log(data);
-        setDomain(data);
-      }
-      validateHost();
-      console.log(host);
-      fetchh();
-      console.log(flag);
-      if (flag == 0) {
-        addTable();
-      } else if (flag == 1) {
-        alert("already exist");
+        console.log(data.HostnameFlag);
+      });
+    console.log(validflag.HostnameFlag);
+    if (validflag.HostnameFlag === false) {
+      alert("check hostname");
+    } else {
+      let { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      } else {
+        alert("Check mail");
+        const { data, error } = await supabase.from("users").select();
+        if (error) {
+          setDomain("hi");
+          console.log(error);
+        }
+        if (data) {
+          console.log(data);
+          setDomain(data);
+        }
+        validateHost();
+        console.log(host);
+        fetchh();
+        console.log(flag);
+        if (flag == 0) {
+          addTable();
+        } else if (flag == 1) {
+          alert("already exist");
+        }
       }
     }
   };
