@@ -12,11 +12,27 @@ const Api = () => {
   const [authCompany, setAuthCompany] = useState("");
 
   const tokenStore = useTokenStore((state) => state.tokenVal);
+  const settokenStore = useTokenStore((state) => state.updateToken);
 
   const handleCopyText = (e) => {
     e.preventDefault();
     copy(tokenStore);
     // alert(`You have copied "${tokenVal}"`);
+  };
+
+  const storeApi = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("api").select();
+    console.log(data, "apival");
+    data.map((us) => {
+      if (user.email === us.email) {
+        console.log(us.token);
+        settokenStore(us.token);
+      }
+    });
   };
 
   useEffect(() => {
@@ -50,6 +66,7 @@ const Api = () => {
                 // console.log(us.firstName);
               }
             });
+            storeApi();
           }
         } catch (e) {
           if (e.name == "TypeError") navigate("/confirmresubmission");

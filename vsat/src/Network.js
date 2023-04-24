@@ -18,18 +18,36 @@ const Network = () => {
     const response = await fetch(
       `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
     );
-    const data = await response.json();
-    if (!data) {
+    const dataports = await response.json();
+    if (!dataports) {
       console.log("The array is empty");
     }
-    console.log(data.openPorts);
-    console.log(data.openPorts.length);
-    setportsCount(data.openPorts.length);
+    console.log(typeof dataports);
+    console.log(dataports.openPorts);
+    console.log(dataports.openPorts.length);
+    setportsCount(dataports.openPorts.length);
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase
+      .from("ports")
+      .upsert({
+        id: user.id,
+        openports: dataports.openPorts,
+        port_count: dataports.openPorts.length,
+      })
+      .select();
+    if (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
     console.log("workingggg");
     getData();
+    console.log(typeof portsCount);
     const fetchDetails = async () => {
       // await delay(1000);
 
