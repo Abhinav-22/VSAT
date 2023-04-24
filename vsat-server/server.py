@@ -13,7 +13,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
-wd = "www.buymeawork.com"
+from datetime import datetime
+import OpenSSL
+import ssl
+wd = "www.rajagiritech.ac.in"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -376,6 +379,17 @@ def get_txt_verification():
         else:
             verd.update({"TXTstatus": False})
     return jsonify(verd)
+@app.route("/sslexpiry", methods=['POST', 'GET'])
+def getsslexpiry():
+    expdict={}
+    url = wd
+    cert=ssl.get_server_certificate((url, 443))
+    x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
+    bytes=x509.get_notAfter()
+    timestamp = bytes.decode('utf-8')
+    timval=datetime.strptime(timestamp, '%Y%m%d%H%M%S%z').date().isoformat()
+    expdict.update({"SSLExpiry":timval})
 
+    return(expdict)
 
 app.run()
