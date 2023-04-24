@@ -81,7 +81,7 @@ function Mainpage() {
             </div>
             <div className="mb-6 lg:mb-0 ">
               <img
-                className="mx-0 flex justify-center w-auto max-h-96 "
+                className="mx-0 flex justify-center w-96 h-96 drop-shadow-xl	"
                 src={security}
                 alt="security"
               />
