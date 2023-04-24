@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
 const Register = () => {
-  console.log(supabase);
+  // console.log(supabase);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

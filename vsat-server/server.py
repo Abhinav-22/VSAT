@@ -13,7 +13,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
-wd = "www.kia.com"
+wd = "www.southindianbank.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -28,7 +28,7 @@ def get_hostname_info():
         hosd.update({"ValidHostname": a})
         hosd.update({"HostnameFlag": True})
     except:
-        hosd.update({"InvalidHostname": wd})
+        hosd.update({"Invalid hostname": wd})
         hosd.update({"HostnameFlag": False})
 
     return jsonify(hosd)
@@ -155,7 +155,7 @@ def get_hsts():
         if headers["X-XSS-Protection"]:
             hsd.update({'X-XSS-Protection':  'pass'})
     except KeyError:
-        hsd.update({'X-XSS-Protection header not present':  'fail!'})
+        hsd.update({'X-XSS-Protection-header-not-present':  'fail!'})
 
 # NOSNIFF block
     try:
@@ -165,7 +165,7 @@ def get_hsts():
             hsd.update(
                 {'X-Content-Type-Options header not set correctly':  'fail!'})
     except KeyError:
-        hsd.update({'X-Content-Type-Options header not present':  'fail!'})
+        hsd.update({'X-Content-Type-Options-header-not-present':  'fail!'})
 
 # XFrame block
     try:
@@ -174,23 +174,23 @@ def get_hsts():
         elif "sameorigin" in headers["X-Frame-Options"].lower():
             hsd.update({'X-Frame-Options':  'pass'})
         else:
-            hsd.update({'X-Frame-Options header not set correctly':  'fail!'})
+            hsd.update({'X-Frame-Options-header-not-set-correctly':  'fail!'})
     except KeyError:
-        hsd.update({'X-Frame-Options header not present':  'fail!'})
+        hsd.update({'X-Frame-Options-header-not-present':  'fail!'})
 
 # HSTS block
     try:
         if headers["Strict-Transport-Security"]:
             hsd.update({'Strict-Transport-Security':  'pass'})
     except KeyError:
-        hsd.update({'Strict-Transport-Security header not present':  'fail!'})
+        hsd.update({'Strict-Transport-Security-header-not-present':  'fail!'})
 
 # Policy block
     try:
         if headers["Content-Security-Policy"]:
             hsd.update({'Content-Security-Policy':  'pass'})
     except KeyError:
-        hsd.update({'Content-Security-Policy header not present':  'fail!'})
+        hsd.update({'Content-Security-Policy-header-not-present':  'fail!'})
 
 # Cookie blocks
     for cookie in cookies:
@@ -198,17 +198,19 @@ def get_hsts():
         if cookie.secure:
             hsd.update({'Secure':  'pass'})
         else:
-            hsd.update({'Secure attribute not set':  'fail!'})
+            hsd.update({'Secure-attribute-not-set':  'fail!'})
         if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
             hsd.update({'HttpOnly':  'pass'})
         else:
-            hsd.update({'HttpOnly attribute not set':  'fail!'})
+            hsd.update({'HttpOnly-attribute-not-set':  'fail!'})
     return jsonify(hsd)
 
 
 @app.route("/urlredirection", methods=['POST', 'GET'])
 def get_url_redirection():
     links = []
+    linkdict = {}
+    linkcount = 0
     session = HTMLSession()
     ur = 'https://'+wd
     response = session.get(ur)
@@ -216,16 +218,21 @@ def get_url_redirection():
     for link in soup.find_all('a', href=True):
         if(link['href'].startswith('./')):
             link['href'] = (ur) + link['href']
+            linkcount = linkcount+1
         if(link['href'].startswith('/')):
             link['href'] = ur + link['href']
+            linkcount = linkcount+1
         if(link['href'].startswith('#')):
             continue
         if(link['href'].startswith('http')):
             links.append(link['href'])
+            linkcount = linkcount+1
         i = 0
         for link in links:
             print(link)
-    return jsonify(links)
+    linkdict.update({"Links": links})
+    linkdict.update({"LinkCount": linkcount})
+    return (linkdict)
 
 
 @app.route("/webpagespeed", methods=['POST', 'GET'])
@@ -292,12 +299,12 @@ def get_phishtank():
         pdict.update({"Site details": submit.text})
         if submit.text == "":
             submit = driver.find_element(By.XPATH, '//*[@id="widecol"]/div/h3')
-            pdict.update({"Site details": submit.text})
+            pdict.update({"Sitedetails": submit.text})
 
     except:
         submit = driver.find_element(
             By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/b/tt')
-        pdict.update({"No info about": submit.text})
+        pdict.update({"Noinfoabout": submit.text})
     return (pdict)
 
 
@@ -309,7 +316,7 @@ def get_xssbasic():
 # Step 1: Find all the forms in the page
     soup = bs(requests.get(url).content, "html.parser")
     forms = soup.find_all("form")
-    xdict.update({"Number of forms detected": len(forms)})
+    xdict.update({"NumberOfFormsDetected": len(forms)})
 
     # Step 2: Try submitting a payload to each form and check for XSS vulnerability
     js_script = "<script>alert(XSS)</script>"
@@ -342,9 +349,9 @@ def get_xssbasic():
         # Check for XSS vulnerability
         content = res.content.decode()
         if js_script in content:
-            xdict.update({"XSS Detected": form_details})
+            xdict.update({"XSSDetected": form_details})
         else:
-            xdict.update({"XSS not detected on": url})
+            xdict.update({"XSSNotDetectedOn": url})
     return jsonify(xdict)
 
 
@@ -365,9 +372,9 @@ def get_txt_verification():
         print(dnsd.get('TXT'))
         print(txtval)
         if dnsd.get('TXT') == txtval:
-            verd.update({"TXT status": True})
+            verd.update({"TXTstatus": True})
         else:
-            verd.update({"TXT status": False})
+            verd.update({"TXTstatus": False})
     return jsonify(verd)
 
 
