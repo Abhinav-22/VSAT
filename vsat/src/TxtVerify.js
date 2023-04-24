@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import useTxtStore from "./stores/txtStore";
+import supabase from "./config/supabaseClient";
 
 const TxtVerify = () => {
   const txtStoreval = useTxtStore((state) => state.txtVal);
+  const settxtStore = useTxtStore((state) => state.updateTxt);
+
   console.log(txtStoreval);
+
+  const storeTxt = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase.from("txt").select();
+    console.log(data, "txtval");
+    data.map((us) => {
+      if (user.email === us.email) {
+        console.log(us.txtval);
+        settxtStore(us.txtval);
+      }
+    });
+  };
+
+  useEffect(() => {
+    storeTxt();
+  });
+
   return (
     <>
       <div className="grid  h-screen">
