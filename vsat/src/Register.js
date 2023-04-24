@@ -21,7 +21,7 @@ const Register = () => {
   // for validation
   const [domain, setDomain] = useState([]);
   const [flag, setFlag] = useState(0);
-  const [validflag, setValidFlag] = useState(0);
+  const [validflag, setValidFlag] = useState(null);
   const [host, setHost] = useState("");
 
   const validateHost = async () => {
@@ -31,6 +31,17 @@ const Register = () => {
     setHost(result);
   };
 
+  const checkHost = async() => {
+    
+    fetch("/hostname")
+      .then((res) => res.json())
+      .then((data) => {
+        setValidFlag(data);
+        console.log(data);
+        console.log(data.HostnameFlag);
+      });
+    
+  }
   const addTable = async (e) => {
     var currentTime = new Date().toLocaleString();
     const { data, error } = await supabase.from("users").insert([
@@ -80,15 +91,9 @@ const Register = () => {
       alert("enter all fields");
       return;
     }
-
-    fetch("/hostname")
-      .then((res) => res.json())
-      .then((data) => {
-        setValidFlag(data);
-        console.log(data);
-        console.log(data.HostnameFlag);
-      });
+    checkHost();
     console.log(validflag.HostnameFlag);
+
     if (validflag.HostnameFlag === false) {
       alert("check hostname");
     } else {

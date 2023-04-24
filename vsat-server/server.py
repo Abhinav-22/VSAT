@@ -13,7 +13,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
-wd = "www.southindianbank.com"
+wd = "www.buymeawork.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
