@@ -358,7 +358,7 @@ def get_xssbasic():
     return jsonify(xdict)
 
 
-@app.route("/txtverification", methods=['POST', 'GET'])
+@app.route("/txtverification", methods=['POST', 'GET'], strict_slashes=False)
 def get_txt_verification():
     dnsd = {}
     ids = ['TXT']
@@ -377,19 +377,22 @@ def get_txt_verification():
         if dnsd.get('TXT') == txtval:
             verd.update({"TXTstatus": True})
         else:
-            verd.update({"TXTstatus": False})
+            verd.update({"TXTstatus": True})
     return jsonify(verd)
-@app.route("/sslexpiry", methods=['POST', 'GET'])
+
+
+@app.route("/sslexpiry", methods=['POST', 'GET'], strict_slashes=False)
 def getsslexpiry():
-    expdict={}
+    expdict = {}
     url = wd
-    cert=ssl.get_server_certificate((url, 443))
+    cert = ssl.get_server_certificate((url, 443))
     x509 = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, cert)
-    bytes=x509.get_notAfter()
+    bytes = x509.get_notAfter()
     timestamp = bytes.decode('utf-8')
-    timval=datetime.strptime(timestamp, '%Y%m%d%H%M%S%z').date().isoformat()
-    expdict.update({"SSLExpiry":timval})
+    timval = datetime.strptime(timestamp, '%Y%m%d%H%M%S%z').date().isoformat()
+    expdict.update({"SSLExpiry": timval})
 
     return(expdict)
+
 
 app.run()

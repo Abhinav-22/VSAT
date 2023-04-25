@@ -241,6 +241,44 @@ function Login() {
     }
   };
 
+  const initialPorts = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    let userid = "";
+    let useremail = "";
+    userid = user.id;
+    useremail = user.email;
+    console.log(userid);
+    const { data, error } = await supabase.from("ports").select();
+    if (error) {
+      console.log(error.message);
+    }
+    let flag = 0;
+    data.map((us) => {
+      if (user.id == us.id) {
+        flag = 1;
+      }
+    });
+    console.log(flag);
+    if (flag === 0) {
+      const { data, error } = await supabase.from("ports").insert([
+        {
+          id: userid,
+          created_at: null,
+          openports: null,
+          port_count: null,
+        },
+      ]);
+      if (error) {
+        console.log(error.message);
+        return;
+      } else {
+        console.log("inserted port table successfully");
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { data, error } = await supabase.auth.signInWithPassword({
@@ -258,6 +296,7 @@ function Login() {
         updateUser();
         initialApi();
         initialTxt();
+        initialPorts();
         addtoken();
 
         navigate("/dashboard");
