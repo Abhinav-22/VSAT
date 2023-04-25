@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
-import { create } from "zustand";
 import usePortStore from "./stores/portStore";
+import useDomainStore from "./stores/storeDomain";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -12,13 +12,15 @@ function Dashboard() {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [ports, setPorts] = useState("Loading...");
-
+  const [apiDomainval, setApiDomain] = useState("");
   const [txtval, setTxtval] = useState();
   const [tokenval, setTokenval] = useState();
+  const [domainflag, setDomainFlag] = useState(false);
 
   const [gportCount, setgportCount] = useState(null);
-
-
+  const setDomainval = useDomainStore((state) => state.updateDomain);
+  const domainStoredval = useDomainStore((state) => state.domainval);
+  const resetDomain = useDomainStore((state) => state.resetDomain);
 
   useEffect(() => {
     console.log("workingggg");
@@ -26,6 +28,55 @@ function Dashboard() {
 
     // console.log("---------------");
     console.log(ports);
+    resetDomain();
+    console.log(domainStoredval);
+
+    const uploadDomain = async () => {
+      console.log(domainStoredval);
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("api")
+        .upsert({ id: user.id, domain: domainStoredval })
+        .select();
+      if (error) {
+        console.log(error.message);
+      }
+    };
+
+    const assignDomain = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase.from("users").select();
+      data.map((us) => {
+        if (user.id === us.uuid) {
+          setApiDomain(us.website);
+          setDomainval(us.website);
+          console.log(us.website);
+        }
+      });
+      uploadDomain();
+    };
+
+    const apiDomain = async () => {
+      const { data, error } = await supabase.from("api").select();
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      data.map((us) => {
+        if (user.id === us.id) {
+          assignDomain();
+        }
+      });
+      console.log(apiDomainval);
+      // updateDomain();
+    };
     const fetchDetails = async () => {
       // await delay(1000);
 
@@ -54,12 +105,14 @@ function Dashboard() {
                 setAuthEmail(us.email);
                 if (us.txt_status == false) {
                   console.log(us.txt_status);
-                  
+
                   navigate("/txt");
                 }
                 // console.log(typeof us.txt_status);
               }
             });
+            apiDomain();
+            console.log(domainStoredval);
           }
         } catch (e) {
           if (e.name == "TypeError") navigate("/confirmresubmission");
