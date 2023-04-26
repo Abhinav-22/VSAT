@@ -1,5 +1,7 @@
 import React from "react";
 import logo from "./img/transparent.svg";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const Forgotem = () => {
   return (
@@ -9,14 +11,14 @@ const Forgotem = () => {
           <nav class="relative w-full flex flex-wrap items-center justify-between m-0">
             <div class="container-fluid w-full flex flex-wrap items-center justify-between">
               <div class="container-fluid">
-                <a href="/src/index.html">
+                <Link to="/">
                   {" "}
                   <img
                     src={logo}
                     className="h-14 mr-3 sm:h-14"
                     alt="VSAT Logo"
                   />
-                </a>
+                </Link>
               </div>
             </div>
           </nav>
