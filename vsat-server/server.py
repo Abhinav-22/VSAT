@@ -16,6 +16,7 @@ from urllib.parse import urljoin
 from datetime import datetime
 import OpenSSL
 import ssl
+import math
 wd = "www.rajagiritech.ac.in"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
@@ -56,7 +57,7 @@ def get_ssl_info():
         context = ssl.create_default_context()
         with context.wrap_socket(sock, server_hostname=wd) as ssock:
             cert = ssock.getpeercert()
-        return jsonify(cert)
+        return (cert)
 
 
 @app.route("/dnsinfo", methods=['POST', 'GET'])

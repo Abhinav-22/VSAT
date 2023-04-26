@@ -10,6 +10,7 @@ import Data from "./Data.js";
 import Dashboard from "./Dashboard.js";
 import Domain from "./Domain.js";
 import Api from "./Api.js";
+import Forgotpw from "./Forgotpw.js"
 
 import { Route, Routes } from "react-router-dom";
 import ConfirmResubmission from "./ConfirmResubmission.js";
@@ -30,6 +31,7 @@ function App() {
         <Route path="domain" element={<Domain />}></Route>
         <Route path="api" element={<Api />}></Route>
         <Route path="txt" element={<TxtVerify />}></Route>
+        <Route path="resetpw" element={<Forgotpw/>}></Route>
         <Route
           path="confirmresubmission"
           element={<ConfirmResubmission />}
