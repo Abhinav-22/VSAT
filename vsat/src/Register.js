@@ -5,6 +5,7 @@ import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
 import { Link } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useMultiregStore from "./stores/useMultiregStore";
 
 const Register = () => {
   // console.log(supabase);
@@ -24,6 +25,10 @@ const Register = () => {
   const [validflag, setValidFlag] = useState(null);
   const [host, setHost] = useState("");
 
+  const setregFlag = useMultiregStore((state) => state.updateregFlag);
+  const resetregFlag = useMultiregStore((state) => state.resetregFlag);
+  const regflagval = useMultiregStore((state) => state.multiregflag);
+
   const validateHost = async () => {
     let regex = /www\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
     let result = website.match(regex)[0];
@@ -31,17 +36,16 @@ const Register = () => {
     setHost(result);
   };
 
-  const checkHost = async() => {
-    
-    fetch("/hostname")
+  const checkHost = async () => {
+    await fetch("/hostname")
       .then((res) => res.json())
       .then((data) => {
         setValidFlag(data);
         console.log(data);
         console.log(data.HostnameFlag);
       });
-    
-  }
+  };
+
   const addTable = async (e) => {
     var currentTime = new Date().toLocaleString();
     const { data, error } = await supabase.from("users").insert([
@@ -63,21 +67,32 @@ const Register = () => {
     } else {
       alert("inserted successfully");
     }
-    //console.log(data);
   };
 
   const fetchh = async (e) => {
-    domain.map((user) => {
+    let multflag = 0;
+    const { data, error } = await supabase.from("users").select();
+    data.map((user) => {
       if (user.website == website || user.email == email) {
-        setFlag(1); // alert("website already exist");
-        console.log(flag);
+        setFlag(1);
+        multflag = 1;
+        setregFlag();
+
+        console.log("website already exist actually");
       }
     });
-    console.log(flag);
+    if (multflag == 0) {
+      addTable();
+    } else if (multflag == 1) {
+      alert("Email or domain already exist ");
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFlag(0);
+    let webExist = 0;
+
+    resetregFlag();
+    console.log(regflagval);
     if (
       !firstName ||
       !lastName ||
@@ -91,7 +106,7 @@ const Register = () => {
       alert("enter all fields");
       return;
     }
-    checkHost();
+    await checkHost();
     console.log(validflag.HostnameFlag);
 
     if (validflag.HostnameFlag === false) {
@@ -118,13 +133,10 @@ const Register = () => {
         }
         validateHost();
         console.log(host);
-        fetchh();
-        console.log(flag);
-        if (flag == 0) {
-          addTable();
-        } else if (flag == 1) {
-          alert("already exist");
-        }
+        await fetchh();
+        console.log(regflagval);
+
+        console.log(webExist);
       }
     }
   };
@@ -236,7 +248,7 @@ const Register = () => {
                     className="border  text-sm rounded-lg f block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="google.com"
                     value={website}
-                    oninvalid="setCustomValidity('Please Enter URL.')"
+                    onInvalid="setCustomValidity('Please Enter URL.')"
                     onChange={(e) => setWebsite(e.target.value)}
                     required
                   />
