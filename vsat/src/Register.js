@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createElement } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
 import { Link } from "react-router-dom";
@@ -35,6 +35,21 @@ const Register = () => {
     console.log(result);
     setHost(result);
   };
+
+  function postHostname() {
+    let postDomain = { val: host };
+    console.log(host);
+    axios.post("http://127.0.0.1:5000/hostname", postDomain).then(
+      (response) => {
+        console.log(response);
+        console.log(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    console.log("request poi thonanu");
+  }
 
   const checkHost = async () => {
     await fetch("/hostname")
@@ -106,6 +121,9 @@ const Register = () => {
       alert("enter all fields");
       return;
     }
+    validateHost();
+    postHostname();
+    console.log(host);
     await checkHost();
     console.log(validflag.HostnameFlag);
 
@@ -131,7 +149,6 @@ const Register = () => {
           console.log(data);
           setDomain(data);
         }
-        validateHost();
         console.log(host);
         await fetchh();
         console.log(regflagval);
