@@ -16,8 +16,10 @@ from urllib.parse import urljoin
 from datetime import datetime
 import OpenSSL
 import ssl
+import sys
+from pprint import pprint
 import math
-wd = "www.rajagiritech.ac.in"
+wd = "www.kia.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -157,30 +159,30 @@ def get_hsts():
 # XXSS block
     try:
         if headers["X-XSS-Protection"]:
-            hsd.update({'X-XSS-Protection':  'pass'})
+            hsd.update({'xssProtect':  'pass'})
     except KeyError:
-        hsd.update({'X-XSS-Protection-header-not-present':  'fail!'})
+        hsd.update({'xssnotpresent':  'fail!'})
 
 # NOSNIFF block
     try:
         if headers["X-Content-Type-Options"].lower() == "nosniff":
-            hsd.update({'X-Content-Type-Options':  'pass'})
+            hsd.update({'xcontentoptions':  'pass'})
         else:
             hsd.update(
-                {'X-Content-Type-Options header not set correctly':  'fail!'})
+                {'xcontentnotset':  'fail!'})
     except KeyError:
-        hsd.update({'X-Content-Type-Options-header-not-present':  'fail!'})
+        hsd.update({'xconetentnotsetheader':  'fail!'})
 
 # XFrame block
     try:
         if "deny" in headers["X-Frame-Options"].lower():
-            hsd.update({'X-Frame-Options':  'pass'})
+            hsd.update({'frameoptions':  'pass'})
         elif "sameorigin" in headers["X-Frame-Options"].lower():
-            hsd.update({'X-Frame-Options':  'pass'})
+            hsd.update({'frameoptions':  'pass'})
         else:
-            hsd.update({'X-Frame-Options-header-not-set-correctly':  'fail!'})
+            hsd.update({'framenotset':  'fail!'})
     except KeyError:
-        hsd.update({'X-Frame-Options-header-not-present':  'fail!'})
+        hsd.update({'xframenotset':  'fail!'})
 
 # HSTS block
     try:
@@ -394,6 +396,121 @@ def getsslexpiry():
     expdict.update({"SSLExpiry": timval})
 
     return(expdict)
+
+@app.route("/sqlinjection", methods=['POST', 'GET'], strict_slashes=False)
+def getsqli():
+    s = requests.Session()
+    s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+    def get_forms(url):
+        soup = bs(s.get(url).content, "html.parser")
+        return soup.find_all("form")
+    def get_form_details(form):
+        details = {}
+        try :
+           action = form.attrs.get("action").lower
+        except: 
+            action = None
+        method = form.attrs.get("method", "get").lower
+        inputs = []
+
+        for input_tag in form.find_all("input"):
+            input_type = input_tag.attrs.get("type", "text")
+            input_name = input_tag.attrs.get("name")
+            input_value = input_tag.attrs.get("value", "")
+            inputs.append({
+                "type": input_type, 
+                "name" : input_name,
+                "value" : input_value,
+            })
+            
+        details['action'] = action
+        details['method'] = method
+        details['inputs'] = inputs
+        return details
+
+    def vulnerable(response):
+        errors = {"quoted string not properly terminated", 
+                "warning: mysql",
+                "unclosed quotation mark after the charachter string",
+                "you have an error in your SQL syntax",
+                }
+        for error in errors:
+            if error in response.content.decode().lower():
+                return True
+        return False
+
+    def sql_injection_scan(url):
+        """forms = get_forms(url)
+        print(f"[+] Detected {len(forms)} forms on {url}.")
+        
+        for form in forms:
+            details = form_details(form)
+            
+            for i in "\"'":
+                data = {}
+                for input_tag in details["inputs"]:
+                    if input_tag["type"] == "hidden" or input_tag["value"]:
+                        data[input_tag['name']] = input_tag["value"] + i
+                    elif input_tag["type"] != "submit":
+                        data[input_tag['name']] = f"test{i}"
+        
+                #print(url)
+                url = urljoin(url, form_details["action"])
+                #form_details(form)
+
+                if details["method"] == "post":
+                    res = s.post(url, data=data)
+                elif details["method"] == "get":
+                    res = s.get(url, params=data)
+                if vulnerable(res):
+                    print("SQL injection attack vulnerability in link: ", url )
+                    print("[+] Form:")
+                    pprint(form_details)
+                else:
+                    print("No SQL injection attack vulnerability detected")
+                    break
+        """
+        for c in "\"'":
+            new_url = f"{url}{c}"
+            print("[!] Trying", new_url)
+            # make the HTTP request
+            res = s.get(new_url)
+            if vulnerable(res):
+                print("[+] SQL Injection vulnerability detected, link:", new_url)
+                return
+
+        forms = get_forms(url)
+        print(f"[+] Detected {len(forms)} forms on {url}.")
+        for form in forms:
+            form_details = get_form_details(form)
+            for c in "\"'":
+                data = {}
+                for input_tag in form_details["inputs"]:
+                    if input_tag["type"] == "hidden" or input_tag["value"]:
+                        try:
+                            data[input_tag["name"]] = input_tag["value"] + c
+                        except:
+                            pass
+                    elif input_tag["type"] != "submit":
+                        data[input_tag["name"]] = f"test{c}"
+
+                url = urljoin(url, str(form_details["action"]))
+                if form_details["method"] == "post":
+                    res = s.post(url, data=data)
+                elif form_details["method"] == "get":
+                    res = s.get(url, params=data)
+
+                if vulnerable(res):
+                    print("[+] SQL Injection vulnerability detected, link:", url)
+                    print("[+] Form:")
+                    pprint(form_details)
+                    break
+    urlToBeChecked= 'https://'+wd
+    sql_injection_scan(urlToBeChecked)
+    return
+
+
+
 
 
 app.run()

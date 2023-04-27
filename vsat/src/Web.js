@@ -17,10 +17,17 @@ const Web = () => {
       .then((res) => res.json())
       .then((data) => {
         setLoad(data);
-        // console.log(data);
-        // console.log(typeof load.ltime);
+        
       });
 
+      fetch("/httpsecheader")
+      .then((res) => res.json())
+      .then((data) => {
+        setLoad(data);
+        console.log(data)
+        console.log(data.Content-Security-Policy-header-not-present)
+        
+      });
     const fetchDetails = async () => {
       // await delay(1000);
 
