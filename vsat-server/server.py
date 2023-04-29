@@ -19,7 +19,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.rajagiritech.ac.in"
+wd = "www.google.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -193,22 +193,26 @@ def get_hsts():
 
 # Policy block
     try:
-        if headers["ContentSecurityPolicy"]:
+        if headers["Content-Security-Policy"]:
             hsd.update({'ContentSecurityPolicy':  'pass'})
     except KeyError:
         hsd.update({'ContentSecurityPolicy':  'fail!'})
 
 # Cookie blocks
-    for cookie in cookies:
-        hsd.update({'Set-Cookie':  ''})
-        if cookie.secure:
-            hsd.update({'SecureCookie':  'pass'})
-        else:
-            hsd.update({'SecureCookie':  'fail!'})
-        if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
-            hsd.update({'HttpOnlyCookie':  'pass'})
-        else:
-            hsd.update({'HttpOnlyCookie':  'fail!'})
+    try:
+        for cookie in cookies:
+            hsd.update({'Set-Cookie':  ''})
+            if cookie.secure:
+                hsd.update({'SecureCookie':  'pass'})
+            else:
+                hsd.update({'SecureCookie':  'fail!'})
+            if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
+                hsd.update({'HttpOnlyCookie':  'pass'})
+            else:
+                hsd.update({'HttpOnlyCookie':  'fail!'})
+    except KeyError:
+        hsd.update({'SecureCookie':  'fail!'})
+        hsd.update({'HttpOnlyCookie':  'fail!'})
     return jsonify(hsd)
 
 

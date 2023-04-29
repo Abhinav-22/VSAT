@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
-
+import UrlRedirection from "./UrlRedirection";
 const Web = () => {
   const navigate = useNavigate();
 
@@ -11,6 +11,7 @@ const Web = () => {
   const [authCompany, setAuthCompany] = useState("");
   const [load, setLoad] = useState([{}]);
   const [httpSec, setHttpSec] = useState("");
+  const [url, setUrl] = useState([]);
 
   useEffect(() => {
     // console.log("workingggg");
@@ -342,6 +343,10 @@ const Web = () => {
               </p>
               <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
                 {" "}
+                Content-Security-Policy : {httpSec.ContentSecurityPolicy}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
                 Strict-Transport-Security : {httpSec.strictTransportSecurity}
               </p>
               <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
@@ -354,7 +359,7 @@ const Web = () => {
               </p>
             </div>
             <br />
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 URL redirections
               </p>
@@ -363,6 +368,9 @@ const Web = () => {
                 View the URLs redirected from your website
               </span>
               <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-1">
+                <UrlRedirection />
+              </p>
             </div>
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
