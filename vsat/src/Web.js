@@ -365,6 +365,16 @@ const Web = () => {
               </p>
             </div>
             <br />
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
+                Phishing statsus
+              </p>
+
+              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
+                Check whether your domain has flagged as Phishing website
+              </span>
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+            </div>
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 URL redirections
@@ -383,16 +393,6 @@ const Web = () => {
                   <UrlRedirection />
                 )}
               </p>
-            </div>
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
-                Phishing statsus
-              </p>
-
-              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
-                Check whether your domain has flagged as Phishing website
-              </span>
-              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
             </div>
           </div>
         </div>
