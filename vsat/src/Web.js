@@ -20,6 +20,12 @@ const Web = () => {
       .then((data) => {
         setLoad(data);
       });
+    fetch("/urlredirection")
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.LinkCount);
+        console.log(data);
+      });
 
     fetch("/httpsecheader")
       .then((res) => res.json())
@@ -369,7 +375,13 @@ const Web = () => {
               </span>
               <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
               <p className="ml-3  py-2 text-xl text-white font-normal mb-1">
-                <UrlRedirection />
+                {url === 0 ? (
+                  <p className="ml-3  py-2 text-xl text-white font-normal mb-1">
+                    No URL redirections found
+                  </p>
+                ) : (
+                  <UrlRedirection />
+                )}
               </p>
             </div>
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
