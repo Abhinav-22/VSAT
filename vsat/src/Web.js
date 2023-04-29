@@ -12,6 +12,7 @@ const Web = () => {
   const [load, setLoad] = useState([{}]);
   const [httpSec, setHttpSec] = useState("");
   const [url, setUrl] = useState([]);
+  const [phish, setPhish] = useState("Loading...");
 
   useEffect(() => {
     // console.log("workingggg");
@@ -24,6 +25,12 @@ const Web = () => {
       .then((res) => res.json())
       .then((data) => {
         setUrl(data.LinkCount);
+        console.log(data);
+      });
+    fetch("/phishtank")
+      .then((res) => res.json())
+      .then((data) => {
+        setPhish(data.Sitedetails);
         console.log(data);
       });
 
@@ -365,7 +372,7 @@ const Web = () => {
               </p>
             </div>
             <br />
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-44 mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 Phishing statsus
               </p>
@@ -374,6 +381,9 @@ const Web = () => {
                 Check whether your domain has flagged as Phishing website
               </span>
               <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+              <p className="ml-3 mt-4  py-2 text-xl text-white font-normal mb-1">
+                {phish}
+              </p>
             </div>
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">

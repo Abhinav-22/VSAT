@@ -19,7 +19,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.kia.com"
+wd = "www.google.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -294,7 +294,7 @@ def get_phishtank():
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
 
-    domain = wd
+    domain = "https://"+wd
     e1 = driver.find_element(By.NAME, 'isaphishurl').clear()
 
     e3 = driver.find_element(By.NAME, 'isaphishurl').send_keys(domain)
@@ -306,7 +306,7 @@ def get_phishtank():
     try:
         submit = driver.find_element(
             By.XPATH, '//*[@id="history"]/table[1]/tbody/tr/td[2]/h3/b')
-        pdict.update({"Site details": submit.text})
+        pdict.update({"Sitedetails": submit.text})
         if submit.text == "":
             submit = driver.find_element(By.XPATH, '//*[@id="widecol"]/div/h3')
             pdict.update({"Sitedetails": submit.text})
@@ -314,7 +314,7 @@ def get_phishtank():
     except:
         submit = driver.find_element(
             By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/b/tt')
-        pdict.update({"Noinfoabout": submit.text})
+        pdict.update({"Sitedetails": "does not exist"})
     return (pdict)
 
 
