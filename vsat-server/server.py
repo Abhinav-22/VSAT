@@ -19,7 +19,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.kia.com"
+wd = "www.rajagiritech.ac.in"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -161,7 +161,7 @@ def get_hsts():
         if headers["X-XSS-Protection"]:
             hsd.update({'xssProtect':  'pass'})
     except KeyError:
-        hsd.update({'xssnotpresent':  'fail!'})
+        hsd.update({'xssProtect':  'fail!'})
 
 # NOSNIFF block
     try:
@@ -169,46 +169,46 @@ def get_hsts():
             hsd.update({'xcontentoptions':  'pass'})
         else:
             hsd.update(
-                {'xcontentnotset':  'fail!'})
+                {'xcontentoptions':  'fail!'})
     except KeyError:
-        hsd.update({'xconetentnotsetheader':  'fail!'})
+        hsd.update({'xcontentoptions':  'fail!'})
 
 # XFrame block
     try:
         if "deny" in headers["X-Frame-Options"].lower():
-            hsd.update({'frameoptions':  'pass'})
+            hsd.update({'frameOptions':  'pass'})
         elif "sameorigin" in headers["X-Frame-Options"].lower():
-            hsd.update({'frameoptions':  'pass'})
+            hsd.update({'frameOptions':  'pass'})
         else:
-            hsd.update({'framenotset':  'fail!'})
+            hsd.update({'frameOptions':  'fail!'})
     except KeyError:
-        hsd.update({'xframenotset':  'fail!'})
+        hsd.update({'frameOptions':  'fail!'})
 
 # HSTS block
     try:
         if headers["Strict-Transport-Security"]:
-            hsd.update({'Strict-Transport-Security':  'pass'})
+            hsd.update({'strictTransportSecurity':  'pass'})
     except KeyError:
-        hsd.update({'Strict-Transport-Security-header-not-present':  'fail!'})
+        hsd.update({'strictTransportSecurity':  'fail!'})
 
 # Policy block
     try:
-        if headers["Content-Security-Policy"]:
-            hsd.update({'Content-Security-Policy':  'pass'})
+        if headers["ContentSecurityPolicy"]:
+            hsd.update({'ContentSecurityPolicy':  'pass'})
     except KeyError:
-        hsd.update({'Content-Security-Policy-header-not-present':  'fail!'})
+        hsd.update({'ContentSecurityPolicy':  'fail!'})
 
 # Cookie blocks
     for cookie in cookies:
         hsd.update({'Set-Cookie':  ''})
         if cookie.secure:
-            hsd.update({'Secure':  'pass'})
+            hsd.update({'SecureCookie':  'pass'})
         else:
-            hsd.update({'Secure-attribute-not-set':  'fail!'})
+            hsd.update({'SecureCookie':  'fail!'})
         if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
-            hsd.update({'HttpOnly':  'pass'})
+            hsd.update({'HttpOnlyCookie':  'pass'})
         else:
-            hsd.update({'HttpOnly-attribute-not-set':  'fail!'})
+            hsd.update({'HttpOnlyCookie':  'fail!'})
     return jsonify(hsd)
 
 
@@ -379,8 +379,9 @@ def get_txt_verification():
         print(txtval)
         if dnsd.get('TXT') == txtval:
             verd.update({"TXTstatus": True})
+            break
         else:
-            verd.update({"TXTstatus": True})
+            verd.update({"TXTstatus": False})
     return jsonify(verd)
 
 
@@ -397,18 +398,21 @@ def getsslexpiry():
 
     return(expdict)
 
+
 @app.route("/sqlinjection", methods=['POST', 'GET'], strict_slashes=False)
 def getsqli():
     s = requests.Session()
     s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+
     def get_forms(url):
         soup = bs(s.get(url).content, "html.parser")
         return soup.find_all("form")
+
     def get_form_details(form):
         details = {}
-        try :
-           action = form.attrs.get("action").lower
-        except: 
+        try:
+            action = form.attrs.get("action").lower
+        except:
             action = None
         method = form.attrs.get("method", "get").lower
         inputs = []
@@ -418,58 +422,28 @@ def getsqli():
             input_name = input_tag.attrs.get("name")
             input_value = input_tag.attrs.get("value", "")
             inputs.append({
-                "type": input_type, 
-                "name" : input_name,
-                "value" : input_value,
+                "type": input_type,
+                "name": input_name,
+                "value": input_value,
             })
-            
+
         details['action'] = action
         details['method'] = method
         details['inputs'] = inputs
         return details
 
     def vulnerable(response):
-        errors = {"quoted string not properly terminated", 
-                "warning: mysql",
-                "unclosed quotation mark after the charachter string",
-                "you have an error in your SQL syntax",
-                }
+        errors = {"quoted string not properly terminated",
+                  "warning: mysql",
+                  "unclosed quotation mark after the charachter string",
+                  "you have an error in your SQL syntax",
+                  }
         for error in errors:
             if error in response.content.decode().lower():
                 return True
         return False
 
     def sql_injection_scan(url):
-        """forms = get_forms(url)
-        print(f"[+] Detected {len(forms)} forms on {url}.")
-        
-        for form in forms:
-            details = form_details(form)
-            
-            for i in "\"'":
-                data = {}
-                for input_tag in details["inputs"]:
-                    if input_tag["type"] == "hidden" or input_tag["value"]:
-                        data[input_tag['name']] = input_tag["value"] + i
-                    elif input_tag["type"] != "submit":
-                        data[input_tag['name']] = f"test{i}"
-        
-                #print(url)
-                url = urljoin(url, form_details["action"])
-                #form_details(form)
-
-                if details["method"] == "post":
-                    res = s.post(url, data=data)
-                elif details["method"] == "get":
-                    res = s.get(url, params=data)
-                if vulnerable(res):
-                    print("SQL injection attack vulnerability in link: ", url )
-                    print("[+] Form:")
-                    pprint(form_details)
-                else:
-                    print("No SQL injection attack vulnerability detected")
-                    break
-        """
         for c in "\"'":
             new_url = f"{url}{c}"
             print("[!] Trying", new_url)
@@ -505,12 +479,9 @@ def getsqli():
                     print("[+] Form:")
                     pprint(form_details)
                     break
-    urlToBeChecked= 'https://'+wd
+    urlToBeChecked = 'https://'+wd
     sql_injection_scan(urlToBeChecked)
     return
-
-
-
 
 
 app.run()

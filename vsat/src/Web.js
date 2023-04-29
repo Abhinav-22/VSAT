@@ -10,6 +10,7 @@ const Web = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [load, setLoad] = useState([{}]);
+  const [httpSec, setHttpSec] = useState("");
 
   useEffect(() => {
     // console.log("workingggg");
@@ -17,16 +18,20 @@ const Web = () => {
       .then((res) => res.json())
       .then((data) => {
         setLoad(data);
-        
       });
 
-      fetch("/httpsecheader")
+    fetch("/httpsecheader")
       .then((res) => res.json())
       .then((data) => {
-        setLoad(data);
-        console.log(data)
-        console.log(data.Content-Security-Policy-header-not-present)
-        
+        setHttpSec(data);
+        console.log(data);
+        console.log(data.xssProtect);
+        console.log(data.xcontentoptions);
+        console.log(data.frameOptions);
+        console.log(data.strictTransportSecurity);
+        console.log(data.ContentSecurityPolicy);
+        console.log(data.SecureCookie);
+        console.log(data.HttpOnlyCookie);
       });
     const fetchDetails = async () => {
       // await delay(1000);
@@ -314,7 +319,7 @@ const Web = () => {
             </div>
           </div>
           <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
               <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
                 HTTP Security Header
               </p>
@@ -323,6 +328,30 @@ const Web = () => {
                 View the status of HTTP security header of your website
               </span>
               <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                XSS-Protection : {httpSec.xssProtect}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                X-Content-Type-Options : {httpSec.xcontentoptions}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                X-Frame-Options : {httpSec.frameOptions}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                Strict-Transport-Security : {httpSec.strictTransportSecurity}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                Secure Cookie : {httpSec.SecureCookie}
+              </p>
+              <p className="ml-3  py-2 text-xl text-white font-normal mb-2">
+                {" "}
+                HTTP Only Cookie : {httpSec.HttpOnlyCookie}
+              </p>
             </div>
             <br />
             <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
