@@ -334,9 +334,11 @@ function Login() {
         <div className="form-pane bg-gray-900">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
-              <div className="container-fluid">
-                <img src={logo} style={{ height: "60px", alt: "abc" }} />
-              </div>
+              <Link to="/">
+                <div className="container-fluid">
+                  <img src={logo} style={{ height: "60px", alt: "abc" }} />
+                </div>
+              </Link>
             </div>
           </nav>
           <div className="mx-auto mt-10 w-full max-w-sm p-4  rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">

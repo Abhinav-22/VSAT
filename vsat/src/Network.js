@@ -4,6 +4,8 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import usePortStore from "./stores/portStore";
+import usePortListStore from "./stores/portListStore";
+import OpenPorts from "./OpenPorts";
 
 const Network = () => {
   const navigate = useNavigate();
@@ -12,41 +14,9 @@ const Network = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const portsCount = usePortStore((state) => state.scanports);
-  const setportsCount = usePortStore((state) => state.updatePorts);
-
-  const getData = async (result) => {
-    const response = await fetch(
-      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
-    );
-    const dataports = await response.json();
-    if (!dataports) {
-      console.log("The array is empty");
-    }
-    console.log(typeof dataports);
-    console.log(dataports.openPorts);
-    console.log(dataports.openPorts.length);
-    setportsCount(dataports.openPorts.length);
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    const { data, error } = await supabase
-      .from("ports")
-      .upsert({
-        id: user.id,
-        openports: dataports.openPorts,
-        port_count: dataports.openPorts.length,
-      })
-      .select();
-    if (error) {
-      console.log(error.message);
-    }
-  };
 
   useEffect(() => {
     console.log("workingggg");
-    getData();
     console.log(typeof portsCount);
     const fetchDetails = async () => {
       // await delay(1000);
@@ -320,7 +290,7 @@ const Network = () => {
           </div>
         </div>
         <div className="scan grid grid-cols-3 gap-2">
-          <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
+          <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
             <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
               Network port scanning
             </p>
@@ -329,6 +299,9 @@ const Network = () => {
               View the status of open ports and services of your network
             </span>
             <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+            <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
+              <OpenPorts />
+            </p>
           </div>
           <br />
         </div>

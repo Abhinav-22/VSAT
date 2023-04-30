@@ -17,7 +17,11 @@ const UrlRedirection = () => {
     </p>
   ));
 
-  return <p>{Redirection}</p>;
+  return (
+    <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
+      {Redirection}
+    </p>
+  );
 };
 
 export default UrlRedirection;
