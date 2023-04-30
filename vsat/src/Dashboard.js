@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import usePortStore from "./stores/portStore";
 import useDomainStore from "./stores/storeDomain";
+import useGlanceStore from "./stores/glanceStore";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -21,6 +22,12 @@ function Dashboard() {
   const setDomainval = useDomainStore((state) => state.updateDomain);
   const domainStoredval = useDomainStore((state) => state.domainval);
   const resetDomain = useDomainStore((state) => state.resetDomain);
+
+  // ----------STORES---------
+  const HSTSstatus = useGlanceStore((state) => state.HSTSstatus);
+  const sslstatus = useGlanceStore((state) => state.sslstatus);
+  const phishstatus = useGlanceStore((state) => state.phishtankstatus);
+  const portstatus = usePortStore((state) => state.scanports);
 
   useEffect(() => {
     console.log("workingggg");
@@ -446,9 +453,24 @@ function Dashboard() {
             </div>
           </div>
           <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-3 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 mr-14">
+            <div className="col-span-3 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 mr-14">
               <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
                 Security at a glance
+              </p>
+              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
+                Domain Status :
+                <br />
+                SSL : {sslstatus}
+                <br />
+                Phishtank Status : {phishstatus}
+                <br />
+                HSTS Status : {HSTSstatus}
+                <br />
+                Data Breach Status :
+                <br />
+                No. of Ports Open : {portstatus}
+                <br />
               </p>
             </div>
           </div>

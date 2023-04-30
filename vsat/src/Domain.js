@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useGlanceStore from "./stores/glanceStore";
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Domain = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
+
+  const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
   useEffect(() => {
     console.log("workingggg");
@@ -20,6 +23,11 @@ const Domain = () => {
           setValidSSL(data.SSLExpiry);
           console.log(data);
           console.log(data.SSLExpiry);
+          if (data.SSLExpiry == "No SSL Certificate") {
+            setSSLstatus("             NOT FOUND !!!");
+          } else {
+            setSSLstatus("        SECURE!!!");
+          }
         });
     };
 

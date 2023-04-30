@@ -3,6 +3,8 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import UrlRedirection from "./UrlRedirection";
+import useGlanceStore from "./stores/glanceStore";
+
 const Web = () => {
   const navigate = useNavigate();
 
@@ -13,6 +15,9 @@ const Web = () => {
   const [httpSec, setHttpSec] = useState("");
   const [url, setUrl] = useState([]);
   const [phish, setPhish] = useState("Loading...");
+
+  const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
+  const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
 
   useEffect(() => {
     // console.log("workingggg");
@@ -30,6 +35,12 @@ const Web = () => {
     fetch("/phishtank")
       .then((res) => res.json())
       .then((data) => {
+        if (data.Sitedetails == "Is a phish") {
+          console.log("keriii");
+          setPhishstatus("        NOT SECURE !!!");
+        } else {
+          setPhishstatus("         SECURE!!");
+        }
         setPhish(data.Sitedetails);
         console.log(data);
       });
@@ -46,6 +57,19 @@ const Web = () => {
         console.log(data.ContentSecurityPolicy);
         console.log(data.SecureCookie);
         console.log(data.HttpOnlyCookie);
+        if (
+          data.xssProtect == "fail!" ||
+          data.xcontentoptions == "fail!" ||
+          data.frameOptions == "fail!" ||
+          data.strictTransportSecurity == "fail!" ||
+          data.ContentSecurityPolicy == "fail!" ||
+          data.SecureCookie == "fail!" ||
+          data.HttpOnlyCookie == "fail!"
+        ) {
+          setHSTSstatus("          NOT SECURE!!");
+        } else {
+          setHSTSstatus("          SECURE");
+        }
       });
     const fetchDetails = async () => {
       // await delay(1000);
