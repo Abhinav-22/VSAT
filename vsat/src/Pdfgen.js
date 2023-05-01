@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     color: "black",
   },
+  heading: {
+    textAlign: "center",
+    marginTop: 30,
+    
+  },
   section: {
     margin: 10,
     padding: 10,
@@ -28,11 +33,27 @@ function Pdfgen() {
     <PDFViewer style={styles.viewer}>
       <Document>
         <Page size="A4" style={styles.page}>
+          <View style={styles.heading}>
+            <Text>VSAT</Text>
+          </View>
+
           <View style={styles.section}>
-            <Text>Anna Kollathilla</Text>
+            <Text>Domain Status :</Text>
           </View>
           <View style={styles.section}>
-            <Text>Seen zones all the time</Text>
+            <Text>SSL : </Text>
+          </View>
+          <View style={styles.section}>
+            <Text>Phishtank Status :</Text>
+          </View>
+          <View style={styles.section}>
+            <Text>HSTS Status: </Text>
+          </View>
+          <View style={styles.section}>
+            <Text>Data Breach Status :</Text>
+          </View>
+          <View style={styles.section}>
+            <Text>Ports open : </Text>
           </View>
         </Page>
       </Document>
