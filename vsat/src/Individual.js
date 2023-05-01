@@ -11,7 +11,7 @@ function Induvidual() {
             <div className="container-fluid">
               <Link to="/">
                 {" "}
-                <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
+                <img src={logo} className="h-14 mr-3 sm:h-14 " alt="VSAT Logo" />
               </Link>
             </div>
           </div>
@@ -66,6 +66,7 @@ function Induvidual() {
               </form>
             </div>
           </div>
+          <br / >
           <div className="border-2 border-slate-700 rounded-lg">
             <div className="grid grid-cols-2 gap-5">
               <div className="  rounded-lg reportinfo bg-gray-800 h-auto ">
@@ -129,7 +130,7 @@ function Induvidual() {
                   <span className=" text-md font-medium  rounded w-2/6 h-10 bg-red-900 text-red-300  flex flex-col items-center justify-center ml-3">
                     &nbsp;RISK&nbsp;
                   </span>
-                  <br />
+               <br />
                   <span className=" text-md font-medium w-2/6 h-10   rounded bg-yellow-300 text-yellow-900  flex flex-col items-center justify-center ml-3">
                     &nbsp;MODERATE&nbsp;
                   </span>
