@@ -15,6 +15,7 @@ import { Route, Routes } from "react-router-dom";
 import ConfirmResubmission from "./ConfirmResubmission.js";
 import TxtVerify from "./TxtVerify.js";
 import Forgotem from "./Forgotem.js";
+import Pdfgen from "./Pdfgen.js";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
         <Route path="txt" element={<TxtVerify />}></Route>
         <Route path="resetpw" element={<Forgotpw />}></Route>
         <Route path="resetem" element={<Forgotem />}></Route>
+        <Route path="pdfgen" element={<Pdfgen />}></Route>
+
         <Route
           path="confirmresubmission"
           element={<ConfirmResubmission />}

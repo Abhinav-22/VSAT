@@ -147,6 +147,9 @@ function Dashboard() {
     }
   };
 
+  const navPdf = () => {
+    navigate("/pdfgen");
+  };
   return (
     <>
       {" "}
@@ -518,7 +521,10 @@ function Dashboard() {
             </button>
           </div>
 
-          <button className="flex items-center justify-center mt-7 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded h-10">
+          <button
+            className="flex items-center justify-center mt-7 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded h-10"
+            onClick={navPdf}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
