@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
+import supabase from "./config/supabaseClient";
 
-const Forgotem = () => {
+const Forgotem =  () => {
+  const [email, setEmail] = useState("");
+
+  const getpw = async () => {
+    const { data, error } = await supabase.auth
+      .resetPasswordForEmail(email)
+    
+    console.log("entered get pw",email)
+  };
+ 
+ 
+
   return (
     <div>
       <div className="grid  h-screen">
@@ -39,12 +51,15 @@ const Forgotem = () => {
                   id="email"
                   className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
 
               <button
                 type="submit"
+                onClick={getpw}
                 className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Recover account
