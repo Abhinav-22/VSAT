@@ -6,11 +6,15 @@ import { Link, useNavigate } from "react-router-dom";
 const Forgotpw = () => {
   const [useremail, setUseremail] = useState(null);
   const [pw, setPw] = useState("");
+  const [conpw, setConfPw] = useState("");
 
   
-  const resetpw = async () => {
+  const resetpw = async (e) => {
+    e.preventDefault()
+    
     supabase.auth.onAuthStateChange(async (event, session) => {
       if (event == "PASSWORD_RECOVERY") {
+        console.log("kerii",pw);
        // const newPassword = prompt("What would you like your new password to be?");
         const { data, error } = await supabase.auth
           .updateUser({ password: pw })
@@ -87,12 +91,15 @@ const Forgotpw = () => {
                   Confirm password
                 </label>
                 <input
-                  type="confirm-password"
+                  type="password"
                   name="confirm-password"
                   id="confirm-password"
                   placeholder="••••••••"
+                  onChange={(e) => setConfPw(e.target.value)}
+                  value={conpw}
+
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                  required
                 />
               </div>
               <button
@@ -100,7 +107,7 @@ const Forgotpw = () => {
                 onClick={resetpw}
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Reset passwod
+                Reset password
               </button>
             </form>
           </div>
