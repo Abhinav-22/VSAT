@@ -23,7 +23,7 @@ const Forgotpw = () => {
         if (error) alert("There was an error updating your password.");
       }
     });
-  });
+  }, []);
 
   return (
     <div>
