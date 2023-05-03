@@ -145,7 +145,7 @@ def get_dns_records_info():
             time.sleep(10)
         except Exception as e:
             pass  # or pass
-    return jsonify(dnsd)
+    return dnsd
 
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
@@ -293,7 +293,7 @@ def get_phishtank():
     url = "https://phishtank.org/"
     driver = webdriver.Chrome(options=chrome_options)
     driver.get(url)
-
+    flag = 0
     domain = "https://"+wd
     e1 = driver.find_element(By.NAME, 'isaphishurl').clear()
 
@@ -312,9 +312,32 @@ def get_phishtank():
             pdict.update({"Sitedetails": submit.text})
 
     except:
+        url = "https://phishtank.org/"
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.get(url)
+
+        domain = "http://"+wd
+        e1 = driver.find_element(By.NAME, 'isaphishurl').clear()
+
+        e3 = driver.find_element(By.NAME, 'isaphishurl').send_keys(domain)
         submit = driver.find_element(
-            By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/b/tt')
-        pdict.update({"Sitedetails": "does not exist"})
+            By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/input[2]')
+        submit.click()
+        time.sleep(3)
+
+        try:
+            submit = driver.find_element(
+                By.XPATH, '//*[@id="history"]/table[1]/tbody/tr/td[2]/h3/b')
+            pdict.update({"Sitedetails": submit.text})
+            if submit.text == "":
+                submit = driver.find_element(By.XPATH, '//*[@id="widecol"]/div/h3')
+                pdict.update({"Sitedetails": submit.text})
+
+        except:
+            submit = driver.find_element(
+                By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/b/tt')
+            pdict.update({"Sitedetails": "does not exist"})
+
     return (pdict)
 
 

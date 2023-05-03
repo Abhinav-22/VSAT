@@ -94,8 +94,6 @@ function Dashboard() {
       }
       if (data) {
         try {
-          // setDomain(data);
-          // console.log(domain);
           const {
             data: { user },
           } = await supabase.auth.getUser();
@@ -127,13 +125,6 @@ function Dashboard() {
       }
     };
     fetchDetails();
-
-    // setTxtval(maketxtid(16));
-    // console.log(txtval);
-
-    // setTokenval(makeid(32));
-
-    // console.log(tokenval);
   }, []);
 
   const logout = async (e) => {
@@ -457,7 +448,7 @@ function Dashboard() {
           </div>
           <div className="scan grid grid-cols-3 gap-2">
             <div className="col-span-3 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 mr-14">
-              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
+              <p className="ml-3 py-2 text-2xl text-white font-normal mb-4">
                 Security at a glance
               </p>
               <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />

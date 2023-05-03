@@ -1,4 +1,7 @@
 import React from "react";
+import usePortStore from "./stores/portStore";
+import useGlanceStore from "./stores/glanceStore";
+
 import {
   Document,
   Page,
@@ -16,7 +19,6 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "center",
     marginTop: 30,
-    
   },
   section: {
     margin: 10,
@@ -29,6 +31,11 @@ const styles = StyleSheet.create({
 });
 
 function Pdfgen() {
+  const HSTSstatus = useGlanceStore((state) => state.HSTSstatus);
+  const sslstatus = useGlanceStore((state) => state.sslstatus);
+  const phishstatus = useGlanceStore((state) => state.phishtankstatus);
+  const portstatus = usePortStore((state) => state.scanports);
+
   return (
     <PDFViewer style={styles.viewer}>
       <Document>
@@ -38,22 +45,22 @@ function Pdfgen() {
           </View>
 
           <View style={styles.section}>
-            <Text>Domain Status :</Text>
+            <Text>Domain Status : {}</Text>
           </View>
           <View style={styles.section}>
-            <Text>SSL : </Text>
+            <Text>SSL : {sslstatus}</Text>
           </View>
           <View style={styles.section}>
-            <Text>Phishtank Status :</Text>
+            <Text>Phishtank Status : {phishstatus}</Text>
           </View>
           <View style={styles.section}>
-            <Text>HSTS Status: </Text>
+            <Text>HSTS Status: {HSTSstatus}</Text>
           </View>
           <View style={styles.section}>
             <Text>Data Breach Status :</Text>
           </View>
           <View style={styles.section}>
-            <Text>Ports open : </Text>
+            <Text>Ports open : {portstatus}</Text>
           </View>
         </Page>
       </Document>

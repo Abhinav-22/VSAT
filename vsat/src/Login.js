@@ -383,12 +383,12 @@ function Login() {
                 />
               </div>
               <div className="flex items-start pb-2">
-                <a
-                  href="#"
+                <Link
+                  to="/resetem"
                   className="ml-auto text-sm  hover:underline text-blue-500"
                 >
                   Lost Password?
-                </a>
+                </Link>
               </div>
               <Link to="">
                 <button

@@ -3,19 +3,20 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 
-const Forgotem =  () => {
+const Forgotem = () => {
   const [email, setEmail] = useState("");
 
   const getpw = async (e) => {
     e.preventDefault();
-    const { data, error } = await supabase.auth
-      .resetPasswordForEmail(email)
-    
-    
-    console.log("entered get pw",email)
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(data);
+    }
+
+    console.log("entered get pw", email);
   };
- 
- 
 
   return (
     <div>
@@ -36,7 +37,7 @@ const Forgotem =  () => {
             </div>
           </nav>
           <div className="mx-auto mt-32 w-full max-w-md p-4 rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
-            <form className="space-y-6" >
+            <form className="space-y-6">
               <h5 className="text-xl font-medium text-white">
                 Recover your VSAT account
               </h5>
