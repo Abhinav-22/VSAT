@@ -19,7 +19,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.github.com"
+wd = ""
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -38,6 +38,15 @@ def get_hostname_info():
         hosd.update({"HostnameFlag": False})
 
     return jsonify(hosd)
+
+
+@app.route('/api/endpoint', methods=['POST'])
+def receive_string_from_client():
+    data = request.get_json()
+    str_payload = data['string']
+    print(str_payload)
+    wd = str_payload
+    return jsonify({'message': 'String received'})
 
 
 @app.route('/whoislookup', methods=['POST', 'GET'])
@@ -330,7 +339,8 @@ def get_phishtank():
                 By.XPATH, '//*[@id="history"]/table[1]/tbody/tr/td[2]/h3/b')
             pdict.update({"Sitedetails": submit.text})
             if submit.text == "":
-                submit = driver.find_element(By.XPATH, '//*[@id="widecol"]/div/h3')
+                submit = driver.find_element(
+                    By.XPATH, '//*[@id="widecol"]/div/h3')
                 pdict.update({"Sitedetails": submit.text})
 
         except:
