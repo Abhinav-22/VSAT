@@ -147,7 +147,7 @@ function Dashboard() {
       <div className="grid grid-cols-6 gap-0 h-full">
         <div className="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
-            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-800  ">
+            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-800  drop-shadow-xl  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
                 <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
@@ -360,13 +360,13 @@ function Dashboard() {
             <span className="user font-semibold">&nbsp;{authName}</span>
           </p>
           <div className="grid ml-7 grid-cols-4 justify-center">
-            <div className="web h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+            <div className="web h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="40"
+                height="40"
                 fill="currentColor"
-                className="guard float-right mt-7 mr-2 text-blue-500 bi bi-shield-shaded"
+                className="guard float-right mt-5 mr-2 text-blue-500 bi bi-shield-shaded"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -383,13 +383,13 @@ function Dashboard() {
                 Active
               </span>
             </div>
-            <div className="net h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+            <div className="net h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="40"
+                height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-hdd-network float-right mt-7 mr-2"
+                className="text-blue-500 bi bi-hdd-network float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
@@ -404,13 +404,13 @@ function Dashboard() {
                 Active
               </span>
             </div>
-            <div className="data h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+            <div className="data h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="40"
+                height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-database float-right mt-7 mr-2"
+                className="text-blue-500 bi bi-database float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313ZM13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 5.698ZM14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13V4Zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 8.698Zm0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525Z" />
@@ -424,13 +424,13 @@ function Dashboard() {
                 Active
               </span>
             </div>
-            <div className="asset h-32 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded hover:bg-gray-900">
+            <div className="asset h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="40"
+                height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-gear float-right mt-7 mr-2"
+                className="text-blue-500 bi bi-gear float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
@@ -446,38 +446,177 @@ function Dashboard() {
               </span>
             </div>
           </div>
-          <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-3 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 mr-14">
-              <p className="ml-3 py-2 text-2xl text-white font-normal mb-4">
-                Security at a glance
-              </p>
-              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
-              <p className="ml-3 py-2 text-xl text-white font-normal mb-4">
-                Domain Status :
-                <br />
-                SSL : {sslstatus}
-                <br />
-                Phishtank Status : {phishstatus}
-                <br />
-                HSTS Status : {HSTSstatus}
-                <br />
-                Data Breach Status :
-                <br />
-                No. of Ports Open : {portstatus}
-                <br />
-              </p>
-            </div>
-          </div>
-          <div className="flex tutorial mt-4 ml-7 w-auto rounded justify-between">
+          
+          <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            Security at a glance
+            </p>
+
+          <div class="scan grid grid-cols-3 gap-3">
+          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Scan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Time
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Class
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Result
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr class=" border-b bg-gray-800 border-gray-700 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    Domain scan status
+                </th>
+                <td class="px-6 py-4">
+                    
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+
+                </td>
+                <td class="px-6 py-4">
+                    $2999
+                </td>
+            
+            </tr>
+            <tr class=" border-b bg-gray-800 border-gray-700 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    SSL scan status
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+              
+            </tr>
+            <tr class=" border-b bg-gray-800 border-gray-700 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    Phishtank status
+                </th>
+                <td class="px-6 py-4">
+                    Black
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $99
+                </td>
+                
+            </tr>
+            <tr class=" border-b bg-gray-800 border-gray-700 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    HTTP security header status
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+
+                </td>
+                <td class="px-6 py-4">
+                    $179
+                </td>
+                
+            </tr>
+            <tr class=" border-b bg-gray-800 border-gray-700 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    Data breach status
+                </th>
+                <td class="px-6 py-4">
+                    Gold
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
+
+                </td>
+                <td class="px-6 py-4">
+                    $699
+                </td>
+               
+            </tr>
+            <tr class="bg-gray-800 ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                 
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    Network ports open
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $3999
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class=" col-span-1 mt-3 ml-7  h-94 rounded-xl bg-gray-800 mr-12 ">
+<p className="ml-3 mt-3  text-lg text-white font-medium ">
+            VSAT Tools
+            </p>
             <a
               href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
               target="_blank"
             >
-              <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded h-10">
+              <button className="mt-3 my-auto mx-auto  flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
+                  width="40"
+                  height="40"
                   fill="currentColor"
                   className="bi bi-journal-code my-auto"
                   viewBox="0 0 16 16"
@@ -490,46 +629,47 @@ function Dashboard() {
                   <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
                 </svg>
                 <span className="my-auto ttspan ml-3 flex justify-center">
-                  Click to learn best cyber security practises for your
-                  industry.
+                  VSAT Documentation
                 </span>
               </button>
             </a>
-            <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
+
+            <button className="mt-3 my-auto mx-auto  flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64" onClick={navPdf}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              fill="currentColor"
+              className="bi bi-download my-auto"
+              viewBox="0 0 16 16"
+            >
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+                <span className="my-auto ttspan ml-3 flex justify-center">
+                  Generate security report
+                </span>
+              </button>
+              <button className="mt-3 my-auto mx-auto   flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="40"
+                height="40"
                 fill="currentColor"
                 className="bi bi-search my-auto"
                 viewBox="0 0 16 16"
               >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
               </svg>
-              <span className="my-auto ttspan ml-3 flex justify-center">
-                Quick scan
-              </span>
-            </button>
-          </div>
-
-          <button
-            className="flex items-center justify-center mt-7 mx-auto bg-blue-500 hover:bg-blue-700 text-white font-semibold text-left py-1 px-2 rounded h-10"
-            onClick={navPdf}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-download"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-            </svg>
-            &nbsp;Generate report
-          </button>
-        </div>
+                <span className="my-auto ttspan ml-3 flex justify-center">
+                  Quick scan
+                </span>
+              </button>
+  
+  </div>
+</div>
+</div>
+          
       </div>
     </>
   );
