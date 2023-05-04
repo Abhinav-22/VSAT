@@ -19,7 +19,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.github.com"
+wd = "www.google.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -346,8 +346,8 @@ def get_phishtank():
         except:
             submit = driver.find_element(
                 By.XPATH, '//*[@id="maincol"]/div/div[2]/form/p/b/tt')
-            pdict.update({"Sitedetails": "does not exist"})
-
+            pdict.update({"Sitedetails": "No phishing details found"})
+        return (pdict)
     return (pdict)
 
 

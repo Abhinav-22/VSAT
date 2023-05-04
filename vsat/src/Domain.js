@@ -11,6 +11,8 @@ const Domain = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
+  const [whoisstastus, setWhoisstatus] = useState("");
+  const [dnsecc, setDnssecc] = useState("");
 
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
@@ -32,6 +34,39 @@ const Domain = () => {
     };
 
     updateSSL();
+
+    const updatewhois = async () => {
+      fetch("/whoislookup")
+        .then((res) => res.json())
+        .then((data) => {
+          setWhoisstatus(data.WhoisFlag);
+          console.log(data);
+         // console.log(data.Whoisinfo);
+          if (data.WhoisFlag == true) {
+          
+            data.Whoisinfo.expiration_date.map((us) => {
+console.log(us)            
+            });
+             data.Whoisinfo.name_servers.map((us) => {
+console.log(us)            
+            });
+
+            setDnssecc(data.Whoisinfo.dnssec);
+            console.log(data.Whoisinfo.dnssec)
+//             data.Whoisinfo.dnssec.map((us) => {
+// console.log(us)            
+//             });
+
+
+            
+            
+          } else {
+            setSSLstatus("        SECURE!!!");
+          }
+        });
+    };
+    updatewhois();
+
     const fetchDetails = async () => {
       // await delay(1000);
 
