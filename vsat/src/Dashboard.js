@@ -379,7 +379,7 @@ function Dashboard() {
                 Web Security
               </span>
               <br />
-              <span className="user font-light text-md ml-2 text-white">
+              <span className="user font-medium text-md ml-2 text-white">
               No action required
               </span>
             </div>
@@ -400,7 +400,7 @@ function Dashboard() {
                 Network Security
               </span>
               <br />
-              <span className="user font-light text-md ml-2 text-white">
+              <span className="user font-medium text-md ml-2 text-white">
               No action required
               </span>
             </div>
@@ -420,7 +420,7 @@ function Dashboard() {
                 Data Security
               </span>
               <br />
-              <span className="user font-light text-md ml-2 text-white">
+              <span className="user font-medium text-md ml-2 text-white">
               No action required
               </span>
             </div>

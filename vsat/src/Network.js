@@ -70,7 +70,7 @@ const Network = () => {
     <div className="grid grid-cols-6 gap-0 h-full">
       <div className="sidebar">
         <aside className="h-screen sticky top-0" aria-label="Sidebar">
-          <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
+          <div className="sticky h-full px-3 py-4 overflow-y-auto bg-secondbg  ">
             <Link to="/" className="flex items-center pl-2.5 mb-5">
               <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
             </Link>
@@ -199,7 +199,7 @@ const Network = () => {
             </ul>
             <div
               id="dropdown-cta"
-              className="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-gray-700 "
+              className="p-4 mt-6 rounded-lg bg-fieldbg "
               role="alert drop-shadow-lg	"
             >
               <div className="flex justify-center mb-3 drop-shadow-lg	">
@@ -262,49 +262,74 @@ const Network = () => {
           </div>
         </aside>
       </div>
-      <div className="pane bg-gray-900 col-span-5">
+      <div className="pane bg-mainbg col-span-5">
         <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
           Network security
         </h2>
         <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
         <div className="grid ml-7 grid-cols-4 justify-center">
-          <div className="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
-              fill="currentColor"
-              className="eth float-right mt-7 mr-2 bi bi-ethernet text-white"
-              viewBox="0 0 16 16"
-            >
-              <path d="M14 13.5v-7a.5.5 0 0 0-.5-.5H12V4.5a.5.5 0 0 0-.5-.5h-1v-.5A.5.5 0 0 0 10 3H6a.5.5 0 0 0-.5.5V4h-1a.5.5 0 0 0-.5.5V6H2.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5ZM3.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm2 0h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5ZM9.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5Z" />
-              <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2ZM1 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2Z" />
-            </svg>
-            <span className="user font-medium text-lg ml-2 text-white">
-              Ports open
-            </span>
-            <br />
-            <span className="user font-semibold text-3xl ml-2 text-white ">
-              {portsCount}
-            </span>
-          </div>
+        <div className="web h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+            
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="eth float-right mt-5 mr-2 bi bi-ethernet text-white" viewBox="0 0 16 16">
+                  <path d="M14 13.5v-7a.5.5 0 0 0-.5-.5H12V4.5a.5.5 0 0 0-.5-.5h-1v-.5A.5.5 0 0 0 10 3H6a.5.5 0 0 0-.5.5V4h-1a.5.5 0 0 0-.5.5V6H2.5a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5ZM3.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm2 0h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5ZM9.75 11h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25Zm1.75.25a.25.25 0 0 1 .25-.25h.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-.5a.25.25 0 0 1-.25-.25v-1.5Z"/>
+                  <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2ZM1 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2Z"/>
+                </svg>
+              <span className="user font-semibold text-lg ml-2 text-white">
+                Ports opened
+              </span>
+              <br />
+              <span className="user font-regular text-md ml-2 text-white">
+             {portsCount}
+              </span>
+            </div>
+          
         </div>
+        <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            Network port scan
+            </p>
         <div className="scan grid grid-cols-3 gap-2">
-          <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-auto mt-5 ">
-            <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
-              Network port scanning
-            </p>
-
-            <span className="user font-normal text-sm text-gray-400 pl-3">
-              View the status of open ports and services of your network
-            </span>
-            <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
-            <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
-              <OpenPorts />
-            </p>
-          </div>
-          <br />
+       
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Ports opened
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+                <OpenPorts />
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+       
         </div>
+        
       </div>
     </div>
   );
