@@ -147,7 +147,7 @@ function Dashboard() {
       <div className="grid grid-cols-6 gap-0 h-full">
         <div className="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
-            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-800  drop-shadow-xl  ">
+            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-secondbg  drop-shadow-xl  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
                 <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
@@ -286,11 +286,11 @@ function Dashboard() {
               </ul>
               <div
                 id="dropdown-cta"
-                className="p-4 mt-6 rounded-lg bg-gray-700 "
+                className="p-4 mt-6 rounded-lg bg-fieldbg "
                 role="alert drop-shadow-lg	"
               >
                 <div className="flex justify-center mb-3 drop-shadow-lg	">
-                  <div className="flex justify-center logo rounded-full bg-gray-800 drop-shadow-lg	 ">
+                  <div className="flex justify-center logo rounded-full bg-secondbg drop-shadow-lg	 ">
                     <svg
                       className="logo text-white w-auto h-auto "
                       width="50"
@@ -351,7 +351,7 @@ function Dashboard() {
         </div>
         {/* ================================== */}
 
-        <div className="pane bg-gray-900 col-span-5">
+        <div className="pane bg-mainbg col-span-5">
           <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
             Security Dashboard
           </h2>
@@ -360,13 +360,13 @@ function Dashboard() {
             <span className="user font-semibold">&nbsp;{authName}</span>
           </p>
           <div className="grid ml-7 grid-cols-4 justify-center">
-            <div className="web h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+            <div className="web h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
                 fill="currentColor"
-                className="guard float-right mt-5 mr-2 text-blue-500 bi bi-shield-shaded"
+                className="guard float-right mt-5 mr-2 text-white bi bi-shield-shaded"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -375,74 +375,74 @@ function Dashboard() {
                 />
               </svg>
 
-              <span className="user font-medium text-lg ml-2 text-white">
+              <span className="user font-semibold text-lg ml-2 text-white">
                 Web Security
               </span>
               <br />
-              <span className="user font-bold text-2xl ml-2 text-white">
-                Active
+              <span className="user font-light text-md ml-2 text-white">
+              No action required
               </span>
             </div>
-            <div className="net h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+            <div className="net h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-hdd-network float-right mt-5 mr-2"
+                className="text-white bi bi-hdd-network float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M4.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zM3 4.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
                 <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8.5v3a1.5 1.5 0 0 1 1.5 1.5h5.5a.5.5 0 0 1 0 1H10A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5H.5a.5.5 0 0 1 0-1H6A1.5 1.5 0 0 1 7.5 10V7H2a2 2 0 0 1-2-2V4zm1 0v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm6 7.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5z" />
               </svg>
 
-              <span className="user font-medium text-lg ml-2 text-white">
+              <span className="user font-semibold text-lg ml-2 text-white">
                 Network Security
               </span>
               <br />
-              <span className="user font-bold text-2xl ml-2 text-white">
-                Active
+              <span className="user font-light text-md ml-2 text-white">
+              No action required
               </span>
             </div>
-            <div className="data h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+            <div className="data h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-database float-right mt-5 mr-2"
+                className="text-white bi bi-database float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313ZM13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 5.698ZM14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13V4Zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A4.92 4.92 0 0 0 13 8.698Zm0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525Z" />
               </svg>
 
-              <span className="user font-medium text-lg ml-2 text-white">
+              <span className="user font-semibold text-lg ml-2 text-white">
                 Data Security
               </span>
               <br />
-              <span className="user font-bold text-2xl ml-2 text-white">
-                Active
+              <span className="user font-light text-md ml-2 text-white">
+              No action required
               </span>
             </div>
-            <div className="asset h-20 w-64 drop-shadow-lg bg-gray-800 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+            <div className="asset h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
                 fill="currentColor"
-                className="text-blue-500 bi bi-gear float-right mt-5 mr-2"
+                className="text-white bi bi-gear float-right mt-5 mr-2"
                 viewBox="0 0 16 16"
               >
                 <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
                 <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
               </svg>
 
-              <span className="user font-medium text-lg ml-2 text-white">
+              <span className="user font-semibold text-lg ml-2 text-white">
                 Domain Security
               </span>
               <br />
-              <span className="user font-bold text-2xl ml-2 text-white">
-                Not active
+              <span className="user font-medium text-md ml-2 text-white">
+                No action required
               </span>
             </div>
           </div>
@@ -454,7 +454,7 @@ function Dashboard() {
           <div class="scan grid grid-cols-3 gap-3">
           <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
     <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-        <thead class=" text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
                 <th scope="col" class="p-4">
                     <div class="flex items-center">
@@ -477,7 +477,7 @@ function Dashboard() {
             </tr>
         </thead>
         <tbody>
-            <tr class=" border-b bg-gray-800 border-gray-700 ">
+            <tr class=" border-b bg-secondbg border-txtcol ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                        
@@ -498,7 +498,7 @@ function Dashboard() {
                 </td>
             
             </tr>
-            <tr class=" border-b bg-gray-800 border-gray-700 ">
+            <tr class=" border-b bg-secondbg border-txtcol ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                        
@@ -518,7 +518,7 @@ function Dashboard() {
                 </td>
               
             </tr>
-            <tr class=" border-b bg-gray-800 border-gray-700 ">
+            <tr class=" border-b bg-secondbg border-txtcol ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                        
@@ -538,7 +538,7 @@ function Dashboard() {
                 </td>
                 
             </tr>
-            <tr class=" border-b bg-gray-800 border-gray-700 ">
+            <tr class=" border-b bg-secondbg border-txtcol ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                        
@@ -559,7 +559,7 @@ function Dashboard() {
                 </td>
                 
             </tr>
-            <tr class=" border-b bg-gray-800 border-gray-700 ">
+            <tr class=" border-b bg-secondbg border-txtcol ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                         
@@ -580,7 +580,7 @@ function Dashboard() {
                 </td>
                
             </tr>
-            <tr class="bg-gray-800 ">
+            <tr class="bg-secondbg ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                  
@@ -604,19 +604,19 @@ function Dashboard() {
     </table>
 </div>
 
-<div class=" col-span-1 mt-3 ml-7  h-94 rounded-xl bg-gray-800 mr-12 ">
-<p className="ml-3 mt-3  text-lg text-white font-medium ">
+<div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
+<p className="ml-3 mt-3  text-lg text-white  font-normal ">
             VSAT Tools
             </p>
             <a
               href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
               target="_blank"
             >
-              <button className="mt-3 my-auto mx-auto  flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64 ">
+              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="40"
-                  height="40"
+                  width="25"
+                  height="25"
                   fill="currentColor"
                   className="bi bi-journal-code my-auto"
                   viewBox="0 0 16 16"
@@ -634,11 +634,11 @@ function Dashboard() {
               </button>
             </a>
 
-            <button className="mt-3 my-auto mx-auto  flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64" onClick={navPdf}>
+            <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
+              width="25"
+              height="25"
               fill="currentColor"
               className="bi bi-download my-auto"
               viewBox="0 0 16 16"
@@ -650,18 +650,18 @@ function Dashboard() {
                   Generate security report
                 </span>
               </button>
-              <button className="mt-3 my-auto mx-auto   flex border-2 border-blue-700 hover:bg-blue-700 text-white font-light text-left py-1 px-2 rounded-xl h-20 w-64">
+              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
+                width="25"
+                height="25"
                 fill="currentColor"
                 className="bi bi-search my-auto"
                 viewBox="0 0 16 16"
               >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
               </svg>
-                <span className="my-auto ttspan ml-3 flex justify-center">
+                <span className="my-auto ttspan flex justify-center">
                   Quick scan
                 </span>
               </button>
