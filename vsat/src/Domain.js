@@ -120,7 +120,7 @@ console.log(us)
       <div className="grid grid-cols-6 gap-0 h-full">
         <div className="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
-            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
+            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-secondbg  ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
                 <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
@@ -249,7 +249,7 @@ console.log(us)
               </ul>
               <div
                 id="dropdown-cta"
-                className="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-gray-700 "
+                className="p-4 mt-6 rounded-lg bg-fieldbg"
                 role="alert drop-shadow-lg	"
               >
                 <div className="flex justify-center mb-3 drop-shadow-lg	">
@@ -313,19 +313,20 @@ console.log(us)
           </aside>
         </div>
 
-        <div className="pane bg-gray-900 col-span-5">
+        <div className="pane bg-mainbg col-span-5">
           <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
             Domain checkup
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
           <div className="grid ml-7 grid-cols-4 justify-center">
-            <div className="web h-32 w-64 bg-blue-700 shadow shadow-slate-700 rounded border border-blue-500 hover:bg-gray-900">
-              <svg
+          <div className="web h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+          
+          <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="40"
+                height="40"
                 fill="currentColor"
-                className="ssl float-right mt-7 mr-2 text-white bi bi-patch-check"
+                className="ssl float-right mt-5 mr-2 text-white bi bi-patch-check"
                 viewBox="0 0 16 16"
               >
                 <path
@@ -334,14 +335,15 @@ console.log(us)
                 />
                 <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
               </svg>
-              <span className="user font-medium text-lg ml-2 text-white">
-                SSL expires on
-              </span>
-              <br />
-              <span className="user font-semibold text-3xl ml-2 text-white ">
-                {validSSL}
-              </span>
-            </div>
+            <span className="user font-semibold text-lg ml-2 text-white">
+            SSL expires on
+            </span>
+            <br />
+            <span className="user font-regular text-md ml-2 text-white">
+{validSSL}
+            </span>
+          </div>
+            
           </div>
 
           <div className="scan grid grid-cols-3 gap-2">
