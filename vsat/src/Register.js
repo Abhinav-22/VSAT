@@ -161,7 +161,7 @@ const Register = () => {
   return (
     <>
       <div className="grid grid-cols-2 gap-0 h-auto w-auto min-h-screen">
-        <div className="form-pane bg-gray-900 ">
+        <div className="form-pane bg-mainbg ">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
@@ -170,13 +170,13 @@ const Register = () => {
                   <img
                     src={logo}
                     alt="logo"
-                    style={{ height: "60px", alt: "abc", loading: "lazy" }}
+                    style={{ height: "60px", alt: "abc" }}
                   />
                 </Link>
               </div>
             </div>
           </nav>
-          <div className="flex justify-center mx-auto  w-full max-w-max p-4  border  rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
+          <div className="flex justify-center mx-auto  w-full max-w-max p-4    rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg ">
             <form onSubmit={handleSubmit}>
               <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <h5 className="text-xl font-medium text-white">
@@ -194,7 +194,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="first_name"
-                    className=" border  text-sm rounded-lg f  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className=" text-sm rounded-lg f  block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="John"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
@@ -211,7 +211,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="last_name"
-                    className="border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className=" text-sm rounded-lg  block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Doe"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -228,7 +228,7 @@ const Register = () => {
                   <input
                     type="text"
                     id="company"
-                    className=" border  text-sm rounded-lg   block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className=" text-sm rounded-lg   block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Google"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
@@ -245,7 +245,7 @@ const Register = () => {
                   <input
                     type="tel"
                     id="phone"
-                    className=" border  text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className="   text-sm rounded-lg block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="123-45-678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
@@ -262,7 +262,7 @@ const Register = () => {
                   <input
                     pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$"
                     id="website"
-                    className="border  text-sm rounded-lg f block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className="  text-sm rounded-lg f block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="google.com"
                     value={website}
                     onInvalid="setCustomValidity('Please Enter URL.')"
@@ -281,7 +281,7 @@ const Register = () => {
                 <input
                   type="email"
                   id="email"
-                  className=" border  text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className="   text-sm rounded-lg block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   placeholder="john.doe@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -298,7 +298,7 @@ const Register = () => {
                 <input
                   type="password"
                   id="password"
-                  className=" border  text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className="   text-sm rounded-lg  block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   placeholder="•••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -315,7 +315,7 @@ const Register = () => {
                 <input
                   type="password"
                   id="confirm_password"
-                  className=" border  text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                  className="  text-sm rounded-lg  block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   placeholder="•••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -346,7 +346,7 @@ const Register = () => {
             </form>
           </div>
         </div>
-        <div className="img-pane bg-gray-800 w-full h-full shadow shadow-slate-500 ">
+        <div className="img-pane bg-secondbg w-full h-full  ">
           <img
             className="w-7/12 h-7/12 mx-auto my-auto drop-shadow-md flex flex-col items-center justify-center bg-opacity-25"
             src={register}

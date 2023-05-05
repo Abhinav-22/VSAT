@@ -331,7 +331,7 @@ function Login() {
   return (
     <>
       <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen ">
-        <div className="form-pane bg-gray-900">
+        <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <Link to="/">
@@ -341,7 +341,7 @@ function Login() {
               </Link>
             </div>
           </nav>
-          <div className="mx-auto mt-10 w-full max-w-sm p-4  rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
+          <div className="mx-auto mt-10 w-full max-w-sm p-4  rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg border-gray-700 ">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <h5 className="text-xl font-medium text-white">
                 Sign in to our platform
@@ -358,7 +358,7 @@ function Login() {
                   name="email"
                   id="email"
                   value={email}
-                  className=" border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className=" border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg border-gray-500 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -378,7 +378,7 @@ function Login() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg border-gray-500 placeholder-gray-400 text-white"
                   required
                 />
               </div>
@@ -411,9 +411,9 @@ function Login() {
             </form>
           </div>
         </div>
-        <div className="img-pane bg-gray-800 w-full h-full shadow shadow-slate-500  ">
+        <div className="img-pane bg-secondbg w-full h-full  ">
           <img
-            className="w-6/12 h-6/12 mx-auto mt-10 my-auto bg-opacity-25 flex flex-col items-center justify-center drop-shadow-md"
+            className="w-6/12 h-6/12 mx-auto mt-10 my-auto  flex flex-col items-center justify-center"
             src={payment}
             alt="security"
           />
