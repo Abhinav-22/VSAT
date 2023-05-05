@@ -6,21 +6,21 @@ const ConfirmResubmission = () => {
   return (
     <>
       <div className="grid  h-screen">
-        <div className="form-pane bg-gray-900">
+        <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
                 <Link to="/" className="flex items-center pl-2.5 mb-5">
                   <img
                     src={logo}
-                    style={{ height: "90px", alt: "abc", loading: "lazy" }}
+                    style={{ height: "60px", alt: "abc", loading: "lazy" }}
                     alt="VSAT Logo"
                   />
                 </Link>
               </div>
             </div>
           </nav>
-          <section className="bg-gray-900">
+          <section className="bg-mainbg">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
               <div className="mx-auto max-w-screen-sm text-center">
                 <p className="mb-4 text-3xl tracking-tight font-light md:text-4xl text-white">

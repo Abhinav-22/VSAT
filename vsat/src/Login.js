@@ -358,7 +358,7 @@ function Login() {
                   name="email"
                   id="email"
                   value={email}
-                  className=" border   text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg border-gray-500 placeholder-gray-400 text-white"
+                  className="    text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -378,7 +378,7 @@ function Login() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className=" border  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg border-gray-500 placeholder-gray-400 text-white"
+                  className="  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg  placeholder-gray-400 text-white"
                   required
                 />
               </div>
