@@ -8,29 +8,25 @@ import { Link } from "react-router-dom";
 function Mainpage() {
   return (
     <>
-      <div className=" bg-gray-900 w-full h-screen min-h-screen">
-        <nav className="relative w-full flex flex-wrap items-center justify-between ">
-          <div className="container-fluid w-full flex flex-wrap items-center justify-between">
-            <div className="container-fluid">
-              <img
-                src={logo}
-                style={{ height: "60px", alt: "abc" }}
-                alt=""
-                loading="lazy"
-              />
+    <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen ">
+        <div className="form-pane bg-secondbg">
+          <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
+            <div className="container-fluid w-full flex flex-wrap items-center justify-between">
+              <Link to="/">
+                <div className="container-fluid">
+                  <img src={logo} style={{ height: "60px", alt: "abc" }} />
+                </div>
+              </Link>
             </div>
-          </div>
-        </nav>
-        <div className="container my-24 px-6 mx-auto">
-          <div className="flex justify-between lg:grid-cols-2 gap-8 xl:gap-16 items-center">
-            <div className="mb-6 lg:mb-0">
-              <h2 className="ml-7 text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight text-white">
+          </nav>
+          <div className="flex flex-col justify-center ml-10 mt-32   mx-auto my-24">
+          <h2 className="ml-7 text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight text-white mx-auto my-auto ">
                 Vulnerability <br />
                 Scanning and <br />
                 Assessment Tool
                 <br />
               </h2>
-              <p className="ml-7  py-2 text-blue-600 font-semibold mb-4">
+              <p className="ml-7 mt-2  py-2 text-blue-600 font-semibold mb-4">
                 Securing you in the digital space against threats
               </p>
               <p className="ml-7  text-gray-500 text-lg">
@@ -40,7 +36,7 @@ function Mainpage() {
               <br />
               <div
                 id="main"
-                className="ml-7 grid grid-cols-2 gap-1 justify-between w-80"
+                className="ml-7 mt-5 grid grid-cols-2 gap-1 justify-between w-80"
               >
                 <Link to="/individual">
                   <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
@@ -77,16 +73,16 @@ function Mainpage() {
                     </span>
                   </button>
                 </Link>
-              </div>
-            </div>
-            <div className="mb-6 lg:mb-0 ">
-              <img
-                className="mx-0 flex justify-center w-96 h-96 drop-shadow-xl	"
-                src={security}
-                alt="security"
-              />
-            </div>
-          </div>
+                </div>
+                </div>
+        </div>
+        <div className="img-pane bg-secondbg w-full h-full  ">
+          <img
+            className="w-full h-full mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl"
+            src={security}
+            alt="security"
+          />
+         
         </div>
       </div>
     </>

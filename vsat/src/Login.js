@@ -330,7 +330,7 @@ function Login() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen ">
+      <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen  ">
         <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
@@ -411,13 +411,13 @@ function Login() {
             </form>
           </div>
         </div>
-        <div className="img-pane bg-secondbg w-full h-full  ">
+        <div className="img-pane bg-secondbg w-full h-screen  ">
           <img
-            className="w-6/12 h-6/12 mx-auto mt-10 my-auto  flex flex-col items-center justify-center"
+            className="w-4/6 h-4/6   mx-auto  my-auto  flex flex-col items-center justify-center"
             src={payment}
             alt="security"
           />
-          <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
+          <div className="max-w-screen-xl px-4 py-4 mx-auto text-center lg:py-4 lg:px-4">
             <figure className="max-w-screen-md mx-auto">
               <svg
                 className="h-12 mx-auto mb-3 text-gray-600"
