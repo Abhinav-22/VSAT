@@ -343,43 +343,157 @@ console.log(us)
 {validSSL}
             </span>
           </div>
-            
+       
           </div>
-
+          <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            SSL certificate information
+            </p>
           <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
-                SSL certificate info.
-              </p>
-
-              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
-                View the status of ssl certificate of your website
-              </span>
-              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
-            </div>
-            <br />
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
-                DNS info.
-              </p>
-
-              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
-                View the information about DNS records
-              </span>
-              <hr className=" h-px my-1 w-full border-0 bg-gray-700" />
-            </div>
-            <br />
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
-                WHOIS lookup
-              </p>
-
-              <span className="user font-normal text-sm text-gray-400 ml-3  py-2">
-                View information about your domain from WHOIS
-              </span>
-              <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
-            </div>
-            <br />
+          
+          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    SSL certificate information
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+                
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <br></br>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            DNS record information
+            </p>
+            <br></br>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+  
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DNS records
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+                
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <br></br>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            WHOIS information
+            </p>
+            <br></br>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                Parameters
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  border-b border-txtcol bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                Domain expiry
+                </th>
+                <td class="px-6 py-4">
+               
+                </td>
+                
+            
+            </tr>
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                DNSSEC status
+                </th>
+                <td class="px-6 py-4">
+               
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
           </div>
         </div>
       </div>

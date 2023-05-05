@@ -92,7 +92,7 @@ const Api = () => {
       <div className="grid grid-cols-6 gap-0 h-full">
         <div className="sidebar">
           <aside className="h-screen sticky top-0" aria-label="Sidebar">
-            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800  ">
+            <div className="sticky h-full px-3 py-4 overflow-y-auto bg-secondbg ">
               <Link to="/" className="flex items-center pl-2.5 mb-5">
                 <img src={logo} className="h-14 mr-3 sm:h-14" alt="VSAT Logo" />
               </Link>
@@ -221,7 +221,7 @@ const Api = () => {
               </ul>
               <div
                 id="dropdown-cta"
-                className="p-4 mt-6 rounded-lg bg-blue-50 dark:bg-gray-700 "
+                className="p-4 mt-6 rounded-lg bg-fieldbg "
                 role="alert drop-shadow-lg	"
               >
                 <div className="flex justify-center mb-3 drop-shadow-lg	">
@@ -285,24 +285,40 @@ const Api = () => {
           </aside>
         </div>
 
-        <div className="pane bg-gray-900 col-span-5">
+        <div className="pane bg-mainbg col-span-5">
           <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
             API Settings
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
           <div className="scan grid grid-cols-3 gap-2">
-            <div className="col-span-2 bg-gray-800 shadow shadow-slate-700 rounded ml-7 h-80 mt-5 ">
-              <p className="ml-3  py-2 text-xl text-white font-normal mb-4">
-                VSAT API keys
-                <br />
-                <span className="user font-normal text-sm text-gray-400 mt-3">
-                  Your API is secured behind an API gateway which requires an
-                  API Key for every request. You can use the keys below to use
-                  VSAT API.
-                </span>
-                <hr className=" h-px my-1 w-full border-0 bg-gray-700" />
-              </p>
-              <form>
+          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    VSAT API key
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large  whitespace-nowrap :text-white">   
+                <form>
                 <label
                   for="default-search"
                   className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -312,7 +328,7 @@ const Api = () => {
                 <div className="relative">
                   <p
                     id="token"
-                    className="block w-full p-4 pl-10 text-s rounded-lg   focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 "
+                    className="block w-full p-4 pl-10 text-s rounded-lg   focus:border-blue-500 bg-fieldbg border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 "
                     required
                   >
                     {tokenStore}{" "}
@@ -335,7 +351,17 @@ const Api = () => {
                   </button>
                 </div>
               </form>
-            </div>
+                             </th>
+                
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+           
           </div>
         </div>
       </div>

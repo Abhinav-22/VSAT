@@ -21,7 +21,7 @@ const Forgotem = () => {
   return (
     <div>
       <div className="grid  h-screen">
-        <div className="form-pane bg-gray-900">
+        <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
@@ -36,7 +36,7 @@ const Forgotem = () => {
               </div>
             </div>
           </nav>
-          <div className="mx-auto mt-32 w-full max-w-md p-4 rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 border-gray-700 ">
+          <div className="mx-auto mt-32 w-full max-w-md p-4 rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg  border-gray-700 ">
             <form className="space-y-6">
               <h5 className="text-xl font-medium text-white">
                 Recover your VSAT account
@@ -52,7 +52,7 @@ const Forgotem = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  className="text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-fieldbg border-gray-500 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

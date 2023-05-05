@@ -286,7 +286,9 @@ const Network = () => {
         </div>
         <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             Network port scan
+            
             </p>
+   
         <div className="scan grid grid-cols-3 gap-2">
        
     <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">

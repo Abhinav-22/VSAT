@@ -552,7 +552,7 @@ const Web = () => {
         </tbody>
     </table>
     </div>
-            
+         
     <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             URL redirections
             </p>

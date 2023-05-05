@@ -14,7 +14,7 @@ function Mainpage() {
             <div className="container-fluid">
               <img
                 src={logo}
-                style={{ height: "60px", alt: "abc", loading: "lazy" }}
+                style={{ height: "60px", alt: "abc" }}
                 alt=""
                 loading="lazy"
               />
