@@ -413,7 +413,7 @@ function Login() {
         </div>
         <div className="img-pane bg-secondbg w-full h-screen  ">
           <img
-            className="w-4/6 h-4/6   mx-auto  my-auto  flex flex-col items-center justify-center"
+            className="w-4/6 h-4/6   mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl opacity-80"
             src={payment}
             alt="security"
           />

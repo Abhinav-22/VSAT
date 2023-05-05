@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "./img/transparent.svg";
+import notfound from "./img/404.svg";
 import { Link } from "react-router-dom";
 
 const ConfirmResubmission = () => {
   return (
     <>
       <div className="grid  h-screen">
-        <div className="form-pane bg-mainbg">
+        <div className="form-pane bg-secondbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
@@ -20,22 +21,16 @@ const ConfirmResubmission = () => {
               </div>
             </div>
           </nav>
-          <section className="bg-mainbg">
-            <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+          <section className="bg-secondbg">
+            <div className=" mx-auto max-w-screen-xl  ">
               <div className="mx-auto max-w-screen-sm text-center">
-                <p className="mb-4 text-3xl tracking-tight font-light md:text-4xl text-white">
-                  That's a
-                </p>
-                <h1 className="mb-4 text-7xl tracking-tight font-extrabold  lg:text-9xl text-primary-500 text-blue-800 ">
-                  404
-                </h1>
-                <p className="mb-4 text-3xl tracking-tight font-bold  md:text-4xl text-white">
-                  Something's missing😔
-                </p>
-                <p className="mb-4 text-lg font-light text-gray-400">
-                  Sorry, we can't find that page. You'll find lots to explore on
-                  the home page.{" "}
-                </p>
+              <img
+            className="w-full h-full   mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl opacity-80"
+            src={notfound}
+            alt="page not found"
+          />
+            <p class="mb-4 text-3xl tracking-tight font-bold  md:text-4xl text-white">Something's missing.</p>
+                      <p class="mb-4 text-lg font-light text-gray-400">Sorry, we can't find that page. You'll find lots to explore on the home page. </p>
                 <Link
                   to="/"
                   className="inline-flex text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4"

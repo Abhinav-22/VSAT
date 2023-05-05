@@ -78,7 +78,7 @@ function Mainpage() {
         </div>
         <div className="img-pane bg-secondbg w-full h-full  ">
           <img
-            className="w-full h-full mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl"
+            className="w-full h-full mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl opacity-80"
             src={security}
             alt="security"
           />

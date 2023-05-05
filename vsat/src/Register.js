@@ -348,7 +348,7 @@ const Register = () => {
         </div>
         <div className="img-pane bg-secondbg w-full h-full  ">
           <img
-            className="w-7/12 h-7/12 mx-auto my-auto drop-shadow-md flex flex-col items-center justify-center bg-opacity-25"
+            className="w-4/6 h-4/6   mx-auto  my-auto  flex flex-col items-center justify-center drop-shadow-xl opacity-80"
             src={register}
             alt="security"
           />

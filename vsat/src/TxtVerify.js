@@ -56,7 +56,7 @@ const TxtVerify = () => {
   return (
     <>
       <div className="grid  h-screen">
-        <div className="form-pane bg-gray-900">
+        <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
               <div className="container-fluid">
@@ -64,7 +64,7 @@ const TxtVerify = () => {
                   {" "}
                   <img
                     src={logo}
-                    style={{ height: "90px", alt: "abc", loading: "lazy" }}
+                    style={{ height: "60px", alt: "abc" }}
                     alt=""
                     loading="lazy"
                   />
@@ -72,7 +72,7 @@ const TxtVerify = () => {
               </div>
             </div>
           </nav>
-          <div className="mx-auto mt-10 w-full max-w-xl p-4   rounded-lg shadow-md sm:p-6 md:p-8 bg-gray-800 :border-gray-700 ">
+          <div className="mx-auto mt-10 w-full max-w-xl p-4   rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg :border-gray-700 ">
             <div className="items flex flex-col items-center justify-center mx-auto">
               <ol className="flex items-center justify-center mx-auto w-full mb-4 sm:mb-5 ">
                 <li className="flex w-full items-center text-blue-500 after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-blue-800">
@@ -93,7 +93,7 @@ const TxtVerify = () => {
                   </div>
                 </li>
                 <li className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-gray-700">
-                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-gray-700 shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-fieldbg shrink-0">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -107,7 +107,7 @@ const TxtVerify = () => {
                   </div>
                 </li>
                 <li className="flex items-center">
-                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-gray-700 shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10  rounded-full lg:h-12 lg:w-12 bg-fieldbg shrink-0">
                     <svg
                       aria-hidden="true"
                       className="w-5 h-5  lg:w-6 lg:h-6 text-gray-100"
@@ -158,7 +158,7 @@ const TxtVerify = () => {
                   </ol>
                   <p
                     id="default-search"
-                    className="block text-center w-full p-4 pl-10 text-sm  border rounded-lg  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className="block text-center w-full p-4 pl-10 text-sm   rounded-lg   bg-fieldbg placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     required
                   >
                     {txtStoreval}
@@ -186,7 +186,7 @@ const TxtVerify = () => {
               </div>
               <br />
               <br />
-              <span className=" mx-auto flex  items-center justify-center  w-max text-xs font-medium  px-2.5 py-0.5 rounded bg-gray-700 text-red-400 border border-red-400">
+              <span className=" mx-auto flex  items-center justify-center  w-max text-xs font-medium  px-2.5 py-0.5 rounded bg-fieldbg text-red-400 border border-red-400">
                 <b>
                   <i>Note: </i>
                 </b>{" "}
