@@ -261,7 +261,7 @@ const Data = () => {
 
         <div className="pane bg-mainbg col-span-5">
           <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
-            Data leak information
+            Data Security
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
 

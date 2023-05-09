@@ -585,12 +585,184 @@ const Web = () => {
                
                 <td class="px-6 py-4">
                 {url === 0 ? (
-                   <p class=" ml-7 mt-5  text-sm text-white font-light ">
+                   <p class=" ml-7  mx-auto my-auto align-middle justify-center   text-sm text-white font-light ">
                    No URLs found
                    </p>
                 ) : (
                   <UrlRedirection />
                 )}
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            Web technology scan
+            </p>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Technologies detected
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+                
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            CVE lookup of technologies
+            </p>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    CVE's detected
+                </th>
+                
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+                
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            SQLI Status
+            </p>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    SQLI vulnerability info
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                SQLI status
+                </th>
+                <td class="px-6 py-4">
+
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            XXE Status
+            </p>
+    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    XXE vulnerability info
+                </th>
+                
+                <th scope="col" class="px-6 py-3">
+                    Status
+                </th>
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                XXE status
+                </th>
+                <td class="px-6 py-4">
+
                 </td>
                 
             
