@@ -326,6 +326,50 @@ const Data = () => {
         </tbody>
     </table>
     </div>
+    </div>
+    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            Privacy policy
+            
+            </p>
+          <div className="scan grid grid-cols-3 gap-2">
+          
+          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    privacy policy status
+                </th>
+                
+               
+            </tr>
+        </thead>
+       
+        <tbody>
+        
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+               
+                <td class="px-6 py-4">
+              
+                </td>
+                
+            
+            </tr>
+            
+            
+        </tbody>
+    </table>
+    </div>
           </div>
         </div>
       </div>
