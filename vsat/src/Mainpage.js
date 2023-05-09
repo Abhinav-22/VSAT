@@ -39,7 +39,7 @@ function Mainpage() {
                 className="ml-7 mt-5 grid grid-cols-2 gap-1 justify-between w-80"
               >
                 <Link to="/individual">
-                  <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
+                  <button className="flex bg-blue-500 justify-center items-center hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-12 w-40 mr-14">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -56,7 +56,7 @@ function Mainpage() {
                   </button>
                 </Link>
                 <Link to="/login">
-                  <button className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-10 mr-14">
+                  <button className="flex ml-5 justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold text-left py-1 px-2 rounded h-12 w-40 mr-14">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
