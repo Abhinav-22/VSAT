@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useTokenStore from "./stores/tokenStore";
 import useTxtStore from "./stores/txtStore";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -330,20 +330,19 @@ function Login() {
 
   return (
     <>
-<ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="dark"
-/>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen  ">
-      
         <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">
