@@ -5,6 +5,8 @@ import supabase from "./config/supabaseClient";
 import usePortStore from "./stores/portStore";
 import useDomainStore from "./stores/storeDomain";
 import useGlanceStore from "./stores/glanceStore";
+import usePortListStore from "./stores/portListStore";
+import Pdfgen from "./Pdfgen";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -17,17 +19,30 @@ function Dashboard() {
   const [txtval, setTxtval] = useState();
   const [tokenval, setTokenval] = useState();
   const [domainflag, setDomainFlag] = useState(false);
+  const [timeScanned, setTimeScanned] = useState("");
+  const [httpSec, setHttpSec] = useState("Loading...");
+  const [openP, setOpenP] = useState([]);
+  const [countP, setCountP] = useState("Loading...");
 
   const [gportCount, setgportCount] = useState(null);
   const setDomainval = useDomainStore((state) => state.updateDomain);
   const domainStoredval = useDomainStore((state) => state.domainval);
   const resetDomain = useDomainStore((state) => state.resetDomain);
+  const [validSSL, setValidSSL] = useState("Loading...");
+  const [phish, setPhish] = useState("Loading...");
 
   // ----------STORES---------
   const HSTSstatus = useGlanceStore((state) => state.HSTSstatus);
   const sslstatus = useGlanceStore((state) => state.sslstatus);
   const phishstatus = useGlanceStore((state) => state.phishtankstatus);
   const portstatus = usePortStore((state) => state.scanports);
+  const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
+
+  const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
+  const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
+
+  const setportsCount = usePortStore((state) => state.updatePorts);
+  const setportsList = usePortListStore((state) => state.updateOpenPorts);
 
   useEffect(() => {
     console.log("workingggg");
@@ -126,6 +141,98 @@ function Dashboard() {
     };
     fetchDetails();
   }, []);
+
+  const uploadPorts = async (dataports) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase
+      .from("ports")
+      .upsert({
+        id: user.id,
+        openports: dataports.openPorts,
+        port_count: dataports.openPorts.length,
+      })
+      .select();
+    if (error) {
+      console.log(error.message);
+    }
+  };
+
+  const quickScan = async () => {
+    setTimeScanned(new Date().toLocaleString());
+
+    fetch("/sslexpiry")
+      .then((res) => res.json())
+      .then((data) => {
+        setValidSSL(data.SSLExpiry);
+        console.log(data);
+        console.log(data.SSLExpiry);
+        if (data.SSLExpiry == "No SSL Certificate") {
+          setSSLstatus("             NOT FOUND !!!");
+        } else {
+          setSSLstatus("        SECURE!!!");
+        }
+      });
+
+    fetch("/phishtank")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.Sitedetails == "Is a phish") {
+          console.log("keriii");
+          setPhishstatus("        NOT SECURE !!!");
+        } else {
+          setPhishstatus("         SECURE!!");
+        }
+        setPhish(data.Sitedetails);
+        console.log(data);
+      });
+
+    fetch("/httpsecheader")
+      .then((res) => res.json())
+      .then((data) => {
+        setHttpSec(data);
+        console.log(data);
+        console.log(data.xssProtect);
+        console.log(data.xcontentoptions);
+        console.log(data.frameOptions);
+        console.log(data.strictTransportSecurity);
+        console.log(data.ContentSecurityPolicy);
+        console.log(data.SecureCookie);
+        console.log(data.HttpOnlyCookie);
+        if (
+          data.xssProtect == "fail!" ||
+          data.xcontentoptions == "fail!" ||
+          data.frameOptions == "fail!" ||
+          data.strictTransportSecurity == "fail!" ||
+          data.ContentSecurityPolicy == "fail!" ||
+          data.SecureCookie == "fail!" ||
+          data.HttpOnlyCookie == "fail!"
+        ) {
+          setHSTSstatus("          NOT SECURE!!");
+          setHttpSec("NOT SECURE!");
+        } else {
+          setHSTSstatus("          SECURE");
+          setHttpSec("SECURE");
+        }
+      });
+
+    const response = await fetch(
+      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
+    )
+      .then((res) => res.json())
+      .then((dataports) => {
+        console.log(typeof dataports);
+        console.log(dataports.openPorts);
+        setOpenP(dataports.openPorts);
+        setportsList(dataports.openPorts);
+        setCountP(dataports.openPorts.length);
+        setportsCount(dataports.openPorts.length);
+
+        uploadPorts(dataports);
+      });
+  };
 
   const logout = async (e) => {
     e.preventDefault();
@@ -380,7 +487,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-              No action required
+                No action required
               </span>
             </div>
             <div className="net h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -401,7 +508,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-              No action required
+                No action required
               </span>
             </div>
             <div className="data h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -421,7 +528,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-              No action required
+                No action required
               </span>
             </div>
             <div className="asset h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -446,230 +553,216 @@ function Dashboard() {
               </span>
             </div>
           </div>
-          
+
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             Security at a glance
-            </p>
+          </p>
 
           <div class="scan grid grid-cols-3 gap-3">
-          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Scan
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Time
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Class
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Result
-                </th>
-               
-            </tr>
-        </thead>
-        <tbody>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    Domain scan status
-                </th>
-                <td class="px-6 py-4">
-                    
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
+              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+                  <tr>
+                    <th scope="col" class="p-4">
+                      <div class="flex items-center"></div>
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Scan
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Time
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Class
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Result
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class=" border-b bg-secondbg border-txtcol ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Domain scan status
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
+                        Domain
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">$2999</td>
+                  </tr>
+                  <tr class=" border-b bg-secondbg border-txtcol ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      SSL scan status
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
+                        Domain
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">{sslstatus}</td>
+                  </tr>
+                  <tr class=" border-b bg-secondbg border-txtcol ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Phishtank status
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                        Web
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">{phish}</td>
+                  </tr>
+                  <tr class=" border-b bg-secondbg border-txtcol ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      HTTP security header status
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                        Web
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">{httpSec}</td>
+                  </tr>
+                  <tr class=" border-b bg-secondbg border-txtcol ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Data breach status
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">
+                        Data
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">$699</td>
+                  </tr>
+                  <tr class="bg-secondbg ">
+                    <td class="w-4 p-4">
+                      <div class="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Network ports open
+                    </th>
+                    <td class="px-6 py-4">{timeScanned}</td>
+                    <td class="px-6 py-4">
+                      <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                        Network
+                      </span>
+                    </td>
+                    <td class="px-6 py-4">{countP}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-                </td>
-                <td class="px-6 py-4">
-                    $2999
-                </td>
-            
-            </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    SSL scan status
-                </th>
-                <td class="px-6 py-4">
-                    White
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
-                </td>
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-              
-            </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    Phishtank status
-                </th>
-                <td class="px-6 py-4">
-                    Black
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-                
-            </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    HTTP security header status
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+            <div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
+              <p className="ml-3 mt-3  text-lg text-white  font-normal ">
+                VSAT Tools
+              </p>
+              <a
+                href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
+                target="_blank"
+              >
+                <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    fill="currentColor"
+                    className="bi bi-journal-code my-auto"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"
+                    />
+                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                  </svg>
+                  <span className="my-auto ttspan ml-3 flex justify-center">
+                    VSAT Documentation
+                  </span>
+                </button>
+              </a>
 
-                </td>
-                <td class="px-6 py-4">
-                    $179
-                </td>
-                
-            </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                        
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    Data breach status
-                </th>
-                <td class="px-6 py-4">
-                    Gold
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
-
-                </td>
-                <td class="px-6 py-4">
-                    $699
-                </td>
-               
-            </tr>
-            <tr class="bg-secondbg ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                 
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                    Network ports open
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-                <td class="px-6 py-4">
-                <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
-                </td>
-                <td class="px-6 py-4">
-                    $3999
-                </td>
-                
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
-<p className="ml-3 mt-3  text-lg text-white  font-normal ">
-            VSAT Tools
-            </p>
-            <a
-              href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
-              target="_blank"
-            >
-              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
+              <button
+                className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64"
+                onClick={navPdf}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
                   height="25"
                   fill="currentColor"
-                  className="bi bi-journal-code my-auto"
+                  className="bi bi-download my-auto"
                   viewBox="0 0 16 16"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"
-                  />
-                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
-                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                  <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
                 </svg>
-                <span className="my-auto ttspan ml-3 flex justify-center">
-                  VSAT Documentation
-                </span>
-              </button>
-            </a>
-
-            <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="currentColor"
-              className="bi bi-download my-auto"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-            </svg>
                 <span className="my-auto ttspan ml-3 flex justify-center">
                   Generate security report
                 </span>
               </button>
-              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                className="bi bi-search my-auto"
-                viewBox="0 0 16 16"
+              <button
+                className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64"
+                onClick={quickScan}
               >
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  className="bi bi-search my-auto"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
                 <span className="my-auto ttspan flex justify-center">
                   Quick scan
                 </span>
               </button>
-  
-  </div>
-</div>
-</div>
-          
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

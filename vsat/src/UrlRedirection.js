@@ -18,7 +18,7 @@ const UrlRedirection = () => {
   ));
 
   return (
-    <p className="ml-3  py-1 text-xl text-white font-normal mb-4">
+    <p className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
       {Redirection}
     </p>
   );
