@@ -3,6 +3,7 @@ import logo from "./img/transparent.svg";
 import payment from "./img/payment.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useDomainStore from "./stores/storeDomain";
 import useTokenStore from "./stores/tokenStore";
 import useTxtStore from "./stores/txtStore";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,6 +14,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const [data1, setData] = useState();
   const [idd, setId] = useState("");
+  // const [dom, setDomain] = useState("");
+
+  const domainStoredval = useDomainStore((state) => state.domainval);
+  const setDomainval = useDomainStore((state) => state.updateDomain);
 
   const settokenStore = useTokenStore((state) => state.updateToken);
 
@@ -20,6 +25,7 @@ function Login() {
   const txtStoreval = useTxtStore((state) => state.txtVal);
   const navigate = useNavigate();
 
+  let dom = "";
   useEffect(() => {
     const logout = async () => {
       const { error } = await supabase.auth.signOut();
@@ -125,10 +131,6 @@ function Login() {
     });
   };
 
-  useEffect(() => {
-    console.log(data1);
-  }, [data1]);
-
   const addtoken = async (e) => {
     const {
       data: { user },
@@ -168,6 +170,9 @@ function Login() {
     const {
       data: { user },
     } = await supabase.auth.getUser();
+    console.log("inside initial Apppiiiiiii");
+    console.log(domainStoredval);
+    console.log(dom);
     let userid = "";
     let useremail = "";
     userid = user.id;
@@ -279,6 +284,21 @@ function Login() {
       }
     }
   };
+  const updateStore = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log("inside updatestoreeeee");
+    const { data, error } = await supabase
+      .from("users")
+      .select("email, website")
+      .eq("email", user.email);
+
+    console.log(data);
+    setDomainval(data.website);
+    dom = data.website;
+    console.log(dom);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -295,7 +315,7 @@ function Login() {
       } = await supabase.auth.getUser();
       if (user.aud === "authenticated") {
         updateUser();
-        initialApi();
+        updateStore().then(initialApi());
         initialTxt();
         initialPorts();
         addtoken();
