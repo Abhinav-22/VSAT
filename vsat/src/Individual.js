@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 function Induvidual() {
   const [urlVal, setUrlVal] = useState("");
+  const [validSSL, setValidSSL] = useState("Loading...");
+
   const sendURL = async (e) => {
     e.preventDefault();
     console.log(urlVal);
@@ -17,6 +19,17 @@ function Induvidual() {
 
     const result = await response.json();
     console.log(result);
+    scanURL();
+  };
+
+  const scanURL = async () => {
+    fetch("/sslexpiry")
+      .then((res) => res.json())
+      .then((data) => {
+        setValidSSL(data.SSLExpiry);
+        console.log(data);
+        console.log(data.SSLExpiry);
+      });
   };
   return (
     <>
