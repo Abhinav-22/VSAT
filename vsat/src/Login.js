@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useTokenStore from "./stores/tokenStore";
 import useTxtStore from "./stores/txtStore";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -16,7 +18,6 @@ function Login() {
 
   const settxtStore = useTxtStore((state) => state.updateTxt);
   const txtStoreval = useTxtStore((state) => state.txtVal);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -287,7 +288,7 @@ function Login() {
     });
     // console.log(email, password);
     if (error) {
-      console.log(error.message);
+      toast.error("Invalid credentials! Please check and try again");
     } else {
       const {
         data: { user },
@@ -298,7 +299,6 @@ function Login() {
         initialTxt();
         initialPorts();
         addtoken();
-
         navigate("/dashboard");
       } else {
         console.log("not authenticated");
@@ -330,7 +330,20 @@ function Login() {
 
   return (
     <>
+<ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
       <div className="grid grid-cols-2 gap-0 h-screen w-full min-h-screen  ">
+      
         <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
             <div className="container-fluid w-full flex flex-wrap items-center justify-between">

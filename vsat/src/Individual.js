@@ -33,7 +33,7 @@ function Induvidual() {
   };
   return (
     <>
-      <div className="body bg-gray-900 min-h-screen">
+      <div className="body bg-mainbg min-h-screen">
         <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
           <div className="container-fluid w-full flex flex-wrap items-center justify-between">
             <div className="container-fluid">
@@ -85,7 +85,7 @@ function Induvidual() {
                     type="search"
                     id="default-search"
                     onChange={(e) => setUrlVal(e.target.value)}
-                    className="block w-full p-4 pl-10 text-sm  border  rounded-lg   bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    className="block w-full p-4 pl-10 text-sm    rounded-lg   bg-fieldbg  placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter the URL to be scanned..."
                     required
                   />
@@ -100,41 +100,110 @@ function Induvidual() {
             </div>
           </div>
           <br />
-          <div className="border-2 border-slate-700 rounded-lg">
-            <div className="grid grid-cols-2 gap-5">
-              <div className="  rounded-lg reportinfo bg-gray-800 h-auto ">
-                <p className="ml-3  py-2 text-3xl text-white font-medium mb-4">
-                  Security status
-                  <br />
-                </p>
-                <span className="ml-3 user font-normal text-sm text-gray-400">
-                  Determine the websites's level of security by analyzing VSAT
-                  security score
-                </span>
-                <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
+          <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            Security information of the domain
+            </p>
+          <div class="scan grid grid-cols-3 gap-3">
+            
+          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
+    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <tr>
+                <th scope="col" class="p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Scan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Time
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Result
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    VSAT Score
+                </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <tr class=" border-b bg-secondbg border-txtcol ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                Domain status
+                </th>
+                <td class="px-6 py-4">
+                    
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
 
-                <h3 className="desctext text-lg font-medium text-white ml-3 mt-3">
-                  Domain status:
-                </h3>
-                <hr className="w-4/6 h-1 mx-auto   border-0 rounded md:my-10 bg-gray-700" />
-
-                <h3 className="desctext text-lg font-medium text-white ml-3">
-                  SSL status:
-                </h3>
-                <hr className="w-4/6 h-1 mx-auto   border-0 rounded md:my-10 bg-gray-700" />
-
-                <h3 className="desctext text-lg font-medium text-white ml-3">
-                  Phishtank status:
-                </h3>
-                <hr className="w-4/6 h-1 mx-auto   border-0 rounded md:my-10 bg-gray-700" />
-
-                <h3 class="desctext text-lg font-medium text-white ml-3">
-                  <svg
+                </td>
+                <td class="px-6 py-4">
+                    $2999
+                </td>
+            
+            </tr>
+            <tr class=" border-b bg-secondbg border-txtcol ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                SSL scan status
+                </th>
+                <td class="px-6 py-4">
+                    White
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+              
+            </tr>
+            <tr class=" border-b bg-secondbg border-txtcol ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                Phishtank status
+                </th>
+                <td class="px-6 py-4">
+                    Black
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $99
+                </td>
+                
+            </tr>
+            <tr class=" border-b bg-secondbg border-txtcol ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <svg
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
                     class=""
-                    width="30"
-                    height="30"
+                    width="20"
+                    height="20"
                     fill="#000000"
                   >
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -151,55 +220,131 @@ function Induvidual() {
                       ></path>{" "}
                     </g>
                   </svg>
-                  Norton Safeweb&#8482; status:
-                </h3>
+                  Norton Safeweb&#8482; status
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
 
-                <hr className="w-4/6 h-1 mx-auto   border-0 rounded md:my-10 bg-gray-700" />
+                </td>
+                <td class="px-6 py-4">
+                    $179
+                </td>
+                
+            </tr>
+            <tr class=" border-b bg-secondbg border-txtcol ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                        
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                HSTS Header status
+                </th>
+                <td class="px-6 py-4">
+                    Gold
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
 
-                <h3 className="desctext text-lg font-medium text-white ml-3">
-                  HSTS Header status:
-                </h3>
-                <hr className="w-4/6 h-1 mx-auto   border-0 rounded md:my-10 bg-gray-700" />
-              </div>
-              <div className=" rounded-lg scoreinfo  bg-gray-800 h-auto  ">
-                <p className="ml-3  py-2 text-3xl text-white font-medium mb-4">
-                  VSAT security score
-                  <br />
-                </p>
-                <span className="ml-3 user font-normal text-sm text-gray-400">
-                  Displays the security score of the website you have requested.
+                </td>
+                <td class="px-6 py-4">
+                    $699
+                </td>
+               
+            </tr>
+            <tr class="bg-secondbg ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                 
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                    Privacy policy status
+                </th>
+                <td class="px-6 py-4">
+                    Silver
+                </td>
+                <td class="px-6 py-4">
+                <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
+                </td>
+                <td class="px-6 py-4">
+                    $3999
+                </td>
+                
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
+<p className="ml-3 mt-3  text-lg text-white  font-normal ">
+            VSAT Score
+            </p>
+            <a
+              href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
+              target="_blank"
+            >
+              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  className="bi bi-journal-code my-auto"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"
+                  />
+                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                </svg>
+                <span className="my-auto ttspan ml-3 flex justify-center">
+                  VSAT Documentation
                 </span>
-                <hr className=" h-px my-1 w-full  border-0 bg-gray-700" />
-                <br />
-                <div className="score bg-blue-800 h-40 w-40 rounded-full mx-auto my-auto flex flex-col items-center justify-center drop-shadow-2xl shadow-lg">
-                  <p className="ml-3  py-2 text-4xl font-black text-white  mb-4 flex flex-col items-center justify-center ">
-                    3/10
-                  </p>
-                </div>
-                <br />
-                <p className="ml-3  py-2 text-2xl text-white font-light mb-4 flex flex-col items-center justify-center">
-                  Security Index
-                  <br />
-                </p>
-                <div className="indexcards w-96 h-auto border border-slate-600 rounded-xl mx-auto my-auto py-3 flex flex-col items-start  justify-center drop-shadow-2xl ">
-                  <span className=" text-md font-medium  rounded w-2/6 h-10 bg-red-900 text-red-300  flex flex-col items-center justify-center ml-3">
-                    &nbsp;RISK&nbsp;
-                  </span>
-                  <br />
-                  <span className=" text-md font-medium w-2/6 h-10   rounded bg-yellow-300 text-yellow-900  flex flex-col items-center justify-center ml-3">
-                    &nbsp;MODERATE&nbsp;
-                  </span>
-                  <br />
-                  <span className="text-md font-medium w-2/6   h-10 rounded bg-green-900 text-green-300  flex flex-col items-center justify-center ml-3">
-                    &nbsp;SAFE&nbsp;
-                  </span>
-                </div>{" "}
-                <br />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+              </button>
+            </a>
+
+            <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              fill="currentColor"
+              className="bi bi-download my-auto"
+              viewBox="0 0 16 16"
+            >
+              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+                <span className="my-auto ttspan ml-3 flex justify-center">
+                  Generate security report
+                </span>
+              </button>
+              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                fill="currentColor"
+                className="bi bi-search my-auto"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+              </svg>
+                <span className="my-auto ttspan flex justify-center">
+                  Quick scan
+                </span>
+              </button>
+  
+  </div>
+  </div>
+  </div>
+  </div>
     </>
   );
 }
