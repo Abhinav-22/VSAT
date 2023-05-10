@@ -103,9 +103,9 @@ function Induvidual() {
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             Security information of the domain
             </p>
-          <div class="scan grid grid-cols-3 gap-3">
-            
-          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
+            <div className="border-2 border-slate-700 rounded-lg w-auto h-auto">
+          <div class="scan grid grid-cols-3 gap-0 ">
+          <div class="col-span-2 w-4/6 statuscard overflow-x-auto mt-3 ml-7 rounded-xl flex flex-col items-center justify-center">
     <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
         <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
@@ -279,7 +279,7 @@ function Induvidual() {
     </table>
 </div>
 
-<div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
+<div class=" col-span-1 mt-3   h-94 rounded-xl bg-secondbg ">
 <p className="ml-3 mt-3  text-lg text-white  font-normal ">
             VSAT Score
             </p>
@@ -341,6 +341,7 @@ function Induvidual() {
                 </span>
               </button>
   
+  </div>
   </div>
   </div>
   </div>
