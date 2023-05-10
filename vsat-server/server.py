@@ -20,7 +20,7 @@ import ssl
 import sys
 from pprint import pprint
 import math
-wd = "www.rajagiritech.ac.in"
+wd = "www.google.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -55,10 +55,9 @@ def get_whois_info():
     whoid = {}
     try:
         w = whois.whois(wd)
-        whoid.update({'Whois info': w})
+        whoid.update({'Whoisinfo': w})
         whoid.update({"WhoisFlag": True})
     except Exception as e:
-        whoid.update({'Error getting WHOIS': wd})
         whoid.update({"WhoisFlag": False})
     return jsonify(whoid)
 

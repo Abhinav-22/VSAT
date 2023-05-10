@@ -3,6 +3,7 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useGlanceStore from "./stores/glanceStore";
+import Nameserver from "./Nameserver.js";
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -13,9 +14,9 @@ const Domain = () => {
   const [validSSL, setValidSSL] = useState("Loading...");
   const [whoisstastus, setWhoisstatus] = useState("");
   const [dnsecc, setDnssecc] = useState("");
-
+  const [expdate, setExpdate] = useState("");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
-
+  
   useEffect(() => {
     console.log("workingggg");
     const updateSSL = async () => {
@@ -43,10 +44,20 @@ const Domain = () => {
           console.log(data);
          // console.log(data.Whoisinfo);
           if (data.WhoisFlag == true) {
-          
+            const expdtype = typeof  data.Whoisinfo.expiration_date ;
+       //  console.log(expdtype)
+         if (expdtype=="object")
+            {
+              
             data.Whoisinfo.expiration_date.map((us) => {
-console.log(us)            
+              setExpdate(data.Whoisinfo.expiration_date);
+              console.log(us)            
             });
+          }
+            else
+            {setExpdate(data.Whoisinfo.expiration_date);
+            console.log(data.Whoisinfo.expiration_date)
+            }
              data.Whoisinfo.name_servers.map((us) => {
 console.log(us)            
             });
@@ -57,12 +68,9 @@ console.log(us)
 // console.log(us)            
 //             });
 
-
             
             
-          } else {
-            setSSLstatus("        SECURE!!!");
-          }
+          } 
         });
     };
     updatewhois();
@@ -469,7 +477,7 @@ console.log(us)
                 Domain expiry
                 </th>
                 <td class="px-6 py-4">
-               
+                {expdate}
                 </td>
                 
             
@@ -484,12 +492,27 @@ console.log(us)
                 DNSSEC status
                 </th>
                 <td class="px-6 py-4">
-               
+                {dnsecc}
                 </td>
                 
             
             </tr>
             
+            <tr class="  bg-secondbg  ">
+                <td class="w-4 p-4">
+                    <div class="flex items-center">
+                       
+                    </div>
+                </td>
+                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+              DNS SERVERS
+                </th>
+                <td class="px-6 py-4">
+              <Nameserver/>
+                </td>
+                
+            
+            </tr>
             
         </tbody>
     </table>
