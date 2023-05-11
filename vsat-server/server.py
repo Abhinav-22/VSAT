@@ -21,6 +21,7 @@ import sys
 from pprint import pprint
 import math
 wd = "www.google.com"
+wm = "kpajithaanil@gmail.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -523,27 +524,31 @@ def getsqli():
     urlToBeChecked = 'https://'+wd
     sql_injection_scan(urlToBeChecked)
     return
+
+
 @app.route("/webtechscan", methods=['POST', 'GET'], strict_slashes=False)
 def getwebtech():
-    webdict={}
+    webdict = {}
     url = "https://"+wd
     try:
         response = requests.get(url)
-        
+
         server = response.headers.get('server')
         if server:
             webdict.update({"Server": server})
-        
+
         technologies = []
         content = response.text.lower()
         if 'x-powered-by' in response.headers:
-            technologies.extend(re.findall('[\w-]+', response.headers['X-Powered-By']))
+            technologies.extend(re.findall(
+                '[\w-]+', response.headers['X-Powered-By']))
         if 'x-aspnet-version' in response.headers:
             technologies.append('ASP.NET')
         if 'x-drupal-cache' in response.headers:
             technologies.append('Drupal')
         if 'x-generator' in response.headers:
-            technologies.extend(re.findall('[\w-]+', response.headers['X-Generator']))
+            technologies.extend(re.findall(
+                '[\w-]+', response.headers['X-Generator']))
         if 'react' in content:
             technologies.append('React')
         if 'django' in content:
@@ -614,13 +619,48 @@ def getwebtech():
             technologies.append('nginx')
         if 'apache' in response.headers.get('server', '').lower():
             technologies.append('Apache')
-        
+
         if technologies:
-            webdict.update({"Technologies":technologies})
+            webdict.update({"Technologies": technologies})
         else:
-            webdict.update({"Info":"No technologies found."})
+            webdict.update({"Info": "No technologies found."})
     except:
-        webdict.update({"Info":"An error occurred while trying to fetch the website."})
+        webdict.update(
+            {"Info": "An error occurred while trying to fetch the website."})
     return (webdict)
+
+
+@app.route("/dataleak", methods=['POST', 'GET'], strict_slashes=False)
+def dataleak():
+    datad = {}
+    email = wm
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
+
+    url = "https://haveibeenpwned.com/"
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(url)
+
+    webcheck = wm
+    search_box = driver.find_element(By.NAME, 'Account').send_keys(webcheck)
+    submit = driver.find_element(By.XPATH, '//*[@id="searchPwnage"]')
+    submit.click()
+    time.sleep(8)
+    results = driver.find_element(
+        By.XPATH, '//*[@id="pwnedWebsiteBanner"]/div/div/div[1]/h2')
+
+    if(results.text == "Oh no — pwned!"):
+        # print("Data breach involved")
+        datad.update({"DataLeak": True})
+    else:
+        results = driver.find_element(
+            By.XPATH, '//*[@id="noPwnage"]/div/div/div[1]/h2')
+        # print(results.text)
+        datad.update({"DataLeak": False})
+    return jsonify(datad)
+
 
 app.run()
