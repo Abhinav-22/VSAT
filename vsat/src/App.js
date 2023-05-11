@@ -2,6 +2,8 @@ import React from "react";
 //import Individual from "./Individual";
 import Mainpage from "./Mainpage.js";
 import Login from "./Login.js";
+import Lottie from 'react-lottie';
+import  animationData from './popper.json'
 import Register from "./Register.js";
 import Individual from "./Individual.js";
 import Network from "./Network.js";

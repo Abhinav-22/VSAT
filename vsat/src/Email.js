@@ -19,6 +19,7 @@ const Forgotem = () => {
   };
 
   return (
+    
     <div>
       <div className="grid  h-screen">
         <div className="form-pane bg-mainbg">
