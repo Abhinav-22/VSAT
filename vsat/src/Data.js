@@ -22,7 +22,7 @@ const Data = () => {
         if (data.DataLeak == false) {
           setDataleak("No Breach found");
         } else {
-          setDataleak("Breach Found !!!");
+          setDataleak("Breach Found !");
         }
       });
 

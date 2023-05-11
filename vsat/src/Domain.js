@@ -482,7 +482,7 @@ console.log(us)
                 
             
             </tr>
-            <tr class="  bg-secondbg  ">
+            <tr class="border-b border-txtcol  bg-secondbg  ">
                 <td class="w-4 p-4">
                     <div class="flex items-center">
                        
@@ -505,7 +505,7 @@ console.log(us)
                     </div>
                 </td>
                 <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-              DNS SERVERS
+              DNS servers
                 </th>
                 <td class="px-6 py-4">
               <Nameserver/>
