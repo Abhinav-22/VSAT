@@ -31,9 +31,69 @@ const OpenPorts = () => {
     }
   };
 
+  // const fetchHost = async () => {
+  //   var val = "";
+  //   await fetch("/hostname")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       console.log(data.HostnameFlag);
+  //       console.log(data.ValidHostname);
+  //       return data.ValidHostname;
+  //     });
+  // };
+  // const fetchPorts = async (host) => {
+  //   console.log("inside fetchports");
+  //   console.log(host);
+  //   const response = await fetch(
+  //     `https://vsatportscan.azurewebsites.net/scan/${host}`
+  //   )
+  //     .then((res) => res.json())
+  //     .then((dataports) => {
+  //       console.log(typeof dataports);
+  //       console.log(dataports.openPorts);
+  //       setOpenP(dataports.openPorts);
+  //       setportsList(dataports.openPorts);
+  //       setCountP(dataports.openPorts.length);
+  //       console.log(dataports.openPorts.length);
+  //       setportsCount(dataports.openPorts.length);
+
+  //       uploadPorts(dataports);
+  //     });
+  //   // const dataports = await response.json();
+  //   // if (!dataports) {
+  //   //   console.log("The array is empty");
+  //   // }
+  // };
+  // const getData = async () => {
+  //   const host = await fetchHost();
+  //   await fetchPorts(host);
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+  const fetchHost = () => {
+    return fetch("/hostname")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.HostnameFlag);
+        console.log(data.ValidHostname);
+        return data.ValidHostname;
+      });
+  };
+
   const getData = async () => {
+    const host = await fetchHost();
+    await fetchPorts(host);
+  };
+
+  const fetchPorts = async (host) => {
+    console.log("inside fetchports");
+    console.log(host);
     const response = await fetch(
-      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
+      `https://vsatportscan.azurewebsites.net/scan/${host}`
     )
       .then((res) => res.json())
       .then((dataports) => {
@@ -47,10 +107,6 @@ const OpenPorts = () => {
 
         uploadPorts(dataports);
       });
-    // const dataports = await response.json();
-    // if (!dataports) {
-    //   console.log("The array is empty");
-    // }
   };
 
   useEffect(() => {
