@@ -104,104 +104,104 @@ function Induvidual() {
             Security information of the domain
             </p>
             <div className="border-2 border-slate-700 rounded-lg w-auto h-auto">
-          <div class="scan grid grid-cols-3 gap-0 ">
-          <div class="col-span-2 w-4/6 statuscard overflow-x-auto mt-3 ml-7 rounded-xl flex flex-col items-center justify-center">
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+          <div className="scan grid grid-cols-3 gap-0 ">
+          <div className="col-span-2 w-4/6 statuscard overflow-x-auto mt-3 ml-7 rounded-xl flex flex-col items-center justify-center">
+    <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
+                <th scope="col" className="p-4">
+                    <div className="flex items-center">
                         
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                     Scan
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                     Time
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                     Result
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                     VSAT Score
                 </th>
                
             </tr>
         </thead>
         <tbody>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className=" border-b bg-secondbg border-txtcol ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                        
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                 Domain status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+                <td className="px-6 py-4">
+                <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
 
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $2999
                 </td>
             
             </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className=" border-b bg-secondbg border-txtcol ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                        
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                 SSL scan status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     White
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+                <td className="px-6 py-4">
+                <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $1999
                 </td>
               
             </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className=" border-b bg-secondbg border-txtcol ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                        
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                 Phishtank status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     Black
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                <td className="px-6 py-4">
+                <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $99
                 </td>
                 
             </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className=" border-b bg-secondbg border-txtcol ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                        
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                 <svg
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
-                    class=""
+                    className=""
                     width="20"
                     height="20"
                     fill="#000000"
@@ -222,55 +222,55 @@ function Induvidual() {
                   </svg>
                   Norton Safeweb&#8482; status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     Silver
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                <td className="px-6 py-4">
+                <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
 
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $179
                 </td>
                 
             </tr>
-            <tr class=" border-b bg-secondbg border-txtcol ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className=" border-b bg-secondbg border-txtcol ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                         
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                 HSTS Header status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     Gold
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
+                <td className="px-6 py-4">
+                <span className="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
 
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $699
                 </td>
                
             </tr>
-            <tr class="bg-secondbg ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className="bg-secondbg ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                  
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
                     Privacy policy status
                 </th>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     Silver
                 </td>
-                <td class="px-6 py-4">
-                <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
+                <td className="px-6 py-4">
+                <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
                 </td>
-                <td class="px-6 py-4">
+                <td className="px-6 py-4">
                     $3999
                 </td>
                 
@@ -279,7 +279,7 @@ function Induvidual() {
     </table>
 </div>
 
-<div class=" col-span-1 mt-3   h-94 rounded-xl bg-secondbg ">
+<div className=" col-span-1 mt-3   h-94 rounded-xl bg-secondbg ">
 <p className="ml-3 mt-3  text-lg text-white  font-normal ">
             VSAT Score
             </p>

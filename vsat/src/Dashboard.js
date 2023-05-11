@@ -558,143 +558,143 @@ function Dashboard() {
             Security at a glance
           </p>
 
-          <div class="scan grid grid-cols-3 gap-3">
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+          <div className="scan grid grid-cols-3 gap-3">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Scan
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Time
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                      Class
+                    <th scope="col" className="px-6 py-3">
+                      ClassName
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Result
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Domain scan status
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
                         Domain
                       </span>
                     </td>
-                    <td class="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4">$2999</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       SSL scan status
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
                         Domain
                       </span>
                     </td>
-                    <td class="px-6 py-4">{sslstatus}</td>
+                    <td className="px-6 py-4">{sslstatus}</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Phishtank status
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
                         Web
                       </span>
                     </td>
-                    <td class="px-6 py-4">{phish}</td>
+                    <td className="px-6 py-4">{phish}</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       HTTP security header status
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
                         Web
                       </span>
                     </td>
-                    <td class="px-6 py-4">{httpSec}</td>
+                    <td className="px-6 py-4">{httpSec}</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Data breach status
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">
                         Data
                       </span>
                     </td>
-                    <td class="px-6 py-4">$699</td>
+                    <td className="px-6 py-4">$699</td>
                   </tr>
-                  <tr class="bg-secondbg ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="bg-secondbg ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Network ports open
                     </th>
-                    <td class="px-6 py-4">{timeScanned}</td>
-                    <td class="px-6 py-4">
-                      <span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
+                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">
+                      <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
                         Network
                       </span>
                     </td>
-                    <td class="px-6 py-4">{countP}</td>
+                    <td className="px-6 py-4">{countP}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
-              <p className="ml-3 mt-3  text-lg text-white  font-normal ">
+            <div className=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
+              <p classNameName="ml-3 mt-3  text-lg text-white  font-normal ">
                 VSAT Tools
               </p>
               <a

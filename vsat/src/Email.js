@@ -40,8 +40,8 @@ const Forgotem = () => {
           <div className="mx-auto mt-32 w-auto max-w-xl p-4 rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg  border-gray-700 drop-shadow-xl ">
             <form className="space-y-6">
              
-              <div class="align-middle items-center flex flex-col justify-center">
-              <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="60" fill="currentColor" class="flex flex-colbi bi-envelope-check items-center align-middle justify-center text-blue-500 shadow-xl drop-shadow-xl" viewBox="0 0 16 16">
+              <div className="align-middle items-center flex flex-col justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg"  width="60" height="60" fill="currentColor" className="flex flex-colbi bi-envelope-check items-center align-middle justify-center text-blue-500 shadow-xl drop-shadow-xl" viewBox="0 0 16 16">
   
              
   <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
@@ -55,7 +55,7 @@ const Forgotem = () => {
               Thank you for signing up! We need to verify your email address to activate your account and start using our services.
 
             </p>
-            <hr class="h-px my-8  border-0 bg-gray-700">
+            <hr className="h-px my-8  border-0 bg-gray-700">
 </hr>
 <p className="  text-gray-500 text-sm text-center flex flex-col justify-center items-center align-middle">
 Please check your email inbox for a confirmation message from us. If you don't see it in your inbox, please check your spam folder as well. 

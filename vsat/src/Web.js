@@ -348,7 +348,7 @@ const Web = () => {
                       <div role="status">
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-white"
+                          className="w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-white"
                           viewBox="0 0 100 101"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
@@ -362,11 +362,11 @@ const Web = () => {
                             fill="currentFill"
                           />
                         </svg>
-                        <span class="sr-only">Loading...</span>
+                        <span className="sr-only">Loading...</span>
                       </div>
                     </p>
                   ) : (
-                    <p className="user font-regular text-md ml-2  text-white">
+                    <p className="user font-regular text-md ml-2 pt-4 text-white">
                       {load.ltime.toFixed(7) * 1000}ms
                     </p>
                   )}
@@ -378,146 +378,149 @@ const Web = () => {
             HSTS Status
           </p>
           <div className="scan grid  gap-2">
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       HSTS Header
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Staus
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       XSS-Protection
                     </th>
-                    <td class="px-6 py-4"> {httpSec.xssProtect}</td>
+                    <td className="px-6 py-4"> {httpSec.xssProtect}</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       X-Content-Type-Options
                     </th>
-                    <td class="px-6 py-4"> {httpSec.xcontentoptions}</td>
+                    <td className="px-6 py-4"> {httpSec.xcontentoptions}</td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       X-Frame-Options
                     </th>
-                    <td class="px-6 py-4"> {httpSec.frameOptions}</td>
+                    <td className="px-6 py-4"> {httpSec.frameOptions}</td>
                   </tr>
 
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Content-Security-Policy
                     </th>
-                    <td class="px-6 py-4"> {httpSec.ContentSecurityPolicy}</td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      {httpSec.ContentSecurityPolicy}
+                    </td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Strict-Transport-Security
                     </th>
-                    <td class="px-6 py-4">
+                    <td className="px-6 py-4">
                       {" "}
                       {httpSec.strictTransportSecurity}
                     </td>
                   </tr>
-                  <tr class=" border-b bg-secondbg border-txtcol ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className=" border-b bg-secondbg border-txtcol ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Secure Cookie
                     </th>
-                    <td class="px-6 py-4"> {httpSec.SecureCookie}</td>
+                    <td className="px-6 py-4"> {httpSec.SecureCookie}</td>
                   </tr>
-                  <tr class="bg-secondbg ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="bg-secondbg ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       HTTP Only Cookie
                     </th>
-                    <td class="px-6 py-4"> {httpSec.HttpOnlyCookie}</td>
+                    <td className="px-6 py-4"> {httpSec.HttpOnlyCookie}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
               Phishing Status
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Domain status for Phishing
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Status
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       Phishing status
                     </th>
-                    <td class="px-6 py-4">{phish}</td>
+                    <td className="px-6 py-4">{phish}</td>
                   </tr>
                 </tbody>
               </table>
@@ -526,28 +529,28 @@ const Web = () => {
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               URL redirections
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       URLs found
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
 
-                    <td class="px-6 py-4">
+                    <td className="px-6 py-4">
                       {url === 0 ? (
-                        <p class=" px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white ">
+                        <p className=" px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white ">
                           No URLs found
                         </p>
                       ) : (
@@ -558,29 +561,29 @@ const Web = () => {
                 </tbody>
               </table>
             </div>
-            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
               Web technology scan
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Technologies detected
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
 
-                    <td class="px-6 py-4"></td>
+                    <td className="px-6 py-4"></td>
                   </tr>
                 </tbody>
               </table>
@@ -588,26 +591,26 @@ const Web = () => {
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               CVE lookup of technologies
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       CVE's detected
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
 
-                    <td class="px-6 py-4"></td>
+                    <td className="px-6 py-4"></td>
                   </tr>
                 </tbody>
               </table>
@@ -615,71 +618,71 @@ const Web = () => {
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               SQLI Status
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       SQLI vulnerability info
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Status
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       SQLI status
                     </th>
-                    <td class="px-6 py-4"></td>
+                    <td className="px-6 py-4"></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
               XXE Status
             </p>
-            <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-              <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-                <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
-                    <th scope="col" class="p-4">
-                      <div class="flex items-center"></div>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       XXE vulnerability info
                     </th>
 
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       Status
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr class="  bg-secondbg  ">
-                    <td class="w-4 p-4">
-                      <div class="flex items-center"></div>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
                     </td>
                     <th
                       scope="row"
-                      class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       XXE status
                     </th>
-                    <td class="px-6 py-4"></td>
+                    <td className="px-6 py-4"></td>
                   </tr>
                 </tbody>
               </table>

@@ -16,7 +16,7 @@ const Domain = () => {
   const [dnsecc, setDnssecc] = useState("");
   const [expdate, setExpdate] = useState("");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
-  
+
   useEffect(() => {
     console.log("workingggg");
     const updateSSL = async () => {
@@ -42,35 +42,29 @@ const Domain = () => {
         .then((data) => {
           setWhoisstatus(data.WhoisFlag);
           console.log(data);
-         // console.log(data.Whoisinfo);
+          // console.log(data.Whoisinfo);
           if (data.WhoisFlag == true) {
-            const expdtype = typeof  data.Whoisinfo.expiration_date ;
-       //  console.log(expdtype)
-         if (expdtype=="object")
-            {
-              
-            data.Whoisinfo.expiration_date.map((us) => {
+            const expdtype = typeof data.Whoisinfo.expiration_date;
+            //  console.log(expdtype)
+            if (expdtype == "object") {
+              data.Whoisinfo.expiration_date.map((us) => {
+                setExpdate(data.Whoisinfo.expiration_date);
+                console.log(us);
+              });
+            } else {
               setExpdate(data.Whoisinfo.expiration_date);
-              console.log(us)            
-            });
-          }
-            else
-            {setExpdate(data.Whoisinfo.expiration_date);
-            console.log(data.Whoisinfo.expiration_date)
+              console.log(data.Whoisinfo.expiration_date);
             }
-             data.Whoisinfo.name_servers.map((us) => {
-console.log(us)            
+            data.Whoisinfo.name_servers.map((us) => {
+              console.log(us);
             });
 
             setDnssecc(data.Whoisinfo.dnssec);
-            console.log(data.Whoisinfo.dnssec)
-//             data.Whoisinfo.dnssec.map((us) => {
-// console.log(us)            
-//             });
-
-            
-            
-          } 
+            console.log(data.Whoisinfo.dnssec);
+            //             data.Whoisinfo.dnssec.map((us) => {
+            // console.log(us)
+            //             });
+          }
         });
     };
     updatewhois();
@@ -327,9 +321,8 @@ console.log(us)
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
           <div className="grid ml-7 grid-cols-4 justify-center">
-          <div className="web h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
-          
-          <svg
+            <div className="web h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
                 height="40"
@@ -343,180 +336,137 @@ console.log(us)
                 />
                 <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
               </svg>
-            <span className="user font-semibold text-lg ml-2 text-white">
-            SSL expires on
-            </span>
-            <br />
-            <span className="user font-regular text-md ml-2 text-white">
-{validSSL}
-            </span>
-          </div>
-       
+              <span className="user font-semibold text-lg ml-2 text-white">
+                SSL expires on
+              </span>
+              <br />
+              <span className="user font-regular text-md ml-2 text-white">
+                {validSSL}
+              </span>
+            </div>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             SSL certificate information
-            </p>
+          </p>
           <div className="scan grid grid-cols-3 gap-2">
-          
-          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    SSL certificate information
-                </th>
-                
-                
-               
-            </tr>
-        </thead>
-       
-        <tbody>
-        
-            <tr class="  bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-               
-                <td class="px-6 py-4">
-                
-                </td>
-                
-            
-            </tr>
-            
-            
-        </tbody>
-    </table>
-    </div>
-    <br></br>
-    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-            DNS record information
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+                  <tr>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      SSL certificate information
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br></br>
+            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+              DNS record information
             </p>
             <br></br>
-    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-  
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    DNS records
-                </th>
-                
-                
-               
-            </tr>
-        </thead>
-       
-        <tbody>
-        
-            <tr class="  bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-               
-                <td class="px-6 py-4">
-                
-                </td>
-                
-            
-            </tr>
-            
-            
-        </tbody>
-    </table>
-    </div>
-    <br></br>
-    <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-            WHOIS information
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+                  <tr>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      DNS records
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <br></br>
+            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
+              WHOIS information
             </p>
             <br></br>
-    <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
-            <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
-                        
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3">
-                Parameters
-                </th>
-                
-                <th scope="col" class="px-6 py-3">
-                    Status
-                </th>
-               
-            </tr>
-        </thead>
-       
-        <tbody>
-        
-            <tr class="  border-b border-txtcol bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                Domain expiry
-                </th>
-                <td class="px-6 py-4">
-                {expdate}
-                </td>
-                
-            
-            </tr>
-            <tr class="border-b border-txtcol  bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-                DNSSEC status
-                </th>
-                <td class="px-6 py-4">
-                {dnsecc}
-                </td>
-                
-            
-            </tr>
-            
-            <tr class="  bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
-                       
-                    </div>
-                </td>
-                <th scope="row" class="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-              DNS servers
-                </th>
-                <td class="px-6 py-4">
-              <Nameserver/>
-                </td>
-                
-            
-            </tr>
-            
-        </tbody>
-    </table>
-    </div>
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      Parameters
+                    </th>
+
+                    <th scope="col" className="px-6 py-3">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr className="  border-b border-txtcol bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Domain expiry
+                    </th>
+                    <td className="px-6 py-4">{expdate}</td>
+                  </tr>
+                  <tr className="border-b border-txtcol  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      DNSSEC status
+                    </th>
+                    <td className="px-6 py-4">{dnsecc}</td>
+                  </tr>
+
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      DNS servers
+                    </th>
+                    <td className="px-6 py-4">
+                      <Nameserver />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

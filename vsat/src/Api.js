@@ -291,16 +291,16 @@ const Api = () => {
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
           <div className="scan grid grid-cols-3 gap-2">
-          <div class="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
-    <table class="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
-        <thead class=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+          <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+    <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+        <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
-                <th scope="col" class="p-4">
-                    <div class="flex items-center">
+                <th scope="col" className="p-4">
+                    <div className="flex items-center">
                         
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
                     VSAT API key
                 </th>
                 
@@ -311,13 +311,13 @@ const Api = () => {
        
         <tbody>
         
-            <tr class="  bg-secondbg  ">
-                <td class="w-4 p-4">
-                    <div class="flex items-center">
+            <tr className="  bg-secondbg  ">
+                <td className="w-4 p-4">
+                    <div className="flex items-center">
                        
                     </div>
                 </td>
-                <th scope="row" class="px-6 py-4 font-large  whitespace-nowrap :text-white">   
+                <th scope="row" className="px-6 py-4 font-large  whitespace-nowrap :text-white">   
                 <form>
                 <label
                   for="default-search"
