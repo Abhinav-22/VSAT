@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import useGlanceStore from "./stores/glanceStore";
 
 const Data = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Data = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [dataleak, setDataleak] = useState("Loading...");
+
+  const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
 
   useEffect(() => {
     console.log("workingggg");
@@ -21,8 +24,10 @@ const Data = () => {
         console.log(data.DataLeak);
         if (data.DataLeak == false) {
           setDataleak("No Breach found");
+          setDatabreach("No Breach found");
         } else {
           setDataleak("Breach Found !");
+          setDatabreach("Breach Found !");
         }
       });
 

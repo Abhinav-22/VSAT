@@ -415,6 +415,7 @@ function Login() {
       } = await supabase.auth.getUser();
 
       if (user.aud === "authenticated") {
+        updateUser();
         const dval = await updateStore();
         await initialApi(dval);
         initialTxt();

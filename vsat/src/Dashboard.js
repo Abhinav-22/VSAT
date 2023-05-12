@@ -23,6 +23,9 @@ function Dashboard() {
   const [httpSec, setHttpSec] = useState("Loading...");
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
+  const [domainscan, setDomainscan] = useState("loading...");
+
+  const [dataleak, setDataleak] = useState("Loading...");
 
   const [gportCount, setgportCount] = useState(null);
   const setDomainval = useDomainStore((state) => state.updateDomain);
@@ -37,6 +40,10 @@ function Dashboard() {
   const phishstatus = useGlanceStore((state) => state.phishtankstatus);
   const portstatus = usePortStore((state) => state.scanports);
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
+
+  const setDomainStatus = useGlanceStore((state) => state.updateDomainstatus);
+  const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
+  const breachstatus = useGlanceStore((state) => state.databreachstatus);
 
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
   const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
@@ -162,17 +169,33 @@ function Dashboard() {
 
   const quickScan = async () => {
     setTimeScanned(new Date().toLocaleString());
-
     fetch("/sslexpiry")
       .then((res) => res.json())
       .then((data) => {
         setValidSSL(data.SSLExpiry);
         console.log(data);
-        console.log(data.SSLExpiry);
+        console.log(typeof data.SSLExpiry);
         if (data.SSLExpiry == "No SSL Certificate") {
           setSSLstatus("             NOT FOUND !!!");
         } else {
           setSSLstatus("        SECURE!!!");
+          const currentDate = new Date();
+          console.log(currentDate);
+
+          const futureDate = new Date(data.SSLExpiry);
+
+          console.log(futureDate);
+          const timeDiff = futureDate.getTime() - currentDate.getTime();
+          const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+          console.log(daysDiff);
+          console.log(timeDiff);
+          if (daysDiff >= 20) {
+            setDomainscan("Secure");
+          } else if (daysDiff >= 0) {
+            setDomainscan("Expires in " + daysDiff + "Days");
+          } else {
+            setDomainscan("Not secure");
+          }
         }
       });
 
@@ -187,6 +210,20 @@ function Dashboard() {
         }
         setPhish(data.Sitedetails);
         console.log(data);
+      });
+
+    fetch("/dataleak")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.DataLeak);
+        if (data.DataLeak == false) {
+          setDataleak("No Breach found");
+          setDatabreach("No Breach found");
+        } else {
+          setDataleak("Breach Found !");
+          setDatabreach("Breach Found !");
+        }
       });
 
     fetch("/httpsecheader")
@@ -597,7 +634,7 @@ function Dashboard() {
                         Domain
                       </span>
                     </td>
-                    <td className="px-6 py-4">$2999</td>
+                    <td className="px-6 py-4">{domainscan}</td>
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -669,7 +706,7 @@ function Dashboard() {
                         Data
                       </span>
                     </td>
-                    <td className="px-6 py-4">$699</td>
+                    <td className="px-6 py-4">{dataleak}</td>
                   </tr>
                   <tr className="bg-secondbg ">
                     <td className="w-4 p-4">
