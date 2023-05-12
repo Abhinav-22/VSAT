@@ -73,7 +73,7 @@ const OpenPorts = () => {
   // useEffect(() => {
   //   getData();
   // }, []);
-  const fetchHost = () => {
+  const fetchHost = async () => {
     return fetch("/hostname")
       .then((res) => res.json())
       .then((data) => {

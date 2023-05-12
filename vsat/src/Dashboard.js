@@ -255,20 +255,56 @@ function Dashboard() {
         }
       });
 
-    const response = await fetch(
-      `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
-    )
-      .then((res) => res.json())
-      .then((dataports) => {
-        console.log(typeof dataports);
-        console.log(dataports.openPorts);
-        setOpenP(dataports.openPorts);
-        setportsList(dataports.openPorts);
-        setCountP(dataports.openPorts.length);
-        setportsCount(dataports.openPorts.length);
+    const fetchHost = async () => {
+      return fetch("/hostname")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          console.log(data.HostnameFlag);
+          console.log(data.ValidHostname);
+          return data.ValidHostname;
+        });
+    };
 
-        uploadPorts(dataports);
-      });
+    const fetchPorts = async (host) => {
+      console.log("inside fetchports");
+      console.log(host);
+      const response = await fetch(
+        `https://vsatportscan.azurewebsites.net/scan/${host}`
+      )
+        .then((res) => res.json())
+        .then((dataports) => {
+          console.log(typeof dataports);
+          console.log(dataports.openPorts);
+          setOpenP(dataports.openPorts);
+          setportsList(dataports.openPorts);
+          setCountP(dataports.openPorts.length);
+          console.log(dataports.openPorts.length);
+          setportsCount(dataports.openPorts.length);
+
+          uploadPorts(dataports);
+        });
+    };
+
+    const getData = async () => {
+      const host = await fetchHost();
+      await fetchPorts(host);
+    };
+    // const response = await fetch(
+    //   `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
+    // )
+    //   .then((res) => res.json())
+    //   .then((dataports) => {
+    //     console.log(typeof dataports);
+    //     console.log(dataports.openPorts);
+    //     setOpenP(dataports.openPorts);
+    //     setportsList(dataports.openPorts);
+    //     setCountP(dataports.openPorts.length);
+    //     setportsCount(dataports.openPorts.length);
+
+    //     uploadPorts(dataports);
+    //   });
+    getData();
   };
 
   const logout = async (e) => {
