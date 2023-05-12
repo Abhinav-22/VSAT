@@ -694,7 +694,7 @@ function Dashboard() {
             </div>
 
             <div className=" col-span-1 mt-3 ml-7 w-5/6  h-94 rounded-xl bg-secondbg mr-12 ">
-              <p classNameName="ml-3 mt-3  text-lg text-white  font-normal ">
+              <p className="ml-3 mt-3  text-lg text-white  font-normal ">
                 VSAT Tools
               </p>
               <a

@@ -403,7 +403,7 @@ const Domain = () => {
               </table>
             </div>
             <br></br>
-            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               WHOIS information
             </p>
             <br></br>

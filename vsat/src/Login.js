@@ -166,48 +166,6 @@ function Login() {
       console.log(error.message);
     }
   };
-  const initialApi = async () => {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    console.log("inside initial Apppiiiiiii");
-    console.log(domainStoredval);
-    console.log(dom);
-    let userid = "";
-    let useremail = "";
-    userid = user.id;
-    useremail = user.email;
-    console.log(userid);
-    const { data, error } = await supabase.from("api").select();
-    if (error) {
-      console.log(error.message);
-    }
-    let flag = 0;
-    data.map((us) => {
-      if (user.email == us.email) {
-        flag = 1;
-      }
-    });
-    console.log(flag);
-    if (flag === 0) {
-      const { data, error } = await supabase.from("api").insert([
-        {
-          id: userid,
-          token: null,
-          flag: false,
-          email: useremail,
-          domain: "",
-        },
-      ]);
-      if (error) {
-        console.log(error.message);
-        return;
-      } else {
-        console.log("inserted api table successfully");
-      }
-    }
-  };
-
   const initialTxt = async () => {
     const {
       data: { user },
@@ -284,20 +242,162 @@ function Login() {
       }
     }
   };
+
+  // const initialApi = async (dval) => {
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+  //   console.log("inside initial Apppiiiiiii");
+  //   console.log(domainStoredval);
+  //   console.log(dval);
+  //   let userid = "";
+  //   let useremail = "";
+  //   userid = user.id;
+  //   useremail = user.email;
+  //   console.log(userid);
+  //   const { data, error } = await supabase.from("api").select();
+  //   if (error) {
+  //     console.log(error.message);
+  //   }
+  //   let flag = 0;
+  //   data.map((us) => {
+  //     if (user.email == us.email) {
+  //       flag = 1;
+  //     }
+  //   });
+  //   console.log(flag);
+  //   if (flag === 0) {
+  //     const { data, error } = await supabase.from("api").insert([
+  //       {
+  //         id: userid,
+  //         token: null,
+  //         flag: false,
+  //         email: useremail,
+  //         domain: "",
+  //       },
+  //     ]);
+  //     if (error) {
+  //       console.log(error.message);
+  //       return;
+  //     } else {
+  //       console.log("inserted api table successfully");
+  //     }
+  //   }
+  // };
+
+  // const updateStore = async () => {
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+  //   console.log("inside updatestoreeeee");
+  //   const { data, error } = await supabase
+  //     .from("users")
+  //     .select("email, website")
+  //     .eq("email", user.email);
+
+  //   console.log(data);
+  //   setDomainval(data.website);
+  //   dom = data.website;
+  //   return data.website;
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   let { data, error } = await supabase.auth.signInWithPassword({
+  //     email: email,
+  //     password: password,
+  //   });
+  //   // console.log(email, password);
+  //   if (error) {
+  //     toast.error("Invalid credentials! Please check and try again");
+  //   } else {
+  //     const {
+  //       data: { user },
+  //     } = await supabase.auth.getUser();
+  //     if (user.aud === "authenticated") {
+  //       updateUser();
+  //       const dval = await updateStore();
+  //       await initialApi(dval);
+  //       initialTxt();
+  //       initialPorts();
+  //       addtoken();
+  //       navigate("/dashboard");
+  //     } else {
+  //       console.log("not authenticated");
+  //     }
+
+  //     // getSession();
+  //     // userDetails();
+  //   }
+  //   // console.log(data);
+  // };
+
+  const initialApi = async (dval) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log("inside initial Apppiiiiiii");
+    console.log(dval);
+    let userid = "";
+    let useremail = "";
+    userid = user.id;
+    useremail = user.email;
+    console.log(userid);
+
+    const { data, error } = await supabase.from("api").select();
+    if (error) {
+      console.log(error.message);
+    }
+
+    let flag = 0;
+    data.map((us) => {
+      if (user.email == us.email) {
+        flag = 1;
+      }
+    });
+    console.log(flag);
+
+    if (flag === 0) {
+      const { data, error } = await supabase.from("api").insert([
+        {
+          id: userid,
+          token: null,
+          flag: false,
+          email: useremail,
+          domain: dval,
+        },
+      ]);
+
+      if (error) {
+        console.log(error.message);
+        return;
+      } else {
+        console.log("inserted api table successfully");
+      }
+    }
+  };
+
   const updateStore = async () => {
     const {
       data: { user },
     } = await supabase.auth.getUser();
     console.log("inside updatestoreeeee");
+
     const { data, error } = await supabase
       .from("users")
       .select("email, website")
       .eq("email", user.email);
 
     console.log(data);
-    setDomainval(data.website);
-    dom = data.website;
+    data.map((us) => {
+      if (user.email === us.email) {
+        console.log(us.website);
+        dom = us.website;
+        setDomainval(us.website);
+      }
+    });
     console.log(dom);
+    return dom;
   };
 
   const handleSubmit = async (e) => {
@@ -306,16 +406,17 @@ function Login() {
       email: email,
       password: password,
     });
-    // console.log(email, password);
+
     if (error) {
       toast.error("Invalid credentials! Please check and try again");
     } else {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       if (user.aud === "authenticated") {
-        updateUser();
-        updateStore().then(initialApi());
+        const dval = await updateStore();
+        await initialApi(dval);
         initialTxt();
         initialPorts();
         addtoken();
@@ -323,11 +424,7 @@ function Login() {
       } else {
         console.log("not authenticated");
       }
-
-      // getSession();
-      // userDetails();
     }
-    // console.log(data);
   };
 
   const getSession = async (e) => {

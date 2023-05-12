@@ -489,7 +489,7 @@ const Web = () => {
                 </tbody>
               </table>
             </div>
-            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               Phishing Status
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
@@ -561,7 +561,7 @@ const Web = () => {
                 </tbody>
               </table>
             </div>
-            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               Web technology scan
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
@@ -651,7 +651,7 @@ const Web = () => {
                 </tbody>
               </table>
             </div>
-            <p classNameName=" ml-7 mt-5  text-lg text-white font-medium ">
+            <p className=" ml-7 mt-5  text-lg text-white font-medium ">
               XXE Status
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
