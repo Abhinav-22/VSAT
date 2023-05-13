@@ -318,8 +318,16 @@ function Dashboard() {
     }
   };
 
-  const navPdf = () => {
-    navigate("/pdfgen");
+  const navPdf = async () => {
+    // navigate("/pdfgen");
+
+    fetch("/download_pdf")
+      .then((response) => response.blob())
+      .then((blob) => {
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, "_blank");
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <>

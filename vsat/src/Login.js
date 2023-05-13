@@ -332,6 +332,46 @@ function Login() {
   //   // console.log(data);
   // };
 
+  const initialGlance = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    console.log("inside initial glanceeeee");
+    let userid = "";
+    let useremail = "";
+    userid = user.id;
+    useremail = user.email;
+    console.log(userid);
+
+    const { data, error } = await supabase.from("glance").select();
+    if (error) {
+      console.log(error.message);
+    }
+
+    let flag = 0;
+    data.map((us) => {
+      if (user.id == us.id) {
+        flag = 1;
+      }
+    });
+    console.log(flag);
+
+    if (flag === 0) {
+      const { data, error } = await supabase.from("glance").insert([
+        {
+          id: user.id,
+        },
+      ]);
+
+      if (error) {
+        console.log(error.message);
+        return;
+      } else {
+        console.log("inserted glance table successfully");
+      }
+    }
+  };
+
   const initialApi = async (dval) => {
     const {
       data: { user },
@@ -420,6 +460,7 @@ function Login() {
         await initialApi(dval);
         initialTxt();
         initialPorts();
+        initialGlance();
         addtoken();
         navigate("/dashboard");
       } else {

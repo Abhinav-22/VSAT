@@ -20,6 +20,9 @@ import ssl
 import sys
 from pprint import pprint
 import math
+from flask import Flask, make_response
+from reportlab.pdfgen import canvas
+
 wd = "www.kia.com"
 wm = "abhinavanil9@gmail.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
@@ -662,6 +665,22 @@ def dataleak():
         # print(results.text)
         datad.update({"DataLeak": False})
     return jsonify(datad)
+
+
+@app.route('/download_pdf')
+def download_pdf():
+    # Generate PDF file
+    pdf_file = canvas.Canvas('example.pdf')
+    pdf_file.drawString(100, 100, "Hello World!")
+    pdf_file.save()
+
+    # Send file back to client as response
+    with open('example.pdf', 'rb') as f:
+        pdf_data = f.read()
+    response = make_response(pdf_data)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
+    return response
 
 
 app.run()
