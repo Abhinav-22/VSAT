@@ -23,7 +23,7 @@ import math
 from flask import Flask, make_response
 from reportlab.pdfgen import canvas
 
-wd = "www.kia.com"
+wd = "iedcsummit.in"
 wm = "abhinavanil9@gmail.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
@@ -164,12 +164,14 @@ def get_dns_records_info():
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
 def get_hsts():
-    ur = 'https://'+wd
-    hsd = {}
-    response = requests.get(ur)
-    headers = response.headers
-    cookies = response.cookies
-
+    try:
+        ur = 'https://'+wd
+        hsd = {}
+        response = requests.get(ur)
+        headers = response.headers
+        cookies = response.cookies
+    except Exception as e:
+        hsd.update({'https': 'fail!'})
 # XXSS block
     try:
         if headers["X-XSS-Protection"]:

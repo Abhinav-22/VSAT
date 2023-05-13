@@ -239,6 +239,7 @@ function Dashboard() {
         console.log(data.SecureCookie);
         console.log(data.HttpOnlyCookie);
         if (
+          data.https == "fail!" ||
           data.xssProtect == "fail!" ||
           data.xcontentoptions == "fail!" ||
           data.frameOptions == "fail!" ||
