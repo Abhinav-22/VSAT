@@ -379,25 +379,133 @@ const Domain = () => {
               DNS record information
             </p>
             <br></br>
-            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
-              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
-                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400 overflow-y-auto">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
                     <th scope="col" className="p-4">
                       <div className="flex items-center"></div>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      DNS records
+                      Parameters
+                    </th>
+
+                    <th scope="col" className="px-6 py-3">
+                      Status
                     </th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  <tr className="  bg-secondbg  ">
+                  <tr className="  border-b border-txtcol bg-secondbg  ">
                     <td className="w-4 p-4">
                       <div className="flex items-center"></div>
                     </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      A
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                  <tr className="border-b border-txtcol  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      AAAA
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
 
+                  <tr className="  border-b border-txtcol bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      SOA
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                  <tr className="border-b border-txtcol  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      MX
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                  <tr className=" border-b border-txtcol  bg-secondbg   ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      TXT
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+
+                  <tr className="border-b border-txtcol  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      CNAME
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+
+                  <tr className="  border-b border-txtcol bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      CAA
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                  <tr className="border-b border-txtcol  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      PTR
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                  <tr className="  border-b border-txtcol bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      SRV
+                    </th>
                     <td className="px-6 py-4"></td>
                   </tr>
                 </tbody>

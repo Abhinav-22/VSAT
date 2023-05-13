@@ -157,9 +157,6 @@ def get_dns_records_info():
         pass
 
     return jsonify(dns_records)
-    # Print the dictionary
-    # for record_type, record_data in dns_records.items():
-    #     print(record_type, "Record:", record_data)
 
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
