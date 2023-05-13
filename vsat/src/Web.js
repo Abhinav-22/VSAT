@@ -366,7 +366,7 @@ const Web = () => {
                       </div>
                     </p>
                   ) : (
-                    <p className="user font-regular text-md ml-2 pt-4 text-white">
+                    <p className="user font-semibold  text-md ml-2  text-white">
                       {load.ltime.toFixed(7) * 1000}ms
                     </p>
                   )}

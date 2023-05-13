@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Forgotem = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +14,9 @@ const Forgotem = () => {
     if (error) {
       console.log(error);
     } else {
+      toast.success("Password reset link has been sent to the registered E-mail id");
       console.log(data);
+
     }
 
     console.log("entered get pw", email);
@@ -20,6 +24,18 @@ const Forgotem = () => {
 
   return (
     <div>
+       <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="grid  h-screen">
         <div className="form-pane bg-mainbg">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
