@@ -49,6 +49,7 @@ const Domain = () => {
             if (expdtype == "object") {
               data.Whoisinfo.expiration_date.map((us) => {
                 setExpdate(data.Whoisinfo.expiration_date);
+
                 console.log(us);
               });
             } else {

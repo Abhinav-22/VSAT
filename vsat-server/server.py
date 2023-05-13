@@ -74,88 +74,92 @@ def get_ssl_info():
 
 @app.route("/dnsinfo", methods=['POST', 'GET'])
 def get_dns_records_info():
-    dnsd = {}
-    ids = [
-        'NONE',
-        'A',
-        'NS',
-        'MD',
-        'MF',
-        'CNAME',
-        'SOA',
-        'MB',
-        'MG',
-        'MR',
-        'NULL',
-        'WKS',
-        'PTR',
-        'HINFO',
-        'MINFO',
-        'MX',
-        'TXT',
-        'RP',
-        'AFSDB',
-        'X25',
-        'ISDN',
-        'RT',
-        'NSAP',
-        'NSAP-PTR',
-        'SIG',
-        'KEY',
-        'PX',
-        'GPOS',
-        'AAAA',
-        'LOC',
-        'NXT',
-        'SRV',
-        'NAPTR',
-        'KX',
-        'CERT',
-        'A6',
-        'DNAME',
-        'OPT',
-        'APL',
-        'DS',
-        'SSHFP',
-        'IPSECKEY',
-        'RRSIG',
-        'NSEC',
-        'DNSKEY',
-        'DHCID',
-        'NSEC3',
-        'NSEC3PARAM',
-        'TLSA',
-        'HIP',
-        'CDS',
-        'CDNSKEY',
-        'CSYNC',
-        'SPF',
-        'UNSPEC',
-        'EUI48',
-        'EUI64',
-        'TKEY',
-        'TSIG',
-        'IXFR',
-        'AXFR',
-        'MAILB',
-        'MAILA',
-        'ANY',
-        'URI',
-        'CAA',
-        'TA',
-        'DLV',
-    ]
+    domain = wd
+    if domain.startswith("www."):
+        domain = domain[4:]
+    dns_records = {}
 
-    for a in ids:
-        try:
-            answers = dns.resolver.resolve(wd, a)
-            for rdata in answers:
-                #print(a, ':', rdata.to_text())
-                dnsd[a] = rdata.to_text()
-            time.sleep(10)
-        except Exception as e:
-            pass  # or pass
-    return dnsd
+    # A Record
+    try:
+        A = dns.resolver.resolve(domain, 'A')
+        dns_records['A'] = [record.to_text() for record in A]
+    except Exception as e:
+        pass
+
+    # AAAA Record
+    try:
+        AAAA = dns.resolver.resolve(domain, 'AAAA')
+        dns_records['AAAA'] = [record.to_text() for record in AAAA]
+    except Exception as e:
+        pass
+
+    # MX Record
+    try:
+        MX = dns.resolver.resolve(domain, 'MX')
+        mx_data = []
+        for record in MX:
+            mx_data.append((record.exchange.to_text(), record.preference))
+        dns_records['MX'] = mx_data
+    except Exception as e:
+        pass
+
+    # NS Record
+    try:
+        NS = dns.resolver.resolve(domain, 'NS')
+        dns_records['NS'] = [record.to_text() for record in NS]
+    except Exception as e:
+        pass
+
+    # TXT Record
+    try:
+        TXT = dns.resolver.resolve(domain, 'TXT')
+        dns_records['TXT'] = [record.to_text() for record in TXT]
+    except Exception as e:
+        pass
+
+    # CNAME Record
+    try:
+        CNAME = dns.resolver.resolve(domain, 'CNAME')
+        dns_records['CNAME'] = [record.to_text() for record in CNAME]
+    except Exception as e:
+        pass
+
+    # CAA Record
+    try:
+        CAA = dns.resolver.resolve(domain, 'CAA')
+        dns_records['CAA'] = [record.to_text() for record in CAA]
+    except Exception as e:
+        pass
+
+    # PTR Record
+    try:
+        PTR = dns.resolver.resolve(domain, 'PTR')
+        dns_records['PTR'] = [record.to_text() for record in PTR]
+    except Exception as e:
+        pass
+
+    # SOA Record
+    try:
+        SOA = dns.resolver.resolve(domain, 'SOA')
+        dns_records['SOA'] = [record.to_text() for record in SOA]
+    except Exception as e:
+        pass
+
+    # SRV Record
+    try:
+        SRV = dns.resolver.resolve(domain, 'SRV')
+        srv_data = []
+        for record in SRV:
+            srv_data.append((record.target.to_text(), record.port,
+                            record.weight, record.priority))
+        dns_records['SRV'] = srv_data
+    except Exception as e:
+        pass
+
+    return jsonify(dns_records)
+    # Print the dictionary
+    # for record_type, record_data in dns_records.items():
+    #     print(record_type, "Record:", record_data)
 
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
