@@ -683,6 +683,22 @@ def download_pdf():
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
     return response
+@app.route('/privacypolicy')
+def privacypolicy():
+    url = "https://"+wd
+    response = requests.get(url)
+    privdict={}
 
+    if "privacy" in response.text.lower():
+        privdict.update({"PrivacyPolicy":True})
+    if "privacypolicy" in response.text.lower():
+        privdict.update({"PrivacyPolicy":True})
+    if "privacy-policy" in response.text.lower():
+        privdict.update({"PrivacyPolicy":True})
+    if "terms" in response.text.lower():
+        privdict.update({"PrivacyPolicy":True})
+    else:
+        privdict.update({"PrivacyPolicy":False})
+    return(privdict)
 
 app.run()

@@ -35,7 +35,7 @@ const TxtVerify = () => {
         console.log(data);
         console.log(data.TXTstatus);
         if (data.TXTstatus == true) {
-          navigate("/login");
+          navigate("/loginback");
         }
       });
     const {

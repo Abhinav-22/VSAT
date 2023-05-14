@@ -1,9 +1,8 @@
 import React, { useState, useEffect, createElement } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useMultiregStore from "./stores/useMultiregStore";
 
@@ -28,6 +27,7 @@ const Register = () => {
   const setregFlag = useMultiregStore((state) => state.updateregFlag);
   const resetregFlag = useMultiregStore((state) => state.resetregFlag);
   const regflagval = useMultiregStore((state) => state.multiregflag);
+  const navigate = useNavigate();
 
   const validateHost = async () => {
     let regex = /www\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
@@ -139,7 +139,7 @@ const Register = () => {
         alert(error.message);
         return;
       } else {
-        alert("Check mail");
+        navigate("/email");
         const { data, error } = await supabase.from("users").select();
         if (error) {
           setDomain("hi");

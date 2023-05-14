@@ -105,7 +105,7 @@ function Induvidual() {
             </p>
             <div className="border-2 border-slate-700 rounded-lg w-auto h-auto">
           <div className="scan grid grid-cols-3 gap-0 ">
-          <div className="col-span-2 w-4/6 statuscard overflow-x-auto mt-3 ml-7 rounded-xl flex flex-col items-center justify-center">
+          <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto mt-3  rounded-xl flex flex-col items-center justify-center">
     <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
         <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
