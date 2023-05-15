@@ -379,7 +379,7 @@ const Domain = () => {
                     <th scope="col" className="p-4">
                       <div className="flex items-center"></div>
                     </th>
-                    <th scope="col" className="px-6 py-3">
+                    <th  scope="col" className="px-6 py-3">
                       SSL certificate information
                     </th>
                   </tr>
@@ -387,11 +387,15 @@ const Domain = () => {
 
                 <tbody>
                   <tr className="  bg-secondbg  ">
-                    <td className="w-4 p-4">
-                      <div className="flex items-center">Issuer </div>
-                    </td>
+                  <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Issuer
+                    </th>
 
-                    <td className="px-6 py-4"> {sslpublisher}</td>
+                    <td className="px-6 py-4"> 
+                    {sslpublisher}</td>
                   </tr>
                 </tbody>
               </table>

@@ -1,5 +1,10 @@
 import requests
 import re
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+import time
+
 wd="www.sportingnews.com"
 webdict = {}
 url = "https://"+wd
@@ -100,3 +105,44 @@ except:
         webdict.update(
             {"Info": "An error occurred while trying to fetch the website."})
 print (webdict)
+index = None
+
+if 'Technologies' in webdict:
+    index = list(webdict).index('Technologies')
+lst=[]
+lst = list(webdict.values())[1]
+llen=len(lst)
+print(lst)
+resdict={}
+print(llen)
+chrome_options = Options()
+
+chrome_options.add_argument("--headless")
+
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--window-size=1920,1080")
+
+
+
+try:
+    url = "https://nvd.nist.gov/vuln/search"
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(url)
+
+    for i in range(0,llen-1):
+        e3 = driver.find_element(By.NAME,'query').send_keys(lst[i])
+        submit = driver.find_element(By.XPATH, '//*[@id="vuln-search-submit"]')
+        submit.click()
+        time.sleep(8)
+
+
+        for i in range(1,6):
+            submit = driver.find_element(By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/th/strong/a')
+            
+            e = driver.find_element(By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) +']/td[2]' ) 
+            #print(e.text)
+            resdict.update({submit.text:e.text})
+
+except Exception as e:
+    print("check spelling bro",e)
+print(resdict)
