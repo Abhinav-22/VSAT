@@ -25,7 +25,7 @@ from reportlab.pdfgen import canvas
 
 wd = ""
 wm = "abhinavanil9@gmail.com"
-txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
+txtval = ""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -43,6 +43,16 @@ def get_hostname_info():
         hosd.update({"HostnameFlag": False})
 
     return jsonify(hosd)
+
+
+@app.route('/settxt', methods=['POST'])
+def settxt():
+    data = request.get_json()
+    str_payload = data['txt']
+    print(str_payload)
+    global txtval
+    txtval = str_payload
+    return jsonify({'message': 'String received in settxt'})
 
 
 @app.route('/api/endpoint', methods=['POST'])

@@ -148,6 +148,37 @@ function Dashboard() {
       }
     };
     fetchDetails();
+
+    const setservertxt = async (val) => {
+      const response = await fetch("/settxt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ txt: val }),
+      });
+      console.log(response);
+    };
+    const setGlobalTXT = async () => {
+      console.log("inside setglobal");
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("txt")
+        .select("id, txtval")
+        .eq("id", user.id);
+      console.log(data);
+      data.map((us) => {
+        if (user.id === us.id) {
+          console.log(us.txtval);
+          setservertxt(us.txtval);
+        }
+      });
+    };
+
+    setGlobalTXT();
   }, []);
 
   const uploadPorts = async (dataports) => {
