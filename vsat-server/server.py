@@ -555,8 +555,7 @@ def getwebtech():
         if 'x-generator' in response.headers:
             technologies.extend(re.findall(
                 '[\w-]+', response.headers['X-Generator']))
-        if 'react' in content:
-            technologies.append('React')
+        
         if 'django' in content:
             technologies.append('Django')
         if 'next/static' in content:
