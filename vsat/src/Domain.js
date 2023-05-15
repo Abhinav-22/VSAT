@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useGlanceStore from "./stores/glanceStore";
 import Nameserver from "./Nameserver.js";
+import Txtrec from "./Txtrec";
+
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -17,6 +19,14 @@ const Domain = () => {
   const [expdate, setExpdate] = useState("");
   const [ssldate, setSsldate] = useState("");
   const [sslpublisher, setSslpublisher] = useState("");
+  const [arec, setArec] = useState("nil");
+  const [aaaarec, setAaaarec] = useState("nil");
+  const [soarec, setSoarec] = useState("nil");
+  const [mxrec, setMxrec] = useState("nil");
+  const [cnamerec, setCnamerec] = useState("nil");
+  const [caarec, setCaarec] = useState("nil");
+  const [ptrrec, setPtrrec] = useState("nil");
+  const [srvrec, setSrvrec] = useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
   useEffect(() => {
@@ -58,6 +68,32 @@ const Domain = () => {
 
     updateSSLinfo();
 
+    const dnsrecords = async () => {
+      fetch("/dnsinfo")
+        .then((res) => res.json())
+        .then((data) => {
+       
+            setArec(data.A);
+          console.log(data);
+          setAaaarec(data.AAAA);
+          console.log(data.notAfter);
+          setSoarec(data.SOA);
+          setMxrec(data.MX[0]);
+          setCnamerec(data.CNAME);
+          setCaarec(data.CAA);
+          setPtrrec(data.PTR);
+          setSrvrec(data.SRV);
+        //  data.issuer[1].map((us) => {
+          //  setSslpublisher(data.issuer[1]);
+          //  console.log(us);
+        // });
+         
+
+          
+        });
+    };
+
+    dnsrecords();
     const updatewhois = async () => {
       fetch("/whoislookup")
         .then((res) => res.json())
@@ -379,7 +415,7 @@ const Domain = () => {
                     <th scope="col" className="p-4">
                       <div className="flex items-center"></div>
                     </th>
-                    <th  scope="col" className="px-6 py-3">
+                    <th scope="col" className="px-6 py-3">
                       SSL certificate information
                     </th>
                   </tr>
@@ -387,15 +423,11 @@ const Domain = () => {
 
                 <tbody>
                   <tr className="  bg-secondbg  ">
-                  <th
-                      scope="row"
-                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      Issuer
-                    </th>
+                    <td className="w-4 p-4">
+                      <div className="flex items-center">Issuer </div>
+                    </td>
 
-                    <td className="px-6 py-4"> 
-                    {sslpublisher}</td>
+                    <td className="px-6 py-4"> {sslpublisher}</td>
                   </tr>
                 </tbody>
               </table>
@@ -433,11 +465,11 @@ const Domain = () => {
                     >
                       A
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ arec}</td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
-                      <div className="flex items-center"></div>
+                      <div className="flex items-center"> </div>
                     </td>
                     <th
                       scope="row"
@@ -445,7 +477,7 @@ const Domain = () => {
                     >
                       AAAA
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ aaaarec}</td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -458,7 +490,7 @@ const Domain = () => {
                     >
                       SOA
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{soarec} </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -470,7 +502,7 @@ const Domain = () => {
                     >
                       MX
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ mxrec}</td>
                   </tr>
                   <tr className=" border-b border-txtcol  bg-secondbg   ">
                     <td className="w-4 p-4">
@@ -482,7 +514,7 @@ const Domain = () => {
                     >
                       TXT
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4"><Txtrec /></td>
                   </tr>
 
                   <tr className="border-b border-txtcol  bg-secondbg  ">
@@ -495,7 +527,7 @@ const Domain = () => {
                     >
                       CNAME
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ cnamerec}</td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -508,7 +540,7 @@ const Domain = () => {
                     >
                       CAA
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{caarec} </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -520,7 +552,7 @@ const Domain = () => {
                     >
                       PTR
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ptrrec} </td>
                   </tr>
                   <tr className="  border-b border-txtcol bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -532,7 +564,7 @@ const Domain = () => {
                     >
                       SRV
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ srvrec}</td>
                   </tr>
                 </tbody>
               </table>
