@@ -160,7 +160,7 @@ function Dashboard() {
       console.log(response);
     };
     const setGlobalTXT = async () => {
-      console.log("inside setglobal");
+      console.log("inside setglobaltxt");
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -179,6 +179,48 @@ function Dashboard() {
     };
 
     setGlobalTXT();
+
+    const setserverURL = async (val) => {
+      const response = await fetch("/api/endpoint", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ string: val }),
+      });
+      console.log(response);
+    };
+    const setserverEmail = async (val) => {
+      const response = await fetch("/setemail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: val }),
+      });
+      console.log(response);
+    };
+
+    const setGlobalURL = async () => {
+      console.log("inside setglobal URLLL");
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("users")
+        .select("uuid, website, email")
+        .eq("uuid", user.id);
+      console.log(data);
+      data.map((us) => {
+        if (user.id === us.uuid) {
+          console.log(us.website);
+          setserverURL(us.website);
+          setserverEmail(us.email);
+        }
+      });
+    };
+    setGlobalURL();
   }, []);
 
   const uploadPorts = async (dataports) => {

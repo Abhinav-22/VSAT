@@ -54,6 +54,15 @@ def settxt():
     txtval = str_payload
     return jsonify({'message': 'String received in settxt'})
 
+@app.route('/setemail', methods=['POST'])
+def setemail():
+    data = request.get_json()
+    str_payload = data['email']
+    print(str_payload)
+    global wm
+    wm = str_payload
+    return jsonify({'message': 'String received in setemail'})
+
 
 @app.route('/api/endpoint', methods=['POST'])
 def receive_string_from_client():
@@ -62,7 +71,7 @@ def receive_string_from_client():
     print(str_payload)
     global wd
     wd = str_payload
-    return jsonify({'message': 'String received'})
+    return jsonify({'message': 'String received in url '})
 
 
 @app.route('/whoislookup', methods=['POST', 'GET'])
