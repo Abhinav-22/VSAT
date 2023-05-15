@@ -23,7 +23,7 @@ import math
 from flask import Flask, make_response
 from reportlab.pdfgen import canvas
 
-wd = "iedcsummit.in"
+wd = ""
 wm = "abhinavanil9@gmail.com"
 txtval = "\"MS=CB05B657DE727C4C4F887BE8D9FFA0A36A87CCD9\""
 app = flask.Flask(__name__)
@@ -50,6 +50,7 @@ def receive_string_from_client():
     data = request.get_json()
     str_payload = data['string']
     print(str_payload)
+    global wd
     wd = str_payload
     return jsonify({'message': 'String received'})
 
@@ -555,7 +556,7 @@ def getwebtech():
         if 'x-generator' in response.headers:
             technologies.extend(re.findall(
                 '[\w-]+', response.headers['X-Generator']))
-        
+
         if 'django' in content:
             technologies.append('Django')
         if 'next/static' in content:
@@ -682,23 +683,27 @@ def download_pdf():
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
     return response
+
+
 @app.route('/privacypolicy')
 def privacypolicy():
     url = "https://"+wd
     response = requests.get(url)
-    privdict={}
+    privdict = {}
 
     if "privacy" in response.text.lower():
-        privdict.update({"PrivacyPolicy":True})
+        privdict.update({"PrivacyPolicy": True})
     if "privacypolicy" in response.text.lower():
-        privdict.update({"PrivacyPolicy":True})
+        privdict.update({"PrivacyPolicy": True})
     if "privacy-policy" in response.text.lower():
-        privdict.update({"PrivacyPolicy":True})
+        privdict.update({"PrivacyPolicy": True})
     if "terms" in response.text.lower():
-        privdict.update({"PrivacyPolicy":True})
+        privdict.update({"PrivacyPolicy": True})
     else:
-        privdict.update({"PrivacyPolicy":False})
+        privdict.update({"PrivacyPolicy": False})
     return(privdict)
+
+
 @app.route('/cvelookup')
 def cvelookup():
     webdict = {}
@@ -722,7 +727,7 @@ def cvelookup():
             if 'x-generator' in response.headers:
                 technologies.extend(re.findall(
                     '[\w-]+', response.headers['X-Generator']))
-        
+
             if 'django' in content:
                 technologies.append('Django')
             if 'next/static' in content:
@@ -797,18 +802,18 @@ def cvelookup():
             else:
                 webdict.update({"Info": "No technologies found."})
     except:
-            webdict.update(
-                {"Info": "An error occurred while trying to fetch the website."})
-    print (webdict)
+        webdict.update(
+            {"Info": "An error occurred while trying to fetch the website."})
+    print(webdict)
     index = None
 
     if 'Technologies' in webdict:
         index = list(webdict).index('Technologies')
-    lst=[]
+    lst = []
     lst = list(webdict.values())[1]
-    llen=len(lst)
+    llen = len(lst)
     print(lst)
-    resdict={}
+    resdict = {}
     print(llen)
     chrome_options = Options()
 
@@ -817,28 +822,30 @@ def cvelookup():
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--window-size=1920,1080")
 
-
-
     try:
         url = "https://nvd.nist.gov/vuln/search"
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(url)
 
-        for i in range(0,llen-1):
-            e3 = driver.find_element(By.NAME,'query').send_keys(lst[i])
-            submit = driver.find_element(By.XPATH, '//*[@id="vuln-search-submit"]')
+        for i in range(0, llen-1):
+            e3 = driver.find_element(By.NAME, 'query').send_keys(lst[i])
+            submit = driver.find_element(
+                By.XPATH, '//*[@id="vuln-search-submit"]')
             submit.click()
             time.sleep(8)
 
+            for i in range(1, 6):
+                submit = driver.find_element(
+                    By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/th/strong/a')
 
-            for i in range(1,6):
-                submit = driver.find_element(By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/th/strong/a')
-                
-                e = driver.find_element(By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) +']/td[2]' ) 
-                #print(e.text)
-                resdict.update({submit.text:e.text})
+                e = driver.find_element(
+                    By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/td[2]')
+                # print(e.text)
+                resdict.update({submit.text: e.text})
 
     except Exception as e:
-        print("check spelling bro",e)
+        print("check spelling bro", e)
     return(resdict)
+
+
 app.run()

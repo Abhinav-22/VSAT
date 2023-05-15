@@ -26,6 +26,7 @@ function Dashboard() {
   const [domainscan, setDomainscan] = useState("loading...");
 
   const [dataleak, setDataleak] = useState("Loading...");
+  const [supssl, setsupSSL] = useState("nil");
 
   const [gportCount, setgportCount] = useState(null);
   const setDomainval = useDomainStore((state) => state.updateDomain);
@@ -169,6 +170,25 @@ function Dashboard() {
 
   const quickScan = async () => {
     setTimeScanned(new Date().toLocaleString());
+    const supassl = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          ssltime: new Date().toLocaleString(),
+          sslres: supssl,
+          domaintime: new Date().toLocaleString(),
+          domainres: domainscan,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    };
     fetch("/sslexpiry")
       .then((res) => res.json())
       .then((data) => {
@@ -197,7 +217,8 @@ function Dashboard() {
             setDomainscan("Not secure");
           }
         }
-      });
+      })
+      .then(supassl());
 
     fetch("/phishtank")
       .then((res) => res.json())
