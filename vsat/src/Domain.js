@@ -437,7 +437,7 @@ const Domain = () => {
               DNS record information
             </p>
             <br></br>
-            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full  rounded-xl ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
                 <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
