@@ -291,14 +291,14 @@ function Dashboard() {
         console.log(data.SecureCookie);
         console.log(data.HttpOnlyCookie);
         if (
-          data.https == "fail!" ||
-          data.xssProtect == "fail!" ||
-          data.xcontentoptions == "fail!" ||
-          data.frameOptions == "fail!" ||
-          data.strictTransportSecurity == "fail!" ||
-          data.ContentSecurityPolicy == "fail!" ||
-          data.SecureCookie == "fail!" ||
-          data.HttpOnlyCookie == "fail!"
+          data.https == "Not Present" ||
+          data.xssProtect == "Not Present" ||
+          data.xcontentoptions == "Not Present" ||
+          data.frameOptions == "Not Present" ||
+          data.strictTransportSecurity == "Not Present" ||
+          data.ContentSecurityPolicy == "Not Present" ||
+          data.SecureCookie == "Not Present" ||
+          data.HttpOnlyCookie == "Not Present"
         ) {
           setHSTSstatus("          NOT SECURE!!");
           setHttpSec("NOT SECURE!");

@@ -23,7 +23,7 @@ import math
 from flask import Flask, make_response
 from reportlab.pdfgen import canvas
 
-wd = ""
+wd = "www.google.com"
 wm = "abhinavanil9@gmail.com"
 txtval = ""
 app = flask.Flask(__name__)
