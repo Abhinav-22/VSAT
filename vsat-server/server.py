@@ -182,64 +182,64 @@ def get_hsts():
         headers = response.headers
         cookies = response.cookies
     except Exception as e:
-        hsd.update({'https': 'fail!'})
+        hsd.update({'https': 'Not Present'})
 # XXSS block
     try:
         if headers["X-XSS-Protection"]:
-            hsd.update({'xssProtect':  'pass'})
+            hsd.update({'xssProtect':  'Present'})
     except KeyError:
-        hsd.update({'xssProtect':  'fail!'})
+        hsd.update({'xssProtect':  'Not Present'})
 
 # NOSNIFF block
     try:
         if headers["X-Content-Type-Options"].lower() == "nosniff":
-            hsd.update({'xcontentoptions':  'pass'})
+            hsd.update({'xcontentoptions':  'Present'})
         else:
             hsd.update(
-                {'xcontentoptions':  'fail!'})
+                {'xcontentoptions':  'Not Present'})
     except KeyError:
-        hsd.update({'xcontentoptions':  'fail!'})
+        hsd.update({'xcontentoptions':  'Not Present'})
 
 # XFrame block
     try:
         if "deny" in headers["X-Frame-Options"].lower():
-            hsd.update({'frameOptions':  'pass'})
+            hsd.update({'frameOptions':  'Present'})
         elif "sameorigin" in headers["X-Frame-Options"].lower():
-            hsd.update({'frameOptions':  'pass'})
+            hsd.update({'frameOptions':  'Present'})
         else:
-            hsd.update({'frameOptions':  'fail!'})
+            hsd.update({'frameOptions':  'Not Present'})
     except KeyError:
-        hsd.update({'frameOptions':  'fail!'})
+        hsd.update({'frameOptions':  'Not Present'})
 
 # HSTS block
     try:
         if headers["Strict-Transport-Security"]:
-            hsd.update({'strictTransportSecurity':  'pass'})
+            hsd.update({'strictTransportSecurity':  'Present'})
     except KeyError:
-        hsd.update({'strictTransportSecurity':  'fail!'})
+        hsd.update({'strictTransportSecurity':  'Not Present'})
 
 # Policy block
     try:
         if headers["Content-Security-Policy"]:
-            hsd.update({'ContentSecurityPolicy':  'pass'})
+            hsd.update({'ContentSecurityPolicy':  'Present'})
     except KeyError:
-        hsd.update({'ContentSecurityPolicy':  'fail!'})
+        hsd.update({'ContentSecurityPolicy':  'Not Present'})
 
 # Cookie blocks
     try:
         for cookie in cookies:
             hsd.update({'Set-Cookie':  ''})
             if cookie.secure:
-                hsd.update({'SecureCookie':  'pass'})
+                hsd.update({'SecureCookie':  'Present'})
             else:
-                hsd.update({'SecureCookie':  'fail!'})
+                hsd.update({'SecureCookie':  'Not Present'})
             if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
-                hsd.update({'HttpOnlyCookie':  'pass'})
+                hsd.update({'HttpOnlyCookie':  'Present'})
             else:
-                hsd.update({'HttpOnlyCookie':  'fail!'})
+                hsd.update({'HttpOnlyCookie':  'Not Present'})
     except KeyError:
-        hsd.update({'SecureCookie':  'fail!'})
-        hsd.update({'HttpOnlyCookie':  'fail!'})
+        hsd.update({'SecureCookie':  'Not Present'})
+        hsd.update({'HttpOnlyCookie':  'Not Present'})
     return jsonify(hsd)
 
 
