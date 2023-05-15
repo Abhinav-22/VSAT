@@ -15,6 +15,8 @@ const Domain = () => {
   const [whoisstastus, setWhoisstatus] = useState("");
   const [dnsecc, setDnssecc] = useState("");
   const [expdate, setExpdate] = useState("");
+  const [ssldate, setSsldate] = useState("");
+  const [sslpublisher, setSslpublisher] = useState("");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
   useEffect(() => {
@@ -35,6 +37,26 @@ const Domain = () => {
     };
 
     updateSSL();
+
+    const updateSSLinfo = async () => {
+      fetch("/sslinfo")
+        .then((res) => res.json())
+        .then((data) => {
+          if (validSSL != "No SSL Certificate") {
+            setSsldate(data.notAfter);
+            console.log(data);
+            console.log(data.notAfter);
+         data.issuer[1].map((us) => {
+           setSslpublisher(data.issuer[1]);
+           console.log(us);
+         });
+          //setSslpublisher(data.issuer[1]);
+
+          }
+        });
+    };
+
+    updateSSLinfo();
 
     const updatewhois = async () => {
       fetch("/whoislookup")
@@ -366,10 +388,10 @@ const Domain = () => {
                 <tbody>
                   <tr className="  bg-secondbg  ">
                     <td className="w-4 p-4">
-                      <div className="flex items-center"></div>
+                      <div className="flex items-center">Issuer </div>
                     </td>
 
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4"> {sslpublisher}</td>
                   </tr>
                 </tbody>
               </table>
