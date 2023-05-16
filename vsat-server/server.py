@@ -26,7 +26,7 @@ from reportlab.pdfgen import canvas
 from fpdf import FPDF
 
 
-wd = ""
+wd = "www.google.com"
 wm = ""
 txtval = ""
 app = flask.Flask(__name__)
@@ -188,6 +188,7 @@ def get_dns_records_info():
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
 def get_hsts():
+    flag=0
     try:
         ur = 'https://'+wd
         hsd = {}
@@ -196,12 +197,14 @@ def get_hsts():
         cookies = response.cookies
     except Exception as e:
         hsd.update({'https': 'Not Present'})
+        flag+=1
 # XXSS block
     try:
         if headers["X-XSS-Protection"]:
             hsd.update({'xssProtect':  'Present'})
     except KeyError:
         hsd.update({'xssProtect':  'Not Present'})
+        flag+=1
 
 # NOSNIFF block
     try:
@@ -210,8 +213,10 @@ def get_hsts():
         else:
             hsd.update(
                 {'xcontentoptions':  'Not Present'})
+            flag+=1
     except KeyError:
         hsd.update({'xcontentoptions':  'Not Present'})
+        flag+=1
 
 # XFrame block
     try:
@@ -221,8 +226,10 @@ def get_hsts():
             hsd.update({'frameOptions':  'Present'})
         else:
             hsd.update({'frameOptions':  'Not Present'})
+            flag+=1
     except KeyError:
         hsd.update({'frameOptions':  'Not Present'})
+        flag+=1
 
 # HSTS block
     try:
@@ -230,6 +237,7 @@ def get_hsts():
             hsd.update({'strictTransportSecurity':  'Present'})
     except KeyError:
         hsd.update({'strictTransportSecurity':  'Not Present'})
+        flag+=1
 
 # Policy block
     try:
@@ -237,6 +245,7 @@ def get_hsts():
             hsd.update({'ContentSecurityPolicy':  'Present'})
     except KeyError:
         hsd.update({'ContentSecurityPolicy':  'Not Present'})
+        flag+=1
 
 # Cookie blocks
     try:
@@ -246,13 +255,18 @@ def get_hsts():
                 hsd.update({'SecureCookie':  'Present'})
             else:
                 hsd.update({'SecureCookie':  'Not Present'})
+                flag+=1
             if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
                 hsd.update({'HttpOnlyCookie':  'Present'})
             else:
                 hsd.update({'HttpOnlyCookie':  'Not Present'})
+                flag+=1
     except KeyError:
         hsd.update({'SecureCookie':  'Not Present'})
         hsd.update({'HttpOnlyCookie':  'Not Present'})
+        flag+=2
+    
+    hsd.update({'falseScore': flag})
     return jsonify(hsd)
 
 

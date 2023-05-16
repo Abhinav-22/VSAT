@@ -6,7 +6,14 @@ import ReactStoreIndicator from 'react-score-indicator'
 function Induvidual() {
   const [urlVal, setUrlVal] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
-  const scorevalue = 5;
+  const [sslsecure, setSslsecure] = useState("Loading...");
+  const [phisstatus, setPhisstatus] = useState("Loading...");
+  const [safewebstatus, setSafewebstatus] = useState("Loading...");
+  const [privacystatus, setPrivacystatus] = useState("Loading");
+  const [hstsstatus, setHstsstatus] = useState("Loading");
+  var scorevalue = 5;
+  var score = 0;
+  const [pstatus, setPstatus] = useState("False");
   const sendURL = async (e) => {
     e.preventDefault();
     console.log(urlVal);
@@ -30,7 +37,97 @@ function Induvidual() {
         setValidSSL(data.SSLExpiry);
         console.log(data);
         console.log(data.SSLExpiry);
+        if (validSSL == "No SSL Certificate") {
+          setSslsecure("Not Secure");
+          //scorevalue = scorevalue - 2;
+        }
+        else {
+          setSslsecure("Present");
+          score = score + 2;
+        }
       });
+    
+      fetch("/phishtank")
+      .then((res) => res.json())
+      .then((data) => {
+       // setValidSSL(data.SSLExpiry);
+        console.log(data);
+        console.log(data.Sitedetails);
+        if (data.Sitedetails == "Is a phish") {
+          setPhisstatus("Not Secure");
+          setPstatus("True");
+          // scorevalue = 0;
+        }
+        else if (data.Sitedetails == "This site is not a phishing site.") {
+          setPhisstatus("Not Phishing site");
+          score = score + 2;
+        }
+        else {
+          setPhisstatus("No phishing details found");
+          score = score + 1;
+        }
+      });
+    
+      fetch("/safeweb")
+      .then((res) => res.json())
+      .then((data) => {
+      //  setSafewebstatus(data);
+        console.log(data);
+      //  console.log(data);
+        if (data == "SAFE") {
+          setSafewebstatus("Safe");
+          score = score + 2;
+          //scorevalue = scorevalue - 2;
+        }
+        else {
+          setSafewebstatus("Not Safe");
+         }
+        
+      });
+    
+      fetch("/httpsecheader")
+      .then((res) => res.json())
+      .then((data) => {
+     
+        console.log(data.falseScore);
+      //  console.log(data);
+        if (data.falseScore == 8) {
+          setHstsstatus("Failed");
+        }
+        else if (data.falseScore == 0){
+          setHstsstatus("Present");
+          score = score + 2;
+        }
+        else if (data.falseScore > 4)
+        {
+          setHstsstatus("Most headers are missing");
+          score = score + 1;
+        }
+        
+        else if (data.falseScore <= 4)
+{
+  setHstsstatus("Some headers are missing");
+  score = score + 1.5;
+  }
+        
+      });
+    
+      fetch("/privacypolicy")
+      .then((res) => res.json())
+      .then((data) => {
+       // setValidSSL(data.SSLExpiry);
+        console.log(data);
+        console.log(data.PrivacyPolicy);
+        if (data.PrivacyPolicy == true) {
+          setPrivacystatus("Present");
+          score = score + 2;
+        }
+        else {
+          setPrivacystatus("Not Present");
+          
+        }
+      });
+    
   };
   return (
     <>
@@ -165,7 +262,8 @@ function Induvidual() {
                     White
                 </td>
                 <td className="px-6 py-4">
-                <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">Domain security</span>
+                <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{ sslsecure}</span>
+                     
                 </td>
                 <td className="px-6 py-4">
                     $1999
@@ -185,7 +283,7 @@ function Induvidual() {
                     Black
                 </td>
                 <td className="px-6 py-4">
-                <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{ phisstatus}</span>
                 </td>
                 <td className="px-6 py-4">
                     $99
@@ -227,7 +325,7 @@ function Induvidual() {
                     Silver
                 </td>
                 <td className="px-6 py-4">
-                <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">Web security</span>
+                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{safewebstatus }</span>
 
                 </td>
                 <td className="px-6 py-4">
@@ -247,8 +345,8 @@ function Induvidual() {
                 <td className="px-6 py-4">
                     Gold
                 </td>
-                <td className="px-6 py-4">
-                <span className="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">Data security</span>
+                    <td className="px-6 py-4">
+                    <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{ hstsstatus}</span>
 
                 </td>
                 <td className="px-6 py-4">
@@ -268,8 +366,9 @@ function Induvidual() {
                 <td className="px-6 py-4">
                     Silver
                 </td>
-                <td className="px-6 py-4">
-                <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Network security</span>
+                    <td className="px-6 py-4">
+                    <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{privacystatus }</span>
+
                 </td>
                 <td className="px-6 py-4">
                     $3999
