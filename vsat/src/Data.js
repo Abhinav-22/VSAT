@@ -11,6 +11,7 @@ const Data = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [dataleak, setDataleak] = useState("Loading...");
+  const [leak, setLeak] = useState("");
 
   const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
 
@@ -25,9 +26,13 @@ const Data = () => {
         if (data.DataLeak == false) {
           setDataleak("No Breach found");
           setDatabreach("No Breach found");
+          setLeak(
+            "Your email has not been detected in any of the popular data breaches"
+          );
         } else {
           setDataleak("Breach Found !");
           setDatabreach("Breach Found !");
+          setLeak("Your email has been detected in popular data breaches");
         }
       });
 
@@ -328,7 +333,7 @@ const Data = () => {
                       <div className="flex items-center"></div>
                     </td>
 
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{leak}</td>
                   </tr>
                 </tbody>
               </table>
