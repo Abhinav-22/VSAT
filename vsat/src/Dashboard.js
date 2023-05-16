@@ -422,6 +422,223 @@ function Dashboard() {
     }
   };
 
+  // const scanhttp = async () => {
+  //   var httpstat = "";
+  //   fetch("/httpsecheader")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setHttpSec(data);
+  //       console.log(data);
+  //       console.log(data.xssProtect);
+  //       console.log(data.xcontentoptions);
+  //       console.log(data.frameOptions);
+  //       console.log(data.strictTransportSecurity);
+  //       console.log(data.ContentSecurityPolicy);
+  //       console.log(data.SecureCookie);
+  //       console.log(data.HttpOnlyCookie);
+  //       if (
+  //         data.https == "Not Present" ||
+  //         data.xssProtect == "Not Present" ||
+  //         data.xcontentoptions == "Not Present" ||
+  //         data.frameOptions == "Not Present" ||
+  //         data.strictTransportSecurity == "Not Present" ||
+  //         data.ContentSecurityPolicy == "Not Present" ||
+  //         data.SecureCookie == "Not Present" ||
+  //         data.HttpOnlyCookie == "Not Present"
+  //       ) {
+  //         setHSTSstatus("          NOT SECURE!!");
+  //         setHttpSec("NOT SECURE!");
+  //         httpstat = "Not Secure";
+  //       } else {
+  //         setHSTSstatus("          SECURE");
+  //         setHttpSec("SECURE");
+  //         httpstat = "Secure";
+  //       }
+  //     });
+  // };
+
+  // const supahttp = async (httpstat) => {
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+
+  //   console.log(httpstat);
+  //   const { data, error } = await supabase
+  //     .from("glance")
+  //     .upsert({
+  //       id: user.id,
+  //       httptime: new Date().toLocaleString(),
+  //       httpres: httpstat,
+  //     })
+  //     .select();
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const scanhttp = async () => {
+    try {
+      const response = await fetch("/httpsecheader");
+      const data = await response.json();
+      setHttpSec(data);
+      console.log(data);
+      console.log(data.xssProtect);
+      console.log(data.xcontentoptions);
+      console.log(data.frameOptions);
+      console.log(data.strictTransportSecurity);
+      console.log(data.ContentSecurityPolicy);
+      console.log(data.SecureCookie);
+      console.log(data.HttpOnlyCookie);
+      if (
+        data.https === "Not Present" ||
+        data.xssProtect === "Not Present" ||
+        data.xcontentoptions === "Not Present" ||
+        data.frameOptions === "Not Present" ||
+        data.strictTransportSecurity === "Not Present" ||
+        data.ContentSecurityPolicy === "Not Present" ||
+        data.SecureCookie === "Not Present" ||
+        data.HttpOnlyCookie === "Not Present"
+      ) {
+        setHSTSstatus("          NOT SECURE!!");
+        setHttpSec("NOT SECURE!");
+        return "Not Secure";
+      } else {
+        setHSTSstatus("          SECURE");
+        setHttpSec("SECURE");
+        return "Secure";
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const supahttp = async (httpstat) => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      console.log(httpstat);
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          httptime: new Date().toLocaleString(),
+          httpres: httpstat,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const scanbreach = async () => {
+    try {
+      const response = await fetch("/dataleak");
+      const data = await response.json();
+      console.log(data);
+      console.log(data.DataLeak);
+      if (data.DataLeak === false) {
+        setDataleak("No Breach found");
+        setDatabreach("No Breach found");
+        return "No Breach Found";
+      } else {
+        setDataleak("Breach Found !");
+        setDatabreach("Breach Found !");
+        return "Breach Found !";
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const supabreach = async (breachstat) => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      console.log(breachstat);
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          breachtime: new Date().toLocaleString(),
+          breachres: breachstat,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+  const fetchHost = async () => {
+    try {
+      const response = await fetch("/hostname");
+      const data = await response.json();
+      console.log(data);
+      console.log(data.HostnameFlag);
+      console.log(data.ValidHostname);
+      return data.ValidHostname;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const fetchPorts = async (host) => {
+    try {
+      console.log("inside fetchPorts");
+      console.log(host);
+      const response = await fetch(
+        `https://vsatportscan.azurewebsites.net/scan/${host}`
+      );
+      const dataports = await response.json();
+      console.log(typeof dataports);
+      console.log(dataports.openPorts);
+      setOpenP(dataports.openPorts);
+      setportsList(dataports.openPorts);
+      setCountP(dataports.openPorts.length);
+      console.log(dataports.openPorts.length);
+      setportsCount(dataports.openPorts.length);
+      uploadPorts(dataports);
+      return dataports.openPorts.length;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const supaports = async (open) => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      console.log(open);
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          porttime: new Date().toLocaleString(),
+          portres: open,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   const scan = async () => {
     try {
       const { ssl, domm } = await scanssl();
@@ -429,110 +646,35 @@ function Dashboard() {
     } catch (error) {
       console.error(error);
     }
+
+    try {
+      const httpstat = await scanhttp();
+      await supahttp(httpstat);
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const breachstat = await scanbreach();
+      await supabreach(breachstat);
+    } catch (error) {
+      console.error(error);
+    }
+
     try {
       const phii = await scanphish();
       await supaphish(phii);
     } catch (error) {
       console.error(error);
     }
-  };
-  const quickScan = async () => {
-    setTimeScanned(new Date().toLocaleString());
 
-    fetch("/dataleak")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        console.log(data.DataLeak);
-        if (data.DataLeak == false) {
-          setDataleak("No Breach found");
-          setDatabreach("No Breach found");
-        } else {
-          setDataleak("Breach Found !");
-          setDatabreach("Breach Found !");
-        }
-      });
-
-    fetch("/httpsecheader")
-      .then((res) => res.json())
-      .then((data) => {
-        setHttpSec(data);
-        console.log(data);
-        console.log(data.xssProtect);
-        console.log(data.xcontentoptions);
-        console.log(data.frameOptions);
-        console.log(data.strictTransportSecurity);
-        console.log(data.ContentSecurityPolicy);
-        console.log(data.SecureCookie);
-        console.log(data.HttpOnlyCookie);
-        if (
-          data.https == "Not Present" ||
-          data.xssProtect == "Not Present" ||
-          data.xcontentoptions == "Not Present" ||
-          data.frameOptions == "Not Present" ||
-          data.strictTransportSecurity == "Not Present" ||
-          data.ContentSecurityPolicy == "Not Present" ||
-          data.SecureCookie == "Not Present" ||
-          data.HttpOnlyCookie == "Not Present"
-        ) {
-          setHSTSstatus("          NOT SECURE!!");
-          setHttpSec("NOT SECURE!");
-        } else {
-          setHSTSstatus("          SECURE");
-          setHttpSec("SECURE");
-        }
-      });
-
-    const fetchHost = async () => {
-      return fetch("/hostname")
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          console.log(data.HostnameFlag);
-          console.log(data.ValidHostname);
-          return data.ValidHostname;
-        });
-    };
-
-    const fetchPorts = async (host) => {
-      console.log("inside fetchports");
-      console.log(host);
-      const response = await fetch(
-        `https://vsatportscan.azurewebsites.net/scan/${host}`
-      )
-        .then((res) => res.json())
-        .then((dataports) => {
-          console.log(typeof dataports);
-          console.log(dataports.openPorts);
-          setOpenP(dataports.openPorts);
-          setportsList(dataports.openPorts);
-          setCountP(dataports.openPorts.length);
-          console.log(dataports.openPorts.length);
-          setportsCount(dataports.openPorts.length);
-
-          uploadPorts(dataports);
-        });
-    };
-
-    const getData = async () => {
+    try {
       const host = await fetchHost();
-      await fetchPorts(host);
-    };
-    // const response = await fetch(
-    //   `https://vsatportscan.azurewebsites.net/scan/103.195.186.173`
-    // )
-    //   .then((res) => res.json())
-    //   .then((dataports) => {
-    //     console.log(typeof dataports);
-    //     console.log(dataports.openPorts);
-    //     setOpenP(dataports.openPorts);
-    //     setportsList(dataports.openPorts);
-    //     setCountP(dataports.openPorts.length);
-    //     setportsCount(dataports.openPorts.length);
-
-    //     uploadPorts(dataports);
-    //   });
-    getData();
+      const open = await fetchPorts(host);
+      await supaports(open);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const logout = async (e) => {
