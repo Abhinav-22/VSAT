@@ -292,8 +292,8 @@ def get_url_redirection():
             links.append(link['href'])
             linkcount = linkcount+1
         i = 0
-        for link in links:
-            print(link)
+       # for link in links:
+          #  print(link)
     linkdict.update({"Links": links})
     linkdict.update({"LinkCount": linkcount})
     return (linkdict)

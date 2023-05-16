@@ -12,6 +12,7 @@ const Data = () => {
   const [authCompany, setAuthCompany] = useState("");
   const [dataleak, setDataleak] = useState("Loading...");
   const [leak, setLeak] = useState("");
+  const [privacystatus, setPrivacystatus] = useState("Loading..");
 
   const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
 
@@ -35,6 +36,22 @@ const Data = () => {
           setLeak("Your email has been detected in popular data breaches");
         }
       });
+    
+      fetch("/privacypolicy")
+  .then((res) => res.json())
+  .then((data) => {
+   
+    console.log(data);
+    console.log(data.PrivacyPolicy);
+    if (data.PrivacyPolicy == true) {
+      setPrivacystatus("Present");
+      
+    }
+    else {
+      setPrivacystatus("Not Present");
+      
+    }
+  });
 
     const fetchDetails = async () => {
       // await delay(1000);
@@ -375,7 +392,7 @@ const Data = () => {
                       <div className="flex items-center"></div>
                     </td>
 
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{ privacystatus}</td>
                   </tr>
                 </tbody>
               </table>
