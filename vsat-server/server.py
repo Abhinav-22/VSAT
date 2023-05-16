@@ -1,5 +1,6 @@
 import flask
 from flask import request, jsonify
+from flask import make_response
 import socket
 import whois
 import ssl
@@ -22,6 +23,8 @@ from pprint import pprint
 import math
 from flask import Flask, make_response
 from reportlab.pdfgen import canvas
+from fpdf import FPDF
+
 
 wd = "www.google.com"
 wm = "abhinavanil9@gmail.com"
@@ -53,6 +56,7 @@ def settxt():
     global txtval
     txtval = str_payload
     return jsonify({'message': 'String received in settxt'})
+
 
 @app.route('/setemail', methods=['POST'])
 def setemail():
@@ -690,15 +694,47 @@ def dataleak():
 
 @app.route('/download_pdf')
 def download_pdf():
-    # Generate PDF file
-    pdf_file = canvas.Canvas('example.pdf')
-    pdf_file.drawString(100, 100, "Hello World!")
-    pdf_file.save()
-
-    # Send file back to client as response
-    with open('example.pdf', 'rb') as f:
-        pdf_data = f.read()
-    response = make_response(pdf_data)
+    # Margin
+    m = 10
+    # Page width: Width of A4 is 210mm
+    pw = 210 - 2*m
+    # Cell height
+    ch = 50
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.image('./white.png',
+              x=-2, y=0.69, w=60, h=0, type='PNG')
+    pdf.set_font('Arial', 'B', 20)
+    pdf.cell(w=0, h=40, txt="Security Report", border=0, ln=1, align='C')
+    pdf.set_font('Arial', '', 18)
+    pdf.cell(w=0, h=15, txt="Report for <company name>", ln=1, align='L')
+    pdf.set_font('Arial', 'B', 14)
+    pdf.set_fill_color(r=211, g=211, b=211)
+    pdf.cell(w=(pw/4), h=25, txt="Web Security", border=1, ln=0, fill=True)
+    pdf.set_font('Arial', '', 14)
+    pdf.multi_cell(
+        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+    pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
+    pdf.set_font('Arial', 'B', 14)
+    pdf.cell(w=(pw/4), h=25, txt="Network Security ",
+             border=1, ln=0, fill=True)
+    pdf.set_font('Arial', '', 14)
+    pdf.multi_cell(
+        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+    pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
+    pdf.set_font('Arial', 'B', 14)
+    pdf.cell(w=(pw/4), h=25, txt="Data Security ", border=1, ln=0, fill=True)
+    pdf.set_font('Arial', '', 14)
+    pdf.multi_cell(
+        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+    pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
+    pdf.set_font('Arial', 'B', 14)
+    pdf.cell(w=(pw/4), h=25, txt="Social Security ", border=1, ln=0, fill=True)
+    pdf.set_font('Arial', '', 14)
+    pdf.multi_cell(
+        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+    pdf_output = pdf.output(dest='S').encode('latin1')
+    response = make_response(pdf_output)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=example.pdf'
     return response
