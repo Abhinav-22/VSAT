@@ -58,8 +58,10 @@ const Domain = () => {
             setSsldate(data.notAfter);
             console.log(data);
             console.log(data.notAfter);
+            const len = data.issuer.length;
+            console.log(len);
          data.issuer[1].map((us) => {
-           setSslpublisher(data.issuer[1]);
+           setSslpublisher(data.issuer[len-2]);
            console.log(us);
          });
           //setSslpublisher(data.issuer[1]);
