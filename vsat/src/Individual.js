@@ -392,10 +392,15 @@ function Induvidual() {
             <p className="  text-lg text-white text-center  font-normal ">
             Safety score index
             </p>
-            <div className=" mb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl " >
-            <span className="ml-3 mx-auto my-auto text-center bg-red-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">Phishing website: <span className="mx-auto my-auto ml-5 border-l border-2 border-white font-bold text-gray-200">Score : 0</span> </span>
-            <span className="ml-3 mx-auto my-auto text-center bg-yellow-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">Less secure: <span className="mx-auto my-auto ml-5 border-l border-2 border-white font-bold text-gray-200 ">Score : 1-3</span></span><br></br>
-            <span className="ml-3 mx-auto my-auto text-center align-middle justify-center bg-green-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2 mb-2 ">Secure:<span className="mx-auto my-auto ml-5 border-l border-2 border-gray-200 font-bold text-white ">Score : 4-10</span></span>
+            <div className=" pb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl " >
+            
+            <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+            Score : 0
+            <span className="ml-9 mx-auto my-auto text-center  bg-red-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">Phishing website  </span></p>
+            <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+            Score : 1-3<span className="ml-5 mx-auto my-auto text-center  bg-yellow-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">Less secure </span></p><br></br>
+            <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+            Score : 4-10<span className="ml-3 mx-auto my-auto text-center  bg-green-600 w-28  h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2  ">Secure website</span></p>
             </div>
   </div>
   </div>
