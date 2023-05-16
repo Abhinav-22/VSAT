@@ -2,7 +2,7 @@ import React, { useState, useEffect, createElement } from "react";
 import axios from "axios";
 import logo from "./img/transparent.svg";
 import register from "./img/register.svg";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useMultiregStore from "./stores/useMultiregStore";
 import { ToastContainer, toast } from "react-toastify";
@@ -29,38 +29,6 @@ const Register = () => {
   const resetregFlag = useMultiregStore((state) => state.resetregFlag);
   const regflagval = useMultiregStore((state) => state.multiregflag);
   const navigate = useNavigate();
-
-  const validateHost = async () => {
-    let regex = /www\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
-    let result = website.match(regex)[0];
-    console.log(result);
-    setHost(result);
-  };
-
-  function postHostname() {
-    let postDomain = { val: host };
-    console.log(host);
-    axios.post("http://127.0.0.1:5000/hostname", postDomain).then(
-      (response) => {
-        console.log(response);
-        console.log(response.data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    console.log("request poi thonanu");
-  }
-
-  const checkHost = async () => {
-    await fetch("/hostname")
-      .then((res) => res.json())
-      .then((data) => {
-        setValidFlag(data);
-        console.log(data);
-        console.log(data.HostnameFlag);
-      });
-  };
 
   const addTable = async (e) => {
     var currentTime = new Date().toLocaleString();
@@ -103,6 +71,54 @@ const Register = () => {
       toast.warning("Account has already registered ");
     }
   };
+
+  const validateHost = async () => {
+    let regex = /www\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
+    let result = website.match(regex)[0];
+    console.log(result);
+    setHost(result);
+    return result;
+  };
+
+  const sendURL = async (val) => {
+    const response = await fetch("/api/endpoint", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ string: val }),
+    });
+    console.log(response);
+  };
+
+  const postHostname = async () => {
+    let postDomain = { val: host };
+    console.log(host);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:5000/hostname",
+        postDomain
+      );
+      console.log(response);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("request poi thonanu");
+  };
+
+  const checkHost = async () => {
+    try {
+      const response = await fetch("/hostname");
+      const data = await response.json();
+      setValidFlag(data);
+      console.log(data);
+      console.log(data.HostnameFlag);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let webExist = 0;
@@ -119,12 +135,13 @@ const Register = () => {
       !password ||
       !confirmPassword
     ) {
-     
       toast.warning("Enter all the fields");
       return;
     }
-    validateHost();
-    postHostname();
+    var valid = "";
+    valid = await validateHost();
+    await sendURL(valid);
+    await postHostname();
     console.log(host);
     await checkHost();
     console.log(validflag.HostnameFlag);
@@ -162,7 +179,7 @@ const Register = () => {
 
   return (
     <>
-     <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}
