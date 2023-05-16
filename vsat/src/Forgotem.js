@@ -4,14 +4,18 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AuthApiError } from "@supabase/supabase-js";
+import { AuthApiError, AuthError } from "@supabase/supabase-js";
 
 const Forgotem = () => {
   const [email, setEmail] = useState("");
 
   const getpw = async (e) => {
+  
     e.preventDefault();
+  
+   
     const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    
     if (error) {
         toast.warning("Too many requests! Try again after 60 seconds");
       
@@ -20,6 +24,7 @@ const Forgotem = () => {
       console.log(data);
 
     }
+  
 
     console.log("entered get pw", email);
   };
