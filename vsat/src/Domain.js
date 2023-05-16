@@ -5,6 +5,12 @@ import supabase from "./config/supabaseClient";
 import useGlanceStore from "./stores/glanceStore";
 import Nameserver from "./Nameserver.js";
 import Txtrec from "./Txtrec";
+import Arecord from "./Arecord";
+import Caarecord from "./Caarecord";
+import Mxrecord from "./Mxrecord";
+import Aaaarecord from "./Aaaarecord";
+import Soarecord from "./Soarecord";
+import Cnamerecord from "./Cnamerecord";
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -18,12 +24,12 @@ const Domain = () => {
   const [expdate, setExpdate] = useState("");
   const [ssldate, setSsldate] = useState("");
   const [sslpublisher, setSslpublisher] = useState("");
-  const [arec, setArec] = useState("nil");
-  const [aaaarec, setAaaarec] = useState("nil");
-  const [soarec, setSoarec] = useState("nil");
-  const [mxrec, setMxrec] = useState("nil");
-  const [cnamerec, setCnamerec] = useState("nil");
-  const [caarec, setCaarec] = useState("nil");
+ // const [arec, setArec] = useState("nil");
+ // const [aaaarec, setAaaarec] = useState("nil");
+ // const [soarec, setSoarec] = useState("nil");
+ // const [mxrec, setMxrec] = useState("nil");
+  //const [cnamerec, setCnamerec] = useState("nil");
+ // const [caarec, setCaarec] = useState("nil");
   const [ptrrec, setPtrrec] = useState("nil");
   const [srvrec, setSrvrec] = useState("nil");
   const [txtflag, setTxtflag] = useState(0);
@@ -114,14 +120,14 @@ const Domain = () => {
       fetch("/dnsinfo")
         .then((res) => res.json())
         .then((data) => {
-          setArec(data.A);
+          //setArec(data.A);
           console.log(data);
-          setAaaarec(data.AAAA);
+        //  setAaaarec(data.AAAA);
           console.log(data.notAfter);
-          setSoarec(data.SOA);
-          setMxrec(data.MX);
-          setCnamerec(data.CNAME);
-          setCaarec(data.CAA);
+        //  setSoarec(data.SOA);
+       //   setMxrec(data.MX);
+         // setCnamerec(data.CNAME);
+         // setCaarec(data.CAA);
           setPtrrec(data.PTR);
           setSrvrec(data.SRV);
           if (data.TXT == "nil") {
@@ -492,7 +498,7 @@ const Domain = () => {
                     >
                       A
                     </th>
-                    <td className="px-6 py-4">{arec}</td>
+                    <td className="px-6 py-4"><Arecord/> </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -504,7 +510,7 @@ const Domain = () => {
                     >
                       AAAA
                     </th>
-                    <td className="px-6 py-4">{aaaarec}</td>
+                    <td className="px-6 py-4"> <Aaaarecord/> </td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -517,7 +523,7 @@ const Domain = () => {
                     >
                       SOA
                     </th>
-                    <td className="px-6 py-4">{soarec} </td>
+                    <td className="px-6 py-4"><Soarecord/> </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -529,7 +535,7 @@ const Domain = () => {
                     >
                       MX
                     </th>
-                    <td className="px-6 py-4">{mxrec}</td>
+                    <td className="px-6 py-4"> <Mxrecord/> </td>
                   </tr>
                   <tr className=" border-b border-txtcol  bg-secondbg   ">
                     <td className="w-4 p-4">
@@ -557,7 +563,7 @@ const Domain = () => {
                     >
                       CNAME
                     </th>
-                    <td className="px-6 py-4">{cnamerec}</td>
+                    <td className="px-6 py-4"> <Cnamerecord/> </td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -570,7 +576,7 @@ const Domain = () => {
                     >
                       CAA
                     </th>
-                    <td className="px-6 py-4">{caarec} </td>
+                    <td className="px-6 py-4"> <Caarecord/> </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
