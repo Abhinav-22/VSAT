@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthApiError } from "@supabase/supabase-js";
 
 const Forgotem = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +13,8 @@ const Forgotem = () => {
     e.preventDefault();
     const { data, error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) {
-      console.log(error);
+        toast.warning("Too many requests! Try again after 60 seconds");
+      
     } else {
       toast.success("Password reset link has been sent to the registered E-mail id");
       console.log(data);

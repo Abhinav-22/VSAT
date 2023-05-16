@@ -5,7 +5,8 @@ import register from "./img/register.svg";
 import { Link,useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useMultiregStore from "./stores/useMultiregStore";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
   // console.log(supabase);
 
@@ -99,7 +100,7 @@ const Register = () => {
     if (multflag == 0) {
       addTable();
     } else if (multflag == 1) {
-      alert("Email or domain already exist ");
+      toast.warning("Account has already registered ");
     }
   };
   const handleSubmit = async (e) => {
@@ -118,7 +119,8 @@ const Register = () => {
       !password ||
       !confirmPassword
     ) {
-      alert("enter all fields");
+     
+      toast.warning("Enter all the fields");
       return;
     }
     validateHost();
@@ -128,7 +130,7 @@ const Register = () => {
     console.log(validflag.HostnameFlag);
 
     if (validflag.HostnameFlag === false) {
-      alert("check hostname");
+      toast.error("Invalid URL! Please check and try again");
     } else {
       let { data, error } = await supabase.auth.signUp({
         email: email,
@@ -160,6 +162,18 @@ const Register = () => {
 
   return (
     <>
+     <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="grid grid-cols-2 gap-0 h-auto w-auto min-h-screen">
         <div className="form-pane bg-mainbg ">
           <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
