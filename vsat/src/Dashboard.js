@@ -240,71 +240,204 @@ function Dashboard() {
       console.log(error.message);
     }
   };
+  // const scanssl = async () => {
+  //   var ssl = "";
+  //   var domm = "";
+  //   fetch("/sslexpiry")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setValidSSL(data.SSLExpiry);
+  //       console.log(data);
+  //       console.log(typeof data.SSLExpiry);
+  //       if (data.SSLExpiry == "No SSL Certificate") {
+  //         setSSLstatus("             NOT FOUND !!!");
+  //         ssl = "not found";
+  //       } else {
+  //         setSSLstatus("        SECURE!!!");
+  //         ssl = "secure";
+  //         const currentDate = new Date();
+  //         console.log(currentDate);
 
+  //         const futureDate = new Date(data.SSLExpiry);
+
+  //         console.log(futureDate);
+  //         const timeDiff = futureDate.getTime() - currentDate.getTime();
+  //         const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  //         console.log(daysDiff);
+  //         console.log(timeDiff);
+  //         if (daysDiff >= 20) {
+  //           setDomainscan("Secure");
+  //           domm = "secure";
+  //         } else if (daysDiff >= 0) {
+  //           setDomainscan("Expires in " + daysDiff + "Days");
+  //           domm = "Expires in " + daysDiff + "Days";
+  //         } else {
+  //           setDomainscan("Not secure");
+  //           domm = "not secure";
+  //         }
+  //       }
+  //       console.log(ssl, domm);
+  //     });
+  //   return { ssl, domm };
+  // };
+
+  const scanssl = () => {
+    return new Promise((resolve, reject) => {
+      var ssl = "";
+      var domm = "";
+      fetch("/sslexpiry")
+        .then((res) => res.json())
+        .then((data) => {
+          setValidSSL(data.SSLExpiry);
+          console.log(data);
+          console.log(typeof data.SSLExpiry);
+          if (data.SSLExpiry == "No SSL Certificate") {
+            setSSLstatus("             NOT FOUND !!!");
+            ssl = "not found";
+          } else {
+            setSSLstatus("        SECURE!!!");
+            ssl = "secure";
+            const currentDate = new Date();
+            console.log(currentDate);
+
+            const futureDate = new Date(data.SSLExpiry);
+
+            console.log(futureDate);
+            const timeDiff = futureDate.getTime() - currentDate.getTime();
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            console.log(daysDiff);
+            console.log(timeDiff);
+            if (daysDiff >= 20) {
+              setDomainscan("Secure");
+              domm = "Secure";
+            } else if (daysDiff >= 0) {
+              setDomainscan("Expires in " + daysDiff + "Days");
+              domm = "Expires in " + daysDiff + "Days";
+            } else {
+              setDomainscan("Not secure");
+              domm = "Not secure";
+            }
+          }
+          console.log(ssl, domm);
+          resolve({ ssl, domm });
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
+  const supassl = async (sslres1, domainres1) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log(sslres1, domainres1);
+    const { data, error } = await supabase
+      .from("glance")
+      .upsert({
+        id: user.id,
+        ssltime: new Date().toLocaleString(),
+        sslres: sslres1,
+        domaintime: new Date().toLocaleString(),
+        domainres: domainres1,
+      })
+      .select();
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  // const scanphish = async () => {
+  //   var phii = "";
+  //   fetch("/phishtank")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (data.Sitedetails == "Is a phish") {
+  //         console.log("keriii");
+  //         setPhishstatus("        NOT SECURE !!!");
+  //         phii = " Not Secure";
+  //       } else {
+  //         setPhishstatus("         SECURE!!");
+  //         phii = "Secure";
+  //       }
+  //       setPhish(data.Sitedetails);
+  //       console.log(data);
+  //     });
+  //   console.log(phii);
+  //   return phii;
+  // };
+  // const supaphish = async (phii) => {
+  //   const {
+  //     data: { user },
+  //   } = await supabase.auth.getUser();
+
+  //   const { data, error } = await supabase
+  //     .from("glance")
+  //     .upsert({
+  //       id: user.id,
+  //       phishtime: new Date().toLocaleString(),
+  //       phishres: phii,
+  //     })
+  //     .select();
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const scanphish = async () => {
+    return new Promise((resolve, reject) => {
+      fetch("/phishtank")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.Sitedetails === "Is a phish") {
+            console.log("keriii");
+            setPhishstatus("        NOT SECURE !!!");
+            resolve("Not Secure");
+          } else {
+            setPhishstatus("         SECURE!!");
+            resolve("Secure");
+          }
+          setPhish(data.Sitedetails);
+          console.log(data);
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
+  const supaphish = async (phii) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log(phii);
+    const { data, error } = await supabase
+      .from("glance")
+      .upsert({
+        id: user.id,
+        phishtime: new Date().toLocaleString(),
+        phishres: phii,
+      })
+      .select();
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const scan = async () => {
+    try {
+      const { ssl, domm } = await scanssl();
+      await supassl(ssl, domm);
+    } catch (error) {
+      console.error(error);
+    }
+    try {
+      const phii = await scanphish();
+      await supaphish(phii);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const quickScan = async () => {
     setTimeScanned(new Date().toLocaleString());
-    const supassl = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { data, error } = await supabase
-        .from("glance")
-        .upsert({
-          id: user.id,
-          ssltime: new Date().toLocaleString(),
-          sslres: supssl,
-          domaintime: new Date().toLocaleString(),
-          domainres: domainscan,
-        })
-        .select();
-      if (error) {
-        console.log(error);
-      }
-    };
-    fetch("/sslexpiry")
-      .then((res) => res.json())
-      .then((data) => {
-        setValidSSL(data.SSLExpiry);
-        console.log(data);
-        console.log(typeof data.SSLExpiry);
-        if (data.SSLExpiry == "No SSL Certificate") {
-          setSSLstatus("             NOT FOUND !!!");
-        } else {
-          setSSLstatus("        SECURE!!!");
-          const currentDate = new Date();
-          console.log(currentDate);
-
-          const futureDate = new Date(data.SSLExpiry);
-
-          console.log(futureDate);
-          const timeDiff = futureDate.getTime() - currentDate.getTime();
-          const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-          console.log(daysDiff);
-          console.log(timeDiff);
-          if (daysDiff >= 20) {
-            setDomainscan("Secure");
-          } else if (daysDiff >= 0) {
-            setDomainscan("Expires in " + daysDiff + "Days");
-          } else {
-            setDomainscan("Not secure");
-          }
-        }
-      })
-      .then(supassl());
-
-    fetch("/phishtank")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.Sitedetails == "Is a phish") {
-          console.log("keriii");
-          setPhishstatus("        NOT SECURE !!!");
-        } else {
-          setPhishstatus("         SECURE!!");
-        }
-        setPhish(data.Sitedetails);
-        console.log(data);
-      });
 
     fetch("/dataleak")
       .then((res) => res.json())
@@ -920,7 +1053,7 @@ function Dashboard() {
               </button>
               <button
                 className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64"
-                onClick={quickScan}
+                onClick={scan}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
