@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link } from "react-router-dom";
+import ReactStoreIndicator from 'react-score-indicator'
 
 function Induvidual() {
   const [urlVal, setUrlVal] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
-
+  const scorevalue = 5;
   const sendURL = async (e) => {
     e.preventDefault();
     console.log(urlVal);
@@ -100,10 +101,10 @@ function Induvidual() {
             </div>
           </div>
           <br />
-          <p className=" ml-7 mt-5  text-lg text-white font-medium ">
+          <p className=" ml-9 mt-5  text-lg text-white font-medium ">
             Security information of the domain
             </p>
-            <div className="border-2 border-slate-700 rounded-lg w-auto h-auto">
+          
           <div className="scan grid grid-cols-3 gap-0 ">
           <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto mt-3  rounded-xl flex flex-col items-center justify-center">
     <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
@@ -279,73 +280,29 @@ function Induvidual() {
     </table>
 </div>
 
-<div className=" col-span-1 mt-3   h-94 rounded-xl bg-secondbg ">
+<div className=" col-span-1    h-94 rounded-xl bg-secondbg mr-5 ">
 <p className="ml-3 mt-3  text-lg text-white  font-normal ">
             VSAT Score
             </p>
-            <a
-              href="https://vsatsec.gitbook.io/vsat-docs/documentation/overview"
-              target="_blank"
-            >
-              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
-                  height="25"
-                  fill="currentColor"
-                  className="bi bi-journal-code my-auto"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"
-                  />
-                  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
-                  <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
-                </svg>
-                <span className="my-auto ttspan ml-3 flex justify-center">
-                  VSAT Documentation
-                </span>
-              </button>
-            </a>
+            <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
+            <ReactStoreIndicator
+        value={4}
+        maxValue={10}
+      />
+            </div>
+            <p className="  text-lg text-white text-center  font-normal ">
+            Safety score index
+            </p>
+            <div className=" mb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl " >
+            <span className="ml-3 mx-auto my-auto text-center bg-red-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">Phishing website: <span className="ml-5 border-l border-2 border-white font-bold text-white">Score:0</span> </span>
+            <span className="ml-3 mx-auto my-auto text-center bg-yellow-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">Less secure: <span className="ml-5 border-l border-2 border-white font-bold text-white">Score:1-3</span></span><br></br>
+            <span className="ml-3 mx-auto my-auto text-center align-middle justify-center bg-green-600 w-47 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2 mb-2 ">Secure:<span className="ml-5 border-l border-2 border-white font-bold text-white">Score:4-10</span></span>
+            </div>
+  </div>
+  </div>
+  </div>
+  </div>
 
-            <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              fill="currentColor"
-              className="bi bi-download my-auto"
-              viewBox="0 0 16 16"
-            >
-              <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-              <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-            </svg>
-                <span className="my-auto ttspan ml-3 flex justify-center">
-                  Generate security report
-                </span>
-              </button>
-              <button className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                className="bi bi-search my-auto"
-                viewBox="0 0 16 16"
-              >
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-              </svg>
-                <span className="my-auto ttspan flex justify-center">
-                  Quick scan
-                </span>
-              </button>
-  
-  </div>
-  </div>
-  </div>
-  </div>
-  </div>
     </>
   );
 }
