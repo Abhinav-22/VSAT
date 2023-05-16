@@ -26,8 +26,8 @@ from reportlab.pdfgen import canvas
 from fpdf import FPDF
 
 
-wd = "www.google.com"
-wm = "abhinavanil9@gmail.com"
+wd = ""
+wm = ""
 txtval = ""
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -111,14 +111,14 @@ def get_dns_records_info():
         A = dns.resolver.resolve(domain, 'A')
         dns_records['A'] = [record.to_text() for record in A]
     except Exception as e:
-        pass
+        dns_records['A'] ='nil'
 
     # AAAA Record
     try:
         AAAA = dns.resolver.resolve(domain, 'AAAA')
         dns_records['AAAA'] = [record.to_text() for record in AAAA]
     except Exception as e:
-        pass
+        dns_records['AAAA'] ='nil'
 
     # MX Record
     try:
@@ -128,49 +128,49 @@ def get_dns_records_info():
             mx_data.append((record.exchange.to_text(), record.preference))
         dns_records['MX'] = mx_data
     except Exception as e:
-        pass
+        dns_records['MX']='nil'
 
     # NS Record
     try:
         NS = dns.resolver.resolve(domain, 'NS')
         dns_records['NS'] = [record.to_text() for record in NS]
     except Exception as e:
-        pass
+        dns_records['NS'] ='nil'
 
     # TXT Record
     try:
         TXT = dns.resolver.resolve(domain, 'TXT')
         dns_records['TXT'] = [record.to_text() for record in TXT]
     except Exception as e:
-        pass
+        dns_records['TXT'] ='nil'
 
     # CNAME Record
     try:
         CNAME = dns.resolver.resolve(domain, 'CNAME')
         dns_records['CNAME'] = [record.to_text() for record in CNAME]
     except Exception as e:
-        pass
+        dns_records['CNAME'] ='nil'
 
     # CAA Record
     try:
         CAA = dns.resolver.resolve(domain, 'CAA')
         dns_records['CAA'] = [record.to_text() for record in CAA]
     except Exception as e:
-        pass
+        dns_records['CAA'] ='nil'
 
     # PTR Record
     try:
         PTR = dns.resolver.resolve(domain, 'PTR')
         dns_records['PTR'] = [record.to_text() for record in PTR]
     except Exception as e:
-        pass
+        dns_records['PTR'] ='nil'
 
     # SOA Record
     try:
         SOA = dns.resolver.resolve(domain, 'SOA')
         dns_records['SOA'] = [record.to_text() for record in SOA]
     except Exception as e:
-        pass
+        dns_records['SOA'] ='nil'
 
     # SRV Record
     try:
@@ -181,7 +181,7 @@ def get_dns_records_info():
                             record.weight, record.priority))
         dns_records['SRV'] = srv_data
     except Exception as e:
-        pass
+        dns_records['SRV'] ='nil'
 
     return jsonify(dns_records)
 

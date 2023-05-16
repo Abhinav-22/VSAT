@@ -27,6 +27,8 @@ const Domain = () => {
   const [caarec, setCaarec] = useState("nil");
   const [ptrrec, setPtrrec] = useState("nil");
   const [srvrec, setSrvrec] = useState("nil");
+  const [txtflag, setTxtflag] = useState(0);
+  const [textr, setTextr]=useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
   useEffect(() => {
@@ -78,11 +80,17 @@ const Domain = () => {
           setAaaarec(data.AAAA);
           console.log(data.notAfter);
           setSoarec(data.SOA);
-          setMxrec(data.MX[0]);
+          setMxrec(data.MX);
           setCnamerec(data.CNAME);
           setCaarec(data.CAA);
           setPtrrec(data.PTR);
           setSrvrec(data.SRV);
+          if (data.TXT == 'nil') {
+            setTxtflag(1);
+            setTextr(data.TXT)
+          }
+          else
+            setTxtflag(0);
         //  data.issuer[1].map((us) => {
           //  setSslpublisher(data.issuer[1]);
           //  console.log(us);
@@ -514,7 +522,16 @@ const Domain = () => {
                     >
                       TXT
                     </th>
-                    <td className="px-6 py-4"><Txtrec /></td>
+                  
+                    <td className="px-6 py-4">
+                      <Txtrec />
+                    </td>
+  
+  
+  
+  
+  
+                    
                   </tr>
 
                   <tr className="border-b border-txtcol  bg-secondbg  ">
