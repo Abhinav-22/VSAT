@@ -19,40 +19,6 @@ const Data = () => {
   useEffect(() => {
     console.log("workingggg");
 
-    fetch("/dataleak")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        console.log(data.DataLeak);
-        if (data.DataLeak == false) {
-          setDataleak("No Breach found");
-          setDatabreach("No Breach found");
-          setLeak(
-            "Your email has not been detected in any of the popular data breaches"
-          );
-        } else {
-          setDataleak("Breach Found !");
-          setDatabreach("Breach Found !");
-          setLeak("Your email has been detected in popular data breaches");
-        }
-      });
-    
-      fetch("/privacypolicy")
-  .then((res) => res.json())
-  .then((data) => {
-   
-    console.log(data);
-    console.log(data.PrivacyPolicy);
-    if (data.PrivacyPolicy == true) {
-      setPrivacystatus("Present");
-      
-    }
-    else {
-      setPrivacystatus("Not Present");
-      
-    }
-  });
-
     const fetchDetails = async () => {
       // await delay(1000);
 
@@ -91,6 +57,37 @@ const Data = () => {
     fetchDetails();
   }, []);
 
+  const scanData = () => {
+    fetch("/dataleak")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.DataLeak);
+        if (data.DataLeak == false) {
+          setDataleak("No Breach found");
+          setDatabreach("No Breach found");
+          setLeak(
+            "Your email has not been detected in any of the popular data breaches"
+          );
+        } else {
+          setDataleak("Breach Found !");
+          setDatabreach("Breach Found !");
+          setLeak("Your email has been detected in popular data breaches");
+        }
+      });
+
+    fetch("/privacypolicy")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.PrivacyPolicy);
+        if (data.PrivacyPolicy == true) {
+          setPrivacystatus("Present");
+        } else {
+          setPrivacystatus("Not Present");
+        }
+      });
+  };
   const logout = async (e) => {
     e.preventDefault();
     const { error } = await supabase.auth.signOut();
@@ -326,19 +323,27 @@ const Data = () => {
                 {dataleak}
               </span>
             </div>
-            <button>
-            <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
-           
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class=" mx-auto my-auto bi bi-activity text-white mt-3" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
-</svg>
-              <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
-                Scan now
-              </p><br></br>
-             
-              
-                      </div>
-                      </button>
+            <button onClick={scanData}>
+              <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class=" mx-auto my-auto bi bi-activity text-white mt-3"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"
+                  />
+                </svg>
+                <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
+                  Scan now
+                </p>
+                <br></br>
+              </div>
+            </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             Data breach information
@@ -392,7 +397,7 @@ const Data = () => {
                       <div className="flex items-center"></div>
                     </td>
 
-                    <td className="px-6 py-4">{ privacystatus}</td>
+                    <td className="px-6 py-4">{privacystatus}</td>
                   </tr>
                 </tbody>
               </table>

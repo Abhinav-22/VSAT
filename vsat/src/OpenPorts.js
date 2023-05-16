@@ -4,7 +4,7 @@ import usePortStore from "./stores/portStore";
 
 import supabase from "./config/supabaseClient";
 
-const OpenPorts = () => {
+const OpenPorts = (props) => {
   const [countP, setCountP] = useState("Loading...");
   const [openP, setOpenP] = useState([]);
 
@@ -108,10 +108,11 @@ const OpenPorts = () => {
         uploadPorts(dataports);
       });
   };
-
   useEffect(() => {
-    getData();
-  }, []);
+    if (props.isButtonClicked) {
+      getData();
+    }
+  }, [props.isButtonClicked]);
 
   const Ports = openP.map((str, index) => (
     <p key={index}>

@@ -6,7 +6,6 @@ import useGlanceStore from "./stores/glanceStore";
 import Nameserver from "./Nameserver.js";
 import Txtrec from "./Txtrec";
 
-
 const Domain = () => {
   const navigate = useNavigate();
 
@@ -28,115 +27,11 @@ const Domain = () => {
   const [ptrrec, setPtrrec] = useState("nil");
   const [srvrec, setSrvrec] = useState("nil");
   const [txtflag, setTxtflag] = useState(0);
-  const [textr, setTextr]=useState("nil");
+  const [textr, setTextr] = useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
 
   useEffect(() => {
     console.log("workingggg");
-    const updateSSL = async () => {
-      fetch("/sslexpiry")
-        .then((res) => res.json())
-        .then((data) => {
-          setValidSSL(data.SSLExpiry);
-          console.log(data);
-          console.log(data.SSLExpiry);
-          if (data.SSLExpiry == "No SSL Certificate") {
-            setSSLstatus("             NOT FOUND !!!");
-          } else {
-            setSSLstatus("        SECURE!!!");
-          }
-        });
-    };
-
-    updateSSL();
-
-    const updateSSLinfo = async () => {
-      fetch("/sslinfo")
-        .then((res) => res.json())
-        .then((data) => {
-          if (validSSL != "No SSL Certificate") {
-            setSsldate(data.notAfter);
-            console.log(data);
-            console.log(data.notAfter);
-            const len = data.issuer.length;
-            console.log(len);
-         data.issuer[1].map((us) => {
-           setSslpublisher(data.issuer[len-2]);
-           console.log(us);
-         });
-          //setSslpublisher(data.issuer[1]);
-
-          }
-        });
-    };
-
-    updateSSLinfo();
-
-    const dnsrecords = async () => {
-      fetch("/dnsinfo")
-        .then((res) => res.json())
-        .then((data) => {
-       
-            setArec(data.A);
-          console.log(data);
-          setAaaarec(data.AAAA);
-          console.log(data.notAfter);
-          setSoarec(data.SOA);
-          setMxrec(data.MX);
-          setCnamerec(data.CNAME);
-          setCaarec(data.CAA);
-          setPtrrec(data.PTR);
-          setSrvrec(data.SRV);
-          if (data.TXT == 'nil') {
-            setTxtflag(1);
-            setTextr(data.TXT)
-          }
-          else
-            setTxtflag(0);
-        //  data.issuer[1].map((us) => {
-          //  setSslpublisher(data.issuer[1]);
-          //  console.log(us);
-        // });
-         
-
-          
-        });
-    };
-
-    dnsrecords();
-    const updatewhois = async () => {
-      fetch("/whoislookup")
-        .then((res) => res.json())
-        .then((data) => {
-          setWhoisstatus(data.WhoisFlag);
-          console.log(data);
-          // console.log(data.Whoisinfo);
-          if (data.WhoisFlag == true) {
-            const expdtype = typeof data.Whoisinfo.expiration_date;
-            //  console.log(expdtype)
-            if (expdtype == "object") {
-              data.Whoisinfo.expiration_date.map((us) => {
-                setExpdate(data.Whoisinfo.expiration_date);
-
-                console.log(us);
-              });
-            } else {
-              setExpdate(data.Whoisinfo.expiration_date);
-              console.log(data.Whoisinfo.expiration_date);
-            }
-            data.Whoisinfo.name_servers.map((us) => {
-              console.log(us);
-            });
-
-            setDnssecc(data.Whoisinfo.dnssec);
-            console.log(data.Whoisinfo.dnssec);
-            //             data.Whoisinfo.dnssec.map((us) => {
-            // console.log(us)
-            //             });
-          }
-        });
-    };
-    updatewhois();
 
     const fetchDetails = async () => {
       // await delay(1000);
@@ -175,6 +70,106 @@ const Domain = () => {
     };
     fetchDetails();
   }, []);
+
+  const scanDomain = () => {
+    const updateSSL = async () => {
+      fetch("/sslexpiry")
+        .then((res) => res.json())
+        .then((data) => {
+          setValidSSL(data.SSLExpiry);
+          console.log(data);
+          console.log(data.SSLExpiry);
+          if (data.SSLExpiry == "No SSL Certificate") {
+            setSSLstatus("             NOT FOUND !!!");
+          } else {
+            setSSLstatus("        SECURE!!!");
+          }
+        });
+    };
+
+    updateSSL();
+
+    const updateSSLinfo = async () => {
+      fetch("/sslinfo")
+        .then((res) => res.json())
+        .then((data) => {
+          if (validSSL != "No SSL Certificate") {
+            setSsldate(data.notAfter);
+            console.log(data);
+            console.log(data.notAfter);
+            const len = data.issuer.length;
+            console.log(len);
+            data.issuer[1].map((us) => {
+              setSslpublisher(data.issuer[len - 2]);
+              console.log(us);
+            });
+            //setSslpublisher(data.issuer[1]);
+          }
+        });
+    };
+
+    updateSSLinfo();
+
+    const dnsrecords = async () => {
+      fetch("/dnsinfo")
+        .then((res) => res.json())
+        .then((data) => {
+          setArec(data.A);
+          console.log(data);
+          setAaaarec(data.AAAA);
+          console.log(data.notAfter);
+          setSoarec(data.SOA);
+          setMxrec(data.MX);
+          setCnamerec(data.CNAME);
+          setCaarec(data.CAA);
+          setPtrrec(data.PTR);
+          setSrvrec(data.SRV);
+          if (data.TXT == "nil") {
+            setTxtflag(1);
+            setTextr(data.TXT);
+          } else setTxtflag(0);
+          //  data.issuer[1].map((us) => {
+          //  setSslpublisher(data.issuer[1]);
+          //  console.log(us);
+          // });
+        });
+    };
+
+    dnsrecords();
+    const updatewhois = async () => {
+      fetch("/whoislookup")
+        .then((res) => res.json())
+        .then((data) => {
+          setWhoisstatus(data.WhoisFlag);
+          console.log(data);
+          // console.log(data.Whoisinfo);
+          if (data.WhoisFlag == true) {
+            const expdtype = typeof data.Whoisinfo.expiration_date;
+            //  console.log(expdtype)
+            if (expdtype == "object") {
+              data.Whoisinfo.expiration_date.map((us) => {
+                setExpdate(data.Whoisinfo.expiration_date);
+
+                console.log(us);
+              });
+            } else {
+              setExpdate(data.Whoisinfo.expiration_date);
+              console.log(data.Whoisinfo.expiration_date);
+            }
+            data.Whoisinfo.name_servers.map((us) => {
+              console.log(us);
+            });
+
+            setDnssecc(data.Whoisinfo.dnssec);
+            console.log(data.Whoisinfo.dnssec);
+            //             data.Whoisinfo.dnssec.map((us) => {
+            // console.log(us)
+            //             });
+          }
+        });
+    };
+    updatewhois();
+  };
 
   const logout = async (e) => {
     e.preventDefault();
@@ -412,22 +407,29 @@ const Domain = () => {
               <span className="user font-regular text-md ml-2 text-white">
                 {validSSL}
               </span>
-              
             </div>
-            
-          <button>
-            <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
-           
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class=" mx-auto my-auto bi bi-activity text-white mt-3" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
-</svg>
-              <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
-                Scan now
-              </p><br></br>
-             
-              
-                      </div>
-                      </button>
+
+            <button onClick={scanDomain}>
+              <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class=" mx-auto my-auto bi bi-activity text-white mt-3"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"
+                  />
+                </svg>
+                <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
+                  Scan now
+                </p>
+                <br></br>
+              </div>
+            </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             SSL certificate information
@@ -490,7 +492,7 @@ const Domain = () => {
                     >
                       A
                     </th>
-                    <td className="px-6 py-4">{ arec}</td>
+                    <td className="px-6 py-4">{arec}</td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -502,7 +504,7 @@ const Domain = () => {
                     >
                       AAAA
                     </th>
-                    <td className="px-6 py-4">{ aaaarec}</td>
+                    <td className="px-6 py-4">{aaaarec}</td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -527,7 +529,7 @@ const Domain = () => {
                     >
                       MX
                     </th>
-                    <td className="px-6 py-4">{ mxrec}</td>
+                    <td className="px-6 py-4">{mxrec}</td>
                   </tr>
                   <tr className=" border-b border-txtcol  bg-secondbg   ">
                     <td className="w-4 p-4">
@@ -539,16 +541,10 @@ const Domain = () => {
                     >
                       TXT
                     </th>
-                  
+
                     <td className="px-6 py-4">
                       <Txtrec />
                     </td>
-  
-  
-  
-  
-  
-                    
                   </tr>
 
                   <tr className="border-b border-txtcol  bg-secondbg  ">
@@ -561,7 +557,7 @@ const Domain = () => {
                     >
                       CNAME
                     </th>
-                    <td className="px-6 py-4">{ cnamerec}</td>
+                    <td className="px-6 py-4">{cnamerec}</td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -598,7 +594,7 @@ const Domain = () => {
                     >
                       SRV
                     </th>
-                    <td className="px-6 py-4">{ srvrec}</td>
+                    <td className="px-6 py-4">{srvrec}</td>
                   </tr>
                 </tbody>
               </table>

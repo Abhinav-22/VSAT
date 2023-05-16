@@ -18,59 +18,11 @@ const Web = () => {
 
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
   const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   useEffect(() => {
     // console.log("workingggg");
-    fetch("/webpagespeed")
-      .then((res) => res.json())
-      .then((data) => {
-        setLoad(data);
-      });
-    fetch("/urlredirection")
-      .then((res) => res.json())
-      .then((data) => {
-        setUrl(data.LinkCount);
-        console.log(data);
-      });
-    fetch("/phishtank")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.Sitedetails == "Is a phish") {
-          console.log("keriii");
-          setPhishstatus("        NOT SECURE !!!");
-        } else {
-          setPhishstatus("         SECURE!!");
-        }
-        setPhish(data.Sitedetails);
-        console.log(data);
-      });
 
-    fetch("/httpsecheader")
-      .then((res) => res.json())
-      .then((data) => {
-        setHttpSec(data);
-        console.log(data);
-        console.log(data.xssProtect);
-        console.log(data.xcontentoptions);
-        console.log(data.frameOptions);
-        console.log(data.strictTransportSecurity);
-        console.log(data.ContentSecurityPolicy);
-        console.log(data.SecureCookie);
-        console.log(data.HttpOnlyCookie);
-        if (
-          data.xssProtect == "fail!" ||
-          data.xcontentoptions == "fail!" ||
-          data.frameOptions == "fail!" ||
-          data.strictTransportSecurity == "fail!" ||
-          data.ContentSecurityPolicy == "fail!" ||
-          data.SecureCookie == "fail!" ||
-          data.HttpOnlyCookie == "fail!"
-        ) {
-          setHSTSstatus("          NOT SECURE!!");
-        } else {
-          setHSTSstatus("          SECURE");
-        }
-      });
     const fetchDetails = async () => {
       // await delay(1000);
 
@@ -109,6 +61,60 @@ const Web = () => {
     fetchDetails();
   }, []);
 
+  const webScan = () => {
+    setIsButtonClicked(true);
+
+    fetch("/webpagespeed")
+      .then((res) => res.json())
+      .then((data) => {
+        setLoad(data);
+      });
+    fetch("/urlredirection")
+      .then((res) => res.json())
+      .then((data) => {
+        setUrl(data.LinkCount);
+        console.log(data);
+      });
+    fetch("/phishtank")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.Sitedetails == "Is a phish") {
+          console.log("keriii");
+          setPhishstatus("        NOT SECURE !!!");
+        } else {
+          setPhishstatus("         SECURE!!");
+        }
+        setPhish(data.Sitedetails);
+        console.log(data);
+      });
+
+    fetch("/httpsecheader")
+      .then((res) => res.json())
+      .then((data) => {
+        setHttpSec(data);
+        console.log(data);
+        console.log(data.xssProtect);
+        console.log(data.xcontentoptions);
+        console.log(data.frameOptions);
+        console.log(data.strictTransportSecurity);
+        console.log(data.ContentSecurityPolicy);
+        console.log(data.SecureCookie);
+        console.log(data.HttpOnlyCookie);
+        if (
+          data.xssProtect == "Not Present" ||
+          data.xcontentoptions == "Not Present" ||
+          data.frameOptions == "Not Present" ||
+          data.strictTransportSecurity == "Not Present" ||
+          data.ContentSecurityPolicy == "Not Present" ||
+          data.SecureCookie == "Not Present" ||
+          data.HttpOnlyCookie == "Not Present"
+        ) {
+          setHSTSstatus("          NOT SECURE!!");
+        } else {
+          setHSTSstatus("          SECURE");
+        }
+      });
+  };
   const logout = async (e) => {
     e.preventDefault();
     const { error } = await supabase.auth.signOut();
@@ -372,21 +378,28 @@ const Web = () => {
                   )}
                 </div>
               </span>
-              
             </div>
-            <button>
-            <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
-           
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class=" mx-auto my-auto bi bi-activity text-white mt-3" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
-</svg>
-              <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
-                Scan now
-              </p><br></br>
-             
-              
-                      </div>
-                      </button>
+            <button onClick={webScan}>
+              <div className="web h-20 w-24  bg-gradbl2 border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class=" mx-auto my-auto bi bi-activity text-white mt-3"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"
+                  />
+                </svg>
+                <p className="user font-semibold text-md ml-2 text-center mr-2 text-white">
+                  Scan now
+                </p>
+                <br></br>
+              </div>
+            </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             HSTS Status
@@ -568,7 +581,10 @@ const Web = () => {
                           No URLs found
                         </p>
                       ) : (
-                        <UrlRedirection />
+                        <UrlRedirection
+                          isButtonClicked={isButtonClicked}
+                          setIsButtonClicked={setIsButtonClicked}
+                        />
                       )}
                     </td>
                   </tr>
