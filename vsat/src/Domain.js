@@ -412,7 +412,22 @@ const Domain = () => {
               <span className="user font-regular text-md ml-2 text-white">
                 {validSSL}
               </span>
+              
             </div>
+            
+          <button>
+            <div className="web h-20 w-24  bg-fieldbg border-2 border-gradbl1 drop-shadow-xl rounded-xl hover:bg-gray-900 cursor-pointer">
+           
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class=" mx-auto my-auto bi bi-activity text-white mt-3" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M6 2a.5.5 0 0 1 .47.33L10 12.036l1.53-4.208A.5.5 0 0 1 12 7.5h3.5a.5.5 0 0 1 0 1h-3.15l-1.88 5.17a.5.5 0 0 1-.94 0L6 3.964 4.47 8.171A.5.5 0 0 1 4 8.5H.5a.5.5 0 0 1 0-1h3.15l1.88-5.17A.5.5 0 0 1 6 2Z"/>
+</svg>
+              <p className="user font-regular text-md ml-2 text-center mr-2 text-white">
+                Scan now
+              </p><br></br>
+             
+              
+                      </div>
+                      </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
             SSL certificate information
@@ -426,7 +441,7 @@ const Domain = () => {
                       <div className="flex items-center"></div>
                     </th>
                     <th scope="col" className="px-6 py-3">
-                      SSL certificate information
+                      SSL certificate issuer information
                     </th>
                   </tr>
                 </thead>
@@ -434,7 +449,7 @@ const Domain = () => {
                 <tbody>
                   <tr className="  bg-secondbg  ">
                     <td className="w-4 p-4">
-                      <div className="flex items-center">Issuer </div>
+                      <div className="flex items-center"> </div>
                     </td>
 
                     <td className="px-6 py-4"> {sslpublisher}</td>
