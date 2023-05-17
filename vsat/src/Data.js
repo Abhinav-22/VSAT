@@ -57,24 +57,79 @@ const Data = () => {
     fetchDetails();
   }, []);
 
-  const scanData = () => {
-    fetch("/dataleak")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        console.log(data.DataLeak);
-        if (data.DataLeak == false) {
-          setDataleak("No Breach found");
-          setDatabreach("No Breach found");
-          setLeak(
-            "Your email has not been detected in any of the popular data breaches"
-          );
-        } else {
-          setDataleak("Breach Found !");
-          setDatabreach("Breach Found !");
-          setLeak("Your email has been detected in popular data breaches");
-        }
-      });
+  const scanbreach = async () => {
+    try {
+      const response = await fetch("/dataleak");
+      const data = await response.json();
+      console.log(data);
+      console.log(data.DataLeak);
+      if (data.DataLeak === false) {
+        setDataleak("No Breach found");
+        setDatabreach("No Breach found");
+        setLeak(
+          "Your email has not been detected in any of the popular data breaches"
+        );
+        return "No Breach Found";
+      } else {
+        setDataleak("Breach Found !");
+        setDatabreach("Breach Found !");
+        setLeak("Your email has been detected in popular data breaches");
+
+        return "Breach Found !";
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const supabreach = async (breachstat) => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      console.log(breachstat);
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          breachtime: new Date().toLocaleString(),
+          breachres: breachstat,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const scanData = async () => {
+    // fetch("/dataleak")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     console.log(data.DataLeak);
+    //     if (data.DataLeak == false) {
+    //       setDataleak("No Breach found");
+    //       setDatabreach("No Breach found");
+    //       setLeak(
+    //         "Your email has not been detected in any of the popular data breaches"
+    //       );
+    //     } else {
+    //       setDataleak("Breach Found !");
+    //       setDatabreach("Breach Found !");
+    //       setLeak("Your email has been detected in popular data breaches");
+    //     }
+    //   });
+    try {
+      const breachstat = await scanbreach();
+      await supabreach(breachstat);
+    } catch (error) {
+      console.error(error);
+    }
 
     fetch("/privacypolicy")
       .then((res) => res.json())
