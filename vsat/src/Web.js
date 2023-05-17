@@ -717,6 +717,39 @@ const Web = () => {
                 </tbody>
               </table>
             </div>
+            <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+                <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
+                  <tr>
+                    <th scope="col" className="p-4">
+                      <div className="flex items-center"></div>
+                    </th>
+                    <th scope="col" className="px-6 py-3">
+                      XSS vulnerability info
+                    </th>
+
+                    <th scope="col" className="px-6 py-3">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr className="  bg-secondbg  ">
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      XSS status
+                    </th>
+                    <td className="px-6 py-4"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
