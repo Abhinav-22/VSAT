@@ -207,7 +207,7 @@ const Register = () => {
               </div>
             </div>
           </nav>
-          <div className="flex justify-center mx-auto  w-full max-w-max p-4    rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg ">
+          <div className="flex justify-center mx-auto  w-full max-w-max p-4    rounded-lg shadow-md sm:p-6 md:p-8 bg-secondbg mb-3 ">
             <form onSubmit={handleSubmit}>
               <div className="grid gap-6 mb-6 md:grid-cols-2">
                 <h5 className="text-xl font-medium text-white">
