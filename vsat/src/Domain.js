@@ -18,6 +18,7 @@ const Domain = () => {
   const navigate = useNavigate();
 
   const [authName, setAuthName] = useState("");
+  const [domainscan, setDomainscan] = useState("loading...");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
@@ -26,12 +27,12 @@ const Domain = () => {
   const [expdate, setExpdate] = useState("");
   const [ssldate, setSsldate] = useState("");
   const [sslpublisher, setSslpublisher] = useState("");
- // const [arec, setArec] = useState("nil");
- // const [aaaarec, setAaaarec] = useState("nil");
- // const [soarec, setSoarec] = useState("nil");
- // const [mxrec, setMxrec] = useState("nil");
+  // const [arec, setArec] = useState("nil");
+  // const [aaaarec, setAaaarec] = useState("nil");
+  // const [soarec, setSoarec] = useState("nil");
+  // const [mxrec, setMxrec] = useState("nil");
   //const [cnamerec, setCnamerec] = useState("nil");
- // const [caarec, setCaarec] = useState("nil");
+  // const [caarec, setCaarec] = useState("nil");
   //const [ptrrec, setPtrrec] = useState("nil");
   //const [srvrec, setSrvrec] = useState("nil");
   const [txtflag, setTxtflag] = useState(0);
@@ -79,24 +80,94 @@ const Domain = () => {
     fetchDetails();
   }, []);
 
-  const scanDomain = () => {
-    const updateSSL = async () => {
+  const scanssl = () => {
+    return new Promise((resolve, reject) => {
+      var ssl = "";
+      var domm = "";
       fetch("/sslexpiry")
         .then((res) => res.json())
         .then((data) => {
           setValidSSL(data.SSLExpiry);
           console.log(data);
-          console.log(data.SSLExpiry);
+          console.log(typeof data.SSLExpiry);
           if (data.SSLExpiry == "No SSL Certificate") {
             setSSLstatus("             NOT FOUND !!!");
+            ssl = "not found";
           } else {
             setSSLstatus("        SECURE!!!");
+            ssl = "secure";
+            const currentDate = new Date();
+            console.log(currentDate);
+
+            const futureDate = new Date(data.SSLExpiry);
+
+            console.log(futureDate);
+            const timeDiff = futureDate.getTime() - currentDate.getTime();
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            console.log(daysDiff);
+            console.log(timeDiff);
+            if (daysDiff >= 20) {
+              setDomainscan("Secure");
+              domm = "Secure";
+            } else if (daysDiff >= 0) {
+              setDomainscan("Expires in " + daysDiff + "Days");
+              domm = "Expires in " + daysDiff + "Days";
+            } else {
+              setDomainscan("Not secure");
+              domm = "Not secure";
+            }
           }
-        });
-    };
+          console.log(ssl, domm);
+          resolve({ ssl, domm });
+        })
+        .catch((error) => reject(error));
+    });
+  };
 
-    updateSSL();
+  const supassl = async (sslres1, domainres1) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
+    console.log(sslres1, domainres1);
+    const { data, error } = await supabase
+      .from("glance")
+      .upsert({
+        id: user.id,
+        ssltime: new Date().toLocaleString(),
+        sslres: sslres1,
+        domaintime: new Date().toLocaleString(),
+        domainres: domainres1,
+      })
+      .select();
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const scanDomain = async () => {
+    // const updateSSL = async () => {
+    //   fetch("/sslexpiry")
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       setValidSSL(data.SSLExpiry);
+    //       console.log(data);
+    //       console.log(data.SSLExpiry);
+    //       if (data.SSLExpiry == "No SSL Certificate") {
+    //         setSSLstatus("             NOT FOUND !!!");
+    //       } else {
+    //         setSSLstatus("        SECURE!!!");
+    //       }
+    //     });
+    // };
+
+    // updateSSL();
+    try {
+      const { ssl, domm } = await scanssl();
+      await supassl(ssl, domm);
+    } catch (error) {
+      console.error(error);
+    }
     const updateSSLinfo = async () => {
       fetch("/sslinfo")
         .then((res) => res.json())
@@ -124,14 +195,14 @@ const Domain = () => {
         .then((data) => {
           //setArec(data.A);
           console.log(data);
-        //  setAaaarec(data.AAAA);
+          //  setAaaarec(data.AAAA);
           console.log(data.notAfter);
-        //  setSoarec(data.SOA);
-       //   setMxrec(data.MX);
-         // setCnamerec(data.CNAME);
-         // setCaarec(data.CAA);
-         // setPtrrec(data.PTR);
-         // setSrvrec(data.SRV);
+          //  setSoarec(data.SOA);
+          //   setMxrec(data.MX);
+          // setCnamerec(data.CNAME);
+          // setCaarec(data.CAA);
+          // setPtrrec(data.PTR);
+          // setSrvrec(data.SRV);
           if (data.TXT == "nil") {
             setTxtflag(1);
             setTextr(data.TXT);
@@ -500,7 +571,9 @@ const Domain = () => {
                     >
                       A
                     </th>
-                    <td className="px-6 py-4"><Arecord/> </td>
+                    <td className="px-6 py-4">
+                      <Arecord />{" "}
+                    </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -512,7 +585,10 @@ const Domain = () => {
                     >
                       AAAA
                     </th>
-                    <td className="px-6 py-4"> <Aaaarecord/> </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Aaaarecord />{" "}
+                    </td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -525,7 +601,9 @@ const Domain = () => {
                     >
                       SOA
                     </th>
-                    <td className="px-6 py-4"><Soarecord/> </td>
+                    <td className="px-6 py-4">
+                      <Soarecord />{" "}
+                    </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -537,7 +615,10 @@ const Domain = () => {
                     >
                       MX
                     </th>
-                    <td className="px-6 py-4"> <Mxrecord/> </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Mxrecord />{" "}
+                    </td>
                   </tr>
                   <tr className=" border-b border-txtcol  bg-secondbg   ">
                     <td className="w-4 p-4">
@@ -565,7 +646,10 @@ const Domain = () => {
                     >
                       CNAME
                     </th>
-                    <td className="px-6 py-4"> <Cnamerecord/> </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Cnamerecord />{" "}
+                    </td>
                   </tr>
 
                   <tr className="  border-b border-txtcol bg-secondbg  ">
@@ -578,7 +662,10 @@ const Domain = () => {
                     >
                       CAA
                     </th>
-                    <td className="px-6 py-4"> <Caarecord/> </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Caarecord />{" "}
+                    </td>
                   </tr>
                   <tr className="border-b border-txtcol  bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -590,7 +677,10 @@ const Domain = () => {
                     >
                       PTR
                     </th>
-                    <td className="px-6 py-4"> <Ptrrec/> </td>
+                    <td className="px-6 py-4">
+                      {" "}
+                      <Ptrrec />{" "}
+                    </td>
                   </tr>
                   <tr className="  border-b border-txtcol bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -602,7 +692,9 @@ const Domain = () => {
                     >
                       SRV
                     </th>
-                    <td className="px-6 py-4"><Srvrecord/> </td>
+                    <td className="px-6 py-4">
+                      <Srvrecord />{" "}
+                    </td>
                   </tr>
                 </tbody>
               </table>
