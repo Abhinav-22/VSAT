@@ -19,7 +19,7 @@ var a = []
   if ( caareco !== 'nil') {
     const Caarecod = caareco.map((str, index) => (
       <p key={index}>
-        {index + 1}. {str}
+         {str}
       </p>
     ));
     return (

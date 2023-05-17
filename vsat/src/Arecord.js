@@ -19,7 +19,7 @@ var a = []
   if ( areco !== 'nil') {
     const Arecod = areco.map((str, index) => (
       <p key={index}>
-        {index + 1}. {str}
+         {str}
       </p>
     ));
     return (

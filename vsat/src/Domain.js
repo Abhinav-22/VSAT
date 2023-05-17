@@ -11,6 +11,8 @@ import Mxrecord from "./Mxrecord";
 import Aaaarecord from "./Aaaarecord";
 import Soarecord from "./Soarecord";
 import Cnamerecord from "./Cnamerecord";
+import Ptrrec from "./Ptrrec";
+import Srvrecord from "./Srvrecord";
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -30,8 +32,8 @@ const Domain = () => {
  // const [mxrec, setMxrec] = useState("nil");
   //const [cnamerec, setCnamerec] = useState("nil");
  // const [caarec, setCaarec] = useState("nil");
-  const [ptrrec, setPtrrec] = useState("nil");
-  const [srvrec, setSrvrec] = useState("nil");
+  //const [ptrrec, setPtrrec] = useState("nil");
+  //const [srvrec, setSrvrec] = useState("nil");
   const [txtflag, setTxtflag] = useState(0);
   const [textr, setTextr] = useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
@@ -128,8 +130,8 @@ const Domain = () => {
        //   setMxrec(data.MX);
          // setCnamerec(data.CNAME);
          // setCaarec(data.CAA);
-          setPtrrec(data.PTR);
-          setSrvrec(data.SRV);
+         // setPtrrec(data.PTR);
+         // setSrvrec(data.SRV);
           if (data.TXT == "nil") {
             setTxtflag(1);
             setTextr(data.TXT);
@@ -588,7 +590,7 @@ const Domain = () => {
                     >
                       PTR
                     </th>
-                    <td className="px-6 py-4">{ptrrec} </td>
+                    <td className="px-6 py-4"> <Ptrrec/> </td>
                   </tr>
                   <tr className="  border-b border-txtcol bg-secondbg  ">
                     <td className="w-4 p-4">
@@ -600,7 +602,7 @@ const Domain = () => {
                     >
                       SRV
                     </th>
-                    <td className="px-6 py-4">{srvrec}</td>
+                    <td className="px-6 py-4"><Srvrecord/> </td>
                   </tr>
                 </tbody>
               </table>

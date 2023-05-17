@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-const Soarecord = () => {
-  const [soareco, setSoareco] = useState([]);
+const Ptrrec = () => {
+  const [ptrreco, setPtrreco] = useState([]);
 var a = []
   useEffect(() => {
     fetch("/dnsinfo")
       .then((res) => res.json())
       .then((data) => {
-        setSoareco(data.SOA);
-        a = data.SOA;
+        setPtrreco(data.PTR);
+        a = data.PTR;
         console.log(typeof a)
-       // console.log(data.TXT);
-        //onsole.log(typeof data.TXT)
-       // console.log(typeof textreco);
+      //  console.log(data.TXT);
+      //  console.log(typeof data.TXT)
+      //  console.log(typeof textreco);
       });
   }, []);
     
-  if ( soareco !== 'nil') {
-    const Soarecod = soareco.map((str, index) => (
+  if ( ptrreco !== 'nil') {
+    const Ptrrecord = ptrreco.map((str, index) => (
       <p key={index}>
-         {str}
+        {index + 1}. {str}
       </p>
     ));
     return (
       <p className=" py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-        {Soarecod}
+        {Ptrrecord}
       </p>
     );
   }
   else {
     return (
       <p className=" py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-        {soareco}
+        {ptrreco}
       </p>
     );
   }
@@ -43,4 +43,4 @@ var a = []
 
 };
 
-export default Soarecord;
+export default Ptrrec;

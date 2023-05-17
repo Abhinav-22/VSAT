@@ -19,7 +19,7 @@ var a = []
   if ( mxreco !== 'nil') {
     const Mxrecod = mxreco.map((str, index) => (
       <p key={index}>
-        {index + 1}. {str}
+         {str}
       </p>
     ));
     return (
