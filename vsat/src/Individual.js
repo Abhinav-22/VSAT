@@ -237,7 +237,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
+                      <span className="  text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {domainstatus}
                       </span>
                     </td>
@@ -255,7 +255,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                      <span className=" text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {sslsecure}
                       </span>
                     </td>
@@ -273,7 +273,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                      <span className=" text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {phisstatus}
                       </span>
                     </td>
@@ -313,7 +313,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                      <span className=" text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {safewebstatus}
                       </span>
                     </td>
@@ -331,7 +331,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                      <span className=" text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {hstsstatus}
                       </span>
                     </td>
@@ -349,7 +349,7 @@ function Induvidual() {
                     </th>
                     <td className="px-6 py-4">{time}</td>
                     <td className="px-6 py-4">
-                      <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
+                      <span className=" text-sm font-semibold mr-2 px-2.5 py-0.5 rounded bg-indigo-900 text-indigo-300">
                         {privacystatus}
                       </span>
                     </td>
@@ -370,20 +370,20 @@ function Induvidual() {
                 Safety score index
               </p>
               <div className=" pb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl ">
-                <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+                <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
                   Score : 0
-                  <span className="ml-9 mx-auto my-auto text-center  bg-red-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
-                    Phishing website{" "}
+                  <span className="ml-9 mx-auto my-auto text-center  bg-red-600 w-40 pl-5 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
+                    Phishing site{" "}
                   </span>
                 </p>
-                <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+                <p className=" ml-5 mt-3  text-md text-white items-middle  font-semibold ">
                   Score : 1-3
                   <span className="ml-5 mx-auto my-auto text-center  bg-yellow-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">
                     Less secure{" "}
                   </span>
                 </p>
-                <br></br>
-                <p className=" ml-5 mt-3  text-md text-white   font-normal ">
+              
+                <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
                   Score : 4-10
                   <span className="ml-3 mx-auto my-auto text-center  bg-green-600 w-28  h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2  ">
                     Secure website
