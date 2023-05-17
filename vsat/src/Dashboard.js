@@ -20,12 +20,22 @@ function Dashboard() {
   const [tokenval, setTokenval] = useState();
   const [domainflag, setDomainFlag] = useState(false);
   const [timeScanned, setTimeScanned] = useState("");
-  const [httpSec, setHttpSec] = useState("Loading...");
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
-  const [domainscan, setDomainscan] = useState("loading...");
 
+  // ----GLANCE----
+  const [domainscan, setDomainscan] = useState("loading...");
+  const [domaintime, setDomaintime] = useState("Loading");
+  const [sslLive, setSSLLive] = useState("Loading...");
+  const [ssltime, setSSLtime] = useState("Loading...");
+  const [phish, setPhish] = useState("Loading...");
+  const [phishtime, setPhishtime] = useState("loading...");
+  const [httpSec, setHttpSec] = useState("Loading...");
+  const [httptime, setHttptime] = useState("Loading...");
   const [dataleak, setDataleak] = useState("Loading...");
+  const [datatime, setDatatime] = useState("Loading...");
+  const [countptime, setCountPtime] = useState("Loading...");
+
   const [supssl, setsupSSL] = useState("nil");
 
   const [gportCount, setgportCount] = useState(null);
@@ -33,7 +43,6 @@ function Dashboard() {
   const domainStoredval = useDomainStore((state) => state.domainval);
   const resetDomain = useDomainStore((state) => state.resetDomain);
   const [validSSL, setValidSSL] = useState("Loading...");
-  const [phish, setPhish] = useState("Loading...");
 
   // ----------STORES---------
   const HSTSstatus = useGlanceStore((state) => state.HSTSstatus);
@@ -221,6 +230,34 @@ function Dashboard() {
       });
     };
     setGlobalURL();
+
+    const fetchGlance = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      const { data, error } = await supabase.from("glance").select();
+      console.log("GLance fetch bro", data);
+      data.map((us) => {
+        if (user.id === us.id) {
+          console.log("ENTERED MAPPPPPPPPPPP");
+          setDomainscan(us.domainres);
+          setDomaintime(us.domaintime);
+          setSSLLive(us.sslres);
+          setSSLtime(us.ssltime);
+          setPhish(us.phishres);
+          setPhishtime(us.phishtime);
+          setHttpSec(us.httpres);
+          setHttptime(us.httptime);
+          setDataleak(us.breachres);
+          setDatatime(us.breachtime);
+          setCountP(us.portres);
+          setCountPtime(us.porttime);
+        }
+      });
+    };
+
+    fetchGlance();
   }, []);
 
   const uploadPorts = async (dataports) => {
@@ -1042,7 +1079,7 @@ function Dashboard() {
                     >
                       Domain scan status
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{domaintime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
                         Domain
@@ -1060,13 +1097,13 @@ function Dashboard() {
                     >
                       SSL scan status
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{ssltime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">
                         Domain
                       </span>
                     </td>
-                    <td className="px-6 py-4">{sslstatus}</td>
+                    <td className="px-6 py-4">{sslLive}</td>
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -1078,7 +1115,7 @@ function Dashboard() {
                     >
                       Phishtank status
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{phishtime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
                         Web
@@ -1096,7 +1133,7 @@ function Dashboard() {
                     >
                       HTTP security header status
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{httptime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">
                         Web
@@ -1114,7 +1151,7 @@ function Dashboard() {
                     >
                       Data breach status
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{datatime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-pink-900 dark:text-pink-300">
                         Data
@@ -1132,7 +1169,7 @@ function Dashboard() {
                     >
                       Network ports open
                     </th>
-                    <td className="px-6 py-4">{timeScanned}</td>
+                    <td className="px-6 py-4">{countptime}</td>
                     <td className="px-6 py-4">
                       <span className="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
                         Network
