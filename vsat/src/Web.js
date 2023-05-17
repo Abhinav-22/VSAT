@@ -61,9 +61,121 @@ const Web = () => {
     fetchDetails();
   }, []);
 
-  const webScan = () => {
+  const scanphish = async () => {
+    return new Promise((resolve, reject) => {
+      fetch("/phishtank")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.Sitedetails === "Is a phish") {
+            console.log("keriii");
+            setPhishstatus("        NOT SECURE !!!");
+            resolve("Not Secure");
+          } else {
+            setPhishstatus("         SECURE!!");
+            resolve("Secure");
+          }
+          setPhish(data.Sitedetails);
+          console.log(data);
+        })
+        .catch((error) => reject(error));
+    });
+  };
+
+  const supaphish = async (phii) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log(phii);
+    const { data, error } = await supabase
+      .from("glance")
+      .upsert({
+        id: user.id,
+        phishtime: new Date().toLocaleString(),
+        phishres: phii,
+      })
+      .select();
+    if (error) {
+      console.log(error);
+    }
+  };
+
+  const scanhttp = async () => {
+    try {
+      const response = await fetch("/httpsecheader");
+      const data = await response.json();
+      setHttpSec(data);
+      console.log(data);
+      console.log(data.xssProtect);
+      console.log(data.xcontentoptions);
+      console.log(data.frameOptions);
+      console.log(data.strictTransportSecurity);
+      console.log(data.ContentSecurityPolicy);
+      console.log(data.SecureCookie);
+      console.log(data.HttpOnlyCookie);
+      if (
+        data.https === "Not Present" ||
+        data.xssProtect === "Not Present" ||
+        data.xcontentoptions === "Not Present" ||
+        data.frameOptions === "Not Present" ||
+        data.strictTransportSecurity === "Not Present" ||
+        data.ContentSecurityPolicy === "Not Present" ||
+        data.SecureCookie === "Not Present" ||
+        data.HttpOnlyCookie === "Not Present"
+      ) {
+        setHSTSstatus("          NOT SECURE!!");
+        // setHttpSec("NOT SECURE!");
+        return "Not Secure";
+      } else {
+        setHSTSstatus("          SECURE");
+        // setHttpSec("SECURE");
+        return "Secure";
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const supahttp = async (httpstat) => {
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      console.log(httpstat);
+      const { data, error } = await supabase
+        .from("glance")
+        .upsert({
+          id: user.id,
+          httptime: new Date().toLocaleString(),
+          httpres: httpstat,
+        })
+        .select();
+      if (error) {
+        console.log(error);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const webScan = async () => {
     setIsButtonClicked(true);
 
+    try {
+      const phii = await scanphish();
+      await supaphish(phii);
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const httpstat = await scanhttp();
+      await supahttp(httpstat);
+    } catch (error) {
+      console.error(error);
+    }
     fetch("/webpagespeed")
       .then((res) => res.json())
       .then((data) => {
@@ -75,45 +187,46 @@ const Web = () => {
         setUrl(data.LinkCount);
         console.log(data);
       });
-    fetch("/phishtank")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.Sitedetails == "Is a phish") {
-          console.log("keriii");
-          setPhishstatus("        NOT SECURE !!!");
-        } else {
-          setPhishstatus("         SECURE!!");
-        }
-        setPhish(data.Sitedetails);
-        console.log(data);
-      });
 
-    fetch("/httpsecheader")
-      .then((res) => res.json())
-      .then((data) => {
-        setHttpSec(data);
-        console.log(data);
-        console.log(data.xssProtect);
-        console.log(data.xcontentoptions);
-        console.log(data.frameOptions);
-        console.log(data.strictTransportSecurity);
-        console.log(data.ContentSecurityPolicy);
-        console.log(data.SecureCookie);
-        console.log(data.HttpOnlyCookie);
-        if (
-          data.xssProtect == "Not Present" ||
-          data.xcontentoptions == "Not Present" ||
-          data.frameOptions == "Not Present" ||
-          data.strictTransportSecurity == "Not Present" ||
-          data.ContentSecurityPolicy == "Not Present" ||
-          data.SecureCookie == "Not Present" ||
-          data.HttpOnlyCookie == "Not Present"
-        ) {
-          setHSTSstatus("          NOT SECURE!!");
-        } else {
-          setHSTSstatus("          SECURE");
-        }
-      });
+    // fetch("/phishtank")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.Sitedetails == "Is a phish") {
+    //       console.log("keriii");
+    //       setPhishstatus("        NOT SECURE !!!");
+    //     } else {
+    //       setPhishstatus("         SECURE!!");
+    //     }
+    //     setPhish(data.Sitedetails);
+    //     console.log(data);
+    //   });
+
+    // fetch("/httpsecheader")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setHttpSec(data);
+    //     console.log(data);
+    //     console.log(data.xssProtect);
+    //     console.log(data.xcontentoptions);
+    //     console.log(data.frameOptions);
+    //     console.log(data.strictTransportSecurity);
+    //     console.log(data.ContentSecurityPolicy);
+    //     console.log(data.SecureCookie);
+    //     console.log(data.HttpOnlyCookie);
+    //     if (
+    //       data.xssProtect == "Not Present" ||
+    //       data.xcontentoptions == "Not Present" ||
+    //       data.frameOptions == "Not Present" ||
+    //       data.strictTransportSecurity == "Not Present" ||
+    //       data.ContentSecurityPolicy == "Not Present" ||
+    //       data.SecureCookie == "Not Present" ||
+    //       data.HttpOnlyCookie == "Not Present"
+    //     ) {
+    //       setHSTSstatus("          NOT SECURE!!");
+    //     } else {
+    //       setHSTSstatus("          SECURE");
+    //     }
+    //   });
   };
   const logout = async (e) => {
     e.preventDefault();
