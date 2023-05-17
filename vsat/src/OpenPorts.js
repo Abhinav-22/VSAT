@@ -31,6 +31,25 @@ const OpenPorts = (props) => {
     }
   };
 
+  const uploadGlancePort = async (dataports) => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const { data, error } = await supabase
+      .from("glance")
+      .upsert({
+        id: user.id,
+        porttime: new Date().toLocaleString(),
+
+        portres: dataports.openPorts.length,
+      })
+      .select();
+    if (error) {
+      console.log(error.message);
+    }
+  };
+
   // const fetchHost = async () => {
   //   var val = "";
   //   await fetch("/hostname")
@@ -73,6 +92,8 @@ const OpenPorts = (props) => {
   // useEffect(() => {
   //   getData();
   // }, []);
+
+  
   const fetchHost = async () => {
     return fetch("/hostname")
       .then((res) => res.json())
@@ -106,6 +127,7 @@ const OpenPorts = (props) => {
         setportsCount(dataports.openPorts.length);
 
         uploadPorts(dataports);
+        uploadGlancePort(dataports);
       });
   };
   useEffect(() => {
