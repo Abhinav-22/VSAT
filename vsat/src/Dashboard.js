@@ -13,6 +13,7 @@ import cover from "./img/cover.jpg";
 
 function Dashboard() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const [authName, setAuthName] = useState("");
   const [authEmail, setAuthEmail] = useState("");
@@ -686,6 +687,8 @@ function Dashboard() {
   };
 
   const scan = async () => {
+    setLoading(true);
+
     try {
       const { ssl, domm } = await scanssl();
       await supassl(ssl, domm);
@@ -721,6 +724,9 @@ function Dashboard() {
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
+
+    window.location.reload();
   };
 
   const logout = async (e) => {
@@ -1242,7 +1248,17 @@ function Dashboard() {
               <button
                 className="mt-3 my-auto mx-auto flex gap-2 justify-center align-middle bg-fieldbg hover:bg-blue-700 text-white font-medium text-left rounded-xl h-20 w-64"
                 onClick={scan}
+                disabled={loading}
               >
+                {loading ? (
+                  <div>
+                    <div className="flex items-center">
+                      <div className="my-auto mt-7 mr-3 ttspan flex animate-spin rounded-full h-5 w-4 border-t-2 border-b-2 border-white-900 "></div>
+                    </div>
+                  </div>
+                ) : (
+                  <p></p>
+                )}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="25"
@@ -1253,6 +1269,7 @@ function Dashboard() {
                 >
                   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
+
                 <span className="my-auto ttspan flex justify-center">
                   Quick scan
                 </span>
