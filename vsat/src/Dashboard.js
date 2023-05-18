@@ -7,6 +7,7 @@ import useDomainStore from "./stores/storeDomain";
 import useGlanceStore from "./stores/glanceStore";
 import usePortListStore from "./stores/portListStore";
 import Pdfgen from "./Pdfgen";
+import cover from"./img/cover.jpg"
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -947,7 +948,7 @@ function Dashboard() {
         {/* ================================== */}
 
         <div className="pane bg-mainbg col-span-5">
-          <h2 className="mt-7 ml-7 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white">
+          <h2 className="mt-7 ml-7 text-3xl md:text-3xl xl:text-3xl font-semibold tracking-tight text-white">
             Security Dashboard
           </h2>
           <p className="mt-3 ml-7 py-2 text-xl text-white font-light mb-4">
@@ -1249,6 +1250,22 @@ function Dashboard() {
                 </span>
               </button>
             </div>
+          </div>
+          <div className="ml-7 mb-3 mt-3 w-3/6  h-52 bg-cover-blue rounded-xl " >
+          <img src={cover} className="w-56 h-full float-right rounded-xl drop-shadow-xl" alt="cover image" />
+          <p className="ml-3 pt-2  text-xl text-white  font-semibold ">
+          Do a security logging checkup right now
+              </p>
+              <p className="ml-3 pt-2  text-md text-white  font-medium ">
+              Know the status of your security logging and
+infrastructure
+              </p>
+              <button className="h-10 w-32 ml-3 mt-7 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-cover-white ">
+             
+              <span className="my-auto ttspan text-center flex justify-center font-bold ">
+              Go to survey
+                  </span>
+              </button>
           </div>
         </div>
       </div>
