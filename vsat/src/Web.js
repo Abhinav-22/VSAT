@@ -749,7 +749,7 @@ const Web = () => {
                 </thead>
 
                 <tbody>
-                  <tr className="  bg-secondbg  ">
+                  <tr className="border-b border-txtcol bg-secondbg  ">
                     <td className="w-4 p-4">
                       <div className="flex items-center"></div>
                     </td>
