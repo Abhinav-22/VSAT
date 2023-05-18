@@ -13,9 +13,20 @@ function Induvidual() {
   const [hstsstatus, setHstsstatus] = useState("Loading");
   const [domainstatus, setDomainstatus] = useState("Loading...");
   const [time, setTime] = useState("");
-  var scorevalue = 5;
-  var score = 0;
+  const [score, setScore] = useState(0);
+
   const [pstatus, setPstatus] = useState("False");
+
+  const incrementByTwo = () => {
+    setScore((prevScore) => prevScore + 2);
+  };
+  const incrementByOne = () => {
+    setScore((prevScore) => prevScore + 1);
+  };
+
+  const incrementByThree = () => {
+    setScore((prevScore) => prevScore + 3);
+  };
   const sendURL = async (e) => {
     e.preventDefault();
     console.log(urlVal);
@@ -33,6 +44,7 @@ function Induvidual() {
   };
 
   const scanURL = async () => {
+    setScore(0);
     setTime(new Date().toLocaleString());
     fetch("/sslexpiry")
       .then((res) => res.json())
@@ -45,7 +57,7 @@ function Induvidual() {
           //scorevalue = scorevalue - 2;
         } else {
           setSslsecure("Present");
-          score = score + 2;
+          incrementByTwo();
         }
         const currentDate = new Date();
         const futureDate = new Date(data.SSLExpiry);
@@ -74,10 +86,10 @@ function Induvidual() {
           // scorevalue = 0;
         } else if (data.Sitedetails == "This site is not a phishing site.") {
           setPhisstatus("Not Phishing site");
-          score = score + 2;
+          incrementByTwo();
         } else {
           setPhisstatus("No phishing details found");
-          score = score + 1;
+          incrementByOne();
         }
       });
 
@@ -89,8 +101,7 @@ function Induvidual() {
         //  console.log(data);
         if (data == "SAFE") {
           setSafewebstatus("Safe");
-          score = score + 2;
-          //scorevalue = scorevalue - 2;
+          incrementByTwo(); //scorevalue = scorevalue - 2;
         } else {
           setSafewebstatus("Not Safe");
         }
@@ -105,13 +116,13 @@ function Induvidual() {
           setHstsstatus("Failed");
         } else if (data.falseScore == 0) {
           setHstsstatus("Present");
-          score = score + 2;
+          incrementByThree();
         } else if (data.falseScore > 4) {
           setHstsstatus("Most headers are missing");
-          score = score + 1;
+          incrementByTwo();
         } else if (data.falseScore <= 4) {
           setHstsstatus("Some headers are missing");
-          score = score + 1.5;
+          incrementByOne();
         }
       });
 
@@ -123,7 +134,7 @@ function Induvidual() {
         console.log(data.PrivacyPolicy);
         if (data.PrivacyPolicy == true) {
           setPrivacystatus("Present");
-          score = score + 2;
+          incrementByTwo();
         } else {
           setPrivacystatus("Not Present");
         }
@@ -364,7 +375,7 @@ function Induvidual() {
                 VSAT Score
               </p>
               <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
-                <ReactStoreIndicator value={4} maxValue={10} />
+                <ReactStoreIndicator value={score} maxValue={13} />
               </div>
               <p className="  text-lg text-white text-center  font-normal ">
                 Safety score index
@@ -382,7 +393,7 @@ function Induvidual() {
                     Less secure{" "}
                   </span>
                 </p>
-              
+
                 <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
                   Score : 4-10
                   <span className="ml-3 mx-auto my-auto text-center  bg-green-600 w-28  h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2  ">
