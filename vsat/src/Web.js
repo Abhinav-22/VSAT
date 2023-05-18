@@ -5,6 +5,8 @@ import supabase from "./config/supabaseClient";
 import UrlRedirection from "./UrlRedirection";
 import useGlanceStore from "./stores/glanceStore";
 import useDomainStore from "./stores/storeDomain";
+import Webserver from "./Webserver";
+import Webtech from "./Webtech";
 
 const Web = () => {
   const navigate = useNavigate();
@@ -210,6 +212,7 @@ const Web = () => {
  }
  xss();
 
+      
     // fetch("/phishtank")
     //   .then((res) => res.json())
     //   .then((data) => {
@@ -739,6 +742,9 @@ const Web = () => {
                     <th scope="col" className="px-6 py-3">
                       Technologies detected
                     </th>
+                    <th scope="col" className="px-6 py-3">
+ 
+</th>
                   </tr>
                 </thead>
 
@@ -747,9 +753,30 @@ const Web = () => {
                     <td className="w-4 p-4">
                       <div className="flex items-center"></div>
                     </td>
+                    <th
+                    scope="row"
+                     className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
 
-                    <td className="px-6 py-4"></td>
+                      Web Technologies
+                      </th>
+                    <td className="px-6 py-4">
+                    <Webtech/>
+                    </td>
                   </tr>
+
+                  <tr className="  bg-secondbg  ">
+   <td className="w-4 p-4">
+     <div className="flex items-center"></div>
+   </td>
+   <th
+   scope="row"
+    className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
+     Web Servers
+     </th>
+                    <td className="px-6 py-4">
+                    <Webserver />
+   </td>
+ </tr>
                 </tbody>
               </table>
             </div>
