@@ -21,6 +21,7 @@
     "react-score-indicator": "^2.2.1",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.2",
+    "survey-react-ui": "^1.9.88",
     "web-vitals": "^2.1.4",
     "zustand": "^4.3.7"
   },

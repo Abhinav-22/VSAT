@@ -1260,12 +1260,14 @@ function Dashboard() {
               Know the status of your security logging and
 infrastructure
               </p>
-              <button className="h-10 w-32 ml-3 mt-7 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-cover-white ">
+              <Link to="/survey">
+              <button className="h-10 w-32 ml-3 mt-7 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
              
               <span className="my-auto ttspan text-center flex justify-center font-bold ">
               Go to survey
                   </span>
               </button>
+              </Link>
           </div>
         </div>
       </div>

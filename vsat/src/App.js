@@ -20,6 +20,7 @@ import Forgotem from "./Forgotem.js";
 import Pdfgen from "./Pdfgen.js";
 import Email from "./Email.js";
 import Loginback from "./Loginback.js";
+import SurveyComponent from "./SurveyComponent.jsx";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="resetem" element={<Forgotem />}></Route>
         <Route path="pdfgen" element={<Pdfgen />}></Route>
         <Route path="email" element={<Email />}></Route>
+        <Route path="survey" element={<SurveyComponent />}></Route>
         <Route path="loginback" element={<Loginback />}></Route>
 
         <Route
