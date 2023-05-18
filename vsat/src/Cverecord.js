@@ -1,41 +1,46 @@
 import React, { useState, useEffect } from "react";
 
-const Webtech = () => {
-  const [techrec, setTechrec] = useState([]);
-  const [techinfo, setTechinfo] = useState();
-//var a = []
+const Cverecord = () => {
+  const [cvereco, setCvereco] = useState([]);
+
   useEffect(() => {
-    fetch("/webtechscan")
+    fetch("/cvelookup")
       .then((res) => res.json())
       .then((data) => {
-        setTechrec(data.Technologies);
-        setTechinfo(data.Info)
-        //console.log(data.Server);
+        setCvereco(data);
+       // a = data.SRV;
+       // console.log(typeof a)
+       // console.log(data.TXT);
+        //onsole.log(typeof data.TXT)
+       // console.log(typeof textreco);
       });
   }, []);
     
-  if ( (techinfo) == "technologies found.") {
-    const Webtec = techrec.map((str, index) => (
+  if ( cvereco !== 'nil') {
+    const Cverecod = cvereco.map((str, index) => (
       <p key={index}>
          {str}
       </p>
     ));
     return (
       <p className=" py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-        {Webtec}
+        {Cverecod}
       </p>
     );
   }
   else {
     return (
       <p className=" py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-        {techinfo}
+        {cvereco}
       </p>
     );
   }
+
+ 
+ 
+ 
+ 
+
 };
-  
-  
 
-
-export default Webtech;
+export default Cverecord;

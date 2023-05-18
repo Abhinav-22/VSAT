@@ -7,6 +7,7 @@ import useGlanceStore from "./stores/glanceStore";
 import useDomainStore from "./stores/storeDomain";
 import Webserver from "./Webserver";
 import Webtech from "./Webtech";
+import Cverecord from "./Cverecord";
 
 const Web = () => {
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Web = () => {
   const [url, setUrl] = useState([]);
   const [phish, setPhish] = useState("Loading...");
   const [xssflag, setXssflag] = useState("nil");
+  const [xxeflag, setXxeflag] = useState("nil");
   const domainStoredval = useDomainStore((state) => state.domainval);
 
 
@@ -212,6 +214,19 @@ const Web = () => {
  }
  xss();
 
+ const xxe = async () => {
+  fetch("/xxelookup")
+    .then((res) => res.json())
+    .then((data) => {
+      
+        setXxeflag(data.XXEStatus);
+       // console.log(data);
+      
+      
+      
+  })
+  }
+ xxe();
       
     // fetch("/phishtank")
     //   .then((res) => res.json())
@@ -802,7 +817,7 @@ const Web = () => {
                       <div className="flex items-center"></div>
                     </td>
 
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4"><Cverecord/> </td>
                   </tr>
                 </tbody>
               </table>
@@ -874,7 +889,7 @@ const Web = () => {
                     >
                       XXE status
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4"> { xxeflag}</td>
                   </tr>
                 </tbody>
               </table>

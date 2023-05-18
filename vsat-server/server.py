@@ -670,6 +670,7 @@ def getwebtech():
 
         if technologies:
             webdict.update({"Technologies": technologies})
+            webdict.update({"Info": "technologies found."})
         else:
             webdict.update({"Info": "No technologies found."})
     except:
@@ -953,6 +954,6 @@ def xxelookup():
 
     else:
         xxedict.update({"XXEStatus": response.status_code})
-
+    return(xxedict)
 
 app.run()
