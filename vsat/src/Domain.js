@@ -35,6 +35,7 @@ const Domain = () => {
   // const [caarec, setCaarec] = useState("nil");
   //const [ptrrec, setPtrrec] = useState("nil");
   //const [srvrec, setSrvrec] = useState("nil");
+  
   const [txtflag, setTxtflag] = useState(0);
   const [textr, setTextr] = useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);

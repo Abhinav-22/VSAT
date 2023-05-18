@@ -407,7 +407,8 @@ def get_xssbasic():
     soup = bs(requests.get(url).content, "html.parser")
     forms = soup.find_all("form")
     xdict.update({"NumberOfFormsDetected": len(forms)})
-
+    if (len(forms)==0):
+        xdict.update({"flag": 0})
     # Step 2: Try submitting a payload to each form and check for XSS vulnerability
     js_script = "<script>alert(XSS)</script>"
     for form in forms:
@@ -440,8 +441,10 @@ def get_xssbasic():
         content = res.content.decode()
         if js_script in content:
             xdict.update({"XSSDetected": form_details})
+            xdict.update({"flag": 1})
         else:
             xdict.update({"XSSNotDetectedOn": url})
+            xdict.update({"flag": 0})
     return jsonify(xdict)
 
 
