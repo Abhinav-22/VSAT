@@ -67,8 +67,10 @@ function Induvidual() {
         console.log(timeDiff);
         if (daysDiff >= 20) {
           setDomainstatus("Secure");
+          incrementByTwo()
         } else if (daysDiff >= 0) {
           setDomainstatus("Expires in " + daysDiff + "Days");
+          incrementByOne()
         } else {
           setDomainstatus("Not secure");
         }
@@ -214,8 +216,8 @@ function Induvidual() {
           </p>
 
           <div className="scan grid grid-cols-3 gap-0 ">
-            <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto mt-3  rounded-xl flex flex-col items-center justify-center">
-              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+            <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto overflow-y-auto mt-3  rounded-xl flex flex-col items-center justify-center">
+              <table className="w-full text-sm text-left rounded-xl text-gray-500 dark:text-gray-400 ">
                 <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
                     <th scope="col" className="p-4">
@@ -230,9 +232,7 @@ function Induvidual() {
                     <th scope="col" className="px-6 py-3">
                       Result
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      VSAT Score
-                    </th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -252,7 +252,7 @@ function Induvidual() {
                         {domainstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$2999</td>
+                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -270,7 +270,7 @@ function Induvidual() {
                         {sslsecure}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$1999</td>
+                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -288,7 +288,7 @@ function Induvidual() {
                         {phisstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$99</td>
+                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -328,7 +328,7 @@ function Induvidual() {
                         {safewebstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$179</td>
+                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -346,7 +346,7 @@ function Induvidual() {
                         {hstsstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$699</td>
+                   
                   </tr>
                   <tr className="bg-secondbg ">
                     <td className="w-4 p-4">
@@ -364,7 +364,7 @@ function Induvidual() {
                         {privacystatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$3999</td>
+                   
                   </tr>
                 </tbody>
               </table>
@@ -375,7 +375,18 @@ function Induvidual() {
                 VSAT Score
               </p>
               <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
-                <ReactStoreIndicator value={score} maxValue={13} />
+                <ReactStoreIndicator value={score} maxValue={13} stepsColors={['#94128F',
+  '#d12000',
+  '#ed8d00',
+  '#f1bc00',
+  '#f1bc00',
+  '#f1bc00',
+  '#f1bc00',
+  '#84c42b',
+  '#53b83a',
+  '#3da940',
+  '#3da940',
+  '#3da940',]}/>
               </div>
               <p className="  text-lg text-white text-center  font-normal ">
                 Safety score index
@@ -383,19 +394,19 @@ function Induvidual() {
               <div className=" pb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl ">
                 <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
                   Score : 0
-                  <span className="ml-9 mx-auto my-auto text-center  bg-red-600 w-40 pl-5 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
+                  <span className="ml-8 mx-auto my-auto text-center  bg-purp w-40 pl-5 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
                     Phishing site{" "}
                   </span>
                 </p>
                 <p className=" ml-5 mt-3  text-md text-white items-middle  font-semibold ">
-                  Score : 1-3
+                  Score : 1-7
                   <span className="ml-5 mx-auto my-auto text-center  bg-yellow-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">
                     Less secure{" "}
                   </span>
                 </p>
 
                 <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
-                  Score : 4-10
+                  Score : 8-13
                   <span className="ml-3 mx-auto my-auto text-center  bg-green-600 w-28  h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2  ">
                     Secure website
                   </span>

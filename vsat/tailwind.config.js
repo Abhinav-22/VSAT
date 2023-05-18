@@ -13,6 +13,7 @@ module.exports = {
         'fieldbg':'#1D1D1D',
         'txtcol': '#303030',
         'cover-blue':'#4558B0',
+        'purp':'#94128F',
         'cover-white':'#D9D9D9'
       }
       
