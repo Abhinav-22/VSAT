@@ -67,8 +67,10 @@ function Induvidual() {
         console.log(timeDiff);
         if (daysDiff >= 20) {
           setDomainstatus("Secure");
+          incrementByTwo()
         } else if (daysDiff >= 0) {
           setDomainstatus("Expires in " + daysDiff + "Days");
+          incrementByOne()
         } else {
           setDomainstatus("Not secure");
         }
@@ -373,7 +375,18 @@ function Induvidual() {
                 VSAT Score
               </p>
               <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
-                <ReactStoreIndicator value={score} maxValue={13} />
+                <ReactStoreIndicator value={score} maxValue={13} stepsColors={['#94128F',
+  '#d12000',
+  '#ed8d00',
+  '#f1bc00',
+  '#f1bc00',
+  '#f1bc00',
+  '#f1bc00',
+  '#84c42b',
+  '#53b83a',
+  '#3da940',
+  '#3da940',
+  '#3da940',]}/>
               </div>
               <p className="  text-lg text-white text-center  font-normal ">
                 Safety score index
@@ -381,19 +394,19 @@ function Induvidual() {
               <div className=" pb-2 h-auto mt-3 w-80 mx-auto my-auto flex flex-col justify-center border-2 border-txtcol rounded-xl ">
                 <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
                   Score : 0
-                  <span className="ml-9 mx-auto my-auto text-center  bg-red-600 w-40 pl-5 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
+                  <span className="ml-8 mx-auto my-auto text-center  bg-purp w-40 pl-5 h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mt-2 ">
                     Phishing site{" "}
                   </span>
                 </p>
                 <p className=" ml-5 mt-3  text-md text-white items-middle  font-semibold ">
-                  Score : 1-3
+                  Score : 1-7
                   <span className="ml-5 mx-auto my-auto text-center  bg-yellow-600 w-28 h-11 text-white text-sm font-semibold mr-2 px-5 py-0.5 rounded mt-2  ">
                     Less secure{" "}
                   </span>
                 </p>
 
                 <p className=" ml-5 mt-3  text-md text-white   font-semibold ">
-                  Score : 4-10
+                  Score : 8-13
                   <span className="ml-3 mx-auto my-auto text-center  bg-green-600 w-28  h-11 text-white text-sm font-semibold mr-2 px-2.5 py-0.5  rounded mt-2  ">
                     Secure website
                   </span>
