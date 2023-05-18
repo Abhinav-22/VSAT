@@ -12,7 +12,7 @@ module.exports = {
         'secondbg':'#111111',
         'fieldbg':'#1D1D1D',
         'txtcol': '#303030',
-        'cover-blue':'#4F7BBE',
+        'cover-blue':'#4558B0',
         'cover-white':'#D9D9D9'
       }
       
