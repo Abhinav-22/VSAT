@@ -13,6 +13,8 @@ import Soarecord from "./Soarecord";
 import Cnamerecord from "./Cnamerecord";
 import Ptrrec from "./Ptrrec";
 import Srvrecord from "./Srvrecord";
+import useDomainStore from "./stores/storeDomain";
+
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -35,7 +37,8 @@ const Domain = () => {
   // const [caarec, setCaarec] = useState("nil");
   //const [ptrrec, setPtrrec] = useState("nil");
   //const [srvrec, setSrvrec] = useState("nil");
-  
+  const domainStoredval = useDomainStore((state) => state.domainval);
+
   const [txtflag, setTxtflag] = useState(0);
   const [textr, setTextr] = useState("nil");
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
@@ -249,6 +252,8 @@ const Domain = () => {
         });
     };
     updatewhois();
+
+
   };
 
   const logout = async (e) => {
@@ -427,7 +432,7 @@ const Domain = () => {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  {authEmail}
+                  {domainStoredval}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button

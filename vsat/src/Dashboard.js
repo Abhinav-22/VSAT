@@ -6,6 +6,8 @@ import usePortStore from "./stores/portStore";
 import useDomainStore from "./stores/storeDomain";
 import useGlanceStore from "./stores/glanceStore";
 import usePortListStore from "./stores/portListStore";
+//import useDomainStore from "./stores/storeDomain";
+
 import Pdfgen from "./Pdfgen";
 import cover from"./img/cover.jpg"
 
@@ -23,6 +25,7 @@ function Dashboard() {
   const [timeScanned, setTimeScanned] = useState("");
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
+  
 
   // ----GLANCE----
   const [domainscan, setDomainscan] = useState("loading...");
@@ -914,7 +917,7 @@ function Dashboard() {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  {authEmail}{" "}
+                  {domainStoredval}{" "}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button

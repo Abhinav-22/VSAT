@@ -6,6 +6,8 @@ import supabase from "./config/supabaseClient";
 import usePortStore from "./stores/portStore";
 import usePortListStore from "./stores/portListStore";
 import OpenPorts from "./OpenPorts";
+import useDomainStore from "./stores/storeDomain";
+
 
 const Network = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const Network = () => {
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
   const portsCount = usePortStore((state) => state.scanports);
+  const domainStoredval = useDomainStore((state) => state.domainval);
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);
 
@@ -236,7 +239,7 @@ const Network = () => {
                 </span>
               </div>
               <p className="flex justify-center mb-3 text-sm font-light text-white">
-                {authEmail}
+                {domainStoredval}
               </p>
               <div className="btn drop-shadow-lg	 ">
                 <button

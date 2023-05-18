@@ -4,12 +4,15 @@ import copy from "copy-to-clipboard";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useTokenStore from "./stores/tokenStore";
+import useDomainStore from "./stores/storeDomain";
+
 
 const Api = () => {
   const navigate = useNavigate();
   const [tokenVal, settokenVal] = useState("");
   const [authEmail, setAuthEmail] = useState("");
   const [authCompany, setAuthCompany] = useState("");
+  const domainStoredval = useDomainStore((state) => state.domainval);
 
   const tokenStore = useTokenStore((state) => state.tokenVal);
   const settokenStore = useTokenStore((state) => state.updateToken);
@@ -253,7 +256,7 @@ const Api = () => {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  {authEmail}
+                  {domainStoredval}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button

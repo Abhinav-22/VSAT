@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import UrlRedirection from "./UrlRedirection";
 import useGlanceStore from "./stores/glanceStore";
+import useDomainStore from "./stores/storeDomain";
 
 const Web = () => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const Web = () => {
   const [httpSec, setHttpSec] = useState("");
   const [url, setUrl] = useState([]);
   const [phish, setPhish] = useState("Loading...");
+  const [xssflag, setXssflag] = useState("nil");
+  const domainStoredval = useDomainStore((state) => state.domainval);
+
 
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
   const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
@@ -187,6 +191,24 @@ const Web = () => {
         setUrl(data.LinkCount);
         console.log(data);
       });
+    
+      const xss = async () => {
+   fetch("/xssbasic")
+     .then((res) => res.json())
+     .then((data) => {
+       if (data.flag == 0) {
+         setXssflag("XSS Not Detected");
+         console.log(xssflag);
+       }
+       else if (data.flag == 1) {
+         setXssflag("XSS Detected");
+         console.log(data.flag);
+       }
+       
+       
+   })
+ }
+ xss();
 
     // fetch("/phishtank")
     //   .then((res) => res.json())
@@ -405,7 +427,7 @@ const Web = () => {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  {authEmail}
+                  {domainStoredval}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button
@@ -853,7 +875,7 @@ const Web = () => {
                 <tbody>
                   <tr className="  bg-secondbg  ">
                     <td className="w-4 p-4">
-                      <div className="flex items-center"></div>
+                      <div className="flex items-center"> </div>
                     </td>
                     <th
                       scope="row"
@@ -861,7 +883,7 @@ const Web = () => {
                     >
                       XSS status
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4"> {xssflag} </td>
                   </tr>
                 </tbody>
               </table>

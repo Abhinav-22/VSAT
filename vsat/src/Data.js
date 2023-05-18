@@ -3,6 +3,7 @@ import logo from "./img/transparent.svg";
 import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useGlanceStore from "./stores/glanceStore";
+import useDomainStore from "./stores/storeDomain";
 
 const Data = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Data = () => {
   const [dataleak, setDataleak] = useState("Loading...");
   const [leak, setLeak] = useState("");
   const [privacystatus, setPrivacystatus] = useState("Loading..");
+  const domainStoredval = useDomainStore((state) => state.domainval);
 
   const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
 
@@ -319,7 +321,7 @@ const Data = () => {
                   </span>
                 </div>
                 <p className="flex justify-center mb-3 text-sm font-light text-white">
-                  {authEmail}
+                  {domainStoredval}
                 </p>
                 <div className="btn drop-shadow-lg	 ">
                   <button
