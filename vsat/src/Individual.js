@@ -214,8 +214,8 @@ function Induvidual() {
           </p>
 
           <div className="scan grid grid-cols-3 gap-0 ">
-            <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto mt-3  rounded-xl flex flex-col items-center justify-center">
-              <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+            <div className="ml-9 col-span-2 w-5/6 statuscard overflow-x-auto overflow-y-auto mt-3  rounded-xl flex flex-col items-center justify-center">
+              <table className="w-full text-sm text-left rounded-xl text-gray-500 dark:text-gray-400 ">
                 <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
                   <tr>
                     <th scope="col" className="p-4">
@@ -230,9 +230,7 @@ function Induvidual() {
                     <th scope="col" className="px-6 py-3">
                       Result
                     </th>
-                    <th scope="col" className="px-6 py-3">
-                      VSAT Score
-                    </th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -252,7 +250,7 @@ function Induvidual() {
                         {domainstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$2999</td>
+                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -270,7 +268,7 @@ function Induvidual() {
                         {sslsecure}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$1999</td>
+                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -288,7 +286,7 @@ function Induvidual() {
                         {phisstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$99</td>
+                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -328,7 +326,7 @@ function Induvidual() {
                         {safewebstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$179</td>
+                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -346,7 +344,7 @@ function Induvidual() {
                         {hstsstatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$699</td>
+                   
                   </tr>
                   <tr className="bg-secondbg ">
                     <td className="w-4 p-4">
@@ -364,7 +362,7 @@ function Induvidual() {
                         {privacystatus}
                       </span>
                     </td>
-                    <td className="px-6 py-4">$3999</td>
+                   
                   </tr>
                 </tbody>
               </table>
