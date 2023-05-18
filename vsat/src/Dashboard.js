@@ -9,7 +9,7 @@ import usePortListStore from "./stores/portListStore";
 //import useDomainStore from "./stores/storeDomain";
 
 import Pdfgen from "./Pdfgen";
-import cover from"./img/cover.jpg"
+import cover from "./img/cover.jpg";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -25,7 +25,6 @@ function Dashboard() {
   const [timeScanned, setTimeScanned] = useState("");
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
-  
 
   // ----GLANCE----
   const [domainscan, setDomainscan] = useState("loading...");
@@ -39,6 +38,12 @@ function Dashboard() {
   const [dataleak, setDataleak] = useState("Loading...");
   const [datatime, setDatatime] = useState("Loading...");
   const [countptime, setCountPtime] = useState("Loading...");
+
+  //-----action----
+  const [domainaction, setDomainaction] = useState("Loading...");
+  const [webaction, setWebaction] = useState("Loading...");
+  const [dataaction, setDataaction] = useState("Loading...");
+  const [networkaction, setNetworkaction] = useState("Loading...");
 
   const [supssl, setsupSSL] = useState("nil");
 
@@ -979,7 +984,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-                No action required
+                {webaction}
               </span>
             </div>
             <div className="net h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -1000,7 +1005,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-                No action required
+                {networkaction}{" "}
               </span>
             </div>
             <div className="data h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -1020,7 +1025,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-                No action required
+                {dataaction}{" "}
               </span>
             </div>
             <div className="asset h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
@@ -1041,7 +1046,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-                No action required
+                {domainaction}{" "}
               </span>
             </div>
           </div>
@@ -1254,23 +1259,25 @@ function Dashboard() {
               </button>
             </div>
           </div>
-          <div className="ml-7 mb-3 mt-3 w-3/6  h-52 bg-cover-blue rounded-xl " >
-          <img src={cover} className="w-56 h-full float-right rounded-xl drop-shadow-xl" alt="cover image" />
-          <p className="ml-3 pt-2  text-xl text-white  font-semibold ">
-          Do a security logging checkup right now
-              </p>
-              <p className="ml-3 pt-2  text-md text-white  font-medium ">
-              Know the status of your security logging and
-infrastructure
-              </p>
-              <Link to="/survey" target="_blank">
+          <div className="ml-7 mb-3 mt-3 w-3/6  h-52 bg-cover-blue rounded-xl ">
+            <img
+              src={cover}
+              className="w-56 h-full float-right rounded-xl drop-shadow-xl"
+              alt="cover image"
+            />
+            <p className="ml-3 pt-6  text-xl text-white  font-semibold ">
+              Do a security logging checkup right now
+            </p>
+            <p className="ml-3 pt-3  text-md text-white  font-medium ">
+              Know the status of your security logging and infrastructure
+            </p>
+            <Link to="/survey" target="_blank">
               <button className="h-10 w-32 ml-3 mt-7 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
-             
-              <span className="my-auto ttspan text-center flex justify-center font-bold ">
-              Go to survey
-                  </span>
+                <span className="my-auto ttspan text-center flex justify-center font-bold ">
+                  Go to survey
+                </span>
               </button>
-              </Link>
+            </Link>
           </div>
         </div>
       </div>

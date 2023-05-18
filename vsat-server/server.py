@@ -113,14 +113,14 @@ def get_dns_records_info():
         A = dns.resolver.resolve(domain, 'A')
         dns_records['A'] = [record.to_text() for record in A]
     except Exception as e:
-        dns_records['A'] ='nil'
+        dns_records['A'] = 'nil'
 
     # AAAA Record
     try:
         AAAA = dns.resolver.resolve(domain, 'AAAA')
         dns_records['AAAA'] = [record.to_text() for record in AAAA]
     except Exception as e:
-        dns_records['AAAA'] ='nil'
+        dns_records['AAAA'] = 'nil'
 
     # MX Record
     try:
@@ -130,49 +130,49 @@ def get_dns_records_info():
             mx_data.append((record.exchange.to_text(), record.preference))
         dns_records['MX'] = mx_data
     except Exception as e:
-        dns_records['MX']='nil'
+        dns_records['MX'] = 'nil'
 
     # NS Record
     try:
         NS = dns.resolver.resolve(domain, 'NS')
         dns_records['NS'] = [record.to_text() for record in NS]
     except Exception as e:
-        dns_records['NS'] ='nil'
+        dns_records['NS'] = 'nil'
 
     # TXT Record
     try:
         TXT = dns.resolver.resolve(domain, 'TXT')
         dns_records['TXT'] = [record.to_text() for record in TXT]
     except Exception as e:
-        dns_records['TXT'] ='nil'
+        dns_records['TXT'] = 'nil'
 
     # CNAME Record
     try:
         CNAME = dns.resolver.resolve(domain, 'CNAME')
         dns_records['CNAME'] = [record.to_text() for record in CNAME]
     except Exception as e:
-        dns_records['CNAME'] ='nil'
+        dns_records['CNAME'] = 'nil'
 
     # CAA Record
     try:
         CAA = dns.resolver.resolve(domain, 'CAA')
         dns_records['CAA'] = [record.to_text() for record in CAA]
     except Exception as e:
-        dns_records['CAA'] ='nil'
+        dns_records['CAA'] = 'nil'
 
     # PTR Record
     try:
         PTR = dns.resolver.resolve(domain, 'PTR')
         dns_records['PTR'] = [record.to_text() for record in PTR]
     except Exception as e:
-        dns_records['PTR'] ='nil'
+        dns_records['PTR'] = 'nil'
 
     # SOA Record
     try:
         SOA = dns.resolver.resolve(domain, 'SOA')
         dns_records['SOA'] = [record.to_text() for record in SOA]
     except Exception as e:
-        dns_records['SOA'] ='nil'
+        dns_records['SOA'] = 'nil'
 
     # SRV Record
     try:
@@ -183,14 +183,14 @@ def get_dns_records_info():
                             record.weight, record.priority))
         dns_records['SRV'] = srv_data
     except Exception as e:
-        dns_records['SRV'] ='nil'
+        dns_records['SRV'] = 'nil'
 
     return jsonify(dns_records)
 
 
 @app.route("/httpsecheader", methods=['POST', 'GET'])
 def get_hsts():
-    flag=0
+    flag = 0
     try:
         ur = 'https://'+wd
         hsd = {}
@@ -199,14 +199,14 @@ def get_hsts():
         cookies = response.cookies
     except Exception as e:
         hsd.update({'https': 'Not Present'})
-        flag+=1
+        flag += 1
 # XXSS block
     try:
         if headers["X-XSS-Protection"]:
             hsd.update({'xssProtect':  'Present'})
     except KeyError:
         hsd.update({'xssProtect':  'Not Present'})
-        flag+=1
+        flag += 1
 
 # NOSNIFF block
     try:
@@ -215,10 +215,10 @@ def get_hsts():
         else:
             hsd.update(
                 {'xcontentoptions':  'Not Present'})
-            flag+=1
+            flag += 1
     except KeyError:
         hsd.update({'xcontentoptions':  'Not Present'})
-        flag+=1
+        flag += 1
 
 # XFrame block
     try:
@@ -228,10 +228,10 @@ def get_hsts():
             hsd.update({'frameOptions':  'Present'})
         else:
             hsd.update({'frameOptions':  'Not Present'})
-            flag+=1
+            flag += 1
     except KeyError:
         hsd.update({'frameOptions':  'Not Present'})
-        flag+=1
+        flag += 1
 
 # HSTS block
     try:
@@ -239,7 +239,7 @@ def get_hsts():
             hsd.update({'strictTransportSecurity':  'Present'})
     except KeyError:
         hsd.update({'strictTransportSecurity':  'Not Present'})
-        flag+=1
+        flag += 1
 
 # Policy block
     try:
@@ -247,7 +247,7 @@ def get_hsts():
             hsd.update({'ContentSecurityPolicy':  'Present'})
     except KeyError:
         hsd.update({'ContentSecurityPolicy':  'Not Present'})
-        flag+=1
+        flag += 1
 
 # Cookie blocks
     try:
@@ -257,17 +257,17 @@ def get_hsts():
                 hsd.update({'SecureCookie':  'Present'})
             else:
                 hsd.update({'SecureCookie':  'Not Present'})
-                flag+=1
+                flag += 1
             if cookie.has_nonstandard_attr('httponly') or cookie.has_nonstandard_attr('HttpOnly'):
                 hsd.update({'HttpOnlyCookie':  'Present'})
             else:
                 hsd.update({'HttpOnlyCookie':  'Not Present'})
-                flag+=1
+                flag += 1
     except KeyError:
         hsd.update({'SecureCookie':  'Not Present'})
         hsd.update({'HttpOnlyCookie':  'Not Present'})
-        flag+=2
-    
+        flag += 2
+
     hsd.update({'falseScore': flag})
     return jsonify(hsd)
 
@@ -295,7 +295,7 @@ def get_url_redirection():
             linkcount = linkcount+1
         i = 0
        # for link in links:
-          #  print(link)
+        #  print(link)
     linkdict.update({"Links": links})
     linkdict.update({"LinkCount": linkcount})
     return (linkdict)
@@ -407,7 +407,7 @@ def get_xssbasic():
     soup = bs(requests.get(url).content, "html.parser")
     forms = soup.find_all("form")
     xdict.update({"NumberOfFormsDetected": len(forms)})
-    if (len(forms)==0):
+    if (len(forms) == 0):
         xdict.update({"flag": 0})
     # Step 2: Try submitting a payload to each form and check for XSS vulnerability
     js_script = "<script>alert(XSS)</script>"
@@ -887,7 +887,7 @@ def cvelookup():
     lst = list(webdict.values())[1]
     llen = len(lst)
     print(lst)
-    resdict = {}
+    resdict = []
     print(llen)
     chrome_options = Options()
 
@@ -909,21 +909,27 @@ def cvelookup():
             time.sleep(8)
 
             for i in range(1, 6):
+                v = []
                 submit = driver.find_element(
                     By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/th/strong/a')
 
                 e = driver.find_element(
                     By.XPATH, '//*[@id="row"]/table/tbody/tr[' + str(i) + ']/td[2]')
                 # print(e.text)
-                resdict.update({submit.text: e.text})
+                v.append(submit.text)
+                v.append(" ")
+                v.append(e.text)
+                print(v)
+                resdict.append(v)
 
     except Exception as e:
         print("check spelling bro", e)
     return(resdict)
 
+
 @app.route('/xxelookup')
 def xxelookup():
-    xxedict={}
+    xxedict = {}
     url = 'https://'+wd
     xml_payload = '<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:///etc/passwd">]><foo>&xxe;</foo>'
     xml_payload = html.escape(xml_payload)
@@ -939,12 +945,14 @@ def xxelookup():
             root = ET.fromstring(response.text)
             # Check for XXE vulnerability by looking for contents of /etc/passwd in the response
             if 'root:x' in response.text:
-                xxedict.update({"XXEStatus":"XXE vulnerability found"})
+                xxedict.update({"XXEStatus": "XXE vulnerability found"})
             else:
-                xxedict.update({"XXEStatus":"No XXE vulnerability found"})
+                xxedict.update({"XXEStatus": "No XXE vulnerability found"})
         except ET.ParseError:
-            xxedict.update({"XXEStatus":"Invalid XML response"})
+            xxedict.update({"XXEStatus": "Invalid XML response"})
 
     else:
-        xxedict.update({"XXEStatus":response.status_code})
+        xxedict.update({"XXEStatus": response.status_code})
+
+
 app.run()
