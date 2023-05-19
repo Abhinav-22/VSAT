@@ -6,12 +6,14 @@ import usePortStore from "./stores/portStore";
 import useDomainStore from "./stores/storeDomain";
 import useGlanceStore from "./stores/glanceStore";
 import usePortListStore from "./stores/portListStore";
+
 //import useDomainStore from "./stores/storeDomain";
 
 import Pdfgen from "./Pdfgen";
 import cover from "./img/cover.jpg";
 
 function Dashboard() {
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -1276,7 +1278,8 @@ function Dashboard() {
               </button>
             </div>
           </div>
-          <div className="ml-7 mb-3 mt-3 w-3/6  h-52 bg-cover-blue rounded-xl ">
+          <div className="scan grid grid-cols-4 gap-3">
+          <div className="ml-7 mb-3 mt-3 col-span-2  h-52 bg-cover-blue rounded-xl ">
             <img
               src={cover}
               className="w-56 h-full float-right rounded-xl drop-shadow-xl"
@@ -1289,13 +1292,17 @@ function Dashboard() {
               Know the status of your security logging and infrastructure
             </p>
             <Link to="/survey" target="_blank">
-              <button className="h-10 w-32 ml-3 mt-7 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
+              <button className="h-10 w-32 ml-3 mt-5 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
                 <span className="my-auto ttspan text-center flex justify-center font-bold ">
                   Go to survey
                 </span>
               </button>
             </Link>
           </div>
+          <div className="col-span-2 mr-10 bg-fieldbg h-52 mt-3 rounded-xl">
+     
+    </div>
+</div>
         </div>
       </div>
     </>
