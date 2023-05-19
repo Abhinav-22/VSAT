@@ -7,7 +7,8 @@ import usePortStore from "./stores/portStore";
 import usePortListStore from "./stores/portListStore";
 import OpenPorts from "./OpenPorts";
 import useDomainStore from "./stores/storeDomain";
-
+import { Tooltip, Typography } from "@material-tailwind/react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const Network = () => {
   const navigate = useNavigate();
@@ -319,7 +320,23 @@ const Network = () => {
           </button>
         </div>
         <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-          Network port scan
+          Network port scan<Tooltip content={
+      <div className="w-80">
+        <Typography color="white" className="font-medium">Phishing Status</Typography>
+        <Typography
+          variant="small"
+          color="white" 
+          className="font-normal opacity-80"
+        >
+          Check whether your website has been flagged as phishing website
+        </Typography>
+      </div>
+    }>
+      <InformationCircleIcon 
+        strokeWidth={2} 
+        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
+      />
+    </Tooltip>
         </p>
 
         <div className="scan grid grid-cols-3 gap-2">

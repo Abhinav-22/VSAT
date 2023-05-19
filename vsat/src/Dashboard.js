@@ -1285,7 +1285,7 @@ function Dashboard() {
               className="w-56 h-full float-right rounded-xl drop-shadow-xl"
               alt="cover image"
             />
-            <p className="ml-3 pt-6  text-xl text-white  font-semibold ">
+            <p className="ml-3 pt-4  text-xl text-white  font-semibold ">
               Do a security logging checkup right now
             </p>
             <p className="ml-3 pt-3  text-md text-white  font-medium ">

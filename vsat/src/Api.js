@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import supabase from "./config/supabaseClient";
 import useTokenStore from "./stores/tokenStore";
 import useDomainStore from "./stores/storeDomain";
-
+import { Tooltip, Typography } from "@material-tailwind/react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const Api = () => {
   const navigate = useNavigate();
@@ -293,9 +294,30 @@ const Api = () => {
             API Settings
           </h2>
           <p className="mt-3 ml-7  py-2 text-xl text-white font-light mb-4"></p>
+          
           <div className="scan grid grid-cols-3 gap-2">
+            
+    
           <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
+
     <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
+    <Tooltip content={
+      <div className="w-80">
+        <Typography color="white" className="font-medium">Phishing Status</Typography>
+        <Typography
+          variant="small"
+          color="white" 
+          className="font-normal opacity-80"
+        >
+          Check whether your website has been flagged as phishing website
+        </Typography>
+      </div>
+    }>
+      <InformationCircleIcon 
+        strokeWidth={2} 
+        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-5" 
+      />
+    </Tooltip>
         <thead className=" text-xs text-gray-700 uppercase bg-fieldbg dark:text-gray-400">
             <tr>
                 <th scope="col" className="p-4">

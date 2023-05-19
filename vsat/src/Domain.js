@@ -14,7 +14,8 @@ import Cnamerecord from "./Cnamerecord";
 import Ptrrec from "./Ptrrec";
 import Srvrecord from "./Srvrecord";
 import useDomainStore from "./stores/storeDomain";
-
+import { Tooltip, Typography } from "@material-tailwind/react";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const Domain = () => {
   const navigate = useNavigate();
@@ -517,7 +518,23 @@ const Domain = () => {
             </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-            SSL certificate information
+            SSL certificate information<Tooltip content={
+      <div className="w-80">
+        <Typography color="white" className="font-medium">Phishing Status</Typography>
+        <Typography
+          variant="small"
+          color="white" 
+          className="font-normal opacity-80"
+        >
+          Check whether your website has been flagged as phishing website
+        </Typography>
+      </div>
+    }>
+      <InformationCircleIcon 
+        strokeWidth={2} 
+        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
+      />
+    </Tooltip>
           </p>
           <div className="scan grid grid-cols-3 gap-2">
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
@@ -546,7 +563,23 @@ const Domain = () => {
             </div>
             <br></br>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              DNS record information
+              DNS record information<Tooltip content={
+      <div className="w-80">
+        <Typography color="white" className="font-medium">Phishing Status</Typography>
+        <Typography
+          variant="small"
+          color="white" 
+          className="font-normal opacity-80"
+        >
+          Check whether your website has been flagged as phishing website
+        </Typography>
+      </div>
+    }>
+      <InformationCircleIcon 
+        strokeWidth={2} 
+        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
+      />
+    </Tooltip>
             </p>
             <br></br>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-full  rounded-xl ">
@@ -707,7 +740,23 @@ const Domain = () => {
             </div>
             <br></br>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              WHOIS information
+              WHOIS information<Tooltip content={
+      <div className="w-80">
+        <Typography color="white" className="font-medium">Phishing Status</Typography>
+        <Typography
+          variant="small"
+          color="white" 
+          className="font-normal opacity-80"
+        >
+          Check whether your website has been flagged as phishing website
+        </Typography>
+      </div>
+    }>
+      <InformationCircleIcon 
+        strokeWidth={2} 
+        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
+      />
+    </Tooltip>
             </p>
             <br></br>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl mb-3 ">
