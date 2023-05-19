@@ -25,7 +25,6 @@ const Web = () => {
   const [xxeflag, setXxeflag] = useState("nil");
   const domainStoredval = useDomainStore((state) => state.domainval);
 
-
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
   const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
   const [isButtonClicked, setIsButtonClicked] = useState(false);
@@ -197,39 +196,32 @@ const Web = () => {
         setUrl(data.LinkCount);
         console.log(data);
       });
-    
-      const xss = async () => {
-   fetch("/xssbasic")
-     .then((res) => res.json())
-     .then((data) => {
-       if (data.flag == 0) {
-         setXssflag("XSS Not Detected");
-         console.log(xssflag);
-       }
-       else if (data.flag == 1) {
-         setXssflag("XSS Detected");
-         console.log(data.flag);
-       }
-       
-       
-   })
- }
- xss();
 
- const xxe = async () => {
-  fetch("/xxelookup")
-    .then((res) => res.json())
-    .then((data) => {
-      
-        setXxeflag(data.XXEStatus);
-       // console.log(data);
-      
-      
-      
-  })
-  }
- xxe();
-      
+    const xss = async () => {
+      fetch("/xssbasic")
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.flag == 0) {
+            setXssflag("XSS Not Detected");
+            console.log(xssflag);
+          } else if (data.flag == 1) {
+            setXssflag("XSS Detected");
+            console.log(data.flag);
+          }
+        });
+    };
+    xss();
+
+    const xxe = async () => {
+      fetch("/xxelookup")
+        .then((res) => res.json())
+        .then((data) => {
+          setXxeflag(data.XXEStatus);
+          // console.log(data);
+        });
+    };
+    xxe();
+
     // fetch("/phishtank")
     //   .then((res) => res.json())
     //   .then((data) => {
@@ -557,23 +549,28 @@ const Web = () => {
             </button>
           </div>
           <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-            HSTS Status<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">HSTS Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          View the status of HTTP Security Header of your website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right items-center justify-center mr-11" 
-      />
-    </Tooltip>
+            HSTS Status
+            <Tooltip
+              content={
+                <div className="w-80">
+                  <Typography color="white" className="font-medium">
+                    HSTS Status
+                  </Typography>
+                  <Typography
+                    variant="small"
+                    color="white"
+                    className="font-normal opacity-80"
+                  >
+                    View the status of HTTP Security Header of your website
+                  </Typography>
+                </div>
+              }
+            >
+              <InformationCircleIcon
+                strokeWidth={2}
+                className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right items-center justify-center mr-11"
+              />
+            </Tooltip>
           </p>
           <div className="scan grid  gap-2">
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
@@ -688,23 +685,29 @@ const Web = () => {
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              Phishing Status<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              Phishing Status
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
@@ -741,23 +744,29 @@ const Web = () => {
             </div>
 
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              URL redirections<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              URL redirections
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
@@ -795,23 +804,29 @@ const Web = () => {
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              Web technology scan<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              Web technology scan
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
@@ -823,9 +838,7 @@ const Web = () => {
                     <th scope="col" className="px-6 py-3">
                       Technologies detected
                     </th>
-                    <th scope="col" className="px-6 py-3">
- 
-</th>
+                    <th scope="col" className="px-6 py-3"></th>
                   </tr>
                 </thead>
 
@@ -835,50 +848,63 @@ const Web = () => {
                       <div className="flex items-center"></div>
                     </td>
                     <th
-                    scope="row"
-                     className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
                       Web Technologies
-                      </th>
+                    </th>
                     <td className="px-6 py-4">
-                    <Webtech/>
+                      <Webtech
+                        isButtonClicked={isButtonClicked}
+                        setIsButtonClicked={setIsButtonClicked}
+                      />
                     </td>
                   </tr>
 
                   <tr className="  bg-secondbg  ">
-   <td className="w-4 p-4">
-     <div className="flex items-center"></div>
-   </td>
-   <th
-   scope="row"
-    className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white">
-     Web Servers
-     </th>
+                    <td className="w-4 p-4">
+                      <div className="flex items-center"></div>
+                    </td>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-large text-gray-900 whitespace-nowrap dark:text-white"
+                    >
+                      Web Servers
+                    </th>
                     <td className="px-6 py-4">
-                    <Webserver />
-   </td>
- </tr>
+                      <Webserver
+                        isButtonClicked={isButtonClicked}
+                        setIsButtonClicked={setIsButtonClicked}
+                      />
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              CVE lookup of technologies<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              CVE lookup of technologies
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl   max-h-screen overflow-y-auto  ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400 ">
@@ -899,29 +925,40 @@ const Web = () => {
                       <div className="flex items-center"></div>
                     </td>
 
-                    <td className="px-6 py-4"><Cverecord/> </td>
+                    <td className="px-6 py-4">
+                      <Cverecord
+                        isButtonClicked={isButtonClicked}
+                        setIsButtonClicked={setIsButtonClicked}
+                      />{" "}
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              SQLI Status<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              SQLI Status
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
@@ -957,23 +994,29 @@ const Web = () => {
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              XXE Status<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              XXE Status
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
@@ -1003,29 +1046,35 @@ const Web = () => {
                     >
                       XXE status
                     </th>
-                    <td className="px-6 py-4"> { xxeflag}</td>
+                    <td className="px-6 py-4"> {xxeflag}</td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className=" ml-7 mt-5  text-lg text-white font-medium ">
-              XSS Status<Tooltip content={
-      <div className="w-80">
-        <Typography color="white" className="font-medium">Phishing Status</Typography>
-        <Typography
-          variant="small"
-          color="white" 
-          className="font-normal opacity-80"
-        >
-          Check whether your website has been flagged as phishing website
-        </Typography>
-      </div>
-    }>
-      <InformationCircleIcon 
-        strokeWidth={2} 
-        className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6" 
-      />
-    </Tooltip>
+              XSS Status
+              <Tooltip
+                content={
+                  <div className="w-80">
+                    <Typography color="white" className="font-medium">
+                      Phishing Status
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="white"
+                      className="font-normal opacity-80"
+                    >
+                      Check whether your website has been flagged as phishing
+                      website
+                    </Typography>
+                  </div>
+                }
+              >
+                <InformationCircleIcon
+                  strokeWidth={2}
+                  className="text-blue-gray-500 w-5 h-5 cursor-pointer float-right absolute right-0 mr-11 mt-6"
+                />
+              </Tooltip>
             </p>
             <div className="col-span-2 statuscard overflow-x-auto mt-3 ml-7 w-3/4 rounded-xl mb-3 ">
               <table className="w-full text-sm text-left rounded-lg text-gray-500 dark:text-gray-400">
