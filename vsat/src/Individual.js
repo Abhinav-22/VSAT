@@ -28,7 +28,15 @@ function Induvidual() {
     setScore((prevScore) => prevScore + 3);
   };
   const sendURL = async (e) => {
+
     e.preventDefault();
+    setDomainstatus("Loading...")
+    setHstsstatus("Loading...")
+    setPrivacystatus("Loading...")
+    setSafewebstatus("Loading...")
+    setSslsecure("Loading...")
+    setValidSSL("Loading...")
+    setPhisstatus("Loading...")
     console.log(urlVal);
     const response = await fetch("/api/endpoint", {
       method: "POST",
