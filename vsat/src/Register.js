@@ -30,7 +30,7 @@ const Register = () => {
   const regflagval = useMultiregStore((state) => state.multiregflag);
   const navigate = useNavigate();
 
-  const addTable = async (e) => {
+  const addTable = async (valid) => {
     var currentTime = new Date().toLocaleString();
     const { data, error } = await supabase.from("users").insert([
       {
@@ -39,7 +39,7 @@ const Register = () => {
         lastName,
         company,
         phone,
-        website: host,
+        website: valid,
         password,
         currentTime,
       },
@@ -53,7 +53,7 @@ const Register = () => {
     }
   };
 
-  const fetchh = async (e) => {
+  const fetchh = async (valid) => {
     let multflag = 0;
     const { data, error } = await supabase.from("users").select();
     data.map((user) => {
@@ -66,18 +66,29 @@ const Register = () => {
       }
     });
     if (multflag == 0) {
-      addTable();
+      addTable(valid);
     } else if (multflag == 1) {
       toast.warning("Account has already registered ");
     }
   };
 
   const validateHost = async () => {
-    let regex = /www\.[a-zA-Z0-9]+\.[a-zA-Z0-9]+/;
-    let result = website.match(regex)[0];
-    console.log(result);
-    setHost(result);
-    return result;
+    function getDomainFromURL(url) {
+      var domain = "";
+
+      try {
+        var parsedURL = new URL(url);
+        domain = parsedURL.hostname;
+      } catch (error) {
+        console.error("Invalid URL: " + error.message);
+      }
+
+      return domain;
+    }
+
+    var domain = getDomainFromURL(website);
+    console.log("Domain: " + domain);
+    return domain;
   };
 
   const sendURL = async (val) => {
@@ -169,7 +180,7 @@ const Register = () => {
           setDomain(data);
         }
         console.log(host);
-        await fetchh();
+        await fetchh(valid);
         console.log(regflagval);
 
         console.log(webExist);
