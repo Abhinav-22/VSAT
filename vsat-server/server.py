@@ -28,7 +28,7 @@ import requests
 from defusedxml import ElementTree as ET
 import html
 
-wd = "www.google.com"
+wd = "cnn.com"
 wm = ""
 txtval = ""
 app = flask.Flask(__name__)
@@ -493,19 +493,20 @@ def getsslexpiry():
 @app.route("/sqlinjection", methods=['POST', 'GET'], strict_slashes=False)
 def getsqli():
     s = requests.Session()
-    s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+    s.headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+    sqlidict={}
+    urlToBeChecked = "https://"+wd
 
-    def get_forms(url):
-        soup = bs(s.get(url).content, "html.parser")
-        return soup.find_all("form")
+    # Get all forms on a webpage
+    soup = BeautifulSoup(s.get(urlToBeChecked).content, "html.parser")
+    forms = soup.find_all("form")
+    sqlidict.update({"NumberOfFormsDetected":len(forms)})
 
-    def get_form_details(form):
-        details = {}
-        try:
-            action = form.attrs.get("action").lower
-        except:
-            action = None
-        method = form.attrs.get("method", "get").lower
+    # Extract form details
+    for form in forms:
+        detailsOfForm = {}
+        action = form.attrs.get("action")
+        method = form.attrs.get("method", "get")
         inputs = []
 
         for input_tag in form.find_all("input"):
@@ -513,66 +514,42 @@ def getsqli():
             input_name = input_tag.attrs.get("name")
             input_value = input_tag.attrs.get("value", "")
             inputs.append({
-                "type": input_type,
+                "type": input_type, 
                 "name": input_name,
                 "value": input_value,
             })
 
-        details['action'] = action
-        details['method'] = method
-        details['inputs'] = inputs
-        return details
+        detailsOfForm['action'] = action
+        detailsOfForm['method'] = method
+        detailsOfForm['inputs'] = inputs
 
-    def vulnerable(response):
-        errors = {"quoted string not properly terminated",
-                  "warning: mysql",
-                  "unclosed quotation mark after the charachter string",
-                  "you have an error in your SQL syntax",
-                  }
-        for error in errors:
-            if error in response.content.decode().lower():
-                return True
-        return False
+        for i in "\"'":
+            data = {}
+            for input_tag in detailsOfForm["inputs"]:
+                if input_tag["type"] == "hidden" or input_tag["value"]:
+                    data[input_tag['name']] = input_tag["value"] + i
+                elif input_tag["type"] != "submit":
+                    data[input_tag['name']] = f"test{i}"
 
-    def sql_injection_scan(url):
-        for c in "\"'":
-            new_url = f"{url}{c}"
-            print("[!] Trying", new_url)
-            # make the HTTP request
-            res = s.get(new_url)
-            if vulnerable(res):
-                print("[+] SQL Injection vulnerability detected, link:", new_url)
-                return
+            #print(urlToBeChecked)
+        # print(detailsOfForm)
 
-        forms = get_forms(url)
-        print(f"[+] Detected {len(forms)} forms on {url}.")
-        for form in forms:
-            form_details = get_form_details(form)
-            for c in "\"'":
-                data = {}
-                for input_tag in form_details["inputs"]:
-                    if input_tag["type"] == "hidden" or input_tag["value"]:
-                        try:
-                            data[input_tag["name"]] = input_tag["value"] + c
-                        except:
-                            pass
-                    elif input_tag["type"] != "submit":
-                        data[input_tag["name"]] = f"test{c}"
+            if detailsOfForm["method"] == "post":
+                res = s.post(urlToBeChecked, data=data)
+            elif detailsOfForm["method"] == "get":
+                res = s.get(urlToBeChecked, params=data)
+            if "quoted string not properly terminated" in res.content.decode().lower() or \
+                "unclosed quotation mark after the charachter string" in res.content.decode().lower() or \
+                'Error Occured While Processing Request' in res.content.decode().lower() or  'You have an error in your SQL syntax' in res.content.decode().lower() or  'error in your SQL syntax' in res.content.decode().lower() or  'Microsoft OLE DB Provider for ODBC Drivers Error' in res.content.decode().lower() or\
+                "you have an error in you SQL syntax" in res.content.decode().lower():
+                print("SQL injection attack vulnerability in link:", urlToBeChecked)
+                sqlidict.update({"SQLIStatus":"SQLI Detected"})
+            else:
+                sqlidict.update({"SQLIStatus":"SQLI Not Detected"})
+            
+                break
 
-                url = urljoin(url, str(form_details["action"]))
-                if form_details["method"] == "post":
-                    res = s.post(url, data=data)
-                elif form_details["method"] == "get":
-                    res = s.get(url, params=data)
-
-                if vulnerable(res):
-                    print("[+] SQL Injection vulnerability detected, link:", url)
-                    print("[+] Form:")
-                    pprint(form_details)
-                    break
-    urlToBeChecked = 'https://'+wd
-    sql_injection_scan(urlToBeChecked)
-    return
+    return (sqlidict)
 
 
 @app.route("/webtechscan", methods=['POST', 'GET'], strict_slashes=False)
