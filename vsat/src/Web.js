@@ -749,15 +749,14 @@ const Web = () => {
                 content={
                   <div className="w-80">
                     <Typography color="white" className="font-medium">
-                      Phishing Status
+                      URL redirections
                     </Typography>
                     <Typography
                       variant="small"
                       color="white"
                       className="font-normal opacity-80"
                     >
-                      Check whether your website has been flagged as phishing
-                      website
+                      Know how many externl and internal links are being redirected to and from your website
                     </Typography>
                   </div>
                 }
@@ -809,15 +808,14 @@ const Web = () => {
                 content={
                   <div className="w-80">
                     <Typography color="white" className="font-medium">
-                      Phishing Status
+                    Web technology scan
                     </Typography>
                     <Typography
                       variant="small"
                       color="white"
                       className="font-normal opacity-80"
                     >
-                      Check whether your website has been flagged as phishing
-                      website
+                     Identify the technologies on which the website is built on
                     </Typography>
                   </div>
                 }
@@ -887,15 +885,14 @@ const Web = () => {
                 content={
                   <div className="w-80">
                     <Typography color="white" className="font-medium">
-                      Phishing Status
+                    CVE lookup of technologies
                     </Typography>
                     <Typography
                       variant="small"
                       color="white"
                       className="font-normal opacity-80"
                     >
-                      Check whether your website has been flagged as phishing
-                      website
+                      Know Common Vulnerability and Exposures(CVE) associated with web technologies
                     </Typography>
                   </div>
                 }
