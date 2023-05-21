@@ -96,9 +96,11 @@ function Induvidual() {
           // scorevalue = 0;
         } else if (data.Sitedetails == "This site is not a phishing site.") {
           setPhisstatus("Not Phishing site");
+          setPstatus("False");
           incrementByTwo();
         } else {
           setPhisstatus("No phishing details found");
+          setPstatus("False");
           incrementByOne();
         }
       });
@@ -129,10 +131,10 @@ function Induvidual() {
           incrementByThree();
         } else if (data.falseScore > 4) {
           setHstsstatus("Most headers are missing");
-          incrementByTwo();
+          incrementByOne();
         } else if (data.falseScore <= 4) {
           setHstsstatus("Some headers are missing");
-          incrementByOne();
+          incrementByTwo();
         }
       });
 
@@ -383,18 +385,34 @@ function Induvidual() {
                 VSAT Score
               </p>
               <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
-                <ReactStoreIndicator value={score} maxValue={13} stepsColors={['#94128F',
-  '#d12000',
-  '#ed8d00',
-  '#f1bc00',
-  '#f1bc00',
-  '#f1bc00',
-  '#f1bc00',
-  '#84c42b',
-  '#53b83a',
-  '#3da940',
-  '#3da940',
-  '#3da940',]}/>
+                {pstatus === "False" ? (<ReactStoreIndicator value={score} maxValue={13} stepsColors={['#94128F',
+                  '#d12000',
+                  '#ed8d00',
+                  '#f1bc00',
+                  '#f1bc00',
+                  '#f1bc00',
+                  '#f1bc00',
+                  '#84c42b',
+                  '#53b83a',
+                  '#3da940',
+                  '#3da940',
+                  '#3da940',]} />
+                
+                  
+                ) :
+                  <ReactStoreIndicator value={0} maxValue={13} stepsColors={['#94128F',
+                    '#d12000',
+                    '#ed8d00',
+                    '#f1bc00',
+                    '#f1bc00',
+                    '#f1bc00',
+                    '#f1bc00',
+                    '#84c42b',
+                    '#53b83a',
+                    '#3da940',
+                    '#3da940',
+                    '#3da940',]} />
+                }
               </div>
               <p className="  text-lg text-white text-center  font-normal ">
                 Safety score index
