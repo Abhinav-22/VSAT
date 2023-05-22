@@ -753,26 +753,26 @@ def download_pdf():
     pdf.cell(w=(pw/4), h=25, txt="Web Security", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="After performing the scans for Web security, it has been infered that "+websec+". The results of the Phishing scan, that is checking if the domain is listed in PhishTank (a database with identified phishing sites) is that it is "+phishstat+" and "+phishdetail+". After checking if all the HTTP security headers are present it is found that it is"+httpsech+".", border=1, )
+        w=0, h=25, txt="After performing the scans for Web security, it has been infered that "+str(websec)+". The results of the Phishing scan, that is checking if the domain is listed in PhishTank (a database with identified phishing sites) is that it is "+str(phishstat)+" and "+str(phishdetail)+". After checking if all the HTTP security headers are present it is found that it is"+str(httpsech)+".", border=1 )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
     pdf.cell(w=(pw/4), h=25, txt="Network Security ",
              border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="After performing the scans for Network security, there are "+portlen+" ports open. They are "+str(openport)+".", border=1, )
+        w=0, h=25, txt="After performing the scans for Network security, there are "+str(portlen)+" ports open. They are "+str(openport)+".", border=1 )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
     pdf.cell(w=(pw/4), h=25, txt="Data Security ", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="After performing the scans for Data Security, it has been identified that "+websec, border=1, )
+        w=0, h=25, txt="After performing the scans for Data Security, it has been identified that "+str(websec), border=1, )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
-    pdf.cell(w=(pw/4), h=25, txt="Domain Security ", border=1, ln=0, fill=True)
+    pdf.cell(w=(pw/4), h=15, txt="Domain Security ", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="After performing the scans for domain security, it has been infered that "+domsec+". The SSL certificate is "+sslres2+" and it's expiry date is on "+sslexpiry+". The domain details are "+domainr, border=1, )
+        w=0, h=10, txt="After performing the scans for domain security, it has been infered that "+str(domsec)+". The SSL certificate is "+str(sslres2)+" and it's expiry date is on "+str(sslexpiry)+". The domain details are "+str(domainr), border=1, )
     pdf_output = pdf.output(dest='S').encode('latin1')
     response = make_response(pdf_output)
     response.headers['Content-Type'] = 'application/pdf'
