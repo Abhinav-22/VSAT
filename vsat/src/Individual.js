@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import logo from "./img/transparent.svg";
 import { Link } from "react-router-dom";
 import ReactStoreIndicator from "react-score-indicator";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 function Induvidual() {
   const [urlVal, setUrlVal] = useState("");
@@ -14,6 +16,7 @@ function Induvidual() {
   const [domainstatus, setDomainstatus] = useState("Loading...");
   const [time, setTime] = useState("");
   const [score, setScore] = useState(0);
+  const [validflag, setValidFlag] = useState(0);
 
   const [pstatus, setPstatus] = useState("False");
 
@@ -28,15 +31,14 @@ function Induvidual() {
     setScore((prevScore) => prevScore + 3);
   };
   const sendURL = async (e) => {
-
     e.preventDefault();
-    setDomainstatus("Loading...")
-    setHstsstatus("Loading...")
-    setPrivacystatus("Loading...")
-    setSafewebstatus("Loading...")
-    setSslsecure("Loading...")
-    setValidSSL("Loading...")
-    setPhisstatus("Loading...")
+    setDomainstatus("Loading...");
+    setHstsstatus("Loading...");
+    setPrivacystatus("Loading...");
+    setSafewebstatus("Loading...");
+    setSslsecure("Loading...");
+    setValidSSL("Loading...");
+    setPhisstatus("Loading...");
     console.log(urlVal);
     const response = await fetch("/api/endpoint", {
       method: "POST",
@@ -51,9 +53,26 @@ function Induvidual() {
     scanURL();
   };
 
-  const scanURL = async () => {
-    setScore(0);
-    setTime(new Date().toLocaleString());
+  const checkHost = async () => {
+    try {
+      const response = await fetch("/hostname");
+      const data = await response.json();
+      setValidFlag(data);
+      console.log(data);
+      console.log(data.HostnameFlag);
+      if (data.HostnameFlag === false) {
+        toast.error("Invalid URL! Please check and try again");
+        return 1;
+      }
+    } catch (error) {
+      console.log(error);
+      return 1;
+    }
+    return 0;
+  };
+
+  const quickscan = async (flag) => {
+    if (flag === 1) return;
     fetch("/sslexpiry")
       .then((res) => res.json())
       .then((data) => {
@@ -75,10 +94,10 @@ function Induvidual() {
         console.log(timeDiff);
         if (daysDiff >= 20) {
           setDomainstatus("Secure");
-          incrementByTwo()
+          incrementByTwo();
         } else if (daysDiff >= 0) {
           setDomainstatus("Expires in " + daysDiff + "Days");
-          incrementByOne()
+          incrementByOne();
         } else {
           setDomainstatus("Not secure");
         }
@@ -152,8 +171,27 @@ function Induvidual() {
         }
       });
   };
+
+  const scanURL = async () => {
+    setScore(0);
+    setTime(new Date().toLocaleString());
+    var flag = await checkHost();
+    await quickscan(flag);
+  };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="body bg-mainbg min-h-screen">
         <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
           <div className="container-fluid w-full flex flex-wrap items-center justify-between">
@@ -242,7 +280,6 @@ function Induvidual() {
                     <th scope="col" className="px-6 py-3">
                       Result
                     </th>
-                    
                   </tr>
                 </thead>
                 <tbody>
@@ -262,7 +299,6 @@ function Induvidual() {
                         {domainstatus}
                       </span>
                     </td>
-                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -280,7 +316,6 @@ function Induvidual() {
                         {sslsecure}
                       </span>
                     </td>
-                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -298,7 +333,6 @@ function Induvidual() {
                         {phisstatus}
                       </span>
                     </td>
-                    
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -338,7 +372,6 @@ function Induvidual() {
                         {safewebstatus}
                       </span>
                     </td>
-                   
                   </tr>
                   <tr className=" border-b bg-secondbg border-txtcol ">
                     <td className="w-4 p-4">
@@ -356,7 +389,6 @@ function Induvidual() {
                         {hstsstatus}
                       </span>
                     </td>
-                   
                   </tr>
                   <tr className="bg-secondbg ">
                     <td className="w-4 p-4">
@@ -374,7 +406,6 @@ function Induvidual() {
                         {privacystatus}
                       </span>
                     </td>
-                   
                   </tr>
                 </tbody>
               </table>
@@ -385,34 +416,45 @@ function Induvidual() {
                 VSAT Score
               </p>
               <div className="flex flex-col align-middle justify-center items-center mx-auto my-auto">
-                {pstatus === "False" ? (<ReactStoreIndicator value={score} maxValue={13} stepsColors={['#94128F',
-                  '#d12000',
-                  '#ed8d00',
-                  '#f1bc00',
-                  '#f1bc00',
-                  '#f1bc00',
-                  '#f1bc00',
-                  '#84c42b',
-                  '#53b83a',
-                  '#3da940',
-                  '#3da940',
-                  '#3da940',]} />
-                
-                  
-                ) :
-                  <ReactStoreIndicator value={0} maxValue={13} stepsColors={['#94128F',
-                    '#d12000',
-                    '#ed8d00',
-                    '#f1bc00',
-                    '#f1bc00',
-                    '#f1bc00',
-                    '#f1bc00',
-                    '#84c42b',
-                    '#53b83a',
-                    '#3da940',
-                    '#3da940',
-                    '#3da940',]} />
-                }
+                {pstatus === "False" ? (
+                  <ReactStoreIndicator
+                    value={score}
+                    maxValue={13}
+                    stepsColors={[
+                      "#94128F",
+                      "#d12000",
+                      "#ed8d00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#84c42b",
+                      "#53b83a",
+                      "#3da940",
+                      "#3da940",
+                      "#3da940",
+                    ]}
+                  />
+                ) : (
+                  <ReactStoreIndicator
+                    value={0}
+                    maxValue={13}
+                    stepsColors={[
+                      "#94128F",
+                      "#d12000",
+                      "#ed8d00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#f1bc00",
+                      "#84c42b",
+                      "#53b83a",
+                      "#3da940",
+                      "#3da940",
+                      "#3da940",
+                    ]}
+                  />
+                )}
               </div>
               <p className="  text-lg text-white text-center  font-normal ">
                 Safety score index
