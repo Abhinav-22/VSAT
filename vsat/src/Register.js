@@ -22,7 +22,7 @@ const Register = () => {
   // for validation
   const [domain, setDomain] = useState([]);
   const [flag, setFlag] = useState(0);
-  const [validflag, setValidFlag] = useState(null);
+  const [validflag, setValidFlag] = useState(0);
   const [host, setHost] = useState("");
 
   const setregFlag = useMultiregStore((state) => state.updateregFlag);
