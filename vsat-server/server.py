@@ -764,10 +764,10 @@ def download_pdf():
     pdf.cell(w=(pw/4), h=25, txt="Data Security ", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+        w=0, h=25, txt="After performing the scans for Data Security, it has been identified that "+websec, border=1, )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
-    pdf.cell(w=(pw/4), h=25, txt="Social Security ", border=1, ln=0, fill=True)
+    pdf.cell(w=(pw/4), h=25, txt="Domain Security ", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
         w=0, h=25, txt="This and the below cells are multi cells.", border=1, )

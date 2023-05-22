@@ -13,7 +13,6 @@ import Pdfgen from "./Pdfgen";
 import cover from "./img/cover.jpg";
 
 function Dashboard() {
-
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -268,17 +267,12 @@ function Dashboard() {
           setCountPtime(us.porttime);
           if (us.phishres == "Secure" && us.httpres == "Secure") {
             setWebaction("No Action is Required");
-          }
-          else
-            setWebaction("Action is Required");
-          if (us.breachres == "Breach Found !")
-            setDataaction("Action is Required");
-          else
-            setDataaction(" No Action is Required");
+          } else setWebaction("Action is Required");
+          if (us.breachres == "Breach Found !") setDataaction("Data Breach Found ");
+          else setDataaction(" Data is Secure");
           if (us.sslres == "secure" && us.domainres == "Secure")
             setDomainaction("No Action is Required");
-          else
-            setDomainaction("Action is Required");
+          else setDomainaction("Action is Required");
         }
       });
     };
@@ -628,6 +622,19 @@ function Dashboard() {
   };
 
   const setVals = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    var open = [];
+    const { data, error } = await supabase.from("ports").select();
+
+    data.map((us) => {
+      if (user.id === us.id) {
+        console.log(us.openports);
+        open = us.openports;
+        console.log(open);
+      }
+    });
     const response = await fetch("/pdfdata", {
       method: "POST",
       headers: {
@@ -637,39 +644,34 @@ function Dashboard() {
         netsec: networkaction,
         datasec: dataaction,
         websec: webaction,
-        domsec: domainaction, 
-        openport: openP,
+        domsec: domainaction,
+        openport: open,
         portlen: countP,
         httpsec: httpSec,
         phishstat: phishstatus,
         domainr: domainscan,
         sslres: sslLive,
         breaches: dataleak,
-        phishdetail : phisdetail,
-        
+        phishdetail: phisdetail,
       }),
     });
     console.log(response);
-   
-   
-   
-  }
+  };
 
   const downloadpdf = async () => {
     fetch("/download_pdf")
-    .then((response) => response.blob())
-    .then((blob) => {
-      const pdfUrl = URL.createObjectURL(blob);
-      window.open(pdfUrl, "_blank");
-    })
-    .catch((error) => console.error(error));
-  }
+      .then((response) => response.blob())
+      .then((blob) => {
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, "_blank");
+      })
+      .catch((error) => console.error(error));
+  };
 
   const navPdf = async () => {
     // navigate("/pdfgen");
     await setVals();
-    await downloadpdf(); 
-   
+    await downloadpdf();
   };
   return (
     <>
@@ -1197,30 +1199,28 @@ function Dashboard() {
             </div>
           </div>
           <div className="scan grid grid-cols-4 gap-3">
-          <div className="ml-7 mb-3 mt-3 col-span-2  h-52 bg-cover-blue rounded-xl ">
-            <img
-              src={cover}
-              className="w-56 h-full float-right rounded-xl drop-shadow-xl"
-              alt="cover image"
-            />
-            <p className="ml-3 pt-4  text-xl text-white  font-semibold ">
-              Do a security logging checkup right now
-            </p>
-            <p className="ml-3 pt-3  text-md text-white  font-medium ">
-              Know the status of your security logging and infrastructure
-            </p>
-            <Link to="/survey" target="_blank">
-              <button className="h-10 w-32 ml-3 mt-5 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
-                <span className="my-auto ttspan text-center flex justify-center font-bold ">
-                  Go to survey
-                </span>
-              </button>
-            </Link>
+            <div className="ml-7 mb-3 mt-3 col-span-2  h-52 bg-cover-blue rounded-xl ">
+              <img
+                src={cover}
+                className="w-56 h-full float-right rounded-xl drop-shadow-xl"
+                alt="cover image"
+              />
+              <p className="ml-3 pt-4  text-xl text-white  font-semibold ">
+                Do a security logging checkup right now
+              </p>
+              <p className="ml-3 pt-3  text-md text-white  font-medium ">
+                Know the status of your security logging and infrastructure
+              </p>
+              <Link to="/survey" target="_blank">
+                <button className="h-10 w-32 ml-3 mt-5 bg-cover-white rounded-2xl text-cover-blue text-center hover:bg-gray-400 hover:text-white ">
+                  <span className="my-auto ttspan text-center flex justify-center font-bold ">
+                    Go to survey
+                  </span>
+                </button>
+              </Link>
+            </div>
+            <div className="col-span-2 mr-10 bg-fieldbg h-52 mt-3 rounded-xl"></div>
           </div>
-          <div className="col-span-2 mr-10 bg-fieldbg h-52 mt-3 rounded-xl">
-     
-    </div>
-</div>
         </div>
       </div>
     </>
