@@ -268,7 +268,7 @@ function Dashboard() {
           if (us.phishres == "Secure" && us.httpres == "Secure") {
             setWebaction("No Action is Required");
           } else setWebaction("Action is Required");
-          if (us.breachres == "Breach Found !") setDataaction("Breach Found ");
+          if (us.breachres == "Breach Found !") setDataaction("Data Breach Found ");
           else setDataaction(" Data is Secure");
           if (us.sslres == "secure" && us.domainres == "Secure")
             setDomainaction("No Action is Required");
