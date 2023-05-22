@@ -828,27 +828,10 @@ function Dashboard() {
               >
                 <div className="flex justify-center mb-3 drop-shadow-lg	">
                   <div className="flex justify-center logo rounded-full bg-secondbg drop-shadow-lg	 ">
-                    <svg
-                      className="logo text-white w-auto h-auto "
-                      width="50"
-                      height="50"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1.3294 19L0.731323 17.9641L5.06145 15.4641L7.1029 19H1.3294Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M15.1858 19H9.4123L5.7935 12.7321L10.1236 10.2321L15.1858 19Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M23.2687 19H17.4952L10.8557 7.5L15.1858 5L23.2687 19Z"
-                        fill="currentColor"
-                      />
-                    </svg>
+               
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-buildings-fill logo text-white w-auto h-auto" viewBox="0 0 16 16">
+  <path d="M15 .5a.5.5 0 0 0-.724-.447l-8 4A.5.5 0 0 0 6 4.5v3.14L.342 9.526A.5.5 0 0 0 0 10v5.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V14h1v1.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5V.5ZM2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-1 2v1H2v-1h1Zm1 0h1v1H4v-1Zm9-10v1h-1V3h1ZM8 5h1v1H8V5Zm1 2v1H8V7h1ZM8 9h1v1H8V9Zm2 0h1v1h-1V9Zm-1 2v1H8v-1h1Zm1 0h1v1h-1v-1Zm3-2v1h-1V9h1Zm-1 2h1v1h-1v-1Zm-2-4h1v1h-1V7Zm3 0v1h-1V7h1Zm-2-2v1h-1V5h1Zm1 0h1v1h-1V5Z"/>
+</svg>
                   </div>
                   <span className=" ml-3 mt-3 flex justify-center font-bold text-white">
                     {authCompany}
@@ -938,7 +921,7 @@ function Dashboard() {
               </span>
               <br />
               <span className="user font-medium text-md ml-2 text-white">
-                {networkaction}{" "}
+                Find more in Network tab
               </span>
             </div>
             <div className="data h-20 w-64 drop-shadow-lg bg-gradient-to-r from-gradbl1 to-gradbl2 shadow shadow-slate-700 rounded-xl hover:bg-gray-900">
