@@ -657,6 +657,7 @@ function Dashboard() {
         breaches: dataleak,
         phishdetail: phisdetail,
         sslexpiry: ssldate,
+        dom: domainStoredval
       }),
     });
     console.log(response);
