@@ -28,9 +28,14 @@ import requests
 from defusedxml import ElementTree as ET
 import html
 
-wd = "cnn.com"
+wd = ""
 wm = ""
 txtval = ""
+websec = ""
+datasec = ""
+netsec = ""
+domsec = ""
+
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
@@ -68,6 +73,24 @@ def setemail():
     global wm
     wm = str_payload
     return jsonify({'message': 'String received in setemail'})
+
+
+@app.route('/pdfdata', methods=['POST'])
+def pdfdata():
+    data = request.get_json()
+    # dom = data['string']
+    # print(str_payload)
+    global netsec
+    global datasec
+    global websec
+    global domsec
+    netsec = data['netsec']
+    datasec = data['datasec']
+    websec = data['websec']
+    domsec = data['domsec']
+    print(netsec + " // " + datasec + " // " + websec + " // " + domsec )
+    return jsonify({'message': 'pdf values recieved '})
+    
 
 
 @app.route('/api/endpoint', methods=['POST'])

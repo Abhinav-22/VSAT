@@ -62,10 +62,10 @@ function Dashboard() {
   const phishstatus = useGlanceStore((state) => state.phishtankstatus);
   const portstatus = usePortStore((state) => state.scanports);
   const setSSLstatus = useGlanceStore((state) => state.updateSSLstatus);
+  const breachstatus = useGlanceStore((state) => state.databreachstatus);
 
   const setDomainStatus = useGlanceStore((state) => state.updateDomainstatus);
   const setDatabreach = useGlanceStore((state) => state.updateBreachstatus);
-  const breachstatus = useGlanceStore((state) => state.databreachstatus);
 
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
   const setPhishstatus = useGlanceStore((state) => state.updatePhishstatus);
@@ -265,6 +265,19 @@ function Dashboard() {
           setDatatime(us.breachtime);
           setCountP(us.portres);
           setCountPtime(us.porttime);
+          if (us.phishres == "Secure" && us.httpres == "Secure") {
+            setWebaction("No Action Required");
+          }
+          else
+            setWebaction("Action Required");
+          if (us.breachres == "Breach Found !")
+            setDataaction("Action Required");
+          else
+            setDataaction(" No Action Required");
+          if (us.sslres == "secure" && us.domainres == "Secure")
+            setDomainaction("No Action Required");
+          else
+            setDomainaction("Action Required");
         }
       });
     };
@@ -289,46 +302,6 @@ function Dashboard() {
       console.log(error.message);
     }
   };
-  // const scanssl = async () => {
-  //   var ssl = "";
-  //   var domm = "";
-  //   fetch("/sslexpiry")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setValidSSL(data.SSLExpiry);
-  //       console.log(data);
-  //       console.log(typeof data.SSLExpiry);
-  //       if (data.SSLExpiry == "No SSL Certificate") {
-  //         setSSLstatus("             NOT FOUND !!!");
-  //         ssl = "not found";
-  //       } else {
-  //         setSSLstatus("        SECURE!!!");
-  //         ssl = "secure";
-  //         const currentDate = new Date();
-  //         console.log(currentDate);
-
-  //         const futureDate = new Date(data.SSLExpiry);
-
-  //         console.log(futureDate);
-  //         const timeDiff = futureDate.getTime() - currentDate.getTime();
-  //         const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-  //         console.log(daysDiff);
-  //         console.log(timeDiff);
-  //         if (daysDiff >= 20) {
-  //           setDomainscan("Secure");
-  //           domm = "secure";
-  //         } else if (daysDiff >= 0) {
-  //           setDomainscan("Expires in " + daysDiff + "Days");
-  //           domm = "Expires in " + daysDiff + "Days";
-  //         } else {
-  //           setDomainscan("Not secure");
-  //           domm = "not secure";
-  //         }
-  //       }
-  //       console.log(ssl, domm);
-  //     });
-  //   return { ssl, domm };
-  // };
 
   const scanssl = () => {
     return new Promise((resolve, reject) => {
@@ -394,43 +367,6 @@ function Dashboard() {
       console.log(error);
     }
   };
-
-  // const scanphish = async () => {
-  //   var phii = "";
-  //   fetch("/phishtank")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (data.Sitedetails == "Is a phish") {
-  //         console.log("keriii");
-  //         setPhishstatus("        NOT SECURE !!!");
-  //         phii = " Not Secure";
-  //       } else {
-  //         setPhishstatus("         SECURE!!");
-  //         phii = "Secure";
-  //       }
-  //       setPhish(data.Sitedetails);
-  //       console.log(data);
-  //     });
-  //   console.log(phii);
-  //   return phii;
-  // };
-  // const supaphish = async (phii) => {
-  //   const {
-  //     data: { user },
-  //   } = await supabase.auth.getUser();
-
-  //   const { data, error } = await supabase
-  //     .from("glance")
-  //     .upsert({
-  //       id: user.id,
-  //       phishtime: new Date().toLocaleString(),
-  //       phishres: phii,
-  //     })
-  //     .select();
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const scanphish = async () => {
     return new Promise((resolve, reject) => {
@@ -742,16 +678,41 @@ function Dashboard() {
     }
   };
 
+  const setVals = async () => {
+    const response = await fetch("/pdfdata", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        netsec: networkaction,
+        datasec: dataaction,
+        websec: webaction,
+        domsec : "helllo", //
+        
+      }),
+    });
+    console.log(response);
+   
+   
+   
+  }
+
+  const downloadpdf = async () => {
+    fetch("/download_pdf")
+    .then((response) => response.blob())
+    .then((blob) => {
+      const pdfUrl = URL.createObjectURL(blob);
+      window.open(pdfUrl, "_blank");
+    })
+    .catch((error) => console.error(error));
+  }
+
   const navPdf = async () => {
     // navigate("/pdfgen");
-
-    fetch("/download_pdf")
-      .then((response) => response.blob())
-      .then((blob) => {
-        const pdfUrl = URL.createObjectURL(blob);
-        window.open(pdfUrl, "_blank");
-      })
-      .catch((error) => console.error(error));
+    await setVals();
+    await downloadpdf(); 
+   
   };
   return (
     <>
