@@ -28,6 +28,7 @@ function Dashboard() {
   const [timeScanned, setTimeScanned] = useState("");
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
+  const [phisdetail, setPhisdetail] = useState("");
 
   // ----GLANCE----
   const [domainscan, setDomainscan] = useState("loading...");
@@ -266,18 +267,18 @@ function Dashboard() {
           setCountP(us.portres);
           setCountPtime(us.porttime);
           if (us.phishres == "Secure" && us.httpres == "Secure") {
-            setWebaction("No Action Required");
+            setWebaction("No Action is Required");
           }
           else
-            setWebaction("Action Required");
+            setWebaction("Action is Required");
           if (us.breachres == "Breach Found !")
-            setDataaction("Action Required");
+            setDataaction("Action is Required");
           else
-            setDataaction(" No Action Required");
+            setDataaction(" No Action is Required");
           if (us.sslres == "secure" && us.domainres == "Secure")
-            setDomainaction("No Action Required");
+            setDomainaction("No Action is Required");
           else
-            setDomainaction("Action Required");
+            setDomainaction("Action is Required");
         }
       });
     };
@@ -376,9 +377,11 @@ function Dashboard() {
           if (data.Sitedetails === "Is a phish") {
             console.log("keriii");
             setPhishstatus("        NOT SECURE !!!");
+            setPhisdetail(data.Sitedetails);
             resolve("Not Secure");
           } else {
             setPhishstatus("         SECURE!!");
+            setPhisdetail(data.Sitedetails);
             resolve("Secure");
           }
           setPhish(data.Sitedetails);
@@ -406,60 +409,6 @@ function Dashboard() {
       console.log(error);
     }
   };
-
-  // const scanhttp = async () => {
-  //   var httpstat = "";
-  //   fetch("/httpsecheader")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setHttpSec(data);
-  //       console.log(data);
-  //       console.log(data.xssProtect);
-  //       console.log(data.xcontentoptions);
-  //       console.log(data.frameOptions);
-  //       console.log(data.strictTransportSecurity);
-  //       console.log(data.ContentSecurityPolicy);
-  //       console.log(data.SecureCookie);
-  //       console.log(data.HttpOnlyCookie);
-  //       if (
-  //         data.https == "Not Present" ||
-  //         data.xssProtect == "Not Present" ||
-  //         data.xcontentoptions == "Not Present" ||
-  //         data.frameOptions == "Not Present" ||
-  //         data.strictTransportSecurity == "Not Present" ||
-  //         data.ContentSecurityPolicy == "Not Present" ||
-  //         data.SecureCookie == "Not Present" ||
-  //         data.HttpOnlyCookie == "Not Present"
-  //       ) {
-  //         setHSTSstatus("          NOT SECURE!!");
-  //         setHttpSec("NOT SECURE!");
-  //         httpstat = "Not Secure";
-  //       } else {
-  //         setHSTSstatus("          SECURE");
-  //         setHttpSec("SECURE");
-  //         httpstat = "Secure";
-  //       }
-  //     });
-  // };
-
-  // const supahttp = async (httpstat) => {
-  //   const {
-  //     data: { user },
-  //   } = await supabase.auth.getUser();
-
-  //   console.log(httpstat);
-  //   const { data, error } = await supabase
-  //     .from("glance")
-  //     .upsert({
-  //       id: user.id,
-  //       httptime: new Date().toLocaleString(),
-  //       httpres: httpstat,
-  //     })
-  //     .select();
-  //   if (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const scanhttp = async () => {
     try {
@@ -688,7 +637,15 @@ function Dashboard() {
         netsec: networkaction,
         datasec: dataaction,
         websec: webaction,
-        domsec : "helllo", //
+        domsec: domainaction, 
+        openport: openP,
+        portlen: countP,
+        httpsec: httpSec,
+        phishstat: phishstatus,
+        domainr: domainscan,
+        sslres: sslLive,
+        breaches: dataleak,
+        phishdetail : phisdetail,
         
       }),
     });

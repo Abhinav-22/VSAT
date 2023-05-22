@@ -84,10 +84,28 @@ def pdfdata():
     global datasec
     global websec
     global domsec
+    global openport
+    global portlen
+    global httpsech
+    global phishstat
+    global domainr
+    global sslres2
+    global breaches
+    global phishdetail
     netsec = data['netsec']
     datasec = data['datasec']
     websec = data['websec']
     domsec = data['domsec']
+    openport= data['openport']
+    portlen= data['portlen']
+    httpsech= data['httpsec']
+    phishstat= data['phishstat']
+    domainr=data['domainr']
+    sslres2= data['sslres']
+    breaches= data['breaches']
+    phishdetail=data['phishdetail']
+
+
     print(netsec + " // " + datasec + " // " + websec + " // " + domsec )
     return jsonify({'message': 'pdf values recieved '})
     
@@ -733,14 +751,14 @@ def download_pdf():
     pdf.cell(w=(pw/4), h=25, txt="Web Security", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+        w=0, h=25, txt="After performing the scans for Web security, it has been infered that "+websec+". The results of the Phishing scan, that is checking if the domain is listed in PhishTank (a database with identified phishing sites) is that it is "+phishstat+" and "+phishdetail+". After checking if all the HTTP security headers are present it is found that it is"+httpsech+".", border=1, )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
     pdf.cell(w=(pw/4), h=25, txt="Network Security ",
              border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+        w=0, h=25, txt="After performing the scans for Network security, there are "+portlen+" ports open. They are "+str(openport)+".", border=1, )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
     pdf.cell(w=(pw/4), h=25, txt="Data Security ", border=1, ln=0, fill=True)
