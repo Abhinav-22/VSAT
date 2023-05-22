@@ -92,6 +92,7 @@ def pdfdata():
     global sslres2
     global breaches
     global phishdetail
+    global sslexpiry
     netsec = data['netsec']
     datasec = data['datasec']
     websec = data['websec']
@@ -104,6 +105,7 @@ def pdfdata():
     sslres2= data['sslres']
     breaches= data['breaches']
     phishdetail=data['phishdetail']
+    sslexpiry=data['sslexpiry']
 
 
     print(netsec + " // " + datasec + " // " + websec + " // " + domsec )
@@ -730,7 +732,7 @@ def dataleak():
     return jsonify(datad)
 
 
-@app.route('/download_pdf')
+@app.route('/download_pdf',  methods=['POST', 'GET'])
 def download_pdf():
     # Margin
     m = 10
@@ -770,7 +772,7 @@ def download_pdf():
     pdf.cell(w=(pw/4), h=25, txt="Domain Security ", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 14)
     pdf.multi_cell(
-        w=0, h=25, txt="This and the below cells are multi cells.", border=1, )
+        w=0, h=25, txt="After performing the scans for domain security, it has been infered that "+domsec+". The SSL certificate is "+sslres2+" and it's expiry date is on "+sslexpiry+". The domain details are "+domainr, border=1, )
     pdf_output = pdf.output(dest='S').encode('latin1')
     response = make_response(pdf_output)
     response.headers['Content-Type'] = 'application/pdf'

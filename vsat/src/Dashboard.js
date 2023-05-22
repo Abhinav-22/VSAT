@@ -28,6 +28,7 @@ function Dashboard() {
   const [openP, setOpenP] = useState([]);
   const [countP, setCountP] = useState("Loading...");
   const [phisdetail, setPhisdetail] = useState("");
+  const [ssldate, setSsldate] = useState("");
 
   // ----GLANCE----
   const [domainscan, setDomainscan] = useState("loading...");
@@ -270,7 +271,7 @@ function Dashboard() {
           } else setWebaction("Action is Required");
           if (us.breachres == "Breach Found !") setDataaction("Data Breach Found ");
           else setDataaction(" Data is Secure");
-          if (us.sslres == "secure" && us.domainres == "Secure")
+          if (us.sslres == "valid" && us.domainres == "Secure")
             setDomainaction("No Action is Required");
           else setDomainaction("Action is Required");
         }
@@ -310,10 +311,12 @@ function Dashboard() {
           console.log(typeof data.SSLExpiry);
           if (data.SSLExpiry == "No SSL Certificate") {
             setSSLstatus("             NOT FOUND !!!");
+            setSsldate("Not present");
             ssl = "not found";
           } else {
             setSSLstatus("        SECURE!!!");
-            ssl = "secure";
+            setSsldate(data.SSLExpiry);
+            ssl = "valid";
             const currentDate = new Date();
             console.log(currentDate);
 
@@ -653,6 +656,7 @@ function Dashboard() {
         sslres: sslLive,
         breaches: dataleak,
         phishdetail: phisdetail,
+        sslexpiry: ssldate,
       }),
     });
     console.log(response);

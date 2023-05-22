@@ -70,7 +70,7 @@ const Data = () => {
         setDataleak("No Breach found");
         setDatabreach("No Breach found");
         setLeak(
-          "Your email has not been detected in any of the popular data breaches"
+          "Your registered email has not been detected in any of the popular data breaches"
         );
         return "No Breach Found";
       } else {
