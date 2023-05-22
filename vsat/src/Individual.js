@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import ReactStoreIndicator from "react-score-indicator";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-
 function Induvidual() {
+  
+
   const [urlVal, setUrlVal] = useState("");
   const [validSSL, setValidSSL] = useState("Loading...");
   const [sslsecure, setSslsecure] = useState("Loading...");
@@ -53,6 +54,7 @@ function Induvidual() {
     scanURL();
   };
 
+
   const checkHost = async () => {
     try {
       const response = await fetch("/hostname");
@@ -93,13 +95,13 @@ function Induvidual() {
         console.log(daysDiff);
         console.log(timeDiff);
         if (daysDiff >= 20) {
-          setDomainstatus("Secure");
+          setDomainstatus("Valid domain");
           incrementByTwo();
         } else if (daysDiff >= 0) {
           setDomainstatus("Expires in " + daysDiff + "Days");
           incrementByOne();
         } else {
-          setDomainstatus("Not secure");
+          setDomainstatus("Invalid domain");
         }
       });
 
@@ -110,6 +112,7 @@ function Induvidual() {
         console.log(data);
         console.log(data.Sitedetails);
         if (data.Sitedetails == "Is a phish") {
+          toast.error(" Entered website is a phishing website")
           setPhisstatus("Not Secure");
           setPstatus("True");
           // scorevalue = 0;
@@ -192,7 +195,9 @@ function Induvidual() {
         pauseOnHover
         theme="dark"
       />
+      
       <div className="body bg-mainbg min-h-screen">
+   
         <nav className="relative w-full flex flex-wrap items-center justify-between m-0">
           <div className="container-fluid w-full flex flex-wrap items-center justify-between">
             <div className="container-fluid">
@@ -207,13 +212,16 @@ function Induvidual() {
             </div>
           </div>
         </nav>
+       
         <div className="container mx-auto">
+        
           <div className="textbar">
             <h3 className="mx-auto my-auto mb-3 pt-4 ml-7 mt-3 text-4xl md:text-4xl xl:text-4xl font-semibold tracking-tight text-white flex flex-col items-center justify-center">
               Individual's Security Platform
             </h3>
           </div>
           <div className="flex search-bar w-full align-middle items-center justify-center">
+         
             <div className="w-4/6 ">
               <form>
                 <label
