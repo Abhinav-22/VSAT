@@ -373,11 +373,11 @@ function Dashboard() {
         .then((data) => {
           if (data.Sitedetails === "Is a phish") {
             console.log("keriii");
-            setPhishstatus("        NOT SECURE !!!");
+            setPhishstatus("NOT SECURE !!!");
             setPhisdetail(data.Sitedetails);
             resolve("Not Secure");
           } else {
-            setPhishstatus("         SECURE!!");
+            setPhishstatus("Secure!");
             setPhisdetail(data.Sitedetails);
             resolve("Secure");
           }
@@ -430,12 +430,12 @@ function Dashboard() {
         data.SecureCookie === "Not Present" ||
         data.HttpOnlyCookie === "Not Present"
       ) {
-        setHSTSstatus("          NOT SECURE!!");
+        setHSTSstatus(" NOT SECURE!");
         setHttpSec("NOT SECURE!");
         return "Not Secure";
       } else {
-        setHSTSstatus("          SECURE");
-        setHttpSec("SECURE");
+        setHSTSstatus("Secure");
+        setHttpSec("Secure");
         return "Secure";
       }
     } catch (error) {

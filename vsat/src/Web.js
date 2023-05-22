@@ -23,6 +23,7 @@ const Web = () => {
   const [phish, setPhish] = useState("Loading...");
   const [xssflag, setXssflag] = useState("nil");
   const [xxeflag, setXxeflag] = useState("nil");
+  const [sqliinfo, setSqliinfo] = useState("nil");
   const domainStoredval = useDomainStore((state) => state.domainval);
 
   const setHSTSstatus = useGlanceStore((state) => state.updateHSTSstatus);
@@ -212,6 +213,16 @@ const Web = () => {
     };
     xss();
 
+    const sqlinjection = async () => {
+      fetch("/sqlinjection")
+        .then((res) => res.json())
+        .then((data) => {
+          setSqliinfo(data.SQLIStatus);
+          // console.log(data);
+        });
+    };
+    sqlinjection();
+
     const xxe = async () => {
       fetch("/xxelookup")
         .then((res) => res.json())
@@ -221,46 +232,6 @@ const Web = () => {
         });
     };
     xxe();
-
-    // fetch("/phishtank")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.Sitedetails == "Is a phish") {
-    //       console.log("keriii");
-    //       setPhishstatus("        NOT SECURE !!!");
-    //     } else {
-    //       setPhishstatus("         SECURE!!");
-    //     }
-    //     setPhish(data.Sitedetails);
-    //     console.log(data);
-    //   });
-
-    // fetch("/httpsecheader")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setHttpSec(data);
-    //     console.log(data);
-    //     console.log(data.xssProtect);
-    //     console.log(data.xcontentoptions);
-    //     console.log(data.frameOptions);
-    //     console.log(data.strictTransportSecurity);
-    //     console.log(data.ContentSecurityPolicy);
-    //     console.log(data.SecureCookie);
-    //     console.log(data.HttpOnlyCookie);
-    //     if (
-    //       data.xssProtect == "Not Present" ||
-    //       data.xcontentoptions == "Not Present" ||
-    //       data.frameOptions == "Not Present" ||
-    //       data.strictTransportSecurity == "Not Present" ||
-    //       data.ContentSecurityPolicy == "Not Present" ||
-    //       data.SecureCookie == "Not Present" ||
-    //       data.HttpOnlyCookie == "Not Present"
-    //     ) {
-    //       setHSTSstatus("          NOT SECURE!!");
-    //     } else {
-    //       setHSTSstatus("          SECURE");
-    //     }
-    //   });
   };
   const logout = async (e) => {
     e.preventDefault();
@@ -985,7 +956,7 @@ const Web = () => {
                     >
                       SQLI status
                     </th>
-                    <td className="px-6 py-4"></td>
+                    <td className="px-6 py-4">{sqliinfo} </td>
                   </tr>
                 </tbody>
               </table>

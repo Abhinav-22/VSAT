@@ -545,6 +545,8 @@ def getsqli():
     soup = BeautifulSoup(s.get(urlToBeChecked).content, "html.parser")
     forms = soup.find_all("form")
     sqlidict.update({"NumberOfFormsDetected":len(forms)})
+    sqlidict.update({"SQLIStatus":"No Forms Detected"})
+
 
     # Extract form details
     for form in forms:
@@ -754,7 +756,7 @@ def download_pdf():
     pdf.cell(w=(pw/4), h=15, txt="Web Security", border=1, ln=0, fill=True)
     pdf.set_font('Arial', '', 12)
     pdf.multi_cell(
-        w=0, h=10, txt="After performing the scans for Web security, it has been infered that "+str(websec)+". The results of the Phishing scan, that is checking if the domain is listed in PhishTank (a database with identified phishing sites) is that it is "+str(phishstat)+" and "+str(phishdetail)+". After checking if all the HTTP security headers are present it is found that it is"+str(httpsech)+".", border=1 )
+        w=0, h=10, txt="After performing the scans for Web security, it has been infered that "+str(websec)+". The results of the Phishing scan, that is checking if the domain is listed in PhishTank (a database with identified phishing sites) is that it is "+str(phishstat)+" and "+str(phishdetail)+". After checking if all the HTTP security headers are present it is found that it is "+str(httpsech)+".", border=1 )
     pdf.cell(w=0, h=15, txt=" ", border=0, ln=1)
     pdf.set_font('Arial', 'B', 14)
     pdf.cell(w=(pw/4), h=15, txt="Network Security ",
