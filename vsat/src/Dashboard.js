@@ -11,6 +11,7 @@ import usePortListStore from "./stores/portListStore";
 
 import Pdfgen from "./Pdfgen";
 import cover from "./img/cover.jpg";
+import api from "./img/api.png";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -1207,7 +1208,23 @@ function Dashboard() {
                 </button>
               </Link>
             </div>
-            <div className="col-span-2 mr-10 bg-fieldbg h-52 mt-3 rounded-xl"></div>
+            <div className="col-span-2 mr-10 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-zinc-600 via-indigo-900 to-blue-900 h-52 mt-3 rounded-xl">
+            <p className="ml-3 pt-4  text-xl text-white  font-semibold ">
+            Try out VSAT API
+              </p>
+              <p className="ml-3 pt-3  text-md text-white  font-medium ">
+              VSAT API allows developers to integrate <br></br>
+security scans to your digital assets
+              </p>
+              
+              <Link to="http://localhost:8000/docs" target="_blank">
+                <button className="h-10 w-32 ml-3 mt-10 bg-cover-white rounded-2xl text-indigo-900 text-center hover:bg-gray-400 hover:text-white ">
+                  <span className="my-auto ttspan text-center flex justify-center font-bold ">
+                    API Docs
+                  </span>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
