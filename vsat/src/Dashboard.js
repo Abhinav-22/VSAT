@@ -652,11 +652,11 @@ function Dashboard() {
         openport: open,
         portlen: countP,
         httpsec: httpSec,
-        phishstat: phishstatus,
+        phishstat: phish,
         domainr: domainscan,
         sslres: sslLive,
         breaches: dataleak,
-        phishdetail: phisdetail,
+       // phishdetail: phisdetail,
         sslexpiry: ssldate,
         dom: domainStoredval
       }),
