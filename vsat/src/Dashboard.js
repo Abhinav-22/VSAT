@@ -1218,7 +1218,7 @@ security scans to your digital assets
               </p>
               
               <Link to="http://localhost:8000/docs" target="_blank">
-                <button className="h-10 w-32 ml-3 mt-10 bg-cover-white rounded-2xl text-indigo-900 text-center hover:bg-gray-400 hover:text-white ">
+                <button className="h-10 w-32 ml-3 mt-12 bg-cover-white rounded-2xl text-indigo-900 text-center hover:bg-gray-400 hover:text-white ">
                   <span className="my-auto ttspan text-center flex justify-center font-bold ">
                     API Docs
                   </span>
